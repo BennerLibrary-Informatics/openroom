@@ -174,7 +174,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
             hours. This will be automated in a future version of this system.</em><br/>
         <form name="adddefaulthours" action="myhours.php" method="POST">
-            <table>
+            <div>
                 <tr>
                     <td>
                         <strong>Open:</strong>
@@ -219,7 +219,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td colspan="2"><em>(To close room for entire day, leave hours set to 00:00-00:00.)</em><br/><br/>
                     </td>
                 </tr>
-            </table>
+            </div>
             <strong>Days Affected:&nbsp;&nbsp;&emsp; </strong>
             <?php
                 $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
@@ -228,7 +228,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 }
             ?>
             <br><br><h4><strong>Rooms Affected: </strong></h4>
-            <table>
+            <div>
                 <?php
                 $roomgroup = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
                 while ($group = mysqli_fetch_array($roomgroup)) {
@@ -242,7 +242,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   }
 
                 ?>
-            </table>
+            </div>
             <br/>
             <input type="hidden" name="op" value="adddefaulthours"/>
             <input type="submit" value="Add Hours"/><br/><br/><br/>

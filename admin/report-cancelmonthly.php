@@ -74,7 +74,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <br/><br/><strong>Monthly Cancellation Report for the period starting: <?php echo date("F Y", $starttime); ?>
             and ending: <?php echo date("F Y", $endtime); ?></strong><br/><br/>
 
-        <table id="reporttable">
+        <div id="reporttable">
             <tr class="reportodd">
                 <td><strong>Month</strong></td>
                 <?php
@@ -130,7 +130,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             echo "<td>" . $runningtotal . "</td></tr>";
             ?>
 
-        </table>
+        </div>
 
         <br/>
         <?php

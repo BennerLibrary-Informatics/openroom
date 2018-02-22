@@ -185,7 +185,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3><a href="index.php">Administration</a> - Multiple Reservations</h3><br/>
         <span class="notetext">Use this form to make repeating reservations. Choose the date range, what time you would like the reservation to start, the duration, and which days of the week it should occur on.<br/>Clicking "Check Availability" will show a report of what reservations can be made.</span><br/>
         <form name="multiplereservations" action="multiplereservations.php" method="POST">
-            <table>
+            <div>
                 <tr>
                     <td>
                         <strong>Username:</strong>
@@ -285,9 +285,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <?php echo $optionalfields_string; ?>
                     </td>
                 </tr>
-            </table>
+            </div>
             <strong>Days in Effect:</strong>
-            <table>
+            <div>
                 <tr>
                     <?php
                     $dayarray = array("sunday" => "", "monday" => "", "tuesday" => "", "wednesday" => "", "thursday" => "", "friday" => "", "saturday" => "");
@@ -310,7 +310,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td><input type="checkbox" name="daysineffect[]"
                                value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong></td>
                 </tr>
-            </table>
+            </div>
             <br/>
             <input type="hidden" name="op" value="multiplereservations"/>
             <?php

@@ -162,7 +162,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Custom Fields</h3>
         <br/><br/>
-        <table id="customfieldstable">
+        <div id="customfieldstable">
             <tr>
                 <td class="tableheader">&nbsp;</td>
                 <td class="tableheader">Name</td>
@@ -230,12 +230,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $count++;
             }
             ?>
-        </table>
+        </div>
         <br/>
         <br/>
         <h3>Add New Custom Field</h3><br/>
         <form name="addoption" action="customfields.php" method="POST">
-            <table border="0">
+            <div border="0">
                 <tr>
                     <td><strong>Name</strong></td>
                     <td><input type="text" name="optionname"/></td>
@@ -289,7 +289,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <input type="submit" value="Add Custom Field"/>
                     </td>
                 </tr>
-            </table>
+            </div>
         </form>
         <?php
         }
