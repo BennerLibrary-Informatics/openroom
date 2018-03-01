@@ -102,7 +102,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             function deletehrs(roomhoursid, anchorname) {
                 var answer = confirm("Are you sure you would like to delete these hours?\n\nNOTE: Modifying hours will NOT delete room reservations. For special hours (such as holidays, etc.) please use the Special Hours section in administration.");
                 if (answer) {
-                    window.location = "myhours.php?op=deletedefaulthours&roomhoursid=" + roomhoursid + "&anchorname=" + anchorname;
+                    window.location = "defaulthours.php?op=deletedefaulthours&roomhoursid=" + roomhoursid + "&anchorname=" + anchorname;
                 }
                 else {
 
@@ -173,7 +173,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3>Add Default Hours</h3><br/>
         <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
             hours. This will be automated in a future version of this system.</em><br/>
-        <form name="adddefaulthours" action="myhours.php" method="POST">
+        <form name="adddefaulthours" action="defaulthours.php" method="POST">
             <div>
                 <tr>
                     <td>

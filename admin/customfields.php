@@ -1,3 +1,4 @@
+
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -162,7 +163,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Custom Fields</h3>
         <br/><br/>
-        <div id="customfieldstable">
+        <div class="table tablestriped">
+        <table id="customfieldstable">
             <tr>
                 <td class="tableheader">&nbsp;</td>
                 <td class="tableheader">Name</td>
@@ -230,67 +232,90 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $count++;
             }
             ?>
-        </div>
+        </table>
+      </div>
+
         <br/>
         <br/>
         <h3>Add New Custom Field</h3><br/>
+
+
+
         <form name="addoption" action="customfields.php" method="POST">
-            <div border="0">
-                <tr>
-                    <td><strong>Name</strong></td>
-                    <td><input type="text" name="optionname"/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><strong>Form Name</strong></td>
-                    <td><input type="text" name="optionformname"/></td>
-                    <td><span class="notetext">Must be all lowercase using only letters a-z, no spaces.</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Form Question</strong></td>
-                    <td><input type="text" name="optionquestion"/></td>
-                    <td><span class="notetext">This is the prompt that will appear on the form.</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Type</strong></td>
-                    <td><select name="optiontype" onchange="changer(this.value);">
-                            <option value="0">Text</option>
-                            <option value="1">Selection</option>
-                        </select></td>
-                    <td><span class="notetext">Select "Text" to allow any user input. Choose "Selection" to provide limited options.</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Choices</strong></td>
-                    <td><input type="text" name="optionchoices" disabled="disabled"/></td>
-                    <td><span class="notetext">If you chose "Selection" above, type the available options here, separated by a semi-colon.<br/><em>(Ex.: Choice1;Choice2)</em></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Private?</strong></td>
-                    <td><select name="optionprivate">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select></td>
-                    <td><span class="notetext">Will this field appear for all other users (when a reservation is clicked or when a search is performed)?</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Required?</strong></td>
-                    <td><select name="optionrequired">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select></td>
-                    <td><span class="notetext">Is this field required before a user can make a reservation?</span></td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <input type="hidden" name="op" value="addoption"/>
-                        <input type="submit" value="Add Custom Field"/>
-                    </td>
-                </tr>
+
+            <div class="form-group row">
+                   <label for="optionname" class="col-sm-2 col-form-label"><strong>Name</strong></label>
+                  <div class= "col-sm-8">
+                  <input  class="form-control form-control-sm" type="text" name="optionname"/>
+                </div>
             </div>
-        </form>
+          <div class="form-group row">
+                 <label for "optionformname" class="col-sm-2 col-form-label"><strong>Form Name</strong></label>
+                 <div class="col-sm-10">
+                   <input class="form-control form-control-sm" type="text" name="optionformname"/>
+                   <span class="notetext">Must be all lowercase using only letters a-z, no spaces.</span>
+                 </div>
+          </div>
+          <div class="form-group row">
+            <label for="optionquestion" class ="col-sm-2 col-form-label"><strong>Form Question</strong></label>
+            <div class = "col-sm-10">
+                <input class="form-control form-control-sm" type="text" name="optionquestion"/>
+                <span class="notetext">This is the prompt that will appear on the form.</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="optiontype"  class ="col-sm-2 col-form-label"><strong>Type</strong></label>
+            <div class = "col-sm-2">
+              <select name="optiontype" onchange="changer(this.value);" class="form-control form-control-sm">
+                  <option value="0">Text</option>
+                  <option value="1">Selection</option>
+              </select>
+            </div>
+              <div class = "col-sm-10">
+              <span class="notetext">Select "Text" to allow any user input. Choose "Selection" to provide limited options.</span>
+            </div>
+
+        </div>
+        <div class="form-group row">
+          <label for="optionchoices"  class ="col-sm-2 col-form-label"><strong>Choices</strong></label>
+          <div class = "col-sm-10">
+            <input class="form-control form-control-sm" type="text" name="optionchoices" disabled="disabled"/>
+            <span class="notetext">If you chose "Selection" above, type the available options here, separated by a semi-colon.<br/><em>(Ex.: Choice1;Choice2)</em></span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+        <label for = "optionprivate" class ="col-sm-2 col-form-label"><strong>Private?</strong></label>
+        <div class = "col-sm-2">
+          <select name="optionprivate" onchange="changer(this.value);"class="form-control form-control-sm">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+        <div class = "col-sm-10">
+        <span class="notetext">Will this field appear for all other users (when a reservation is clicked or when a search is performed)?</span>
+        </div>
+      </div>
+
+      <div class="form-group row">
+            <label for = "optionrequired" class ="col-sm-2 col-form-label"><strong>Required?</strong></label>
+            <div class = "col-sm-2">
+              <select name="optionrequired" onchange="changer(this.value);"class="form-control form-control-sm">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+              </div>
+              <div class = "col-sm-10">
+                <span class="notetext">Is this field required before a user can make a reservation?</span>
+              </div>
+      </div>
+
+      <div>
+      <input type="hidden" name="op" value="addoption"/>
+      <input type="submit" value="Add Custom Field"/>
+    </div>
+         </form>
+
         <?php
         }
         ?>
