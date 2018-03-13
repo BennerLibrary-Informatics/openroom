@@ -184,21 +184,18 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Multiple Reservations</h3><br/>
         <span class="notetext">Use this form to make repeating reservations. Choose the date range, what time you would like the reservation to start, the duration, and which days of the week it should occur on.<br/>Clicking "Check Availability" will show a report of what reservations can be made.</span><br/>
-        <form name="multiplereservations" action="multiplereservations.php" method="POST">
+        <form name="multiplereservations" action="multiplereservations.php" method="POST" class = "form-group">
           <div class = "row">
-            <div class = "col-lg-4">
-              <strong>Username:</strong>
-            </div>
             <div class = "col-lg-7">
-              <input type="text" name="altusername" value="<?php echo $_POST["altusername"]; ?>"/> <em>(The
+              <label for = "usrnrev"><strong>Username:</strong></label>
+              <input id = "usrnrev" type="text" name="altusername" value="<?php echo $_POST["altusername"]; ?>"/> <em>(The
                   username of the user you're making these reservations for.)</em>
             </div>
           </div>
+
           <div class = "row">
-            <div class = "col-lg-4">
-              <strong>Room:</strong>
-            </div>
-            <div class = "col-lg-8">
+            <div class = "col-lg-8 form-group">
+              <label for = "roomid"><strong>Room:</strong></label>
               <select name="roomid">
                   <?php
                   $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid, roomname ASC;");
@@ -215,10 +212,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-4">
-              <strong>From:</strong>
-            </div>
             <div class = "col-lg-8">
+              <label for "form"><strong>From:</strong></label>
               <input id="from" size="10" maxlength="10" name="from" type="text"
                      value="<?php echo $_POST["from"]; ?>"/>
               <img src="../includes/datechooser/calendar.gif"
@@ -229,10 +224,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-4">
-              <strong>To:</strong>
-            </div>
             <div class = "col-lg-8">
+              <label for = "to"><strong>To:</strong></label>
               <input id="to" size="10" maxlength="10" name="to" type="text"
                      value="<?php echo $_POST["to"]; ?>"/>
               <img src="../includes/datechooser/calendar.gif"
@@ -243,31 +236,31 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-4">
-              <strong>Reservation Time:</strong>
-            </div>
-            <div class = "col-lg-8">
-              <select name="starthour">
-                  <?php
-                  for ($i = 0; $i <= 24; $i++) {
-                      $selectstr = "";
-                      if ($i == $_POST["starthour"]) {
-                          $selectstr = "selected";
-                      }
-                      echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
-                  }
-                  ?>
-              </select>:<select name="startminute">
-                  <?php
-                  for ($i = 0; $i <= 59; $i++) {
-                      $selectstr = "";
-                      if ($i == $_POST["startminute"]) {
-                          $selectstr = "selected";
-                      }
-                      echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
-                  }
-                  ?>
-              </select>
+            <div id = "starttime" class = "col-lg-8">
+              <label for = "starttime"><strong>Reservation Time:</strong></label>
+              <div id = "starttime">
+                <select name="starthour">
+                    <?php
+                    for ($i = 0; $i <= 24; $i++) {
+                        $selectstr = "";
+                        if ($i == $_POST["starthour"]) {
+                            $selectstr = "selected";
+                        }
+                        echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+                    }
+                    ?>
+                </select>:<select name="startminute">
+                    <?php
+                    for ($i = 0; $i <= 59; $i++) {
+                        $selectstr = "";
+                        if ($i == $_POST["startminute"]) {
+                            $selectstr = "selected";
+                        }
+                        echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+                    }
+                    ?>
+                </select>
+              </div>
             </div>
           </div>
 
