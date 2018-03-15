@@ -71,7 +71,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ending: <?php echo $to; ?></strong>
         </div>
 
-        <table id="reporttable">
+        <div id="reporttable">
             <tr class="reportodd">
                 <td><strong>Date</strong></td>
                 <?php
@@ -127,7 +127,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             echo "<td>" . $runningtotal . "</td></tr>";
             ?>
 
-        </table>
+        </div>
 
         <br/>
         <?php
