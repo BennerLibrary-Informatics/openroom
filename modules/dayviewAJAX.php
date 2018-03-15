@@ -78,7 +78,7 @@ if ($_SESSION["username"] != "") {
         }
     }
 
-
+///////////////////////////////////////////////////////////////////
     //Construct table header
     $dvout .= "<tr><th>&nbsp;</th>";
     foreach ($xmlroominfo->room as $room) {
