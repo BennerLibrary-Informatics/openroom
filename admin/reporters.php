@@ -99,16 +99,17 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           <div class = "col-sm-12">
             <h4>Add Reporter</h4>
           </div>
-          <div class = "row">
-            <div class = "col-sm-12">
-              <form name="addreporter" action="reporters.php" method="POST">
-                  <input type="text" name="reportername"/>
-                  <input type="hidden" name="op" value="addreporter"/>
-                  <input type="submit" value="Add Reporter"/>
-              </form>
-            </div>
+        </div>
+        <div class = "row">
+          <div class = "col-sm-12">
+            <form name="addreporter" action="reporters.php" method="POST">
+                <input type="text" name="reportername"/>
+                <input type="hidden" name="op" value="addreporter"/>
+                <input type="submit" value="Add Reporter"/>
+            </form>
           </div>
         </div>
+      </div>
 
         <?php
         }
