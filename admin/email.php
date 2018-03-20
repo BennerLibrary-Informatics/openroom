@@ -210,11 +210,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <span class="notetext">There are three types of emails: <strong>Verbose</strong> are fully-detailed messages, <strong>Terse</strong> are stripped down to only the most important details, and <strong>GEF (Gmail Event Format)</strong> is formatted to work with Gmail Events.</span>
         <div id = "settingsul">
           <!-- Top email setup  -->
-          <div class = "row col-lg-12">
+          <div class = "row col-sm-12">
             On Reservations - <span class="notetext">This email is sent whenever a reservation is made.</span>
           </div>
 
-          <div class = "row col-lg-8 right">
+          <div class = "row col-sm-8 right">
             <form name="onreserveverbose" action="email.php" method="POST">
               Verbose: <input type="text" name="email_res_verbose" value="<?php echo $email_res_verbose; ?>"/>
               <input type="hidden" name="op" value="email_res_verbose"/>
@@ -222,7 +222,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </form>
           </div>
 
-          <div class = "row col-lg-8">
+          <div class = "row col-sm-8">
             <form name="onreserveterse" action="email.php" method="POST">
               Terse: <input type="text" name="email_res_terse" value="<?php echo $email_res_terse; ?>"/>
               <input type="hidden" name="op" value="email_res_terse"/>
@@ -230,7 +230,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </form>
           </div>
 
-          <div class = "row col-lg-8">
+          <div class = "row col-sm-8">
             <form name="onreservegef" action="email.php" method="POST">
               GEF: <input type="text" name="email_res_gef" value="<?php echo $email_res_gef; ?>"/>
               <input type="hidden" name="op" value="email_res_gef"/>
@@ -239,10 +239,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <!-- On condition  -->
-          <div class = "row col-lg-12">
+          <div class = "row col-sm-12">
             On Condition - <span class="notetext">This email is sent whenever certain conditions are met when reservations or cancellations are made.<br/>(*This will NOT be sent to users.)<br/>(*When dealing with Duration and Number In Group, the condition is met when the user enters a value greater than or equal to the conditional value.)</span>
           </div>
-          <div class = "row col-lg-12">
+          <div class = "row col-sm-12">
             <form name="oncondition" action="email.php" method="POST">When <select name="email_condition">
                     <option value="">None</option>
                     <option value="duration"<?php if ($settings["email_condition"] == "duration") echo " selected"; ?>>
@@ -268,7 +268,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <input type="submit" value="Save"/></form>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="onconditionverbose" action="email.php" method="POST">
                 Verbose: <input type="text" name="email_cond_verbose" value="<?php echo $email_cond_verbose; ?>"/>
                 <input type="hidden" name="op" value="email_cond_verbose"/>
@@ -276,7 +276,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="onconditionterse" action="email.php" method="POST">
                 Terse: <input type="text" name="email_cond_terse" value="<?php echo $email_cond_terse; ?>"/>
                 <input type="hidden" name="op" value="email_cond_terse"/>
@@ -285,7 +285,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="onconditiongef" action="email.php" method="POST">
                 GEF: <input type="text" name="email_cond_gef" value="<?php echo $email_cond_gef; ?>"/>
                 <input type="hidden" name="op" value="email_cond_gef"/>
@@ -293,11 +293,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
           </div>
 
-          <div class = "row col-lg-12">
+          <div class = "row col-sm-12">
             On Cancellations - <span class="notetext">This email is sent whenever a reservation is cancelled.</span>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="oncancelverbose" action="email.php" method="POST">
                 Verbose: <input type="text" name="email_can_verbose" value="<?php echo $email_can_verbose; ?>"/>
                 <input type="hidden" name="op" value="email_can_verbose"/>
@@ -306,7 +306,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="oncancelterse" action="email.php" method="POST">
                 Terse: <input type="text" name="email_can_terse" value="<?php echo $email_can_terse; ?>"/>
                 <input type="hidden" name="op" value="email_can_terse"/>
@@ -315,7 +315,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="oncancelgef" action="email.php" method="POST">
                 GEF: <input type="text" name="email_can_gef" value="<?php echo $email_can_gef; ?>"/>
                 <input type="hidden" name="op" value="email_can_gef"/>
@@ -324,10 +324,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
           </div>
 
-          <div class = "row col-lg-12">
+          <div class = "row col-sm-12">
             System Address - <span class="notetext">This address is used in the "from" and "reply-to" fields. It is also the address that will be used for users to contact administrators.</span>
           </div>
-          <div class = "row col-lg-12">
+          <div class = "row col-sm-12">
             <form name="systemaddress" action="email.php" method="POST">
                 <input type="text" name="email_system" value="<?php echo $settings["email_system"]; ?>"/>
                 <input type="hidden" name="op" value="email_system"/>

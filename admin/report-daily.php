@@ -55,10 +55,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <center>
             <?php if ($_SESSION["isadministrator"] == "TRUE" || $_SESSION["isreporter"] == "TRUE"){
             if ($successmsg != "") {
-                echo "<div id=\"successmsg\" class=\"row col-lg-12\">" . $successmsg . "</div>";
+                echo "<div id=\"successmsg\" class=\"row col-sm-12\">" . $successmsg . "</div>";
             }
             if ($errormsg != "") {
-                echo "<div id=\"errormsg\" class=\"row col-lg-12\">" . $errormsg . "</div>";
+                echo "<div id=\"errormsg\" class=\"row col-sm-12\">" . $errormsg . "</div>";
             }
             ?>
         </center>
@@ -66,7 +66,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           <h3><a href="index.php">Administration</a> - Reports - Daily</h3>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           <strong>Daily Report for the period starting: <?php echo $from; ?> and
             ending: <?php echo $to; ?></strong>
         </div>

@@ -186,7 +186,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <span class="notetext">Use this form to make repeating reservations. Choose the date range, what time you would like the reservation to start, the duration, and which days of the week it should occur on.<br/>Clicking "Check Availability" will show a report of what reservations can be made.</span><br/>
         <form name="multiplereservations" action="multiplereservations.php" method="POST" class = "form-group">
           <div class = "row">
-            <div class = "col-lg-7">
+            <div class = "col-sm-7">
               <label for = "usrnrev"><strong>Username:</strong></label>
               <input id = "usrnrev" type="text" name="altusername" value="<?php echo $_POST["altusername"]; ?>"/> <em>(The
                   username of the user you're making these reservations for.)</em>
@@ -194,7 +194,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-8 form-group">
+            <div class = "col-sm-8 form-group">
               <label for = "roomid"><strong>Room:</strong></label>
               <select name="roomid">
                   <?php
@@ -212,7 +212,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-8">
+            <div class = "col-sm-8">
               <label for "form"><strong>From:</strong></label>
               <input id="from" size="10" maxlength="10" name="from" type="text"
                      value="<?php echo $_POST["from"]; ?>"/>
@@ -224,7 +224,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-8">
+            <div class = "col-sm-8">
               <label for = "to"><strong>To:</strong></label>
               <input id="to" size="10" maxlength="10" name="to" type="text"
                      value="<?php echo $_POST["to"]; ?>"/>
@@ -236,7 +236,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div id = "starttime" class = "col-lg-8">
+            <div id = "starttime" class = "col-sm-8">
               <label for = "starttime"><strong>Reservation Time:</strong></label>
               <div id = "starttime">
                 <select name="starthour">
@@ -265,25 +265,25 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
           <div class = "row">
-            <div class = "col-lg-4">
+            <div class = "col-sm-4">
               <strong>Duration:</strong>
             </div>
-            <div class = "col-lg-8">
+            <div class = "col-sm-8">
               <input type="text" size="5" name="duration" value="<?php echo $_POST["duration"]; ?>"/> (in
                           minutes)
             </div>
           </div>
 
             <div class = "row">
-              <div class = "col-lg-4">
+              <div class = "col-sm-4">
                   <strong>Optional Fields</strong>
               </div>
-              <div class = "col-lg-8">
+              <div class = "col-sm-8">
                 <?php echo $optionalfields_string; ?>
               </div>
             </div>
 
-            <div class = "row col-lg-12">
+            <div class = "row col-sm-12">
               <strong>Days in Effect:</strong>
             </div>
             <div class = "row">
@@ -325,7 +325,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <input type="hidden" name="op" value="multiplereservations"/>
 
             <div class = "row">
-              <div class = "col-lg-12">
+              <div class = "col-sm-12">
                 <?php
                 if ($_POST["onlychecking"] != "multireserve") {
                     $onlychksel = "checked";
@@ -342,7 +342,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               </div>
             </div>
 
-                <div class = "row col-lg-5 align-self-center">
+                <div class = "row col-sm-5 align-self-center">
                   <input type="submit" value="Submit"/>
                 </div>
         </form>

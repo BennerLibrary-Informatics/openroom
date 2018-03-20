@@ -210,11 +210,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3><a href="index.php">Administration</a> - Timing and Limitations</h3>
 
         <div id = "settingsul">
-          <div  class = "row col-lg-12">
+          <div  class = "row col-sm-12">
             Allow Past Reservations? - <span class="notetext">Allow reservations to be made in the past?</span>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="allowpastreservations" action="timing.php" method="POST">
                   <input type="hidden" name="op" value="allowpastreservations"/>
                   <?php
@@ -235,11 +235,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Allow Simultaneous Reservations? - <span class="notetext">Allow two reservations for different rooms to occur at the same time for one user?</span>
         </div>
         <div class = "row">
-          <div class = "col-lg-12">
+          <div class = "col-sm-12">
             <form name="allowsimultaneousreservations" action="timing.php" method="POST">
                 <input type="hidden" name="op" value="allowsimultaneousreservations"/>
                 <?php
@@ -260,11 +260,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Interval - <span class="notetext">The number of minutes each row represents (default: 30).</span>
         </div>
         <div class = "row">
-          <div class = "col-lg-12">
+          <div class = "col-sm-12">
             <form name="interval" action="timing.php" method="POST">
                 <input type="hidden" name="op" value="interval"/>
                 <input type="text" name="interval" value="<?php echo $settings["interval"]; ?>"/>
@@ -273,7 +273,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Time Format - <span class="notetext">Default "g:i a" will appear as "11:48 pm". See <a
                       href="http://us.php.net/manual/en/function.date.php">PHP.net's Date() article</a> for how to format this string.</span>
         </div>
@@ -286,11 +286,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </form>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Duration Limit - <span class="notetext">Maximum amount of each reservation in minutes. Default: 240. Set to 0 for no limit.</span>
         </div>
         <div class = "row">
-          <div class = "col-lg-12">
+          <div class = "col-sm-12">
             <form name="limit_duration" action="timing.php" method="POST">
                 <input type="hidden" name="op" value="limit_duration"/>
                 <input type="text" name="limit_duration"
@@ -300,11 +300,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Total Limit - <span class="notetext">Maximum amount of total reservation time in minutes per period. Default: 240/day. Set to 0 for no limit.</span>
         </div>
         <div class = "row">
-          <div class = "col-lg-12">
+          <div class = "col-sm-12">
             <form name="limit_total" action="timing.php" method="POST">
                 <input type="hidden" name="op" value="limit_total"/>
                 <?php
@@ -330,7 +330,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Frequency Limit - <span class="notetext">Maximum number of reservations per period. Default: 0. Set to 0 for no limit.</span>
         </div>
         <div class = "row">
@@ -361,16 +361,16 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Window Limit - <span class="notetext">Allows users to make reservations only within a certain time range. This allows you to prevent users from making reservations, say, 10 years into the future, that they can't fulfill.</span>
         </div>
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           <span class="notetext">Windows come in two forms: <strong>Permanent</strong> and <strong>Sliding</strong>.<br/>
           <strong>Permanent Windows</strong> are based on a specific date, after which reservations may no longer be made. (Example: 5/25/2025)<br/>
           <strong>Sliding Windows</strong> are based on a time period in the future, based on the current day, after which reservations may no longer be made. (Example: 6 months from today)</span>
         </div>
         <div class = "row">
-          <div class = "col-lg-12">
+          <div class = "col-sm-12">
             <form name="limit_window" action="timing.php" method="POST">
                 <input type="hidden" name="op" value="limit_window"/>
                 <?php
@@ -390,7 +390,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 }
                 ?>
                 <input type="radio" name="limit_window_type" value="permanent" <?php echo $permstr; ?>/>Permanent
-                <div class = "row col-lg-12">
+                <div class = "row col-sm-12">
                   <input id="limit_window_date" size="10" maxlength="10" name="limit_window_date"
                          type="text" value="<?php echo $permval; ?>">
                   <img src="../includes/datechooser/calendar.gif"
@@ -398,11 +398,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <div id="chooserSpan3" class="dateChooser select-free"
                        style="display: none; visibility: hidden; width: 160px;"></div>
                 </div>
-                <div class = "row col-lg-12">
+                <div class = "row col-sm-12">
                   <input type="radio" name="limit_window_type" value="sliding" <?php echo $slidstr; ?>/>Sliding
                   - <span class="notetext">Must be greater than 0.</span>
                 </div>
-                <div class = "row col-lg-12">
+                <div class = "row col-sm-12">
                   <input type="text" size="10" name="limit_window_range"
                          value="<?php echo $limit_window[0]; ?>"/>
                   <select name="limit_window_period">
@@ -412,18 +412,18 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                       <option value="year" <?php echo $yearstr; ?>>Years</option>
                   </select>
                 </div>
-                <div class = "row col-lg-12">
+                <div class = "row col-sm-12">
                   <input type="submit" value="Save"/>
                 </div>
             </form>
           </div>
         </div>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           Opening Day Limit - <span class="notetext">Will not allow users to make reservations PRIOR TO the Opening Day. Default: None (leave blank)</span>
         </div>
         <div class = "row">
-          <div class = "col-lg-12">
+          <div class = "col-sm-12">
             <form name="limit_openingday" action="timing.php" method="POST">
                 <input type="hidden" name="op" value="limit_openingday"/>
                 <input id="limit_openingday" size="10" maxlength="10" name="limit_openingday" type="text"
