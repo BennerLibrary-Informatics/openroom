@@ -160,7 +160,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <form name="addspecialhours" action="specialhours.php" method="POST">
           <div class = "row">
-            <div class = "col-sm-3">
+            <div class = "col-sm-1">
               <strong>From:</strong>
             </div>
             <div class = "col-sm-9">
@@ -173,7 +173,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
             <div class = "row">
-              <div class = "col-sm-3">
+              <div class = "col-sm-1">
                 <strong>To:</strong>
               </div>
               <div class = "col-sm-9">
@@ -186,7 +186,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
 
             <div class = "row">
-              <div class = "col-sm-3">
+              <div class = "col-sm-1">
                 <strong>Open:</strong>
               </div>
               <div class = "col-sm-9">
@@ -207,7 +207,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
 
             <div class = "row">
-              <div class = "col-sm-3">
+              <div class = "col-sm-1">
                 <strong>Close:</strong>
               </div>
               <div class = "col-sm-8">
@@ -249,7 +249,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                       $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                       $rgn = mysqli_fetch_array($roomgroupname);
                       if ($to1 > 0) echo "</table>\n";
-                      echo "<table><tr><td colspan=\"5\">" . $rgn["roomgroupname"] . "</td></tr>";
+                      echo "<div class = 'row col-sm-auto'>" . $rgn["roomgroupname"] . "</div>";
                       $to5 = 0;
                       $to1++;
                   }
@@ -267,7 +267,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
             <br/>
             <input type="hidden" name="op" value="addspecialhours"/>
-            <input type="submit" value="Add Special Hours"/><br/><br/><br/>
+            <input type="submit" value="Add Special Hours"/>
         </form>
 
         <?php

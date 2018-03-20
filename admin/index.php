@@ -125,140 +125,140 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <div class = "row col-sm-12">
           <h3>Reports</h3>
         </div>
-        <div class = "row col-sm-12"><!--user lookup-->
-            <strong>User Lookup</strong><em> - All reservations made by specified user.</em><br/>
-        </div>
-          <div class = "row col-sm-12">
+        <div class = "col-sm-12 col-sm-offset-2">
+          <div class = "row col-sm-12"><!--user lookup-->
+              <strong>User Lookup</strong><em> - All reservations made by specified user.</em>
+          </div>
+          <div class = "row">
             <form name="userlookup" method="POST" action="report-userlookup.php">
-                <div class = "col-sm-12">Username:
+                <div class = "col-sm-12 col-sm-offset-2">Username:
                   <input type="text" name="lookupname"/><input type="submit" value="Lookup"/>
                 </div>
             </form>
           </div>
-        <div class = "row"> <!--Daily-->
-          <div class = "col-sm-12">
-            <strong>Daily</strong><em> - Total reservations per day, per room.</em>
-          </div>
-        </div>
-        <div class = "row">
-          <form name="daily" method="POST" action="report-daily.php">
-            <div class = "col-sm-12 col-sm-offset-2">
-              For the period starting: <input id="from" size="10" maxlength="10" name="from" type="text">
-              <img src="../includes/datechooser/calendar.gif"
-                   onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-              <div id="chooserSpan3" class="dateChooser select-free"
-                   style="display: none; visibility: hidden; width: 160px;"></div>
-              and ending: <input id="to" size="10" maxlength="10" name="to" type="text">
-              <img src="../includes/datechooser/calendar.gif"
-                   onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-              <div id="chooserSpan3" class="dateChooser select-free"
-                   style="display: none; visibility: hidden; width: 160px;"></div>
-              <input type="submit" value="Run Report"/>
+          <div class = "row"> <!--Daily-->
+            <div class = "col-sm-12">
+              <strong>Daily</strong><em> - Total reservations per day, per room.</em>
             </div>
-          </form>
-      </div>
-        <div class = "row col-sm-12">
-          <strong>Monthly</strong><em> - Total reservations per month, per room.</em>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-12 col-sm-offset-2">
-            <form name="monthly" method="POST" action="report-monthly.php">
-                For the period starting: <select name="startmonth">
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-                <select name="startyear">
-                    <?php
-                    //Get earliest year of reservations
-                    $eyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY start ASC;"));
-                    $eyear = date("Y", strtotime($eyear["start"]));
-                    //Get latest year of reservations
-                    $lyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY end DESC;"));
-                    $lyear = date("Y", strtotime($lyear["end"]));
-                    while ($eyear <= $lyear) {
-                        echo "<option value=\"" . $eyear . "\">" . $eyear . "</option>";
-                        $eyear++;
-                    }
-                    ?>
-                </select>
-                and ending: <select name="endmonth">
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-                <select name="endyear">
-                    <?php
-                    //Get earliest year of reservations
-                    $eyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY start ASC;"));
-                    $eyear = date("Y", strtotime($eyear["start"]));
-                    //Get latest year of reservations
-                    $lyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY end DESC;"));
-                    $lyear = date("Y", strtotime($lyear["end"]));
-                    while ($eyear <= $lyear) {
-                        echo "<option value=\"" . $eyear . "\">" . $eyear . "</option>";
-                        $eyear++;
-                    }
-                    ?>
-
-                </select>
+          </div>
+          <div class = "row">
+            <form name="daily" method="POST" action="report-daily.php">
+              <div class = "col-sm-12 col-sm-offset-2">
+                For the period starting: <input id="from" size="10" maxlength="10" name="from" type="text">
+                <img src="../includes/datechooser/calendar.gif"
+                     onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                <div id="chooserSpan3" class="dateChooser select-free"
+                     style="display: none; visibility: hidden; width: 160px;"></div>
+                and ending: <input id="to" size="10" maxlength="10" name="to" type="text">
+                <img src="../includes/datechooser/calendar.gif"
+                     onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                <div id="chooserSpan3" class="dateChooser select-free"
+                     style="display: none; visibility: hidden; width: 160px;"></div>
                 <input type="submit" value="Run Report"/>
+              </div>
             </form>
+        </div>
+          <div class = "row col-sm-12">
+            <strong>Monthly</strong><em> - Total reservations per month, per room.</em>
+          </div>
+          <div class = "row">
+            <div class = "col-sm-12">
+              <form name="monthly" method="POST" action="report-monthly.php">
+                  For the period starting: <select name="startmonth">
+                      <option value="1">January</option>
+                      <option value="2">February</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                  </select>
+                  <select name="startyear">
+                      <?php
+                      //Get earliest year of reservations
+                      $eyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY start ASC;"));
+                      $eyear = date("Y", strtotime($eyear["start"]));
+                      //Get latest year of reservations
+                      $lyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY end DESC;"));
+                      $lyear = date("Y", strtotime($lyear["end"]));
+                      while ($eyear <= $lyear) {
+                          echo "<option value=\"" . $eyear . "\">" . $eyear . "</option>";
+                          $eyear++;
+                      }
+                      ?>
+                  </select>
+                  and ending: <select name="endmonth">
+                      <option value="1">January</option>
+                      <option value="2">February</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                  </select>
+                  <select name="endyear">
+                      <?php
+                      //Get earliest year of reservations
+                      $eyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY start ASC;"));
+                      $eyear = date("Y", strtotime($eyear["start"]));
+                      //Get latest year of reservations
+                      $lyear = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations ORDER BY end DESC;"));
+                      $lyear = date("Y", strtotime($lyear["end"]));
+                      while ($eyear <= $lyear) {
+                          echo "<option value=\"" . $eyear . "\">" . $eyear . "</option>";
+                          $eyear++;
+                      }
+                      ?>
+
+                  </select>
+                  <input type="submit" value="Run Report"/>
+              </form>
+            </div>
           </div>
         </div>
 
         <div class = "row col-sm-12"> <!--Cancellation reports-->
           <h3>Cancellation Reports</h3>
         </div>
-        <div class = "row">
-          <div class = "col-sm-11 col-sm-pull-1">
-            <strong>Daily</strong><em> - Total cancellations per day, per room.</em>
+        <div class = "col-sm-12 col-sm-offset-2">
+          <div class = "row">
+            <div class = "col-sm-12">
+              <strong>Daily</strong><em> - Total cancellations per day, per room.</em>
+            </div>
           </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-12">
-            <form name="daily" method="POST" action="report-canceldaily.php">
-                For the period starting: <input id="fromc" size="10" maxlength="10" name="fromc"
-                                                type="text">
-                <img src="../includes/datechooser/calendar.gif"
-                     onclick="showChooser(this, 'fromc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                <div id="chooserSpan3" class="dateChooser select-free"
-                     style="display: none; visibility: hidden; width: 160px;"></div>
-                and ending: <input id="toc" size="10" maxlength="10" name="toc" type="text">
-                <img src="../includes/datechooser/calendar.gif"
-                     onclick="showChooser(this, 'toc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                <div id="chooserSpan3" class="dateChooser select-free"
-                     style="display: none; visibility: hidden; width: 160px;"></div>
-                <input type="submit" value="Run Report"/>
-            </form>
+          <div class = "row">
+            <div class = "col-sm-12">
+              <form name="daily" method="POST" action="report-canceldaily.php">
+                  For the period starting: <input id="fromc" size="10" maxlength="10" name="fromc"
+                                                  type="text">
+                  <img src="../includes/datechooser/calendar.gif"
+                       onclick="showChooser(this, 'fromc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                  <div id="chooserSpan3" class="dateChooser select-free"
+                       style="display: none; visibility: hidden; width: 160px;"></div>
+                  and ending: <input id="toc" size="10" maxlength="10" name="toc" type="text">
+                  <img src="../includes/datechooser/calendar.gif"
+                       onclick="showChooser(this, 'toc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                  <div id="chooserSpan3" class="dateChooser select-free"
+                       style="display: none; visibility: hidden; width: 160px;"></div>
+                  <input type="submit" value="Run Report"/>
+              </form>
+            </div>
           </div>
-        </div>
 
-        <div class = "row"> <!--Monthly-->
-          <div class = "col-sm-12">
+          <div class = "row col-sm-12"> <!--Monthly-->
             <strong>Monthly</strong><em> - Total cancellations per month, per room.</em>
           </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-12">
+          <div class = "row col-sm-12">
             <form name="monthly" method="POST" action="report-cancelmonthly.php">
                 For the period starting: <select name="startmonth">
                     <option value="1">January</option>
@@ -320,9 +320,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <input type="submit" value="Run Report"/>
             </form>
           </div>
-        </div>
 
-    </div>
+      </div>
+  </div>
     </body>
     </html>
     <?php
