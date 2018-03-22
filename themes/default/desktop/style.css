@@ -40,7 +40,7 @@ p {
 .button {
     border: 2px #000000 solid;
     background-color: #EEEEEE;
-    width: 55px;
+
     margin-bottom: 5px;
 }
 
@@ -53,11 +53,13 @@ p {
 
 #heading {
     background-color: #FFFFFF;
+    font-size: 20px;
     border: 0px;
     margin: 0 auto;
     padding: 0px;
     text-align: right;
     width: 800px;
+    height: 50px;
 }
 
 #remindermessage {
@@ -174,7 +176,7 @@ p {
 */
 
 #dayviewheader {
-    font-size: 15px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
 }
@@ -286,6 +288,8 @@ p {
     border: 1px #000000 solid;
     padding: 5px;
     position: relative;
+    /* top: 300px; */
+
 }
 
 #legendtitle {

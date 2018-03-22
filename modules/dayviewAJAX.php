@@ -1,3 +1,6 @@
+<!-- create anoter dvout idea and add before others -->
+
+
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -16,6 +19,8 @@ if ($_POST["group"] == "") {
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
+ //$legend = include("legend.php");
+
 
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
@@ -28,6 +33,7 @@ $current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
+
 
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
@@ -47,7 +53,12 @@ if ($_SESSION["username"] != "") {
     }
     $group_str .= "</tr></table>";
 
-    $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
+
+
+     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div><div>TESTING</div>"  . $group_str;
+
+     echo "<div>Test</div>";
+
     $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
 
 
