@@ -55,9 +55,52 @@ if ($_SESSION["username"] != "") {
 
 
 
-     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div><div>TESTING</div>"  . $group_str;
+     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>";
 
-     echo "<div>Test</div>";
+     $dvout .= "<hr>";
+     $dvout .= "<div id = \"legend\">";
+     $dvout .= "<div class=\"container\">";
+        $dvout .= "<div class = \"row\">";
+
+        $dvout .= "<div class = \"col\" id = \"legendTitleText\">";
+          $dvout .= "Legend:";
+        $dvout .=  "</div>";
+
+        $dvout .= "<div class = \"col\" id = \"legendText\">";
+            $dvout .= "Open: ";
+            $dvout .=   "<img src=\"themes/default/desktop/images/reservebutton.png\"/>";
+          $dvout .=  "</div>";
+
+          $dvout .= "<div class = \"col\" id = \"legendText\">";
+              $dvout .= "Closed: ";
+            $dvout .= "<img src=\"themes/default/desktop/images/closedbutton.png\"/>";
+          $dvout .=  "</div>";
+
+
+          $dvout .= "<div  class = \"col\" id = \"legendText\">";
+          $dvout .= "Your Reservations: ";
+            $dvout .= "<img src=\"themes/default/desktop/images/cancelbutton.png\"/>";
+          $dvout .=  "</div>";
+
+
+          $dvout .= "<div class = \"col\" id = \"legendText\">";
+          $dvout .= "Taken: ";
+            $dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
+          $dvout .=  "</div>";
+
+
+
+
+        $dvout .=  "</div>";
+     $dvout .=  "</div>";
+     $dvout .=  "</div>";
+
+
+
+
+
+
+
 
     $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
 

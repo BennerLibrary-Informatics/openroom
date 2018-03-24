@@ -12,7 +12,11 @@ body {
 p {
     font-family: Helvetica, arial, sans-serif;
 }
-
+hr {
+  color: #000000;
+  background-color: #000000;
+  border-width: 3px;
+}
 #loginform {
 
 }
@@ -82,7 +86,7 @@ p {
     border: 1px #000000 solid;
     margin: 0 auto;
     padding: 0px;
-    width: 800px;
+    width: 1000px;
 }
 
 #leftside {
@@ -96,7 +100,7 @@ p {
     border-left: 1px #999999 dotted;
     float: right;
     padding: 10px;
-    width: 599px;
+    width: 799px;
 }
 
 #clear_both {
@@ -283,6 +287,10 @@ p {
 
 }
 
+#legendText{
+  font-size: 12px;
+  font-weight: bold;
+}
 #legend {
     background-color: #ffffdd;
     border: 1px #000000 solid;
