@@ -34,12 +34,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     <div id="container">
         <?php if ($_SESSION["isadministrator"] == "TRUE") { ?>
           <div class = "row"> <!--User Management-->
-            <div classw = "col-lg-12">
+            <div class = "col-lg-12">
               <h3>User Management</h3>
             </div>
           </div>
           <div class = "row">
-            <div class = "col-lg-10">
+            <div class = "col-lg-12">
               <a href="administrators.php">Administrators</a><em> - Add/Remove users with full administrative
                     access.</em>
             </div>
@@ -58,6 +58,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               <h3>Room Management</h3>
             </div>
           </div>
+
+          <div class = "row">
+            <div class = "col-lg-12">
+              <a href="room_main.php">Room</a><em> - Manage Rooms.</em>
+            </div>
+          </div>
+
           <div class = "row">
             <div class = "col-lg-12">
               <a href="hours.php">Open Hours</a><em> - Set up the open and closing time, as shown in the

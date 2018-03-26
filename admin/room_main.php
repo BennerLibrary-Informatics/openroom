@@ -169,7 +169,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3><a href="index.php">Administration</a> - Rooms</h3>
         <div class="roomslist">
             <?php
-            
             $pgroupname = "";
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
             while ($room = mysqli_fetch_array($rooms)) {
@@ -214,43 +213,44 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </div>
         <br/><br/>
         <h3>Add a New Room</h3>
-        <form name="addroom" method="POST" action="rooms.php">
+
+        <form name="addroom" method="POST" action="room_main.php">
             <div class="adminform">
-                <tr>
-                    <td><strong>Room Name:</strong></td>
-                    <td><input type="text" name="roomname"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Capacity:</strong></td>
-                    <td><input type="text" name="roomcapacity"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Description:</strong></td>
-                    <td><input type="text" name="roomdescription"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Group:</strong></td>
-                    <td>
-                        <?php
-                        $roomgroupstr = "<select name=\"roomgroupid\">";
-                        $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
-                        while ($roomgroup = mysqli_fetch_array($roomgroups)) {
-                            $roomgroupstr .= "<option value=\"" . $roomgroup["roomgroupid"] . "\">" . $roomgroup["roomgroupname"] . "</option>";
-                        }
-                        $roomgroupstr .= "</select>";
-                        echo $roomgroupstr;
-                        ?>
-                        <input type="hidden" name="op" value="addroom"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center><input type="submit" value="Add Room"/></center>
-                    </td>
-                </tr>
+              <div class = "form-group">
+
+                    <label><strong>Room Name:</strong></label>
+                    <input type="text" name="roomname"/>
+                  </div>
+
+                <div class="form-group">
+                    <label><strong>Capacity:</strong></label>
+                    <input type="text" name="roomcapacity"/>
+                </div>
+                <div class="form-group">
+                    <label><strong>Description:</strong></label>
+                    <input type="text" name="roomdescription"/>
+                </div>
+                <div class="form-group">
+                <label><strong>Group:</strong></label>
+
+                    <?php
+                    $roomgroupstr = "<select name=\"roomgroupid\">";
+                    $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
+                    while ($roomgroup = mysqli_fetch_array($roomgroups)) {
+                        $roomgroupstr .= "<option value=\"" . $roomgroup["roomgroupid"] . "\">" . $roomgroup["roomgroupname"] . "</option>";
+                    }
+                    $roomgroupstr .= "</select>";
+                    echo $roomgroupstr;
+                    ?>
+                    <input type="hidden" name="op" value="addroom"/>
+
+                <div>
+                  <button type="submit" class="btn btn-primary">Add Room</button>
 
             </div>
+            </div>
         </form>
+
         <?php
         }
         ?>
@@ -258,5 +258,5 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     </body>
     </html>
     <?php
-}
-?>
+    }
+    ?>

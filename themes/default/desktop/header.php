@@ -7,6 +7,9 @@ require_once("includes/or-dbinfo.php");
 <head>
     <title><?php echo $settings["instance_name"]; ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo $_SESSION["themepath"]; ?>style.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
     <meta http-equiv="Content-Script-Type" content="text/javascript"/>
 </head>
 
@@ -15,13 +18,13 @@ require_once("includes/or-dbinfo.php");
 	<span class="username">
 	<?php
     if ($_SESSION["systemid"] == $settings["systemid"]){
-    echo isset($_SESSION["username"]) ? "<strong>Hello, </strong>" . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
+    echo isset($_SESSION["username"]) ? "<strong>Hello, </strong>" . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\"style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
     echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
     if ($settings["login_method"] == "normal" && $_SESSION["username"] != "") {
-        echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;|";
+        echo "|&nbsp;<a href=\"editaccount.php\"style=\"color:white;\">Edit Account</a>&nbsp;|";
     }
     if ($_SESSION["username"] != "") {
-        echo "&nbsp;<a href=\"modules/logout.php\">Logout</a>";
+        echo "&nbsp;<a href=\"modules/logout.php\"style=\"color:white;\">Logout</a>";
     }
     }
     ?>
@@ -29,16 +32,16 @@ require_once("includes/or-dbinfo.php");
 <?php include("modules/reminder.php"); ?>
 <div id="container">
     <div id="leftside">
-        <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom09.png" alt="OpenRoom"/>
+        <!-- <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom09.png" alt="OpenRoom"/> -->
         <br/>
 
         <?php include("modules/calendar.php"); ?>
         <br/>
 
-      
 
 
-        <?php include("modules/roomdetails.php"); ?>
+
+        <!-- <?php include("modules/roomdetails.php"); ?> -->
 
     </div>
     <div id="rightside">
