@@ -169,10 +169,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3><a href="index.php">Administration</a> - Rooms</h3>
         <div class="roomslist">
             <?php
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 9470118... pc back to surface
             $pgroupname = "";
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
             while ($room = mysqli_fetch_array($rooms)) {

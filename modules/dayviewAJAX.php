@@ -1,3 +1,6 @@
+<!-- create anoter dvout idea and add before others -->
+
+
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -16,6 +19,8 @@ if ($_POST["group"] == "") {
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
+ //$legend = include("legend.php");
+
 
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
@@ -24,15 +29,13 @@ $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
 
-<<<<<<< HEAD
-=======
 date_default_timezone_set("America/Chicago"); //starts at current hour instead of 8am
 
->>>>>>> parent of c5e9fb3... screwed up reservation hours (+5)
 $current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
+
 
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
@@ -44,53 +47,60 @@ if ($_SESSION["username"] != "") {
         $group_str .= "<option value=\"". $group["roomgroupid"] ."\" ". $selected_str .">". $group["roomgroupname"] ."</option>";
     }
     $group_str .= "</select>";*/
-    $group_str = "<table><tr>";
+
+    $group_str = "<ul class = \"nav nav-tabs\">";
     while ($group = mysqli_fetch_array($groups)) {
         $selected_str = "class=\"grouptab\"";
         if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class=\"selected\"";
-        $group_str .= "<td onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</td>";
+        $group_str .= "<li onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</li>";
     }
-    $group_str .= "</tr></table>";
+    $group_str .= "</ul>";
+
+
+    // $group_str = "<table><tr>";
+    // while ($group = mysqli_fetch_array($groups)) {
+    //     $selected_str = "class=\"grouptab\"";
+    //     if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class=\"selected\"";
+    //     $group_str .= "<td onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</td>";
+    // }
+    // $group_str .= "</tr></table>";
 
 
 
      $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>";
 
-     $dvout .= "<hr>";
+
      $dvout .= "<div id = \"legend\">";
      $dvout .= "<div class=\"container\">";
         $dvout .= "<div class = \"row\">";
 
-        $dvout .= "<div class = \"col\" id = \"legendTitleText\">";
+        $dvout .= "<div class = \"col-sm-auto\" id = \"legendTitleText\">";
           $dvout .= "Legend:";
         $dvout .=  "</div>";
 
-        $dvout .= "<div class = \"col\" id = \"legendText\">";
+        $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
             $dvout .= "Open: ";
-            $dvout .=   "<img src=\"themes/default/desktop/images/reservebutton.png\"/>";
+            $dvout .= "<img src=\"themes/default/desktop/images/opensign.png\"width=\"40\" height=\"40\"/>";
           $dvout .=  "</div>";
 
-          $dvout .= "<div class = \"col\" id = \"legendText\">";
+          $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
               $dvout .= "Closed: ";
-<<<<<<< HEAD
-
 
             $dvout .= "<img src=\"themes/default/desktop/images/closedSign.png\"width=\"40\" height=\"40\"/>";
-=======
-            $dvout .= "<img src=\"themes/default/desktop/images/closedbutton.png\"/>";
->>>>>>> parent of 9470118... pc back to surface
           $dvout .=  "</div>";
 
 
-          $dvout .= "<div  class = \"col\" id = \"legendText\">";
+          $dvout .= "<div  class = \"col-sm-auto\" id = \"legendText\">";
           $dvout .= "Your Reservations: ";
-            $dvout .= "<img src=\"themes/default/desktop/images/cancelbutton.png\"/>";
+          $dvout .= "<i class=\"glyphicon glyphicon-ok\"></i>";
+            // $dvout .= "<img src=\"themes/default/desktop/images/cancelbutton.png\"/>";
           $dvout .=  "</div>";
 
 
-          $dvout .= "<div class = \"col\" id = \"legendText\">";
+          $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
           $dvout .= "Taken: ";
-            $dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
+          $dvout .= "<i class=\"glyphicon glyphicon-remove\"></i>";
+          //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
           $dvout .=  "</div>";
 
 
@@ -98,19 +108,16 @@ if ($_SESSION["username"] != "") {
 
         $dvout .=  "</div>";
      $dvout .=  "</div>";
-     $dvout .=  "</div>";
+     $dvout .=  "</div> ". $group_str;
 
 
 
 
 
 
-
-
-    $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
-
-    $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
-    $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
+ //$dvout .= .$group_str;
+     $dvout .=  "<div class =\"table-responsive\">";
+    $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
 
 
     //Create optional field form items string for reservation form
@@ -293,6 +300,7 @@ if ($_SESSION["username"] != "") {
     }
 
     $dvout .= "</table>";
+    $dvout .=  "</div>";
 
     echo $dvout;
 } //User isn't logged in

@@ -61,33 +61,51 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Opening and closing time</h3>
-        <p>
-            <strong>Settings for open and close time</strong><em> as shown by the reservation calendar. 8 represents 8
-                AM; 20 represents 8 PM"</em></p>
+        <div class = "row">
+          <div class = "col-lg-12">
+            <p><strong>Settings for open and close time</strong><em> as shown by the reservation calendar. 8 represents 8
+                    AM; 20 represents 8 PM"</em></p>
+          </div>
+        </div>
+
         <form name="openhours" method="POST" action="hours.php">
-            <ul>
-                <li>
-                    Opening time: </br />
-                    <input type="range" min="0" max="23" step="1" name="starttime" style="width: 80%;"
-                           value="<?php echo $settings["starttime"] ?>"
-                           oninput="starttimeoutput.value = starttime.value"/>
-                    <output name="starttimeoutput"><?php echo $settings["starttime"]; ?></output>
-                </li>
-                <br/>
-                <li>
-                    Closing time: <br/>
-                    <input type="range" min="0" max="23" step="1" name="endtime" style="width: 80%;"
-                           value="<?php echo $settings["endtime"]; ?>" oninput="endtimeoutput.value = endtime.value"/>
-                    <output name="endtimeoutput"><?php echo $settings["endtime"]; ?></output>
-                </li>
-                <br/>
-                <input type="submit" value="Update"/>
-            </ul>
+          <div class = "row"> <!-- Opening time  -->
+            <div class = "col-lg-12">
+              Opening time:
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-lg-12">
+              <input type="range" min="0" max="23" step="1" name="starttime" style="width: 80%;"
+                     value="<?php echo $settings["starttime"] ?>"
+                     oninput="starttimeoutput.value = starttime.value"/>
+              <output name="starttimeoutput"><?php echo $settings["starttime"]; ?></output>
+            </div>
+          </div>
+
+          <div class = "row"> <!-- Closing time -->
+            <div class = "col-lg-12">
+              Closing time:
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-lg-12">
+              <input type="range" min="0" max="23" step="1" name="endtime" style="width: 80%;"
+                     value="<?php echo $settings["endtime"]; ?>" oninput="endtimeoutput.value = endtime.value"/>
+              <output name="endtimeoutput"><?php echo $settings["endtime"]; ?></output>
+            </div>
+          </div>
+
+          <div class = "row"> <!-- Update button -->
+            <div class = "col-lg-12">
+              <input type="submit" value="Update"/>
+            </div>
+          </div>
         </form>
         <?php
         }
         ?>
-    </div>
+    </div> <!-- end of container -->
     </body>
     </html>
     <?php
