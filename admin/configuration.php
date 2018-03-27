@@ -123,23 +123,23 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <center>
             <?php if ($_SESSION["isadministrator"] == "TRUE"){
             if ($successmsg != "") {
-                echo "<div id=\"successmsg\" class = 'col-lg-12'>" . $successmsg . "</div>";
+                echo "<div id=\"successmsg\" class = 'col-sm-12'>" . $successmsg . "</div>";
             }
             if ($errormsg != "") {
-                echo "<div id=\"errormsg\" class = 'col-lg-12'>" . $errormsg . "</div>";
+                echo "<div id=\"errormsg\" class = 'col-sm-12'>" . $errormsg . "</div>";
             }
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Configuration</h3>
         <div id = "settingsul">
           <div class = "row"> <!--System Name-->
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               System Name - <span class="notetext">The name of this system.
                                 Appears as the title on all screens.</span>
             </div>
           </div>
           <div class = "row">
-            <div class = "col-lg-12">
+            <div class = "col-sm-12">
               <form name="instance_name" action="configuration.php" method="POST">
                   <input type="hidden" name="op" value="instance_name"/>
                   <input type="text" name="instance_name" value="<?php echo $settings["instance_name"]; ?>"/>
@@ -150,127 +150,110 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
 
           <div class = "row"> <!--System URL-->
-            <div class = "row">
-              <div class = "col-lg-12">
-                System URL - <span class="notetext">The URL users use to access this system. For example: www.bsu.edu/libraries/openroom/ (Note: please do not include protocol such as "http://")</span>
-              </div>
+            <div class = "col-sm-12">
+              System URL - <span class="notetext">The URL users use to access this system. For example: www.bsu.edu/libraries/openroom/ (Note: please do not include protocol such as "http://")</span>
             </div>
-            <div class = "row">
-              <div class = "col-lg-12">
-                <form name="instance_url" action="configuration.php" method="POST">
-                    <input type="hidden" name="op" value="instance_url"/>
-                    <input type="text" name="instance_url" value="<?php echo $settings["instance_url"]; ?>"/>
-                    <input type="submit" value="Save"/>
-                </form>
-              </div>
+          </div>
+          <div class = "row">
+            <div class = "col-sm-12">
+              <form name="instance_url" action="configuration.php" method="POST">
+                  <input type="hidden" name="op" value="instance_url"/>
+                  <input type="text" name="instance_url" value="<?php echo $settings["instance_url"]; ?>"/>
+                  <input type="submit" value="Save"/>
+              </form>
             </div>
           </div>
 
           <div class = "row"> <!--Security Settings-->
-            <div class = "row">
-              <div class = "col-lg-12">
-                Security Settings SSL/HTTPS - <span class="notetext">Setting this value to TRUE will add the https protocol where appropriate to ensure security.</span>
-              </div>
+            <div class = "col-sm-12">
+              Security Settings SSL/HTTPS - <span class="notetext">Setting this value to TRUE will add the https protocol where appropriate to ensure security.</span>
             </div>
-            <div class = "row">
-              <div class = "col-lg-12">
-                <form name="https" action="configuration.php" method="POST">
-                    <input type="hidden" name="op" value="https"/>
-                    <?php
-                    $trueselected = "";
-                    $falseselected = "";
-                    if ($settings["https"] == "true") $trueselected = "checked";
-                    if ($settings["https"] == "false") $falseselected = "checked";
-                    ?>
-                    <input type="radio" name="https" value="true" <?php echo $trueselected; ?>/>Yes&nbsp;<input
-                            type="radio" name="https" value="false" <?php echo $falseselected; ?>/>No&nbsp;<input
-                            type="submit" value="Save"/>
-                </form>
-              </div>
+          </div>
+          <div class = "row">
+            <div class = "col-sm-12 col-sm-offset-2">
+              <form name="https" action="configuration.php" method="POST">
+                  <input type="hidden" name="op" value="https"/>
+                  <?php
+                  $trueselected = "";
+                  $falseselected = "";
+                  if ($settings["https"] == "true") $trueselected = "checked";
+                  if ($settings["https"] == "false") $falseselected = "checked";
+                  ?>
+                  <input type="radio" name="https" value="true" <?php echo $trueselected; ?>/>Yes&nbsp;<input
+                          type="radio" name="https" value="false" <?php echo $falseselected; ?>/>No&nbsp;<input
+                          type="submit" value="Save"/>
+              </form>
             </div>
           </div>
 
           <div class = "row"> <!-- Email filter -->
-            <div class = "row">
-              <div class = "col-lg-12">
-                Email Filter - <span class="notetext">Enter the domain names you expect your users to use when registering with an email address.</span>
-                <br/>NOTE: Please separate each domain with a comma ",".
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col-lg-12">
-                <?php
-                $emailfilters = unserialize($settings["email_filter"]);
-                echo "<form name=\"email_filter\" action=\"configuration.php\" method=\"POST\"><input type=\"hidden\" name=\"op\" value=\"email_filter\" /><input type=\"text\" name=\"email_filter\" value=\"";
-                $count = 0;
-                foreach ($emailfilters as $emailfilter) {
-                    $comma = ",";
-                    if ($count == count($emailfilters) - 1) $comma = "";
-                    echo $emailfilter . $comma;
-                    $count++;
-                }
-                echo "\"/> <input type=\"submit\" value=\"Save\" /></form><br/>";
-                ?>
-              </div>
+            <div class = "col-sm-12">
+              Email Filter - <span class="notetext">Enter the domain names you expect your users to use when registering with an email address.</span>
+              <br/>NOTE: Please separate each domain with a comma ",".
             </div>
           </div>
-
-          <div class = "row"> <!-- Login settings -->
-            <div class = "row">
-              <div class = "col-lg-12">
-                Login Settings
-              </div>
-            </div>
-              <div class = "row">
-                <div class = "col-lg-12"
-                  Login Method: <?php echo $settings["login_method"]; ?> - <span class="notetext">This setting may not be changed. It is setup during the initial installation of OpenRoom.</span>
-
-                    <?php if ($settings["login_method"] == "ldap") { ?>
-                        <div class = "row">
-                            <div class = "col-lg-12">
-                                <form name="ldap_baseDN" action="configuration.php" method="POST">
-                                    <input type="hidden" name="op" value="ldap_baseDN"/>
-                                    BaseDN: <input type="text" name="ldap_baseDN"
-                                                   value="<?php echo $settings["ldap_baseDN"]; ?>"/> <input
-                                            type="submit" value="Save"/>
-                                </form>
-                            </div>
-                            <div class = "col-lg-12">
-                                <form name="ldap_host" action="configuration.php" method="POST">
-                                    <input type="hidden" name="op" value="ldap_host"/>
-                                    Host: <input type="text" name="ldap_host"
-                                                 value="<?php echo $settings["ldap_host"]; ?>"/> <input
-                                            type="submit" value="Save"/>
-                                </form>
-                            </div>
-                        </div>
-                    <?php } ?>
-
-              </div>
-            </div>
-          </div>
-
           <div class = "row">
-            <div class = "row">
-              <div class = "col-lg-12">
-                  Theme - <span class="notetext">Type the name of your theme folder here.</span>
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col-lg-12">
-                <form name="theme">
-                    <input type="hidden" name="op" value="theme"/>
-                    <input type="text" name="theme" value="<?php echo $settings["theme"]; ?>"/> <input
-                            type="submit" value="Save"/>
-                </form>
-              </div>
+            <div class = "col-sm-12">
+              <?php
+              $emailfilters = unserialize($settings["email_filter"]);
+              echo "<form name=\"email_filter\" action=\"configuration.php\" method=\"POST\"><input type=\"hidden\" name=\"op\" value=\"email_filter\" /><input type=\"text\" name=\"email_filter\" value=\"";
+              $count = 0;
+              foreach ($emailfilters as $emailfilter) {
+                  $comma = ",";
+                  if ($count == count($emailfilters) - 1) $comma = "";
+                  echo $emailfilter . $comma;
+                  $count++;
+              }
+              echo "\"/> <input type=\"submit\" value=\"Save\" /></form>";
+              ?>
             </div>
           </div>
 
-        </div> <!-- end of settingsul id -->
-        <?php
-        }
-        ?>
+          <div class = "row col-sm-12"> <!-- Login settings -->
+            Login Settings
+          </div>
+            <div class = "col-sm-12"
+              Login Method: <?php echo $settings["login_method"]; ?> - <span class="notetext">This setting may not be changed. It is setup during the initial installation of OpenRoom.</span>
+
+                <?php if ($settings["login_method"] == "ldap") { ?>
+                    <div class = "col-sm-12">
+                        <form name="ldap_baseDN" action="configuration.php" method="POST">
+                            <input type="hidden" name="op" value="ldap_baseDN"/>
+                            BaseDN: <input type="text" name="ldap_baseDN"
+                                           value="<?php echo $settings["ldap_baseDN"]; ?>"/> <input
+                                    type="submit" value="Save"/>
+                        </form>
+                    </div>
+                    <div class = "col-sm-12">
+                        <form name="ldap_host" action="configuration.php" method="POST">
+                            <input type="hidden" name="op" value="ldap_host"/>
+                            Host: <input type="text" name="ldap_host"
+                                         value="<?php echo $settings["ldap_host"]; ?>"/> <input
+                                    type="submit" value="Save"/>
+                        </form>
+                    </div>
+                <?php } ?>
+            </div>
+
+
+          <div class = "row col-sm-12">
+              Theme - <span class="notetext">Type the name of your theme folder here.</span>
+          </div>
+          <div class = "row">
+            <div class = "col-sm-12">
+              <form name="theme">
+                  <input type="hidden" name="op" value="theme"/>
+                  <input type="text" name="theme" value="<?php echo $settings["theme"]; ?>"/> <input
+                          type="submit" value="Save"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end of settingsul id -->
+  <?php
+  }
+  ?>
     </div>
     </body>
     </html>
