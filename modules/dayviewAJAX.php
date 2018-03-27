@@ -24,11 +24,15 @@ $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
 
+<<<<<<< HEAD
+=======
+date_default_timezone_set("America/Chicago"); //starts at current hour instead of 8am
+
+>>>>>>> parent of c5e9fb3... screwed up reservation hours (+5)
 $current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
-//$currentmdy = date('l, F d, Y', $_POST["fromrange"]);
-$currentmdy = date('l, F d, Y');
+$currentmdy = date('l, F d, Y', $_POST["fromrange"]);
 
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
@@ -269,6 +273,7 @@ if ($_SESSION["username"] != "") {
                 if ($isadministrator == "TRUE") {
                     $altusernamestr = "<strong>Username</strong>: <input type=\'text\' name=\'altusername\' /><br/><strong>Email Confirmation</strong>: <select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
                 }
+
                 $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime()) . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
 
                 //$collision = "<img style=\"cursor: pointer;\" src=\"". $_SESSION["themepath"] ."images/reservebutton.png\" border=\"0\" onClick=\"showPopUp(this,'". $info ."');\" />";
