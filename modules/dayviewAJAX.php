@@ -1,3 +1,6 @@
+<!-- create anoter dvout idea and add before others -->
+
+
 <?php
 echo "<script type = 'text/javascript'>
   alert('hi I'm here');
@@ -53,6 +56,8 @@ if ($_POST["group"] == "") {
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
+ //$legend = include("legend.php");
+
 
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
@@ -61,11 +66,14 @@ $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
 
+date_default_timezone_set("America/Chicago"); //starts at current hour instead of 8am
+
 $current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
 //$legend = include("legend.php");
+
 
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
@@ -86,6 +94,7 @@ if ($_SESSION["username"] != "") {
     $group_str .= "</div></div>";
 
     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
+
 
     //$divout .= "<div class = 'row'>". $legend."</div>"; /*WORK ON THIS LATER*/
 
@@ -274,7 +283,7 @@ if ($_SESSION["username"] != "") {
         $current_time->addMinutes($settings["interval"]);
     }
 
-    $dvout .= "</div>";
+
 
     echo $dvout;
 } //User isn't logged in
