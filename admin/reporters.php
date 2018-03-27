@@ -84,36 +84,26 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Reporters</h3>
-
-        <div class = "row">
-          <div class = "col-lg-12">
+        <ul>
             <?php
+
             $reporters = model\Reporter::all();
             foreach ($reporters as $reporter) {
-                echo "<div class = 'col-6'>" . $reporter->username . " <a href=\"javascript:confirmdelete('" . $reporter->username . "');\">Delete</a></div>";
+                echo "<li>" . $reporter->username . " <a href=\"javascript:confirmdelete('" . $reporter->username . "');\">Delete</a></li>";
             }
             ?>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <h4>Add Reporter</h4>
-          </div>
-          <div class = "row">
-            <div class = "col-lg-12">
-              <form name="addreporter" action="reporters.php" method="POST">
-                  <input type="text" name="reportername"/>
-                  <input type="hidden" name="op" value="addreporter"/>
-                  <input type="submit" value="Add Reporter"/>
-              </form>
-            </div>
-          </div>
-        </div>
-
+        </ul>
+        <br/>
+        <h4>Add Reporter</h4>
+        <form name="addreporter" action="reporters.php" method="POST">
+            <input type="text" name="reportername"/>
+            <input type="hidden" name="op" value="addreporter"/>
+            <input type="submit" value="Add Reporter"/>
+        </form>
         <?php
         }
         ?>
-    </div> <!-- end of container -->
+    </div>
     </body>
     </html>
     <?php

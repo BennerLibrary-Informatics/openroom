@@ -81,7 +81,7 @@ if ($_SESSION["username"] != "") {
           $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
               $dvout .= "Closed: ";
 
-<<<<<<< HEAD
+
             $dvout .= "<img src=\"themes/default/desktop/images/closedSign.png\"width=\"40\" height=\"40\"/>";
           $dvout .=  "</div>";
 
@@ -114,10 +114,9 @@ if ($_SESSION["username"] != "") {
  //$dvout .= .$group_str;
      $dvout .=  "<div class =\"table-responsive\">";
     $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
-=======
+
     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
     $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
->>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
 
 
     //Create optional field form items string for reservation form
