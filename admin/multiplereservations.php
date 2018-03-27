@@ -215,7 +215,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <div class = "col-lg-8">
               <label for "form"><strong>From:</strong></label>
               <input id="from" size="10" maxlength="10" name="from" type="text"
-                     value="<?php echo $_POST["from"]; ?>"/>
+              value="
++                               <?php if(isset($_POST["from"]))
++                                          echo $_POST["from"]; ?>"/>
               <img src="../includes/datechooser/calendar.gif"
                    onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
               <div id="chooserSpan3" class="dateChooser select-free"
@@ -227,7 +229,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <div class = "col-lg-8">
               <label for = "to"><strong>To:</strong></label>
               <input id="to" size="10" maxlength="10" name="to" type="text"
-                     value="<?php echo $_POST["to"]; ?>"/>
+              value="
++                                <?php if(isset($_POST["to"]))
++                                          echo $_POST["to"]; ?>"/>
               <img src="../includes/datechooser/calendar.gif"
                    onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
               <div id="chooserSpan3" class="dateChooser select-free"
@@ -243,7 +247,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <?php
                     for ($i = 0; $i <= 24; $i++) {
                         $selectstr = "";
-                        if ($i == $_POST["starthour"]) {
+                        if (isset($_POST["starthour"]) && $i == $_POST["starthour"]) {
                             $selectstr = "selected";
                         }
                         echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
@@ -253,7 +257,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <?php
                     for ($i = 0; $i <= 59; $i++) {
                         $selectstr = "";
-                        if ($i == $_POST["startminute"]) {
+                        if (isset($_POST["startminute"]) && $i == $_POST["startminute"]) {
                             $selectstr = "selected";
                         }
                         echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
@@ -269,8 +273,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               <strong>Duration:</strong>
             </div>
             <div class = "col-lg-8">
-              <input type="text" size="5" name="duration" value="<?php echo $_POST["duration"]; ?>"/> (in
-                          minutes)
+              <input type="text" size="5" name="duration" value="<?php echo $_POST["duration"]; ?>"/> (in minutes)
             </div>
           </div>
 
@@ -289,7 +292,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <div class = "row">
               <?php
               $dayarray = array("sunday" => "", "monday" => "", "tuesday" => "", "wednesday" => "", "thursday" => "", "friday" => "", "saturday" => "");
-              foreach ($_POST["daysineffect"] as $affectedday) {
+              if(isset($_POST["daysineffect"]))
+                     foreach ($_POST["daysineffect"] as $affectedday) {
                   $dayarray[$affectedday] = "checked";
               }
               ?>
@@ -327,7 +331,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <div class = "row">
               <div class = "col-lg-12">
                 <?php
-                if ($_POST["onlychecking"] != "multireserve") {
+                if (isset($_POST["onlychecking"]) && $_POST["onlychecking"] != "multireserve") {
                     $onlychksel = "checked";
                     $onlychkselb = "";
                 } else {
@@ -347,7 +351,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </div>
         </form>
         <?php
-        if ($availstr != "") {
+        if (isset($availstr) && $availstr != "") {
             echo $availstr;
         }
         }
