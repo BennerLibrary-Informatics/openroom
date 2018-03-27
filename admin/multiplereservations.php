@@ -323,7 +323,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
             <br/>
             <input type="hidden" name="op" value="multiplereservations"/>
-
             <div class = "row">
               <div class = "col-sm-12">
                 <?php
@@ -347,7 +346,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </div>
         </form>
         <?php
-        if ($availstr != "") {
+        if (isset($availstr) && $availstr != "") {
             echo $availstr;
         }
         }
