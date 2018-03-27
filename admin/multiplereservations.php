@@ -247,6 +247,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             $selectstr = "selected";
                         }
                         echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+
                     }
                     ?>
                 </select>:<select name="startminute">
@@ -347,7 +348,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </div>
         </form>
         <?php
-        if ($availstr != "") {
+        if (isset($availstr) && $availstr != "") {
             echo $availstr;
         }
         }

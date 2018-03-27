@@ -208,7 +208,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Timing and Limitations</h3>
-
         <div id = "settingsul">
           <div  class = "row col-sm-12">
             Allow Past Reservations? - <span class="notetext">Allow reservations to be made in the past?</span>
