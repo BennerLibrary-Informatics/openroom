@@ -1,9 +1,7 @@
 body {
-    margin: 10px;
+    margin: 0px;
     padding-top: 4px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: #c1c1c1;
+    background-color: #FFFFFF;
     font-family: Helvetica, arial, sans-serif;
     font-size: 12px;
 }
@@ -20,19 +18,6 @@ hr {
 
 }
 
-.glyphicon-ok {
-    font-size: 25px;
-    color: green;
-    position: relative;
-}
-.glyphicon-remove {
-    font-size: 25px;
-    color: red;
-
-}
-
-
-}
 #loginform ul {
     margin: 0px;
     padding: 0px;
@@ -69,22 +54,32 @@ hr {
 
 #heading {
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-color: #54406b;
     font-size: 20px;
     color: #FFFFFF;
 =======
     background-color: #FFFFFF;
 >>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
+=======
+    background-color: #FFFFFF;
+    font-size: 20px;
+>>>>>>> parent of 9470118... pc back to surface
     border: 0px;
     margin: 0 auto;
-    padding: 5px;
+    padding: 0px;
     text-align: right;
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: auto;
     height: 100px;
 =======
     width: 800px;
 >>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
+=======
+    width: 800px;
+    height: 50px;
+>>>>>>> parent of 9470118... pc back to surface
 }
 
 #remindermessage {
@@ -103,29 +98,25 @@ hr {
 }
 
 #container {
-    background-color: #FFFFFF;
+    background-color: #E1DBAF;
     border: 1px #000000 solid;
     margin: 0 auto;
     padding: 0px;
-    width: auto;
-
-    height:auto;
+    width: 1000px;
 }
 
 #leftside {
     float: left;
     padding: 10px;
     text-align: center;
-    max-width: 160px;
-    height: 100%;
+    width: 160px;
 }
 
 #rightside {
-
-    /* float: left; */
+    border-left: 1px #999999 dotted;
+    float: right;
     padding: 10px;
-    margin-left: 170px;
-     overflow: hidden;
+    width: 799px;
 }
 
 #clear_both {
@@ -211,15 +202,16 @@ hr {
 }
 
 .grouptab {
-    background-color: #FFFFFF;
-    font-size: 15px;
-    width: auto;
+    background-color: #C1BC98;
+    border-top: 1px #000000 solid;
+    border-left: 1px #000000 solid;
+    border-right: 1px #000000 solid;
     cursor: pointer;
-    padding: 10px;
+    padding: 2px;
 }
 
 .selected {
-    background-color: lightgrey;
+    background-color: #EFE9BA;
     border-top: 1px #000000 solid;
     border-left: 1px #000000 solid;
     border-right: 1px #000000 solid;
@@ -229,18 +221,16 @@ hr {
 }
 
 .mousedoverrow {
-    background-color: lightgrey;
+    background-color: #C1BC98;
 }
 
 .mousedoutrow {
-    background-color: #FFFFFF;
+    background-color: #E1DBAF;
 }
 
 #dayviewTable {
-
     border-collapse: collapse;
     width: 100%;
-    display:block;
 }
 
 #dayviewTable th {
@@ -249,7 +239,6 @@ hr {
 
 .dayviewTime {
     font-weight: bold;
-    font-size: 30px;
 }
 
 .dayviewTD {
@@ -319,26 +308,24 @@ hr {
   font-weight: bold;
 }
 #legend {
-    background-color: #FFFFFF;
-    border-top: 2px solid black;
-    border-bottom:2px solid black;
+    background-color: #ffffdd;
+    border: 1px #000000 solid;
     padding: 5px;
     position: relative;
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: auto;
+=======
+>>>>>>> parent of 9470118... pc back to surface
     /* top: 300px; */
 
 =======
 >>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
 }
-#legendTitleText{
-  font-weight: bold;
-  font-size: 16px;
 
-}
-#legendText {
+#legendtitle {
     font-weight: bold;
-
+    text-decoration: underline;
 }
 
 #legendtable td {

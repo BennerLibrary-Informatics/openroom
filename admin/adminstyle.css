@@ -6,7 +6,7 @@
 body {
     margin: 0px;
     padding-top: 4px;
-    background-color: #c1c1c1;
+    background-color: #FFFFFF;
     font-family: Helvetica, arial, sans-serif;
 
     font-size: 12px;
@@ -14,24 +14,24 @@ body {
 
 #container {
     background-color: #EEEEEE;
-    border: 2px #000000 solid;
-    margin: auto;
+    border: 1px #AAAAFF solid;
+    margin: 0 auto;
     padding: 10px;
+<<<<<<< HEAD
     width: 90%;
     height:auto;
+=======
+    width: 780px;
+>>>>>>> parent of 9470118... pc back to surface
 }
 
 #heading {
-  background-color: #54406b;
-  font-size: 20px;
-  color: #FFFFFF;
-  border: 0px;
-  margin: auto;
-  padding: 5px;
-  padding-right: 15px;
-  text-align: right;
-  width: auto;
-  height: 100px;
+    background-color: #FFFFFF;
+    border: 0px;
+    margin: 0 auto;
+    padding: 0px;
+    width: 800px;
+    text-align: right;
 }
 
 .roomname {
