@@ -12,6 +12,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     echo "You are not logged in. Please <a href=\"../index.php\">click here</a> and login with an account that is an authorized administrator or reporter.";
 } else {
     $op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : "";
+
+
     $successmsg = "";
     $errormsg = "";
     switch ($op) {
@@ -25,11 +27,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $affectedrooms = isset($_REQUEST["affectedrooms"]) ? $_REQUEST["affectedrooms"] : "";
             //days that the change applies to
             $affecteddays = isset($_REQUEST["affecteddays"]) ? $_REQUEST["affecteddays"] : "";
+
+
             if($startperiod == "PM" && $starthour != 12)
               $starthour += 12;
+
             if($endperiod == "PM" && $endhour != 12)
               $endhour += 12;
-            //All fields required
+             //All fields required
             if ($starthour != "" && $startminute != "" && $endhour != "" && $endminute != "" && $affectedrooms != "" && is_array($affectedrooms) && $affecteddays != "" && is_array($affecteddays)) {
                 //Make sure from and to are in proper formats
                         //Make sure endtime is greater than starttime
@@ -66,6 +71,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                             $room = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomid=" . $aroom . ";"));
                                             $errormsg = "There was a problem adding the new hours. Please try again.";
                                             $errormsg .= "<br/>Unable to add default hours to room " . $room["roomname"] . ". Please try again!";
+
                                         }
                                     }
                                 }
@@ -77,6 +83,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $errormsg .= "<br/>Some parameters are missing. Make sure all form fields are filled out.";
             }
             break;
+
+]
         case "deletedefaulthours":
             $roomhoursid = isset($_REQUEST["roomhoursid"]) ? $_REQUEST["roomhoursid"] : "";
             if (mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM roomhours WHERE roomhoursid=" . $roomhoursid . ";")) {
@@ -101,8 +109,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     window.location = "defaulthours.php?op=deletedefaulthours&roomhoursid=" + roomhoursid + "&anchorname=" + anchorname;
                 }
                 else {
+
+
                 }
             }
+
+
         </script>
 
         <script src="../includes/datechooser/date-functions.js" type="text/javascript"></script>
@@ -134,6 +146,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3>Current Room Hours:</h3><br>
         <?php
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
+
+          
             $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
             while($group = mysqli_fetch_array($roomgroups)){
                 echo "<h4><strong>" . $group["roomgroupname"] . ":</strong></h4>";
@@ -143,6 +157,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 while($room = mysqli_fetch_array($rooms)){
                     echo "<tr>";
                     echo "<td width=500px align='center'>" . $room['roomname'] . "</td>";
+
                     for ($wkdy = 0; $wkdy <= 6; $wkdy++) {
                         echo "<td width=3000px align='center'>";
                         $thisday = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomhours WHERE roomid=" . $room["roomid"] . " AND dayofweek=" . $wkdy . " ORDER BY start ASC;");
@@ -153,9 +168,91 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         }
                         echo "</td>";
                     }
+
+
+
                     echo "</tr>";
                 }
                 echo "</table>";
+            }
+        ?>
+        <br/>
+        <hr/>
+        <br/>
+
+        <div class = "row col-lg-12">
+          <h3>Add Default Hours</h3>
+        </div>
+        <div class = "row col-lg-12 description">
+          <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
+            hours. This will be automated in a future version of this system.</em>
+        </div>
+        <form name="adddefaulthours" action="defaulthours.php" method="POST">
+          <div class = "form-group row">
+            <div class = "col-lg-auto">
+            <label for = "starthour"><strong>Open:</strong></label>
+              <select name="starthour">
+                  <?php
+                  for ($i = 1; $i <= 12; $i++) {
+                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                  }
+                  ?>
+              </select>:<select name="startminute">
+                  <?php
+                  for ($i = 0; $i <= 59; $i++) {
+                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                  }
+                  ?>
+              </select>
+            <select name="startperiod">
+                <?php
+                $timePeriods = ["AM" , "PM"];
+                for ($i = 0; $i < 2; $i++) {
+                    echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                }
+                ?>
+            </select>
+            </div>
+          </div>
+
+          <div class = "row form-group">
+            <div class = "col-lg-12">
+              <label for = "endhour"><strong>Close:</strong></label>
+              <select name="endhour">
+                  <?php
+                  for ($i = 1; $i <= 12; $i++) {
+                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                  }
+                  ?>
+              </select>:<select name="endminute">
+                  <?php
+                  for ($i = 0; $i <= 59; $i++) {
+                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                  }
+                  ?>
+              </select>
+              <select name="endperiod">
+                  <?php
+                  $timePeriods = ["AM" , "PM"];
+                  for ($i = 0; $i < 2; $i++) {
+                      echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                  }
+                  ?>
+              </select>
+            </div>
+          </div>
+          <div class = "row col-lg-12">
+            <em>(To close room for entire day, leave hours set to 00:00-00:00.)</em>
+          </div>
+
+          <div class = "row">
+            <div class = "col-lg-auto">
+              <strong>Days Affected:&nbsp;&nbsp;&emsp; </strong>
+            </div>
+            <?php
+            $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+            for ($i = 0; $i <= 6; $i++) {
+
             }
         ?>
         <br/>
@@ -235,24 +332,34 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     echo "<input type=\"checkbox\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "</strong>";
                 }
             ?>
-            <br><br><h4><strong>Rooms Affected: </strong></h4>
-            <table>
+
+            <!--CHANGE HERE, need the days to be horizontal-->
+          </div>
+
+          <div class = "row col-lg-12">
+            <h4><strong>Rooms Affected: </strong></h4>
+          </div>
+
+            <div class = "row">
+
                 <?php
                 $roomgroup = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
                 while ($group = mysqli_fetch_array($roomgroup)) {
                     echo "<h4>" . $group["roomgroupname"] . "</h4>";
-                    echo "<table>";
+
+                    echo "<div class = 'row'>";
                     $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $group["roomgroupid"] . ";");
                     while ($room = mysqli_fetch_array($rooms)){
-                        echo "<tr><td><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></td></tr>\n";
+                        echo "<div class = 'col-lg-auto'><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></div>\n";
                     }
-                    echo "</table>";
+                    echo "</div>";
                   }
+
                 ?>
-            </table>
-            <br/>
+            </div>
             <input type="hidden" name="op" value="adddefaulthours"/>
-            <input type="submit" value="Add Hours"/><br/><br/><br/>
+            <input type="submit" value="Add Hours"/>
+
         </form>
 
         <?php

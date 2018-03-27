@@ -209,234 +209,237 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Timing and Limitations</h3>
 
-        <div id = "settingsul">
-          <div  class = "row col-lg-12">
-            Allow Past Reservations? - <span class="notetext">Allow reservations to be made in the past?</span>
-          </div>
-          <div class = "row">
-            <div class = "col-lg-12">
-              <form name="allowpastreservations" action="timing.php" method="POST">
-                  <input type="hidden" name="op" value="allowpastreservations"/>
-                  <?php
-                  $trueselect = "";
-                  $falseselect = "";
-                  if ($settings["allow_past_reservations"] == "true") {
-                      $trueselect = "checked";
-                  } else {
-                      $falseselect = "checked";
-                  }
-                  ?>
-                  <input type="radio" name="allowpastreservations" value="true" <?php echo $trueselect; ?>>Yes<br/>
-                  <input type="radio" name="allowpastreservations" value="false" <?php echo $falseselect; ?>>
-                  No<br/>
-                  <input type="submit" value="Save"/>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Allow Simultaneous Reservations? - <span class="notetext">Allow two reservations for different rooms to occur at the same time for one user?</span>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <form name="allowsimultaneousreservations" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="allowsimultaneousreservations"/>
-                <?php
-                $trueselect = "";
-                $falseselect = "";
-                if ($settings["allow_simultaneous_reservations"] == "true") {
-                    $trueselect = "checked";
-                } else {
-                    $falseselect = "checked";
-                }
-                ?>
-                <input type="radio" name="allowsimultaneousreservations"
-                       value="true" <?php echo $trueselect; ?>>Yes<br/>
-                <input type="radio" name="allowsimultaneousreservations"
-                       value="false" <?php echo $falseselect; ?>> No<br/>
-                <input type="submit" value="Save"/>
-            </form>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Interval - <span class="notetext">The number of minutes each row represents (default: 30).</span>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <form name="interval" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="interval"/>
-                <input type="text" name="interval" value="<?php echo $settings["interval"]; ?>"/>
-                <input type="submit" value="Save"/>
-            </form>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Time Format - <span class="notetext">Default "g:i a" will appear as "11:48 pm". See <a
-                      href="http://us.php.net/manual/en/function.date.php">PHP.net's Date() article</a> for how to format this string.</span>
-        </div>
-        <div class = "row">
-          <form name="time_format" action="timing.php" method="POST">
-              <input type="hidden" name="op" value="time_format"/>
-              <input type="text" name="time_format" value="<?php echo $settings["time_format"]; ?>"/>
-              minutes
-              <input type="submit" value="Save"/>
-          </form>
-        </div>
-
-        <div class = "row col-lg-12">
-          Duration Limit - <span class="notetext">Maximum amount of each reservation in minutes. Default: 240. Set to 0 for no limit.</span>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <form name="limit_duration" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="limit_duration"/>
-                <input type="text" name="limit_duration"
-                       value="<?php echo $settings["limit_duration"]; ?>"/> minutes
-                <input type="submit" value="Save"/>
-            </form>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Total Limit - <span class="notetext">Maximum amount of total reservation time in minutes per period. Default: 240/day. Set to 0 for no limit.</span>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <form name="limit_total" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="limit_total"/>
-                <?php
-                $limit_total = unserialize($settings["limit_total"]);
-                $daystr = "";
-                $weekstr = "";
-                $monthstr = "";
-                $yearstr = "";
-                if ($limit_total[1] == "day") $daystr = "selected";
-                if ($limit_total[1] == "week") $weekstr = "selected";
-                if ($limit_total[1] == "month") $monthstr = "selected";
-                if ($limit_total[1] == "year") $yearstr = "selected";
-                ?>
-                <input type="text" name="limit_total" value="<?php echo $limit_total[0]; ?>"/>minutes per
-                <select name="limit_total_period">
-                    <option value="day" <?php echo $daystr; ?>>Day</option>
-                    <option value="week" <?php echo $weekstr; ?>>Week</option>
-                    <option value="month" <?php echo $monthstr; ?>>Month</option>
-                    <option value="year" <?php echo $yearstr; ?>>Year</option>
-                </select>
-                <input type="submit" value="Save"/>
-            </form>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Frequency Limit - <span class="notetext">Maximum number of reservations per period. Default: 0. Set to 0 for no limit.</span>
-        </div>
-        <div class = "row">
-          <div class = "row">
-            <form name="limit_frequency" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="limit_frequency"/>
-                <?php
-                $limit_frequency = unserialize($settings["limit_frequency"]);
-                $daystr = "";
-                $weekstr = "";
-                $monthstr = "";
-                $yearstr = "";
-                if ($limit_frequency[1] == "day") $daystr = "selected";
-                if ($limit_frequency[1] == "week") $weekstr = "selected";
-                if ($limit_frequency[1] == "month") $monthstr = "selected";
-                if ($limit_frequency[1] == "year") $yearstr = "selected";
-                ?>
-                <input type="text" name="limit_frequency" value="<?php echo $limit_frequency[0]; ?>"/>reservations
-                per
-                <select name="limit_frequency_period">
-                    <option value="day" <?php echo $daystr; ?>>Day</option>
-                    <option value="week" <?php echo $weekstr; ?>>Week</option>
-                    <option value="month" <?php echo $monthstr; ?>>Month</option>
-                    <option value="year" <?php echo $yearstr; ?>>Year</option>
-                </select>
-                <input type="submit" value="Save"/>
-            </form>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Window Limit - <span class="notetext">Allows users to make reservations only within a certain time range. This allows you to prevent users from making reservations, say, 10 years into the future, that they can't fulfill.</span>
-        </div>
-        <div class = "row col-lg-12">
-          <span class="notetext">Windows come in two forms: <strong>Permanent</strong> and <strong>Sliding</strong>.<br/>
-          <strong>Permanent Windows</strong> are based on a specific date, after which reservations may no longer be made. (Example: 5/25/2025)<br/>
-          <strong>Sliding Windows</strong> are based on a time period in the future, based on the current day, after which reservations may no longer be made. (Example: 6 months from today)</span>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <form name="limit_window" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="limit_window"/>
-                <?php
-                $limit_window = unserialize($settings["limit_window"]);
-                $permstr = "";
-                $slidstr = "";
-                if ($limit_window[0] == "0") {
-                    $permstr = "checked";
-                    $permval = $limit_window[1];
-                } else {
-                    $slidstr = "checked";
-                    $slidval = $limit_window[1];
-                    if ($slidval == "day") $daystr = "selected";
-                    if ($slidval == "week") $weekstr = "selected";
-                    if ($slidval == "month") $monthstr = "selected";
-                    if ($slidval == "year") $yearstr = "selected";
-                }
-                ?>
-                <input type="radio" name="limit_window_type" value="permanent" <?php echo $permstr; ?>/>Permanent
-                <div class = "row col-lg-12">
-                  <input id="limit_window_date" size="10" maxlength="10" name="limit_window_date"
-                         type="text" value="<?php echo $permval; ?>">
-                  <img src="../includes/datechooser/calendar.gif"
-                       onclick="showChooser(this, 'limit_window_date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                  <div id="chooserSpan3" class="dateChooser select-free"
-                       style="display: none; visibility: hidden; width: 160px;"></div>
-                </div>
-                <div class = "row col-lg-12">
-                  <input type="radio" name="limit_window_type" value="sliding" <?php echo $slidstr; ?>/>Sliding
-                  - <span class="notetext">Must be greater than 0.</span>
-                </div>
-                <div class = "row col-lg-12">
-                  <input type="text" size="10" name="limit_window_range"
-                         value="<?php echo $limit_window[0]; ?>"/>
-                  <select name="limit_window_period">
-                      <option value="day" <?php echo $daystr; ?>>Days</option>
-                      <option value="week" <?php echo $weekstr; ?>>Weeks</option>
-                      <option value="month" <?php echo $monthstr; ?>>Months</option>
-                      <option value="year" <?php echo $yearstr; ?>>Years</option>
-                  </select>
-                </div>
-                <div class = "row col-lg-12">
-                  <input type="submit" value="Save"/>
-                </div>
-            </form>
-          </div>
-        </div>
-
-        <div class = "row col-lg-12">
-          Opening Day Limit - <span class="notetext">Will not allow users to make reservations PRIOR TO the Opening Day. Default: None (leave blank)</span>
-        </div>
-        <div class = "row">
-          <div class = "col-lg-12">
-            <form name="limit_openingday" action="timing.php" method="POST">
-                <input type="hidden" name="op" value="limit_openingday"/>
-                <input id="limit_openingday" size="10" maxlength="10" name="limit_openingday" type="text"
-                       value="<?php echo $settings["limit_openingday"]; ?>">
-                <img src="../includes/datechooser/calendar.gif"
-                     onclick="showChooser(this, 'limit_openingday', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                <div id="chooserSpan3" class="dateChooser select-free"
-                     style="display: none; visibility: hidden; width: 160px;"></div>
-                <br/>
-                <input type="submit" value="Save"/><br/><br/>
-            </form>
-          </div>
-        </div>
+        <ul id="settingsul">
+            <li>
+                Allow Past Reservations? - <span class="notetext">Allow reservations to be made in the past?</span>
+                <ul>
+                    <li>
+                        <form name="allowpastreservations" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="allowpastreservations"/>
+                            <?php
+                            $trueselect = "";
+                            $falseselect = "";
+                            if ($settings["allow_past_reservations"] == "true") {
+                                $trueselect = "checked";
+                            } else {
+                                $falseselect = "checked";
+                            }
+                            ?>
+                            <input type="radio" name="allowpastreservations" value="true" <?php echo $trueselect; ?>>Yes<br/>
+                            <input type="radio" name="allowpastreservations" value="false" <?php echo $falseselect; ?>>
+                            No<br/>
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Allow Simultaneous Reservations? - <span class="notetext">Allow two reservations for different rooms to occur at the same time for one user?</span>
+                <ul>
+                    <li>
+                        <form name="allowsimultaneousreservations" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="allowsimultaneousreservations"/>
+                            <?php
+                            $trueselect = "";
+                            $falseselect = "";
+                            if ($settings["allow_simultaneous_reservations"] == "true") {
+                                $trueselect = "checked";
+                            } else {
+                                $falseselect = "checked";
+                            }
+                            ?>
+                            <input type="radio" name="allowsimultaneousreservations"
+                                   value="true" <?php echo $trueselect; ?>>Yes<br/>
+                            <input type="radio" name="allowsimultaneousreservations"
+                                   value="false" <?php echo $falseselect; ?>> No<br/>
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Interval - <span class="notetext">The number of minutes each row represents (default: 30).</span>
+                <ul>
+                    <li>
+                        <form name="interval" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="interval"/>
+                            <input type="text" name="interval" value="<?php echo $settings["interval"]; ?>"/>
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Time Format - <span class="notetext">Default "g:i a" will appear as "11:48 pm". See <a
+                            href="http://us.php.net/manual/en/function.date.php">PHP.net's Date() article</a> for how to format this string.</span>
+                <ul>
+                    <li>
+                        <form name="time_format" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="time_format"/>
+                            <input type="text" name="time_format" value="<?php echo $settings["time_format"]; ?>"/>
+                            minutes
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Duration Limit - <span class="notetext">Maximum amount of each reservation in minutes. Default: 240. Set to 0 for no limit.</span>
+                <ul>
+                    <li>
+                        <form name="limit_duration" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="limit_duration"/>
+                            <input type="text" name="limit_duration"
+                                   value="<?php echo $settings["limit_duration"]; ?>"/> minutes
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Total Limit - <span class="notetext">Maximum amount of total reservation time in minutes per period. Default: 240/day. Set to 0 for no limit.</span>
+                <ul>
+                    <li>
+                        <form name="limit_total" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="limit_total"/>
+                            <?php
+                            $limit_total = unserialize($settings["limit_total"]);
+                            $daystr = "";
+                            $weekstr = "";
+                            $monthstr = "";
+                            $yearstr = "";
+                            if ($limit_total[1] == "day") $daystr = "selected";
+                            if ($limit_total[1] == "week") $weekstr = "selected";
+                            if ($limit_total[1] == "month") $monthstr = "selected";
+                            if ($limit_total[1] == "year") $yearstr = "selected";
+                            ?>
+                            <input type="text" name="limit_total" value="<?php echo $limit_total[0]; ?>"/>minutes per
+                            <select name="limit_total_period">
+                                <option value="day" <?php echo $daystr; ?>>Day</option>
+                                <option value="week" <?php echo $weekstr; ?>>Week</option>
+                                <option value="month" <?php echo $monthstr; ?>>Month</option>
+                                <option value="year" <?php echo $yearstr; ?>>Year</option>
+                            </select>
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Frequency Limit - <span class="notetext">Maximum number of reservations per period. Default: 0. Set to 0 for no limit.</span>
+                <ul>
+                    <li>
+                        <form name="limit_frequency" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="limit_frequency"/>
+                            <?php
+                            $limit_frequency = unserialize($settings["limit_frequency"]);
+                            $daystr = "";
+                            $weekstr = "";
+                            $monthstr = "";
+                            $yearstr = "";
+                            if ($limit_frequency[1] == "day") $daystr = "selected";
+                            if ($limit_frequency[1] == "week") $weekstr = "selected";
+                            if ($limit_frequency[1] == "month") $monthstr = "selected";
+                            if ($limit_frequency[1] == "year") $yearstr = "selected";
+                            ?>
+                            <input type="text" name="limit_frequency" value="<?php echo $limit_frequency[0]; ?>"/>reservations
+                            per
+                            <select name="limit_frequency_period">
+                                <option value="day" <?php echo $daystr; ?>>Day</option>
+                                <option value="week" <?php echo $weekstr; ?>>Week</option>
+                                <option value="month" <?php echo $monthstr; ?>>Month</option>
+                                <option value="year" <?php echo $yearstr; ?>>Year</option>
+                            </select>
+                            <input type="submit" value="Save"/>
+                        </form>
+                        <br/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Window Limit - <span class="notetext">Allows users to make reservations only within a certain time range. This allows you to prevent users from making reservations, say, 10 years into the future, that they can't fulfill.</span>
+                <ul>
+                    <li>
+						<span class="notetext">Windows come in two forms: <strong>Permanent</strong> and <strong>Sliding</strong>.<br/>
+						<strong>Permanent Windows</strong> are based on a specific date, after which reservations may no longer be made. (Example: 5/25/2025)<br/>
+						<strong>Sliding Windows</strong> are based on a time period in the future, based on the current day, after which reservations may no longer be made. (Example: 6 months from today)</span>
+                        <form name="limit_window" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="limit_window"/>
+                            <?php
+                            $limit_window = unserialize($settings["limit_window"]);
+                            $permstr = "";
+                            $slidstr = "";
+                            if ($limit_window[0] == "0") {
+                                $permstr = "checked";
+                                $permval = $limit_window[1];
+                            } else {
+                                $slidstr = "checked";
+                                $slidval = $limit_window[1];
+                                if ($slidval == "day") $daystr = "selected";
+                                if ($slidval == "week") $weekstr = "selected";
+                                if ($slidval == "month") $monthstr = "selected";
+                                if ($slidval == "year") $yearstr = "selected";
+                            }
+                            ?>
+                            <input type="radio" name="limit_window_type" value="permanent" <?php echo $permstr; ?>/>Permanent
+                            <ul>
+                                <li>
+                                    <input id="limit_window_date" size="10" maxlength="10" name="limit_window_date"
+                                           type="text" value="<?php if(isset($permval)){
+                                               echo $permval;}?>">
+                                    <img src="../includes/datechooser/calendar.gif"
+                                         onclick="showChooser(this, 'limit_window_date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                    <div id="chooserSpan3" class="dateChooser select-free"
+                                         style="display: none; visibility: hidden; width: 160px;"></div>
+                                </li>
+                            </ul>
+                            <br/>
+                            <input type="radio" name="limit_window_type" value="sliding" <?php echo $slidstr; ?>/>Sliding
+                            - <span class="notetext">Must be greater than 0.</span>
+                            <ul>
+                                <li>
+                                    <input type="text" size="10" name="limit_window_range"
+                                           value="<?php echo $limit_window[0]; ?>"/>
+                                    <select name="limit_window_period">
+                                        <option value="day" <?php echo $daystr; ?>>Days</option>
+                                        <option value="week" <?php echo $weekstr; ?>>Weeks</option>
+                                        <option value="month" <?php echo $monthstr; ?>>Months</option>
+                                        <option value="year" <?php echo $yearstr; ?>>Years</option>
+                                    </select>
+                                </li>
+                            </ul>
+                            <br/>
+                            <input type="submit" value="Save"/><br/><br/>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Opening Day Limit - <span class="notetext">Will not allow users to make reservations PRIOR TO the Opening Day. Default: None (leave blank)</span>
+                <ul>
+                    <li>
+                        <form name="limit_openingday" action="timing.php" method="POST">
+                            <input type="hidden" name="op" value="limit_openingday"/>
+                            <input id="limit_openingday" size="10" maxlength="10" name="limit_openingday" type="text"
+                                   value="<?php echo $settings["limit_openingday"]; ?>">
+                            <img src="../includes/datechooser/calendar.gif"
+                                 onclick="showChooser(this, 'limit_openingday', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                            <div id="chooserSpan3" class="dateChooser select-free"
+                                 style="display: none; visibility: hidden; width: 160px;"></div>
+                            <br/>
+                            <input type="submit" value="Save"/><br/><br/>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <br/>
 
         <?php
         }
