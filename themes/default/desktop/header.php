@@ -18,7 +18,11 @@ require_once("includes/or-dbinfo.php");
 	<span class="username">
 	<?php
     if ($_SESSION["systemid"] == $settings["systemid"]){
+<<<<<<< HEAD
     echo isset($_SESSION["username"]) ? "<strong>Hello, </strong>" . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\"style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
+=======
+    echo isset($_SESSION["displayname"]) ? "<strong>Logged in as</strong>: " . $_SESSION["displayname"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
+>>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
     echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
     if ($settings["login_method"] == "normal" && $_SESSION["username"] != "") {
         echo "|&nbsp;<a href=\"editaccount.php\"style=\"color:white;\">Edit Account</a>&nbsp;|";
@@ -38,7 +42,12 @@ require_once("includes/or-dbinfo.php");
         <?php include("modules/calendar.php"); ?>
         <br/>
 
+<<<<<<< HEAD
 
+=======
+        <?php include("modules/legend.php"); ?>
+        <br/>
+>>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
 
 
         <!-- <?php include("modules/roomdetails.php"); ?> -->

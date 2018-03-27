@@ -59,7 +59,7 @@ hr {
 .button {
     border: 2px #000000 solid;
     background-color: #EEEEEE;
-
+    width: 55px;
     margin-bottom: 5px;
 }
 
@@ -71,15 +71,23 @@ hr {
 }
 
 #heading {
+<<<<<<< HEAD
     background-color: #54406b;
     font-size: 20px;
     color: #FFFFFF;
+=======
+    background-color: #FFFFFF;
+>>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
     border: 0px;
     margin: 0 auto;
     padding: 5px;
     text-align: right;
+<<<<<<< HEAD
     width: auto;
     height: 100px;
+=======
+    width: 800px;
+>>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
 }
 
 #remindermessage {
@@ -200,7 +208,7 @@ hr {
 */
 
 #dayviewheader {
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
 }
@@ -319,9 +327,12 @@ hr {
     border-bottom:2px solid black;
     padding: 5px;
     position: relative;
+<<<<<<< HEAD
     height: auto;
     /* top: 300px; */
 
+=======
+>>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
 }
 #legendTitleText{
   font-weight: bold;

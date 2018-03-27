@@ -56,25 +56,28 @@
 
 <div id="loginform">
     <form id="authentication" onsubmit="return false" action="">
-          <div id="loginusername" class = "form-group row">
-            <div class = "col-sm-4">
-                      <lable for="loginusernamelabel">Olivet Username:</label>
+          <div id="loginusername" class = "row">
+              <div class = "col-lg-4 usernamelabel">
+                  <span id="loginusernamelabel">Olivet Username:</span>
+              </div>
+              <div class = "col-lg-8 usernamefield">
                   <input alt="Enter your Olivet Username" type="text" name="username" id="usernamefield"
-                         class="form-control form-control-sm" placeholder="Your Olivet Username" autofocus="autofocus"/>
-            </div>
+                         class="textfield" placeholder="Your Olivet Username" autofocus="autofocus"/>
+              </div>
           </div>
 
-          <div id="loginpassword" class = "form-group row">
-              <div class = "col-sm-4">
-                  <label for="loginpasswordlabel">Password:</label>
+          <div id="loginpassword" class = "row">
+              <div class = "col-lg-4">
+                  <span id="loginpasswordlabel">Password:</span>
+              </div>
+              <div class = "col-lg-8">
                   <input alt="Enter your Olivet Password" type="password" name="password" id="passwordfield"
-                         class="form-control form-control-sm" placeholder="Your Olivet password"/>
-               </div>
-
+                         class="textfield" placeholder="Your Olivet password"/>
+              </div>
           </div>
-          <div class = "form-group row">
-              <div class = "col-sm-4">
-                      <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
+          <div class = "row">
+              <div class = "col-lg-8">
+                  <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
                          onclick="ajaxAuthenticate()"/><br/>
                   <?php
                   if ($settings["login_method"] == "normal") {

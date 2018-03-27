@@ -1,6 +1,3 @@
-<!-- create anoter dvout idea and add before others -->
-
-
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -19,8 +16,6 @@ if ($_POST["group"] == "") {
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
- //$legend = include("legend.php");
-
 
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
@@ -36,7 +31,6 @@ $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 //$currentmdy = date('l, F d, Y', $_POST["fromrange"]);
 $currentmdy = date('l, F d, Y');
-
 
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
@@ -87,6 +81,7 @@ if ($_SESSION["username"] != "") {
           $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
               $dvout .= "Closed: ";
 
+<<<<<<< HEAD
             $dvout .= "<img src=\"themes/default/desktop/images/closedSign.png\"width=\"40\" height=\"40\"/>";
           $dvout .=  "</div>";
 
@@ -119,6 +114,10 @@ if ($_SESSION["username"] != "") {
  //$dvout .= .$group_str;
      $dvout .=  "<div class =\"table-responsive\">";
     $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
+=======
+    $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
+    $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
+>>>>>>> parent of ab8949c... moving things from laptop to desktop, no big changes
 
 
     //Create optional field form items string for reservation form
