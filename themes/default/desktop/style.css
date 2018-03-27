@@ -1,13 +1,12 @@
-@import "css/bootstrap.css";
-@import "css/bootstrap-grid.css";
-@import "css/bootstrap-reboot.css";
-@import "css/bootstrap.min.css";
+@import "bootimp.css";
 
 
 body {
-    margin: 0px;
+    margin: 10px;
     padding-top: 4px;
-    background-color: #FFFFFF;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #c1c1c1;
     font-family: Helvetica, arial, sans-serif;
     font-size: 12px;
 }
@@ -15,11 +14,28 @@ body {
 p {
     font-family: Helvetica, arial, sans-serif;
 }
-
+hr {
+  color: #000000;
+  background-color: #000000;
+  border-width: 3px;
+}
 #loginform {
 
 }
 
+.glyphicon-ok {
+    font-size: 25px;
+    color: green;
+    position: relative;
+}
+.glyphicon-remove {
+    font-size: 25px;
+    color: red;
+
+}
+
+
+}
 #loginform ul {
     margin: 0px;
     padding: 0px;
@@ -43,7 +59,7 @@ p {
 .button {
     border: 2px #000000 solid;
     background-color: #EEEEEE;
-    width: 55px;
+
     margin-bottom: 5px;
 }
 
@@ -55,12 +71,15 @@ p {
 }
 
 #heading {
-    background-color: #FFFFFF;
+    background-color: #54406b;
+    font-size: 20px;
+    color: #FFFFFF;
     border: 0px;
     margin: 0 auto;
-    padding: 0px;
+    padding: 5px;
     text-align: right;
-    width: 800px;
+    width: auto;
+    height: 100px;
 }
 
 #remindermessage {
@@ -79,25 +98,29 @@ p {
 }
 
 #container {
-    background-color: #E1DBAF;
+    background-color: #FFFFFF;
     border: 1px #000000 solid;
     margin: 0 auto;
     padding: 0px;
-    width: 800px;
+    width: auto;
+
+    height:auto;
 }
 
 #leftside {
     float: left;
     padding: 10px;
     text-align: center;
-    width: 160px;
+    max-width: 160px;
+    height: 100%;
 }
 
 #rightside {
-    border-left: 1px #999999 dotted;
-    float: right;
+
+    /* float: left; */
     padding: 10px;
-    width: 599px;
+    margin-left: 170px;
+     overflow: hidden;
 }
 
 #clear_both {
@@ -177,22 +200,21 @@ p {
 */
 
 #dayviewheader {
-    font-size: 15px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
 }
 
 .grouptab {
-    background-color: #C1BC98;
-    border-top: 1px #000000 solid;
-    border-left: 1px #000000 solid;
-    border-right: 1px #000000 solid;
+    background-color: #FFFFFF;
+    font-size: 15px;
+    width: auto;
     cursor: pointer;
-    padding: 2px;
+    padding: 10px;
 }
 
 .selected {
-    background-color: #EFE9BA;
+    background-color: lightgrey;
     border-top: 1px #000000 solid;
     border-left: 1px #000000 solid;
     border-right: 1px #000000 solid;
@@ -202,16 +224,18 @@ p {
 }
 
 .mousedoverrow {
-    background-color: #C1BC98;
+    background-color: lightgrey;
 }
 
 .mousedoutrow {
-    background-color: #E1DBAF;
+    background-color: #FFFFFF;
 }
 
 #dayviewTable {
+
     border-collapse: collapse;
     width: 100%;
+    display:block;
 }
 
 #dayviewTable th {
@@ -220,6 +244,7 @@ p {
 
 .dayviewTime {
     font-weight: bold;
+    font-size: 30px;
 }
 
 .dayviewTD {
@@ -284,16 +309,28 @@ p {
 
 }
 
+#legendText{
+  font-size: 12px;
+  font-weight: bold;
+}
 #legend {
-    background-color: #ffffdd;
-    border: 1px #000000 solid;
+    background-color: #FFFFFF;
+    border-top: 2px solid black;
+    border-bottom:2px solid black;
     padding: 5px;
     position: relative;
-}
+    height: auto;
+    /* top: 300px; */
 
-#legendtitle {
+}
+#legendTitleText{
+  font-weight: bold;
+  font-size: 16px;
+
+}
+#legendText {
     font-weight: bold;
-    text-decoration: underline;
+
 }
 
 #legendtable td {

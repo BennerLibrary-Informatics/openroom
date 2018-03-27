@@ -208,130 +208,176 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Email Setup</h3><br/>
         <span class="notetext">There are three types of emails: <strong>Verbose</strong> are fully-detailed messages, <strong>Terse</strong> are stripped down to only the most important details, and <strong>GEF (Gmail Event Format)</strong> is formatted to work with Gmail Events.</span>
-        <ul id="settingsul">
-            <li>
-                On Reservations - <span class="notetext">This email is sent whenever a reservation is made.</span>
-                <ul>
-                    <li>
-                        <form name="onreserveverbose" action="email.php" method="POST">Verbose: <input type="text"
-                                                                                                       name="email_res_verbose"
-                                                                                                       value="<?php echo $email_res_verbose; ?>"/><input
-                                    type="hidden" name="op" value="email_res_verbose"/><input type="submit"
-                                                                                              value="Save"/></form>
-                    </li>
-                    <li>
-                        <form name="onreserveterse" action="email.php" method="POST">Terse: <input type="text"
-                                                                                                   name="email_res_terse"
-                                                                                                   value="<?php echo $email_res_terse; ?>"/><input
-                                    type="hidden" name="op" value="email_res_terse"/><input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                    <li>
-                        <form name="onreservegef" action="email.php" method="POST">GEF: <input type="text"
-                                                                                               name="email_res_gef"
-                                                                                               value="<?php echo $email_res_gef; ?>"/><input
-                                    type="hidden" name="op" value="email_res_gef"/><input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                </ul>
-                <br/>
-            </li>
-            <li>
-                On Condition - <span class="notetext">This email is sent whenever certain conditions are met when reservations or cancellations are made.<br/>(*This will NOT be sent to users.)<br/>(*When dealing with Duration and Number In Group, the condition is met when the user enters a value greater than or equal to the conditional value.)</span>
-                <ul>
-                    <li>
-                        <form name="oncondition" action="email.php" method="POST">When <select name="email_condition">
-                                <option value="">None</option>
-                                <option value="duration"<?php if ($settings["email_condition"] == "duration") echo " selected"; ?>>
-                                    Duration
-                                </option>
-                                <option value="capacity"<?php if ($settings["email_condition"] == "capacity") echo " selected"; ?>>
-                                    Number In Group
-                                </option>
-                                <?php
-                                //Grab all optional fields
-                                $ofselected = "";
-                                $ofs = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields;");
-                                while ($of = mysqli_fetch_array($ofs)) {
-                                    if ($settings["email_condition"] == $of["optionformname"]) {
-                                        $ofselected = " selected";
-                                    }
-                                    echo "<option value=\"" . $of["optionformname"] . "\"" . $ofselected . ">" . $of["optionname"] . "</option>";
-                                }
-                                ?>
-                            </select> = <input type="text" name="email_condition_value"
-                                               value="<?php echo $settings["email_condition_value"]; ?>"/>
-                            <input type="hidden" name="op" value="condition"/>
-                            <input type="submit" value="Save"/></form>
-                        <ul>
-                            <li>
-                                <form name="onconditionverbose" action="email.php" method="POST">Verbose: <input
-                                            type="text" name="email_cond_verbose"
-                                            value="<?php echo $email_cond_verbose; ?>"/><input type="hidden" name="op"
-                                                                                               value="email_cond_verbose"/><input
-                                            type="submit" value="Save"/></form>
-                            </li>
-                            <li>
-                                <form name="onconditionterse" action="email.php" method="POST">Terse: <input type="text"
-                                                                                                             name="email_cond_terse"
-                                                                                                             value="<?php echo $email_cond_terse; ?>"/><input
-                                            type="hidden" name="op" value="email_cond_terse"/><input type="submit"
-                                                                                                     value="Save"/>
-                                </form>
-                            </li>
-                            <li>
-                                <form name="onconditiongef" action="email.php" method="POST">GEF: <input type="text"
-                                                                                                         name="email_cond_gef"
-                                                                                                         value="<?php echo $email_cond_gef; ?>"/><input
-                                            type="hidden" name="op" value="email_cond_gef"/><input type="submit"
-                                                                                                   value="Save"/></form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <br/>
-            </li>
-            <li>
-                On Cancellations - <span class="notetext">This email is sent whenever a reservation is cancelled.</span>
-                <ul>
-                    <li>
-                        <form name="oncancelverbose" action="email.php" method="POST">Verbose: <input type="text"
-                                                                                                      name="email_can_verbose"
-                                                                                                      value="<?php echo $email_can_verbose; ?>"/><input
-                                    type="hidden" name="op" value="email_can_verbose"/><input type="submit"
-                                                                                              value="Save"/></form>
-                    </li>
-                    <li>
-                        <form name="oncancelterse" action="email.php" method="POST">Terse: <input type="text"
-                                                                                                  name="email_can_terse"
-                                                                                                  value="<?php echo $email_can_terse; ?>"/><input
-                                    type="hidden" name="op" value="email_can_terse"/><input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                    <li>
-                        <form name="oncancelgef" action="email.php" method="POST">GEF: <input type="text"
-                                                                                              name="email_can_gef"
-                                                                                              value="<?php echo $email_can_gef; ?>"/><input
-                                    type="hidden" name="op" value="email_can_gef"/><input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                </ul>
-                <br/>
-            </li>
-            <li>
-                System Address - <span class="notetext">This address is used in the "from" and "reply-to" fields. It is also the address that will be used for users to contact administrators.</span>
-                <ul>
-                    <li>
-                        <form name="systemaddress" action="email.php" method="POST">
-                            <input type="text" name="email_system" value="<?php echo $settings["email_system"]; ?>"/>
-                            <input type="hidden" name="op" value="email_system"/>
-                            <input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <br/>
+        <div id = "settingsul">
+          <!-- Top email setup  -->
+          <div class = "row col-sm-12">
+            On Reservations - <span class="notetext">This email is sent whenever a reservation is made.</span>
+          </div>
+
+          <div class = "col-sm-12 col-sm-offset-4">
+              <form name="onreserveverbose" action="email.php" method="POST">
+                <div class = "row">
+                  <div class = "col-sm-2"> Verbose:</div>
+                  <div class = "col-sm-3"> <input type="text" name="email_res_verbose" value="<?php echo $email_res_verbose; ?>"/></div>
+                  <div class = "col-sm-auto">
+                      <input type="hidden" name="op" value="email_res_verbose"/>
+                      <input type="submit" value="Save"/>
+                  </div>
+                </div>
+              </form>
+
+
+            <form name="onreserveterse" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-2"> Terse: </div>
+                <div class = "col-sm-3"><input type="text" name="email_res_terse" value="<?php echo $email_res_terse; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_res_terse"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+
+
+            <form name="onreservegef" action="email.php" method="POST">
+              <div class ="row">
+                <div class = "col-sm-2">GEF:</div>
+                <div class = "col-sm-3"> <input type="text" name="email_res_gef" value="<?php echo $email_res_gef; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_res_gef"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- On condition  -->
+          <div class = "row col-sm-12">
+            On Condition - <span class="notetext">This email is sent whenever certain conditions are met when reservations or cancellations are made.<br/>(*This will NOT be sent to users.)<br/>(*When dealing with Duration and Number In Group, the condition is met when the user enters a value greater than or equal to the conditional value.)</span>
+          </div>
+
+          <div class = "col-sm-12 col-sm-offset-2">
+            <form name="oncondition" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-2">When </div>
+                <div class = "col-sm-auto">
+                  <select name="email_condition">
+                    <option value="">None</option>
+                    <option value="duration"<?php if ($settings["email_condition"] == "duration") echo " selected"; ?>>
+                        Duration
+                    </option>
+                    <option value="capacity"<?php if ($settings["email_condition"] == "capacity") echo " selected"; ?>>
+                        Number In Group
+                    </option>
+                    <?php
+                    //Grab all optional fields
+                    $ofselected = "";
+                    $ofs = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields;");
+                    while ($of = mysqli_fetch_array($ofs)) {
+                        if ($settings["email_condition"] == $of["optionformname"]) {
+                            $ofselected = " selected";
+                        }
+                        echo "<option value=\"" . $of["optionformname"] . "\"" . $ofselected . ">" . $of["optionname"] . "</option>";
+                    }
+                    ?>
+                  </select> = <input type="text" name="email_condition_value"
+                                 value="<?php echo $settings["email_condition_value"]; ?>"/>
+                </div>
+                <div class = "col-sm-2">
+                  <input type="hidden" name="op" value="condition"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+
+            <form name="onconditionverbose" action="email.php" method="POST">
+              <div class = "row">
+                  <div class = "col-sm-2"> Verbose:</div>
+                  <div class = "col-sm-3"> <input type="text" name="email_cond_verbose" value="<?php echo $email_cond_verbose; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_cond_verbose"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+
+            <form name="onconditionterse" action="email.php" method="POST">
+              <div class ="row">
+                <div class = "col-sm-2">Terse: </div>
+                <div class = "col-sm-3"><input type="text" name="email_cond_terse" value="<?php echo $email_cond_terse; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_cond_terse"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+            <form name="onconditiongef" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-2">GEF: </div>
+                <div class = "col-sm-3"><input type="text" name="email_cond_gef" value="<?php echo $email_cond_gef; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_cond_gef"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+
+          </div>
+          <div class = "row col-sm-12">
+            On Cancellations - <span class="notetext">This email is sent whenever a reservation is cancelled.</span>
+          </div>
+          <div class = "col-sm-12 col-sm-offset-2">
+            <form name="oncancelverbose" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-2">Verbose:</div>
+              <div class = "col-sm-3"> <input type="text" name="email_can_verbose" value="<?php echo $email_can_verbose; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_can_verbose"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+
+            <form name="oncancelterse" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-2">Terse:</div>
+                <div class = "col-sm-3"><input type="text" name="email_can_terse" value="<?php echo $email_can_terse; ?>"/></div>
+                <div class = "col-auto">
+                  <input type="hidden" name="op" value="email_can_terse"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+
+            <form name="oncancelgef" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-2">GEF:</div>
+                <div class = "col-sm-3"><input type="text" name="email_can_gef" value="<?php echo $email_can_gef; ?>"/></div>
+                <div class = "col-sm-auto">
+                  <input type="hidden" name="op" value="email_can_gef"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class = "row col-sm-12">
+            System Address - <span class="notetext">This address is used in the "from" and "reply-to" fields. It is also the address that will be used for users to contact administrators.</span>
+          </div>
+          <div class = "col-sm-12 col-sm-offset-2">
+            <form name="systemaddress" action="email.php" method="POST">
+              <div class = "row">
+                <div class = "col-sm-3">
+                  <input type="text" name="email_system" value="<?php echo $settings["email_system"]; ?>"/>
+                </div>
+                <div class = "col-auto">
+                  <input type="hidden" name="op" value="email_system"/>
+                  <input type="submit" value="Save"/>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
         <?php
         }
         ?>

@@ -124,7 +124,7 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
         ajaxFunction(0, 0); //All params = 0 for current date to appear
         dayviewer(0, 0, '', ''); //All params = 0 or '' for current date's dayview to appear
     </script>
-    <div id="calendarModule"></div>
+
     <?php
 }
 ?>
