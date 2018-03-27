@@ -141,7 +141,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             function confirmdelete(roomid, roomname) {
                 var answer = confirm("Are you sure you would like to delete " + roomname + "?\n\nNOTE: Deleting a room will NOT delete past reservations. Any future reservations will be cancelled automatically.");
                 if (answer) {
-                    window.location = "rooms.php?op=deleteroom&id=" + roomid;
+                    window.location = "room_main.php?op=deleteroom&id=" + roomid;
                 }
                 else {
 
@@ -167,31 +167,46 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Rooms</h3>
-        <div class="roomslist">
+        <div class="table tablestriped">
             <?php
-
+  //echo "<div class=\"table tablestriped\">";
             $pgroupname = "";
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
+
+
+
             while ($room = mysqli_fetch_array($rooms)) {
                 $cgroupname = $room["roomgroupid"];
                 if ($pgroupname != $cgroupname) {
                     $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                     $rgn = mysqli_fetch_array($roomgroupname);
-                    echo "<tr><td colspan=\"8\" class=\"tabletitle\">" . $rgn["roomgroupname"] . "</td></tr>";
-                    echo "<tr><td class=\"tableheader\" colspan=\"2\">Order</td><td class=\"tableheader\">Name</td><td class=\"tableheader\">Capacity</td><td class=\"tableheader\">Group</td><td class=\"tableheader\">Description</td><td></td><td></td></tr>";
+                    echo "<table id=\"roomslist\">";
+                    echo  "<tr>";
+                    echo "<td></td>";
+                    echo "<td></td>";
+                    echo "<td class=\"tableheader\">Room Name</td>";
+                    echo  "<td class=\"tableheader\">Capacity</td>";
+                    echo  "<td class=\"tableheader\">Group</td>";
+                    echo "<td class=\"tableheader\">Description</td>";
+                    echo "<td></td>";
+                    echo "<td></td>";
+                    echo "</tr>";
+                    //echo "<tr><td colspan=\"8\" class=\"tabletitle\">" . $rgn["roomgroupname"] . "</td></tr>";
+                    //echo "<tr><td class=\"tableheader\" colspan=\"2\">Order</td><td class=\"tableheader\">Name</td><td class=\"tableheader\">Capacity</td><td class=\"tableheader\">Group</td><td class=\"tableheader\">Description</td><td></td><td></td></tr>";
                 }
+
                 $pgroupname = $cgroupname;
                 $roomid = $room["roomid"];
 
                 $thisgroupcount = mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $cgroupname . ";"));
                 $orderstring = "";
                 if ($room["roomposition"] >= 0 && $room["roomposition"] < $thisgroupcount - 1) {
-                    $orderstring .= "<td><a href=\"rooms.php?op=incorder&id=" . $roomid . "\"><img src=\"images/movedown.gif\" style=\"display: inline;border: 0px;\" /></a></td>";
+                    $orderstring .= "<td><a href=\"room_main.php?op=incorder&id=" . $roomid . "\"><img src=\"images/movedown.gif\" style=\"display: inline;border: 0px;\" /></a></td>";
                 } else {
                     $orderstring .= "<td></td>";
                 }
                 if ($room["roomposition"] < $thisgroupcount && $room["roomposition"] > 0) {
-                    $orderstring .= "<td><a href=\"rooms.php?op=decorder&id=" . $roomid . "\"><img src=\"images/moveup.gif\" style=\"display: inline;border: 0px;\" /></a></td>";
+                    $orderstring .= "<td><a href=\"room_main.php?op=decorder&id=" . $roomid . "\"><img src=\"images/moveup.gif\" style=\"display: inline;border: 0px;\" /></a></td>";
                 } else {
                     $orderstring .= "<td></td>";
                 }
@@ -208,46 +223,58 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $roomgroupstr .= "</select>";
 
 
-                echo "<tr>" . $orderstring . "<td><form name=\"editroom\" method=\"POST\" action=\"rooms.php\"><input type=\"hidden\" name=\"op\" value=\"editroom\"/><input type=\"hidden\" name=\"roomid\" value=\"" . $room["roomid"] . "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"smalltxt\" type=\"text\" name=\"roomcapacity\" value=\"" . $room["roomcapacity"] . "\"/></td><td>" . $roomgroupstr . "</td><td><textarea rows=\"3\" cols=\"20\" name=\"roomdescription\">" . $room["roomdescription"] . "</textarea></td><td><input type=\"submit\" value=\"Save Changes\" /></form></td><td><a href=\"javascript:confirmdelete(" . $roomid . ",'" . $room["roomname"] . "');\">Delete Room</a></td></tr>\n";
+                echo "<tr>" . $orderstring . "<td><form name=\"editroom\" method=\"POST\" action=\"room_main.php\"><input type=\"hidden\" name=\"op\" value=\"editroom\"/><input type=\"hidden\" name=\"roomid\" value=\"" . $room["roomid"] . "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"smalltxt\" type=\"text\" name=\"roomcapacity\" value=\"" . $room["roomcapacity"] . "\"/></td><td>" . $roomgroupstr . "</td><td><textarea rows=\"3\" cols=\"18\" name=\"roomdescription\">" . $room["roomdescription"] . "</textarea></td><td><input type=\"submit\" value=\"Save Changes\" /></form></td><td><a href=\"javascript:confirmdelete(" . $roomid . ",'" . $room["roomname"] . "');\">Delete Room</a></td></tr>\n";
             }
+
+
+
+
             ?>
+          </table>
         </div>
+
         <br/><br/>
         <h3>Add a New Room</h3>
-        <form name="addroom" method="POST" action="rooms.php">
-            <div class="adminform">
-                <tr>
-                    <td><strong>Room Name:</strong></td>
-                    <td><input type="text" name="roomname"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Capacity:</strong></td>
-                    <td><input type="text" name="roomcapacity"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Description:</strong></td>
-                    <td><input type="text" name="roomdescription"/></td>
-                </tr>
-                <tr>
-                    <td><strong>Group:</strong></td>
-                    <td>
+        <form name="addroom" method="POST" action="room_main.php">
+          <div class="adminform">
+            <div class="form-group row">
+
+                    <label for="roomname" class="col-sm-2 col-form-label"> <strong>Room Name:</strong></label>
+                    <div class= "col-sm-4">
+                      <input class="form-control form-control-sm" type="text" name="roomname"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                      <label for="roomcapacity" class="col-sm-2 col-form-label"> <strong>Capacity</strong></label>
+                        <div class= "col-sm-4">
+                          <input class="form-control form-control-sm" type="text" name="roomcapacity"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                            <label for="roomdescription" class="col-sm-2 col-form-label"> <strong>Description</strong></label>
+                            <div class= "col-sm-4">
+                              <input class="form-control form-control-sm" type="text" name="roomdescription"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                                <label for="roomgroup" class="col-sm-2 col-form-label"><strong>Group</strong></label>
+                                <div class="col-sm-10">
+
                         <?php
                         $roomgroupstr = "<select name=\"roomgroupid\">";
                         $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
                         while ($roomgroup = mysqli_fetch_array($roomgroups)) {
                             $roomgroupstr .= "<option value=\"" . $roomgroup["roomgroupid"] . "\">" . $roomgroup["roomgroupname"] . "</option>";
                         }
-                        $roomgroupstr .= "</select>";
+                        $roomgroupstr .= "</select></div></div>";
                         echo $roomgroupstr;
                         ?>
+                        <div>
                         <input type="hidden" name="op" value="addroom"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center><input type="submit" value="Add Room"/></center>
-                    </td>
-                </tr>
+                        <input type="submit" value="Add Room"/>
+                        </div>
+
 
             </div>
         </form>

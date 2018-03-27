@@ -184,6 +184,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Multiple Reservations</h3><br/>
         <span class="notetext">Use this form to make repeating reservations. Choose the date range, what time you would like the reservation to start, the duration, and which days of the week it should occur on.<br/>Clicking "Check Availability" will show a report of what reservations can be made.</span><br/>
+
+
         <form name="multiplereservations" action="multiplereservations.php" method="POST">
             <table>
                 <tr>
@@ -304,26 +306,84 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     if(isset($_POST["daysineffect"]))
                       foreach ($_POST["daysineffect"] as $affectedday) {
                         $dayarray[$affectedday] = "checked";
+
                     }
                     ?>
-                    <td><input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong>
-                    </td>
-                    <td><input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong>
-                    </td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong>
-                    </td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong></td>
-                </tr>
-            </table>
+                </select>:<select name="startminute">
+                    <?php
+                    for ($i = 0; $i <= 59; $i++) {
+                        $selectstr = "";
+                        if (isset($_POST["startminute"]) && $i == $_POST["startminute"]) {
+                            $selectstr = "selected";
+                        }
+                        echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+                    }
+                    ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-lg-4">
+              <strong>Duration:</strong>
+            </div>
+            <div class = "col-lg-8">
+              <input type="text" size="5" name="duration" value="<?php echo $_POST["duration"]; ?>"/> (in minutes)
+            </div>
+          </div>
+
+            <div class = "row">
+              <div class = "col-lg-4">
+                  <strong>Optional Fields</strong>
+              </div>
+              <div class = "col-lg-8">
+                <?php echo $optionalfields_string; ?>
+              </div>
+            </div>
+
+            <div class = "row col-lg-12">
+              <strong>Days in Effect:</strong>
+            </div>
+            <div class = "row">
+              <?php
+              $dayarray = array("sunday" => "", "monday" => "", "tuesday" => "", "wednesday" => "", "thursday" => "", "friday" => "", "saturday" => "");
+              if(isset($_POST["daysineffect"]))
+                     foreach ($_POST["daysineffect"] as $affectedday) {
+                  $dayarray[$affectedday] = "checked";
+              }
+              ?>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong>
+              </div>
+
+            </div>
+
             <br/>
             <input type="hidden" name="op" value="multiplereservations"/>
+
             <?php
             if (isset($_POST["onlychecking"]) && $_POST["onlychecking"] != "multireserve") {
                 $onlychksel = "checked";
@@ -338,6 +398,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                                 value="multireserve" <?php echo $onlychkselb; ?> /><strong>Finalize
                 Reservations</strong><br/><br/>
             <input type="submit" value="Submit"/><br/><br/><br/>
+
         </form>
         <?php
         if (isset($availstr) && $availstr != "") {

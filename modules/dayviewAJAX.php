@@ -1,3 +1,6 @@
+<!-- create anoter dvout idea and add before others -->
+
+
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -14,15 +17,18 @@ if ($_POST["group"] == "") {
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
+
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
 $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
+
 $current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
+
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups ORDER BY roomgroupid ASC;");
@@ -33,15 +39,18 @@ if ($_SESSION["username"] != "") {
         $group_str .= "<option value=\"". $group["roomgroupid"] ."\" ". $selected_str .">". $group["roomgroupname"] ."</option>";
     }
     $group_str .= "</select>";*/
-    $group_str = "<table><tr>";
+
+    $group_str = "<ul class = \"nav nav-tabs\">";
     while ($group = mysqli_fetch_array($groups)) {
         $selected_str = "class=\"grouptab\"";
         if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class=\"selected\"";
-        $group_str .= "<td onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</td>";
+        $group_str .= "<li onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</li>";
     }
+
     $group_str .= "</tr></table>";
     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
     $dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
+
     //Create optional field form items string for reservation form
     //Select all records from optionalfields table in order of optionorder ascending
     $optionalfields_string = "";
@@ -67,6 +76,8 @@ if ($_SESSION["username"] != "") {
             $optionalfields_string .= "</select><br/>";
         }
     }
+
+
     //Construct table header
     $dvout .= "<tr><th>&nbsp;</th>";
     foreach ($xmlroominfo->room as $room) {
@@ -202,6 +213,8 @@ if ($_SESSION["username"] != "") {
         $current_time->addMinutes($settings["interval"]);
     }
     $dvout .= "</table>";
+
+
     echo $dvout;
 } //User isn't logged in
 else {

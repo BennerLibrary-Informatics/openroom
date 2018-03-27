@@ -62,19 +62,25 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <center>
             <?php if ($_SESSION["isadministrator"] == "TRUE" || $_SESSION["isreporter"] == "TRUE"){
             if ($successmsg != "") {
-                echo "<div id=\"successmsg\">" . $successmsg . "</div>";
+                echo "<div id=\"successmsg\" class=\"row col-lg-12\">" . $successmsg . "</div>";
             }
             if ($errormsg != "") {
-                echo "<div id=\"errormsg\">" . $errormsg . "</div>";
+                echo "<div id=\"errormsg\"  class=\"row col-lg-12\">". $errormsg . "</div>";
             }
             ?>
         </center>
-        <h3><a href="index.php">Administration</a> - Reports - Cancellations - Monthly</h3>
+        <div class = "row col-lg-12">
+          <h3><a href="index.php">Administration</a> - Reports - Cancellations - Monthly</h3>
+        </div>
 
-        <br/><br/><strong>Monthly Cancellation Report for the period starting: <?php echo date("F Y", $starttime); ?>
-            and ending: <?php echo date("F Y", $endtime); ?></strong><br/><br/>
 
-        <table id="reporttable">
+        <div class = "row col-lg-12">
+          <strong>Monthly Cancellation Report for the period starting: <?php echo date("F Y", $starttime); ?>
+            and ending: <?php echo date("F Y", $endtime); ?></strong>
+        </div>
+
+
+        <div id="reporttable">
             <tr class="reportodd">
                 <td><strong>Month</strong></td>
                 <?php
@@ -130,7 +136,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             echo "<td>" . $runningtotal . "</td></tr>";
             ?>
 
-        </table>
+        </div>
 
         <br/>
         <?php

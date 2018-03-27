@@ -84,25 +84,30 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Banned Users</h3>
-        <ul>
-            <?php
-            $bannedusers = model\BannedUser::all();
-            foreach ($bannedusers as $banneduser) {
-                echo "<li>" . $banneduser->username . " <a href=\"javascript:confirmdelete('" . $banneduser->username . "');\">Delete</a></li>";
-            }
-            ?>
-        </ul>
-        <br/>
-        <h4>Ban User</h4>
-        <form name="banuser" action="bans.php" method="POST">
-            <input type="text" name="bannedusername"/>
-            <input type="hidden" name="op" value="ban"/>
-            <input type="submit" value="Ban User"/>
-        </form>
+
+        <div class = "row">
+          <?php
+          $bannedusers = model\BannedUser::all();
+          foreach ($bannedusers as $banneduser) {
+              echo "<div class = 'col-lg-12'>" . $banneduser->username . " <a href=\"javascript:confirmdelete('" . $banneduser->username . "');\">Delete</a></div>";
+          }
+          ?>
+        </div>
+        <div class = "row col-lg-12">
+          <h4>Ban User</h4>
+        </div>
+        <div class = "row col-lg-12">
+          <form name="banuser" action="bans.php" method="POST">
+              <input type="text" name="bannedusername"/>
+              <input type="hidden" name="op" value="ban"/>
+              <input type="submit" value="Ban User"/>
+          </form>
+        </div>
+
         <?php
         }
         ?>
-    </div>
+    </div> <!-- end of container -->
     </body>
     </html>
     <?php

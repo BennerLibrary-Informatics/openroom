@@ -1,26 +1,37 @@
+@import "css/bootstrap.css";
+@import "css/bootstrap-grid.css";
+@import "css/bootstrap-reboot.css";
+
+
 body {
     margin: 0px;
     padding-top: 4px;
-    background-color: #FFFFFF;
+    background-color: #c1c1c1;
     font-family: Helvetica, arial, sans-serif;
+
     font-size: 12px;
 }
 
 #container {
     background-color: #EEEEEE;
-    border: 1px #AAAAFF solid;
-    margin: 0 auto;
+    border: 2px #000000 solid;
+    margin: auto;
     padding: 10px;
-    width: 780px;
+    width: 90%;
+    height:auto;
 }
 
 #heading {
-    background-color: #FFFFFF;
-    border: 0px;
-    margin: 0 auto;
-    padding: 0px;
-    width: 800px;
-    text-align: right;
+  background-color: #54406b;
+  font-size: 20px;
+  color: #FFFFFF;
+  border: 0px;
+  margin: auto;
+  padding: 5px;
+  padding-right: 15px;
+  text-align: right;
+  width: auto;
+  height: 100px;
 }
 
 .roomname {
@@ -66,15 +77,21 @@ h3 {
     height: 30px;
     width: 50%;
 }
+#roomslist td {
+    padding: 5px;
 
-.roomslist tr {
-    vertical-align: baseline;
+
 }
+
+
+
 
 .defaulthourslist tr {
     vertical-align: baseline;
 }
-
+.table{
+  width: auto;
+}
 .timeblock {
     border: 1px #CCCCFF solid;
 }

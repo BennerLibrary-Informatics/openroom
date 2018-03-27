@@ -2,10 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 include("../includes/or-dbinfo.php");
 include("../includes/ClockTime.php");
-
 if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     echo "You are not logged in. Please <a href=\"../index.php\">click here</a> and login with an account that is an authorized administrator or reporter.";
 } elseif ($_SESSION["isadministrator"] != "TRUE") {
@@ -13,12 +11,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 } elseif ($_SESSION["systemid"] != $settings["systemid"]) {
     echo "You are not logged in. Please <a href=\"../index.php\">click here</a> and login with an account that is an authorized administrator or reporter.";
 } else {
-
     $op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : "";
+
 
     $successmsg = "";
     $errormsg = "";
-
     switch ($op) {
         case "adddefaulthours":
             $starthour = isset($_REQUEST["starthour"]) ? $_REQUEST["starthour"] : "";
@@ -31,13 +28,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             //days that the change applies to
             $affecteddays = isset($_REQUEST["affecteddays"]) ? $_REQUEST["affecteddays"] : "";
 
+
             if($startperiod == "PM" && $starthour != 12)
               $starthour += 12;
 
             if($endperiod == "PM" && $endhour != 12)
               $endhour += 12;
-
-            //All fields required
+             //All fields required
             if ($starthour != "" && $startminute != "" && $endhour != "" && $endminute != "" && $affectedrooms != "" && is_array($affectedrooms) && $affecteddays != "" && is_array($affecteddays)) {
                 //Make sure from and to are in proper formats
                         //Make sure endtime is greater than starttime
@@ -87,6 +84,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
             break;
 
+]
         case "deletedefaulthours":
             $roomhoursid = isset($_REQUEST["roomhoursid"]) ? $_REQUEST["roomhoursid"] : "";
             if (mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM roomhours WHERE roomhoursid=" . $roomhoursid . ";")) {
@@ -96,8 +94,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
             break;
     }
-
-
     ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -114,8 +110,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 }
                 else {
 
+
                 }
             }
+
 
         </script>
 
@@ -149,6 +147,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <?php
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
 
+          
             $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
             while($group = mysqli_fetch_array($roomgroups)){
                 echo "<h4><strong>" . $group["roomgroupname"] . ":</strong></h4>";
@@ -169,6 +168,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         }
                         echo "</td>";
                     }
+
 
 
                     echo "</tr>";
@@ -252,9 +252,87 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <?php
             $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
             for ($i = 0; $i <= 6; $i++) {
-              echo "<div class=\"col-lg-auto\" <input type=\"checkbox\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "</strong></div>";
+
             }
+        ?>
+        <br/>
+        <hr/>
+        <br/>
+
+        <h3>Add Default Hours</h3><br/>
+        <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
+            hours. This will be automated in a future version of this system.</em><br/>
+        <form name="adddefaulthours" action="defaulthours.php" method="POST">
+            <table>
+                <tr>
+                    <td>
+                        <strong>Open:</strong>
+                    </td>
+                    <td>
+                        <select name="starthour">
+                            <?php
+                            for ($i = 1; $i <= 12; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>:<select name="startminute">
+                            <?php
+                            for ($i = 0; $i <= 59; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>
+                      <select name="startperiod">
+                          <?php
+                          $timePeriods = ["AM" , "PM"];
+                          for ($i = 0; $i < 2; $i++) {
+                              echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                          }
+                          ?>
+                      </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Close:</strong>
+                    </td>
+                    <td>
+                        <select name="endhour">
+                            <?php
+                            for ($i = 1; $i <= 12; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>:<select name="endminute">
+                            <?php
+                            for ($i = 0; $i <= 59; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="endperiod">
+                            <?php
+                            $timePeriods = ["AM" , "PM"];
+                            for ($i = 0; $i < 2; $i++) {
+                                echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><em>(To close room for entire day, leave hours set to 00:00-00:00.)</em><br/><br/>
+                    </td>
+                </tr>
+            </table>
+            <strong>Days Affected:&nbsp;&nbsp;&emsp; </strong>
+            <?php
+                $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+                for ($i = 0; $i <= 6; $i++) {
+                    echo "<input type=\"checkbox\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "</strong>";
+                }
             ?>
+
             <!--CHANGE HERE, need the days to be horizontal-->
           </div>
 
@@ -263,10 +341,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
             <div class = "row">
+
                 <?php
                 $roomgroup = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
                 while ($group = mysqli_fetch_array($roomgroup)) {
                     echo "<h4>" . $group["roomgroupname"] . "</h4>";
+
                     echo "<div class = 'row'>";
                     $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $group["roomgroupid"] . ";");
                     while ($room = mysqli_fetch_array($rooms)){
@@ -279,6 +359,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
             <input type="hidden" name="op" value="adddefaulthours"/>
             <input type="submit" value="Add Hours"/>
+
         </form>
 
         <?php
