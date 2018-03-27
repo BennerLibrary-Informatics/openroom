@@ -8,6 +8,7 @@ body {
     padding-top: 4px;
     background-color: #c1c1c1;
     font-family: Helvetica, arial, sans-serif;
+
     font-size: 12px;
 }
 
@@ -16,7 +17,8 @@ body {
     border: 2px #000000 solid;
     margin: auto;
     padding: 10px;
-    width: 80%;
+    width: 90%;
+    height:auto;
 }
 
 #heading {
@@ -75,15 +77,21 @@ h3 {
     height: 30px;
     width: 50%;
 }
+#roomslist td {
+    padding: 5px;
 
-.roomslist tr {
-    vertical-align: baseline;
+
 }
+
+
+
 
 .defaulthourslist tr {
     vertical-align: baseline;
 }
-
+.table{
+  width: auto;
+}
 .timeblock {
     border: 1px #CCCCFF solid;
 }

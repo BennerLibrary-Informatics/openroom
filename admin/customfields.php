@@ -238,7 +238,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <br/>
         <br/>
         <h3>Add New Custom Field</h3><br/>
-        
+
 
 
         <form name="addoption" action="customfields.php" method="POST">

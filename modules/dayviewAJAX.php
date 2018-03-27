@@ -31,7 +31,7 @@ $xmlroominfo = new SimpleXMLElement($getroominfo);
 
 date_default_timezone_set("America/Chicago"); //starts at current hour instead of 8am
 
-$current_time = new ClockTime($settings["starttime"] ?? date('H'), 0, 0);
+$current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
