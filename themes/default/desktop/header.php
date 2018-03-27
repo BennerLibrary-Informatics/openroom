@@ -15,6 +15,12 @@ require_once("includes/or-dbinfo.php");
 
 <body>
 <div id="heading">
+  <div class = "openroomtitle">
+    Open Room
+  </div>
+  <div class = "ONUtitle">
+   Olivet Nazerene University
+  </div>
 	<span class="username">
 	<?php
     if ($_SESSION["systemid"] == $settings["systemid"]){

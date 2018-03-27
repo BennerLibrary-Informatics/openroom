@@ -11,6 +11,18 @@ body {
     font-size: 12px;
 }
 
+.openroomtitle{
+  font-family: "PT Serif Caption" ;
+  font-size: 30px ;
+  text-align: left;
+}
+
+.ONUtitle{
+  font-family: "PT Serif Caption";
+  font-size: 15px;
+  text-align: left;
+}
+
 p {
     font-family: Helvetica, arial, sans-serif;
 }
