@@ -123,7 +123,7 @@ if ($_SESSION["username"] != "") {
 
 ///////////////////////////////////////////////////////////////////
     //Construct table header WORK HERE
-    $dvout .= "<div class = 'row'><div class = 'col-sm-2 text-nowrap'><label><b>Room Names: </b></label></div>";
+    $dvout .= "<div class = 'row'><div class = 'col-lg-1 hidden-sm-down hidden-lg-up text-nowrap'><label><b>Rooms: </b></label></div>";
     foreach ($xmlroominfo->room as $room) {
         $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
     }
@@ -224,7 +224,7 @@ if ($_SESSION["username"] != "") {
                             //Display "taken" button that shows public info.
                             $collision = "<img style=\"cursor: pointer;\" src=\"" . $_SESSION["themepath"] . "images/takenbutton.png\" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                         } else {
-                            if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<br/><br/><center>Cancel this reservation? <a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center>";
+                            if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<center>Cancel this reservation? <a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center>";
                             //Display "cancel" button that shows cancellation confirmation.
                             $collision = "<img style=\"cursor: pointer;\" src=\"" . $_SESSION["themepath"] . "images/cancelbutton.png\" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                         }
@@ -265,7 +265,7 @@ if ($_SESSION["username"] != "") {
                 $collision = "<img src=\"" . $_SESSION["themepath"] . "images/closedbutton.png\" />";
             }
               //This is where the room buttons are printed
-            $dvout .= "<div class='col-sm text-center' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
+            $dvout .= "<div class='col' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
         }
 
         $dvout .= "</div></div>";
