@@ -98,6 +98,11 @@ if ($_SESSION["username"] != "") {
     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>" . $group_str;
 
 
+    /* gotta get this working
+    <script language="javascript" type="text/javascript">
+      document.getElementById("calbutton").innerHTML = "<img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/>";
+    </script>*/
+
 
     //$divout .= "<div class = 'row'>". $legend."</div>"; /*WORK ON THIS LATER*/
 
