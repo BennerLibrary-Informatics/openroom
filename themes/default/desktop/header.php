@@ -14,26 +14,36 @@ require_once("includes/or-dbinfo.php");
 </head>
 
 <body>
-<div id="heading">
-  <div class = "openroomtitle">
-    Open Room
+<div id="heading" class = "row">
+  <div class = "col-auto margin-top-20">
+    <img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
   </div>
-  <div class = "ONUtitle">
-   Olivet Nazerene University
+  <div class = "col-auto">
+    <div id = "headerText">
+      <div class = " openroomtitle">
+        Open Room
+      </div>
+      <div class = "ONUtitle">
+       Olivet Nazerene University
+     </div>
+   </div>
   </div>
-	<span class="username">
-	<?php
-    if ($_SESSION["systemid"] == $settings["systemid"]){
-    echo isset($_SESSION["username"]) ? "<strong>Hello, </strong>" . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\"style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
-    echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
-    if ($settings["login_method"] == "normal" && $_SESSION["username"] != "") {
-        echo "|&nbsp;<a href=\"editaccount.php\"style=\"color:white;\">Edit Account</a>&nbsp;|";
-    }
-    if ($_SESSION["username"] != "") {
-        echo "&nbsp;<a href=\"modules/logout.php\"style=\"color:white;\">Logout</a>";
-    }
-    }
-    ?>
+
+   <div class="col align-self-end">
+   <?php
+     if ($_SESSION["systemid"] == $settings["systemid"]){
+       echo isset($_SESSION["username"]) ? "<span class = 'username'><strong>Hello, </strong>" . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\"style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
+       echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
+       if ($settings["login_method"] == "normal" && $_SESSION["username"] != "") {
+           echo "|&nbsp;<a href=\"editaccount.php\"style=\"color:white;\">Edit Account</a>&nbsp;|";
+       }
+       if ($_SESSION["username"] != "") {
+           echo "&nbsp;<a href=\"modules/logout.php\"style=\"color:white;\">Logout</a>";
+       }
+     }
+     ?>
+   </div>
+ </div>
 </div>
 <?php include("modules/reminder.php"); ?>
 <div id="container">

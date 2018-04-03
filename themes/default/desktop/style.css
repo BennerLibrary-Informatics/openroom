@@ -11,15 +11,23 @@ body {
     font-size: 12px;
 }
 
+.margin-top-20{
+  margin-top: 20px;
+}
+#headerText{
+  margin-left: -10px;
+}
 .openroomtitle{
   font-family: "PT Serif Caption" ;
-  font-size: 30px ;
+  font-size: 40px ;
   text-align: left;
 }
 
 .ONUtitle{
   font-family: "PT Serif Caption";
-  font-size: 15px;
+  margin-top: -8px;
+  margin-left: 3px;
+  font-size: 17px;
   text-align: left;
 }
 
@@ -90,7 +98,7 @@ hr {
     margin: 0 auto;
     padding: 5px;
     text-align: right;
-    width: auto;
+    width: 80%;
     height: 100px;
 }
 
@@ -114,9 +122,8 @@ hr {
     border: 1px #000000 solid;
     margin: 0 auto;
     padding: 0px;
-    width: auto;
+    width: 80%;
 
-    height:auto;
 }
 
 #leftside {
@@ -130,9 +137,8 @@ hr {
 #rightside {
 
     /* float: left; */
-    padding: 10px;
-    margin-left: 170px;
-     overflow: hidden;
+    padding: 30px;
+    overflow: hidden;
 }
 
 #clear_both {
