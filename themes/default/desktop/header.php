@@ -25,6 +25,7 @@ require_once("includes/or-dbinfo.php");
     }
     if ($_SESSION["username"] != "") {
         echo "&nbsp;<a href=\"modules/logout.php\"style=\"color:white;\">Logout</a>";
+
     }
     }
     ?>
