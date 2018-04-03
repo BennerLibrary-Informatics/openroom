@@ -180,104 +180,109 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <hr/>
         <br/>
 
-        <div class = "row col-lg-12">
-          <h3>Add Default Hours</h3>
-        </div>
-        <div class = "row col-lg-12 description">
-          <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
-            hours. This will be automated in a future version of this system.</em>
-        </div>
+        <h3>Add Default Hours</h3><br/>
+        <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
+            hours. This will be automated in a future version of this system.</em><br/>
         <form name="adddefaulthours" action="defaulthours.php" method="POST">
-          <div class = "form-group row">
-            <div class = "col-lg-auto">
-            <label for = "starthour"><strong>Open:</strong></label>
-              <select name="starthour">
-                  <?php
-                  for ($i = 1; $i <= 12; $i++) {
-                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                  }
-                  ?>
-              </select>:<select name="startminute">
-                  <?php
-                  for ($i = 0; $i <= 59; $i++) {
-                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                  }
-                  ?>
-              </select>
-            <select name="startperiod">
-                <?php
-                $timePeriods = ["AM" , "PM"];
-                for ($i = 0; $i < 2; $i++) {
-                    echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
-                }
-                ?>
-            </select>
-            </div>
-          </div>
+            <table>
+                <tr>
+                    <td>
+                        <strong>Open:</strong>
+                    </td>
+                    <td>
+                        <select name="starthour">
+                            <?php
 
-          <div class = "row form-group">
-            <div class = "col-lg-12">
-              <label for = "endhour"><strong>Close:</strong></label>
-              <select name="endhour">
-                  <?php
-                  for ($i = 1; $i <= 12; $i++) {
-                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                  }
-                  ?>
-              </select>:<select name="endminute">
-                  <?php
-                  for ($i = 0; $i <= 59; $i++) {
-                      echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                  }
-                  ?>
-              </select>
-              <select name="endperiod">
-                  <?php
-                  $timePeriods = ["AM" , "PM"];
-                  for ($i = 0; $i < 2; $i++) {
-                      echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
-                  }
-                  ?>
-              </select>
-            </div>
-          </div>
-          <div class = "row col-lg-12">
-            <em>(To close room for entire day, leave hours set to 00:00-00:00.)</em>
-          </div>
-
-          <div class = "row">
-            <div class = "col-lg-auto">
-              <strong>Days Affected:&nbsp;&nbsp;&emsp; </strong>
-            </div>
+                            for ($i = 0; $i <= 12; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>:<select name="startminute">
+                            <?php
+                            for ($i = 0; $i <= 59; $i=$i + 15) {
+                              if ($i == 0) {
+                                $formatted_value = sprintf("%02d", $i);
+                                echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
+                              }
+                              else
+                                echo "<option value=\"". $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>
+                      <select name="startperiod">
+                          <?php
+                          $timePeriods = ["AM" , "PM"];
+                          for ($i = 0; $i < 2; $i++) {
+                              echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                          }
+                          ?>
+                      </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Close:</strong>
+                    </td>
+                    <td>
+                        <select name="endhour">
+                            <?php
+                            for ($i = 0; $i <= 12; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>:<select name="endminute">
+                            <?php
+                            for ($i = 0; $i <= 59; $i = $i + 15) {
+                                if ($i == 0) {
+                                  $formatted_value = sprintf("%02d", $i);
+                                  echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
+                                }
+                                else
+                                  echo "<option value=\"". $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="endperiod">
+                            <?php
+                            $timePeriods = ["AM" , "PM"];
+                            for ($i = 0; $i < 2; $i++) {
+                                echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><em>(To close room for entire day, leave hours set to 00:00-00:00.)</em><br/><br/>
+                    </td>
+                </tr>
+            </table>
+            <strong>Days Affected:&nbsp;&nbsp;&emsp; </strong>
             <?php
-            $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
-            for ($i = 0; $i <= 6; $i++) {
-              echo "<div class=\"col-lg-auto\" <input type=\"checkbox\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "</strong></div>";
-            }
+                $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+                for ($i = 0; $i <= 6; $i++) {
+                    echo "<input type=\"checkbox\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "</strong>";
+                }
             ?>
-            <!--CHANGE HERE, need the days to be horizontal-->
-          </div>
-
-          <div class = "row col-lg-12">
-            <strong>Rooms Affected: </strong>
-          </div>
-
-            <div class = "row col-lg-12">
+            <br><br><h4><strong>Rooms Affected: </strong></h4>
+            <table>
                 <?php
                 $roomgroup = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
                 while ($group = mysqli_fetch_array($roomgroup)) {
-                    echo $group["roomgroupname"];
+                    echo "<h4>" . $group["roomgroupname"] . "</h4>";
+                    echo "<table>";
                     $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $group["roomgroupid"] . ";");
                     while ($room = mysqli_fetch_array($rooms)){
-                        echo "<div class = 'col-lg-auto'><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></div>\n";
+                        echo "<tr><td><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></td></tr>\n";
                     }
-                    echo "</div>";
+                    echo "</table>";
                   }
 
                 ?>
-            </div>
+            </table>
+            <br/>
             <input type="hidden" name="op" value="adddefaulthours"/>
-            <input type="submit" value="Add Hours"/>
+            <input type="submit" value="Add Hours"/><br/><br/><br/>
         </form>
 
         <?php
