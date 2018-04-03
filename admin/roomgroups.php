@@ -124,7 +124,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </div>
         <br/>
-        <div class = "col-sm-10">
+        <div class = "col-lg-10">
         <h4>Add a New Group</h4>
       </div>
         <form name="addgroup" action="roomgroups.php" method="POST">
