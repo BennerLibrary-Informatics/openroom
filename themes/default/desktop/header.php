@@ -15,14 +15,19 @@ require_once("includes/or-dbinfo.php");
 
 <body>
 <div id="heading" class = "row">
-  <div class = "col-auto margin-top-20">
+  <div class = "col-1 margin-top-20">
     <img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
   </div>
-  <div class = "col-auto">
+  <div class = "col-11 float-right padding-left-30">
     <div id = "headerText">
       <div class = " openroomtitle">
-        Open Room
-      </div>
+        <div class = "row">
+          <div class = "col">Benner Library</div>
+          <div class = "col text-right">
+          Open Room
+          </div>
+        </div>
+        </div>
       <div class = "ONUtitle">
        Olivet Nazerene University
      </div>
