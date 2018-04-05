@@ -85,6 +85,8 @@ if ($_SESSION["username"] != "") {
         $group_str .= "<option value=\"". $group["roomgroupid"] ."\" ". $selected_str .">". $group["roomgroupname"] ."</option>";
     }
     $group_str .= "</select>";*/
+    //$calendarimg = ("../themes/default/desktop/images/calendarbutt.png");
+
     $group_str = "<div class = 'row'>";
     while ($group = mysqli_fetch_array($groups)) {
         $selected_str = "class='grouptab col-sm text-center'";
@@ -93,7 +95,13 @@ if ($_SESSION["username"] != "") {
     }
     $group_str .= "</div></div>";
 
-    $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
+    $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>" . $group_str;
+
+
+    /* gotta get this working
+    <script language="javascript" type="text/javascript">
+      document.getElementById("calbutton").innerHTML = "<img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/>";
+    </script>*/
 
 
     //$divout .= "<div class = 'row'>". $legend."</div>"; /*WORK ON THIS LATER*/
