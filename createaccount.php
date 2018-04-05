@@ -80,42 +80,57 @@ if ($activatecode == "" && $activateusername == "") {
     if ($successmsg == "") {
         ?>
         <form name="createaccount" method="POST" action="createaccount.php">
-            <table border="0">
-                <tr>
-                    <td>Desired Username:</td>
-                    <td><input type="text" name="desiredusername" value="<?php echo $desiredusername; ?>"/></td>
-                    <td><em>Valid Characters: a-z, A-Z, 0-9</em></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password"/></td>
-                </tr>
-                <tr>
-                    <td>Confirm Password:</td>
-                    <td><input type="password" name="confirm"/></td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" name="email" value="<?php echo $email; ?>"/></td>
-                    <td><em><?php
-                            $emailfilters = unserialize($settings["email_filter"]);
-                            $comma = 0;
-                            foreach ($emailfilters as $filter) {
-                                if ($comma == 0) {
-                                    echo "example@" . $filter;
-                                    $comma = 1;
-                                } else {
-                                    echo ", example@" . $filter;
-                                }
-                            }
-                            ?></em></td>
-                </tr>
-                <tr>
-                    <td colspan="3"><input type="hidden" name="submitted" value="1"/><input type="submit"
-                                                                                            value="Create Account"/>
-                    </td>
-                </tr>
-            </table>
+          <div class = "row">
+            <div class = "col-2">
+              <label for = "desiredusername">Username: </label>
+            </div>
+            <div class = "col-auto">
+              <input type="text" id = "desiredusername" name="desiredusername" value="<?php echo $desiredusername; ?>"/>
+            </div>
+            <label for = "desiredusername"><em>Valid Characters: a-z, A-Z, 0-9</em></label>
+          </div>
+
+          <div class = "row">
+            <div class = "col-2">
+              <label for = "password">Password: </label>
+            </div>
+            <div class = "col-auto">
+              <input type="password" id = "password" name="password"/>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-2">
+              <label for = "confirm">Confirm Password: </label>
+            </div>
+            <div class = "col-auto">
+              <input type="password" id = "confirm" name="confirm"/>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-2">
+              <label for = "">Email: </label>
+            </div>
+            <div class = "col-auto">
+              <input type="text" name="email" value="<?php echo $email; ?>"/>
+            </div>
+            <em><?php
+                    $emailfilters = unserialize($settings["email_filter"]);
+                    $comma = 0;
+                    foreach ($emailfilters as $filter) {
+                        if ($comma == 0) {
+                            echo "example@" . $filter;
+                            $comma = 1;
+                        } else {
+                            echo ", example@" . $filter;
+                        }
+                    }
+                    ?></em>
+          </div>
+          <div class = "row col-12">
+            <input type="hidden" name="submitted" value="1"/><input type="submit" value="Create Account"/>
+          </div>
         </form>
         <?php
     } else {
