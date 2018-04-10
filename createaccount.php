@@ -79,40 +79,43 @@ if ($activatecode == "" && $activateusername == "") {
     <?php
     if ($successmsg == "") {
         ?>
+        <div id = "createaccount" class = "col-lg-10 col-sm-12 offset-lg-2">
         <form name="createaccount" method="POST" action="createaccount.php">
-          <div class = "row">
-            <div class = "col-2">
-              <label for = "desiredusername">Username: </label>
+          <div class = "form-group row">
+            <div class = "col-lg-2 col-md-3 col-sm-12 offset-lg-1 loginlabel">
+              <label for = "desiredusername" >Username: </label>
             </div>
-            <div class = "col-auto">
+            <div class = "col-lg-4 col-md-6 col-sm-12">
               <input type="text" id = "desiredusername" name="desiredusername" value="<?php echo $desiredusername; ?>"/>
             </div>
-            <label for = "desiredusername"><em>Valid Characters: a-z, A-Z, 0-9</em></label>
+            <div class = "col-md-9 col-lg-4 validuserchar">
+              <span><em>Valid Characters: a-z, A-Z, 0-9</em></span>
+            </div>
           </div>
 
-          <div class = "row">
-            <div class = "col-2">
+          <div class = "form-group row">
+            <div class = "col-lg-2 col-md-3 col-sm-12 offset-lg-1 passwordlabel">
               <label for = "password">Password: </label>
             </div>
-            <div class = "col-auto">
+            <div class = "col-lg-4 col-md-6 col-sm-12">
               <input type="password" id = "password" name="password"/>
             </div>
           </div>
 
-          <div class = "row">
-            <div class = "col-2">
+          <div class = "form-group row">
+            <div class = "col-lg-3 col-md-3 col-sm-12 passwordlabel">
               <label for = "confirm">Confirm Password: </label>
             </div>
-            <div class = "col-auto">
+            <div class = "col-lg-4 col-md-6 col-sm-12">
               <input type="password" id = "confirm" name="confirm"/>
             </div>
           </div>
 
-          <div class = "row">
-            <div class = "col-2">
+          <div class = "form-group row">
+            <div class = "col-lg-1 col-md-2 col-sm-12 offset-md-1 offset-lg-2 emaillabel">
               <label for = "">Email: </label>
             </div>
-            <div class = "col-auto">
+            <div class = "col-lg-4 col-md-6 col-sm-12">
               <input type="text" name="email" value="<?php echo $email; ?>"/>
             </div>
             <em><?php
@@ -128,10 +131,13 @@ if ($activatecode == "" && $activateusername == "") {
                     }
                     ?></em>
           </div>
-          <div class = "row col-12">
+          <div class = "row">
+          <div class = "col-md-6 col-sm-6 offset-lg-2 offset-sm-3">
             <input type="hidden" name="submitted" value="1"/><input type="submit" value="Create Account"/>
           </div>
+        </div>
         </form>
+      </div>
         <?php
     } else {
         ?>

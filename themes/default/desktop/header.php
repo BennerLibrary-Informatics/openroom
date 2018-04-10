@@ -18,23 +18,17 @@ require_once("includes/or-dbinfo.php");
   <div class = "col-1 margin-top-20">
     <img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
   </div>
-  <div class = "col-11 float-right padding-left-30">
-    <div id = "headerText">
-      <div class = " openroomtitle">
-        <div class = "row">
-          <div class = "col">Benner Library</div>
-          <div class = "col text-right">
-          Open Room
-          </div>
-        </div>
-        </div>
-      <div class = "ONUtitle">
-       Olivet Nazerene University
-     </div>
+  <div id = "headerText" class = "col-11 float-right padding-left-30">
+    <div class = "row openroomtitle">
+      <div class = "col">Benner Library</div>
+      <div class = "col text-right">Open Room</div>
+    </div>
+    <div class = "ONUtitle">
+      Olivet Nazerene University
    </div>
-  </div>
+ </div>
 
-   <div class="col align-self-end">
+   <div class="col align-self-end userhead">
    <?php
      if ($_SESSION["systemid"] == $settings["systemid"]){
        echo isset($_SESSION["username"]) ? "<span class = 'username'><strong>Hello, </strong>" . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\"style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
@@ -54,10 +48,9 @@ require_once("includes/or-dbinfo.php");
 <div id="container">
     <div id="leftside">
         <!-- <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom09.png" alt="OpenRoom"/> -->
-        <br/>
+        
 
         <?php include("modules/calendar.php"); ?>
-        <br/>
 
 
 
