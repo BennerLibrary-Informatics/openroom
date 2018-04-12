@@ -32,8 +32,12 @@ body {
   margin-top: 21px;
 }
 
-.margin-left-30{
-  margin-left: 30px;
+.margin-bottom-15{
+  margin-bottom: 15px;
+}
+
+.margin-left-10{
+  margin-left: 10px;
 }
 
 .padding-left-30{
@@ -61,7 +65,7 @@ body {
 .ONUtitle{
   font-family: "PT Serif Caption";
   margin-top: -8px;
-  margin-left: 46px;
+  margin-left: 1px;
   font-size: 17px;
   text-align: left;
 }
@@ -161,10 +165,9 @@ hr {
     font-size: 20px;
     color: #FFFFFF;
     border: 0px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     padding: 5px;
     text-align: right;
-    width: 80%;
 }
 
 #remindermessage {
@@ -182,13 +185,18 @@ hr {
 
 }
 
-#container {
+#container{
+  box-shadow: 0 0 10px #333333;
+    background-color: #FFFFFF;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+#containerInfo {
     background-color: #FFFFFF;
     border: 1px #000000 solid;
-    margin: 0 auto;
     padding: 0px;
-    width: 80%;
-    margin-bottom: 20px;
 }
 
 #leftside {

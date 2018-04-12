@@ -14,8 +14,10 @@ require_once("includes/or-dbinfo.php");
 </head>
 
 <body>
-<div id="heading" class = "row">
-  <div class = "col-1 margin-top-20">
+  <div id = "container">
+<div id="heading" >
+  <div class = "row" >
+  <div class = "col-1 margin-top-20 margin-left-10 margin-bottom-15">
     <img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
   </div>
   <div id = "headerText" class = "col-11 float-right padding-left-30">
@@ -27,7 +29,7 @@ require_once("includes/or-dbinfo.php");
       Olivet Nazerene University
    </div>
  </div>
-
+</div>
    <div class="col align-self-end userhead">
    <?php
      if ($_SESSION["systemid"] == $settings["systemid"]){
@@ -43,12 +45,12 @@ require_once("includes/or-dbinfo.php");
      ?>
    </div>
  </div>
-</div>
+
 <?php include("modules/reminder.php"); ?>
-<div id="container">
+<div id="containerInfo">
     <div id="leftside">
         <!-- <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom09.png" alt="OpenRoom"/> -->
-        
+
 
         <?php include("modules/calendar.php"); ?>
 
