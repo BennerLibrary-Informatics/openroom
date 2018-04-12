@@ -99,11 +99,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <div class = "row col-lg-12">
           <h4>Add Administrator</h4>
         </div>
-        <div class = "row col-lg-12">
+        <div class = "row form-group">
           <form name="addadministrator" action="administrators.php" method="POST">
-              <input type="text" name="adminname"/>
+              <div class = "col-lg-8"><input type="text" name="adminname"/></div>
               <input type="hidden" name="op" value="addadministrator"/>
-              <input type="submit" value="Add Administrator"/>
+              <div class = "col-lg-4"><input type="submit" value="Add Administrator"/></div>
           </form>
         </div>
         <?php
