@@ -129,7 +129,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               if ($pgroupname != $cgroupname) {
                   $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                   $rgn = mysqli_fetch_array($roomgroupname);
-                  echo "<div class = 'col-lg-8'>" . $rgn["roomgroupname"] . "</div>";
+                  echo "<div class = 'col-sm-8'>" . $rgn["roomgroupname"] . "</div>";
               }
               $pgroupname = $cgroupname;
 
@@ -150,20 +150,20 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <hr/>
         <br/>
 
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           <h3>Add Special Hours</h3>
         </div>
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding special
               hours. This will be automated in a future version of this system.</em><br/>
         </div>
 
         <form name="addspecialhours" action="specialhours.php" method="POST">
           <div class = "row">
-            <div class = "col-lg-3">
+            <div class = "col-sm-1">
               <strong>From:</strong>
             </div>
-            <div class = "col-lg-9">
+            <div class = "col-sm-9">
               <input id="from" size="10" maxlength="10" name="from" type="text">
               <img src="../includes/datechooser/calendar.gif"
                    onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
@@ -173,10 +173,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
 
             <div class = "row">
-              <div class = "col-lg-3">
+              <div class = "col-sm-1">
                 <strong>To:</strong>
               </div>
-              <div class = "col-lg-9">
+              <div class = "col-sm-9">
                 <input id="to" size="10" maxlength="10" name="to" type="text">
                 <img src="../includes/datechooser/calendar.gif"
                      onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
@@ -186,10 +186,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
 
             <div class = "row">
-              <div class = "col-lg-3">
+              <div class = "col-sm-1">
                 <strong>Open:</strong>
               </div>
-              <div class = "col-lg-9">
+              <div class = "col-sm-9">
                 <select name="starthour">
                     <?php
                     for ($i = 0; $i <= 24; $i++) {
@@ -207,10 +207,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
 
             <div class = "row">
-              <div class = "col-lg-3">
+              <div class = "col-sm-1">
                 <strong>Close:</strong>
               </div>
-              <div class = "col-lg-8">
+              <div class = "col-sm-8">
                 <select name="endhour">
                     <?php
                     for ($i = 0; $i <= 24; $i++) {
@@ -228,12 +228,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </div>
 
             <div class = "row">
-              <div class = "col-lg-12">
+              <div class = "col-sm-12">
                 <em>(To close room for entire day, leave hours set to 00:00-00:00.)</em>
               </div>
             </div>
 
-            <div class = "row col-lg-12">
+            <div class = "row col-sm-12">
               <strong>Rooms Affected:</strong>
             </div>
 
@@ -249,7 +249,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                       $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                       $rgn = mysqli_fetch_array($roomgroupname);
                       if ($to1 > 0) echo "</table>\n";
-                      echo "<table><tr><td colspan=\"5\">" . $rgn["roomgroupname"] . "</td></tr>";
+                      echo "<div class = 'row col-sm-auto'>" . $rgn["roomgroupname"] . "</div>";
                       $to5 = 0;
                       $to1++;
                   }
@@ -267,7 +267,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
             <br/>
             <input type="hidden" name="op" value="addspecialhours"/>
-            <input type="submit" value="Add Special Hours"/><br/><br/><br/>
+            <input type="submit" value="Add Special Hours"/>
         </form>
 
         <?php
