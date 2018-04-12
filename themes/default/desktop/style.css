@@ -69,9 +69,7 @@ body {
 .loginlabel, .passwordlabel{
   text-align: right;
 }
-.emailFilter{
-  text-align: left;
-}
+
 .userhead{
   font-size: 13pt;
 }
@@ -445,11 +443,6 @@ label{
 }
 @media only screen and (max-width: 990px){
   .validuserchar{
-    text-align: right;
-  }
-}
-@media only screen and (max-width: 992px){
-  .emailFilter{
     text-align: right;
   }
 }
