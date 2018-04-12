@@ -86,7 +86,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3><a href="index.php">Administration</a> - Reporters</h3>
 
         <div class = "row">
-          <div class = "col-sm-12">
+          <div class = "col-lg-12">
             <?php
             $reporters = model\Reporter::all();
             foreach ($reporters as $reporter) {
@@ -96,20 +96,19 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           </div>
         </div>
         <div class = "row">
-          <div class = "col-sm-12">
+          <div class = "col-lg-12">
             <h4>Add Reporter</h4>
           </div>
-        </div>
-        <div class = "row">
-          <div class = "col-sm-12">
-            <form name="addreporter" action="reporters.php" method="POST">
-                <input type="text" name="reportername"/>
-                <input type="hidden" name="op" value="addreporter"/>
-                <input type="submit" value="Add Reporter"/>
-            </form>
+          <div class = "row">
+            <div class = "col-lg-12">
+              <form name="addreporter" action="reporters.php" method="POST">
+                  <input type="text" name="reportername"/>
+                  <input type="hidden" name="op" value="addreporter"/>
+                  <input type="submit" value="Add Reporter"/>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
 
         <?php
         }

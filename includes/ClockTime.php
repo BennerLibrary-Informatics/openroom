@@ -25,7 +25,9 @@ class ClockTime
         $this->setTime($h, $m, $s);
     }
 
+
 //methods
+
     function setTime($h, $m, $s)
     {
         if ($h < 0) $h * -1;
