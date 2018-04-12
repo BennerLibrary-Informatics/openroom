@@ -89,14 +89,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
           <?php
           $bannedusers = model\BannedUser::all();
           foreach ($bannedusers as $banneduser) {
-              echo "<div class = 'col-lg-12'>" . $banneduser->username . " <a href=\"javascript:confirmdelete('" . $banneduser->username . "');\">Delete</a></div>";
+              echo "<div class = 'col-sm-12'>" . $banneduser->username . " <a href=\"javascript:confirmdelete('" . $banneduser->username . "');\">Delete</a></div>";
           }
           ?>
         </div>
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           <h4>Ban User</h4>
         </div>
-        <div class = "row col-lg-12">
+        <div class = "row col-sm-12">
           <form name="banuser" action="bans.php" method="POST">
               <input type="text" name="bannedusername"/>
               <input type="hidden" name="op" value="ban"/>
