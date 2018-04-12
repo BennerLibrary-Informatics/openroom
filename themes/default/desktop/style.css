@@ -85,48 +85,6 @@ body {
   text-align: left;
 }
 
-.margin-top-20{
-  margin-top: 20px;
-}
-.padding-left-30{
-  padding-left: 30px;
-}
-
-#headerText{
-  margin-left: -10px;
-}
-.openroomtitle{
-  font-family: "PT Serif Caption" ;
-  font-size: 35px ;
-  text-align: left;
-  margin-top: 6px;
-}
-
-.ONUtitle{
-  font-family: "PT Serif Caption";
-  margin-top: -8px;
-  margin-left: 3px;
-  font-size: 17px;
-  text-align: left;
-}
-
-.loginlabel, .passwordlabel{
-  text-align: right;
-}
-
-.userhead{
-  font-size: 13pt;
-}
-
-#createaccount{
-
-}
-.validuserchar{
-  font-weight: normal;
-  font-size: 10pt;
-  text-align: left;
-}
-
 p {
     font-family: Helvetica, arial, sans-serif;
 }
@@ -230,11 +188,7 @@ hr {
     margin: 0 auto;
     padding: 0px;
     width: 80%;
-<<<<<<< HEAD
-
-=======
     margin-bottom: 20px;
->>>>>>> parent of 0f7c9b3... Merge pull request #27 from BennerLibrary-Informatics/allen-css
 }
 
 #leftside {
@@ -494,14 +448,11 @@ label{
     text-align: right;
   }
 }
-<<<<<<< HEAD
-=======
 @media only screen and (max-width: 992px){
   .emailFilter{
     text-align: right;
   }
 }
->>>>>>> parent of 0f7c9b3... Merge pull request #27 from BennerLibrary-Informatics/allen-css
 @media only screen and (max-width: 960px){
   #headerText{
     margin-left:

@@ -63,36 +63,6 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
     <h3><a href="index.php"><?php echo $settings["instance_name"]; ?></a> - Edit Account</h3>
 
     <form name="editaccount" method="POST" action="editaccount.php">
-<<<<<<< HEAD
-      <div class = "row">
-        <div class = "col-2 offset-2 text-right"><label for = "password">Change Password:</label></div>
-        <div class = "col-3"><input id = "password" type="password" name="password"/></div>
-      </div>
-
-      <div class = "row">
-        <div class = "col-2 offset-2 text-right"<label for = "passwordconf">Confirm Password:</label></div>
-        <div class = "col-3"><input id = "passwordconf" type="password" name="confirm"/></div>
-      </div>
-
-      <div class = "row">
-        <div class = "col-2 offset-2 text-right"><label for = "">Email: </label></div>
-        <div class = "col-3"><input type="text" class = "form-control" name="email" value="<?php echo $email; ?>"/></div>
-        <div class = "row"><em><?php
-                $emailfilters = unserialize($settings["email_filter"]);
-                $comma = 0;
-                foreach ($emailfilters as $filter) {
-                    if ($comma == 0) {
-                        echo "example@" . $filter;
-                        $comma = 1;
-                    } else {
-                        echo ", example@" . $filter;
-                    }
-                }
-                ?></em>
-        </div>
-      </div>
-      <div class = "row col-6 subbutt centered">
-=======
       <div class = "form-group row">
         <div class = "col-lg-3 col-md-4 col-sm-12 offset-lg-1 passwordlabel">
           <label for = "password">Change Password:</label>
@@ -133,7 +103,6 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
           </div>
       </div>
       <div class = "col-sm-6 offset-lg-3 offset-sm-3 subbutt ">
->>>>>>> parent of 0f7c9b3... Merge pull request #27 from BennerLibrary-Informatics/allen-css
         <input type="hidden" name="submitted" value="1"/><input type="submit" value="Save"/>
       </div>
     </form>
