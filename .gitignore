@@ -4,3 +4,7 @@ includes/connection.php
 includes/or-dbinfo.php
 model/Config.php
 includes/connection.php
+themes/default/desktop/style.css
+editaccount.php
+editaccount.php
+themes/default/desktop/footer.php

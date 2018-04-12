@@ -13,9 +13,76 @@ body {
     padding-top: 4px;
     padding-left: 15px;
     padding-right: 15px;
+    background-image: url("images/background.gif");
     background-color: #c1c1c1;
     font-family: Helvetica, arial, sans-serif;
     font-size: 12px;
+
+}
+
+.margin-top-20{
+  margin-top: 20px;
+}
+
+.margin-top-30{
+  margin-top: 30px;
+}
+
+.margin-top-21{
+  margin-top: 21px;
+}
+
+.margin-left-30{
+  margin-left: 30px;
+}
+
+.padding-left-30{
+  padding-left: 30px;
+}
+
+.padding-left-10{
+  padding-left: 10px;
+}
+
+.padding-left-12{
+  padding-left: 12px;
+}
+
+#headerText{
+  margin-left: -10px;
+}
+.openroomtitle{
+  font-family: "PT Serif Caption" ;
+  font-size: 35px ;
+  text-align: left;
+  margin-top: 6px;
+}
+
+.ONUtitle{
+  font-family: "PT Serif Caption";
+  margin-top: -8px;
+  margin-left: 46px;
+  font-size: 17px;
+  text-align: left;
+}
+
+.loginlabel, .passwordlabel{
+  text-align: right;
+}
+.emailFilter{
+  text-align: left;
+}
+.userhead{
+  font-size: 13pt;
+}
+
+#createaccount{
+
+}
+.validuserchar{
+  font-weight: normal;
+  font-size: 10pt;
+  text-align: left;
 }
 
 .margin-top-20{
@@ -163,7 +230,11 @@ hr {
     margin: 0 auto;
     padding: 0px;
     width: 80%;
+<<<<<<< HEAD
 
+=======
+    margin-bottom: 20px;
+>>>>>>> parent of 0f7c9b3... Merge pull request #27 from BennerLibrary-Informatics/allen-css
 }
 
 #leftside {
@@ -423,6 +494,14 @@ label{
     text-align: right;
   }
 }
+<<<<<<< HEAD
+=======
+@media only screen and (max-width: 992px){
+  .emailFilter{
+    text-align: right;
+  }
+}
+>>>>>>> parent of 0f7c9b3... Merge pull request #27 from BennerLibrary-Informatics/allen-css
 @media only screen and (max-width: 960px){
   #headerText{
     margin-left:

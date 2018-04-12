@@ -7,12 +7,11 @@
 <div class = "copyright">
   Developed by Ball State University Libraries<br/> <!--Put inside div block-->
   Copyright (C) 2012 Ball State University Libraries
+<<<<<<< HEAD
+</div>
+=======
+>>>>>>> parent of 0f7c9b3... Merge pull request #27 from BennerLibrary-Informatics/allen-css
 </div>
 </div>
-<div id="themeswitch" onClick="javascript:document.cookie='theme=mobile';location.reload(true);">Switch to Mobile View <!--Eventually Remove-->
-</div>
-<br/><br/><br/> <!--Remove these later-->
-<br/><br/><br/>
-<br/><br/><br/>
 </body>
 </html>
