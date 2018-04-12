@@ -63,38 +63,50 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
     <h3><a href="index.php"><?php echo $settings["instance_name"]; ?></a> - Edit Account</h3>
 
     <form name="editaccount" method="POST" action="editaccount.php">
-        <table border="0">
-            <tr>
-                <td>Change Password:</td>
-                <td><input type="password" name="password"/></td>
-            </tr>
-            <tr>
-                <td>Confirm Password:</td>
-                <td><input type="password" name="confirm"/></td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="text" name="email" value="<?php echo $email; ?>"/></td>
-                <td><em><?php
-                        $emailfilters = unserialize($settings["email_filter"]);
-                        $comma = 0;
-                        foreach ($emailfilters as $filter) {
-                            if ($comma == 0) {
-                                echo "example@" . $filter;
-                                $comma = 1;
-                            } else {
-                                echo ", example@" . $filter;
-                            }
-                        }
-                        ?></em></td>
-            </tr>
-            <tr>
-                <td colspan="3"><input type="hidden" name="submitted" value="1"/><input type="submit" value="Save"/>
-                </td>
-            </tr>
-        </table>
+      <div class = "form-group row">
+        <div class = "col-lg-3 col-md-4 col-sm-12 offset-lg-1 passwordlabel">
+          <label for = "password">Change Password:</label>
+        </div>
+        <div class = "col-lg-4 col-md-6 col-sm-12 passwordlabel">
+          <input id = "password" type="password" name="password"/>
+        </div>
+      </div>
+
+      <div class = "form-group row">
+        <div class = "col-lg-3 col-md-4  col-sm-12 offset-lg-1 passwordlabel">
+          <label for = "passwordconf">Confirm Password:</label>
+        </div>
+        <div class = "col-lg-4 col-md-6 col-sm-12">
+          <input id = "passwordconf" type="password" name="confirm"/>
+        </div>
+      </div>
+
+      <div class = "form-group row">
+        <div class = "col-lg-1 col-md-2 col-sm-12 offset-md-2 offset-lg-3">
+          <label for = "">Email: </label>
+        </div>
+        <div class = "col-lg-4 col-md-6 col-sm-12">
+          <input type="text" class = "form-control" name="email" value="<?php echo $email; ?>"/>
+        </div>
+        <div class = "col-md-10 col-lg-4 emailFilter"><em><?php
+            $emailfilters = unserialize($settings["email_filter"]);
+            $comma = 0;
+            foreach ($emailfilters as $filter) {
+                if ($comma == 0) {
+                    echo "example@" . $filter;
+                    $comma = 1;
+                } else {
+                    echo ", example@" . $filter;
+                }
+            }
+            ?></em>
+          </div>
+      </div>
+      <div class = "col-sm-6 offset-lg-3 offset-sm-3 subbutt ">
+        <input type="hidden" name="submitted" value="1"/><input type="submit" value="Save"/>
+      </div>
     </form>
-    <br/><br/>
+
     <?php
     include($_SESSION["themepath"] . "footer.php");
 } else {
