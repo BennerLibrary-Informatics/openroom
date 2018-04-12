@@ -57,23 +57,26 @@
 <div id="loginform">
     <form id="authentication" onsubmit="return false" action="">
           <div id="loginusername" class = "form-group row">
-            <div class = "col-sm-4">
-                      <lable for="loginusernamelabel">Olivet Username:</label>
+            <div class = "col-lg-3 col-md-3 col-sm-12 loginlabel offset-lg-1">
+              <label for="loginusernamelabel">Olivet Username:</label>
+            </div>
+            <div class = "col-lg-4 col-md-6 col-sm-12">
                   <input alt="Enter your Olivet Username" type="text" name="username" id="usernamefield"
                          class="form-control form-control-sm" placeholder="Your Olivet Username" autofocus="autofocus"/>
             </div>
           </div>
 
           <div id="loginpassword" class = "form-group row">
-              <div class = "col-sm-4">
-                  <label for="loginpasswordlabel">Password:</label>
-                  <input alt="Enter your Olivet Password" type="password" name="password" id="passwordfield"
-                         class="form-control form-control-sm" placeholder="Your Olivet password"/>
-               </div>
-
+            <div class = "col-lg-3 col-md-3 col-sm-12 passwordlabel offset-lg-1">
+              <label for="loginpasswordlabel">Password:</label>
+            </div>
+            <div class = "col-lg-4 col-md-6 col-sm-12">
+              <input alt="Enter your Olivet Password" type="password" name="password" id="passwordfield"
+                     class="form-control form-control-sm" placeholder="Your Olivet password"/>
+            </div>
           </div>
           <div class = "form-group row">
-              <div class = "col-sm-4">
+              <div class = "col-lg-4 col-md-6 col-sm-6 offset-lg-4 offset-sm-3">
                       <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
                          onclick="ajaxAuthenticate()"/><br/>
                   <?php
