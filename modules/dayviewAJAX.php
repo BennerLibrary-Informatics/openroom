@@ -47,8 +47,9 @@ if ($_SESSION["username"] != "") {
         $group_str .= "<option value=\"". $group["roomgroupid"] ."\" ". $selected_str .">". $group["roomgroupname"] ."</option>";
     }
     $group_str .= "</select>";*/
+    //$calendarimg = ("../themes/default/desktop/images/calendarbutt.png");
 
-    $group_str = "<ul class = \"nav nav-tabs\">";
+    $group_str = "<div class = 'row'>";
     while ($group = mysqli_fetch_array($groups)) {
         $selected_str = "class=\"grouptab\"";
         if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class=\"selected\"";
@@ -102,7 +103,11 @@ if ($_SESSION["username"] != "") {
           $dvout .= "<i class=\"glyphicon glyphicon-remove\"></i>";
           //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
           $dvout .=  "</div>";
-
+  
+    /* gotta get this working
+    <script language="javascript" type="text/javascript">
+      document.getElementById("calbutton").innerHTML = "<img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/>";
+    </script>*/
 
 
 
