@@ -120,154 +120,140 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Special Hours</h3>
-        <div class = "row specialhourslist"> <!--HERE-->
-          <?php
-          $pgroupname = "";
-          $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
-          while ($room = mysqli_fetch_array($rooms)) {
-              $cgroupname = $room["roomgroupid"];
-              if ($pgroupname != $cgroupname) {
-                  $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
-                  $rgn = mysqli_fetch_array($roomgroupname);
-                  echo "<div class = 'col-sm-8'>" . $rgn["roomgroupname"] . "</div>";
-              }
-              $pgroupname = $cgroupname;
+        <table class="specialhourslist">
+            <?php
+            $pgroupname = "";
+            $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
+            while ($room = mysqli_fetch_array($rooms)) {
+                $cgroupname = $room["roomgroupid"];
+                if ($pgroupname != $cgroupname) {
+                    $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
+                    $rgn = mysqli_fetch_array($roomgroupname);
+                    echo "<tr><td colspan=\"8\" class=\"tabletitle\">" . $rgn["roomgroupname"] . "</td></tr>";
+                }
+                $pgroupname = $cgroupname;
 
                 echo "<tr><td><strong>" . $room["roomname"] . "</strong><ul>";
 
-              $specialhoursa = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomspecialhours WHERE roomid=" . $room["roomid"] . ";");
-              while ($specialhours = mysqli_fetch_array($specialhoursa)) {
-                  $from = explode(" ", $specialhours["fromrange"]);
-                  $to = explode(" ", $specialhours["torange"]);
-                  echo "<li><strong>Date Range: </strong>" . $from[0] . " -- " . $to[0] . " | <strong>Hours:</strong> " . $specialhours["start"] . " -- " . $specialhours["end"] . " | <a href=\"javascript:confirmdelete(" . $specialhours["roomspecialhoursid"] . ");\">X</a></li>";
-              }
+                $specialhoursa = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomspecialhours WHERE roomid=" . $room["roomid"] . ";");
+                while ($specialhours = mysqli_fetch_array($specialhoursa)) {
+                    $from = explode(" ", $specialhours["fromrange"]);
+                    $to = explode(" ", $specialhours["torange"]);
+                    echo "<li><strong>Date Range: </strong>" . $from[0] . " -- " . $to[0] . " | <strong>Hours:</strong> " . $specialhours["start"] . " -- " . $specialhours["end"] . " | <a href=\"javascript:confirmdelete(" . $specialhours["roomspecialhoursid"] . ");\">X</a></li>";
+                }
 
-              echo "</ul></td></tr>";
-          }
-          ?>
-        </div>
+                echo "</ul></td></tr>";
+            }
+            ?>
+        </table>
         <br/>
         <hr/>
         <br/>
-
-        <div class = "row col-sm-12">
-          <h3>Add Special Hours</h3>
-        </div>
-        <div class = "row col-sm-12">
-          <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding special
-              hours. This will be automated in a future version of this system.</em><br/>
-        </div>
-
+        <h3>Add Special Hours</h3><br/>
+        <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding special
+            hours. This will be automated in a future version of this system.</em><br/>
         <form name="addspecialhours" action="specialhours.php" method="POST">
-          <div class = "row">
-            <div class = "col-sm-1">
-              <strong>From:</strong>
-            </div>
-            <div class = "col-sm-9">
-              <input id="from" size="10" maxlength="10" name="from" type="text">
-              <img src="../includes/datechooser/calendar.gif"
-                   onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-              <div id="chooserSpan3" class="dateChooser select-free"
-                   style="display: none; visibility: hidden; width: 160px;"></div>
-          </div>
-          </div>
-
-            <div class = "row">
-              <div class = "col-sm-1">
-                <strong>To:</strong>
-              </div>
-              <div class = "col-sm-9">
-                <input id="to" size="10" maxlength="10" name="to" type="text">
-                <img src="../includes/datechooser/calendar.gif"
-                     onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                <div id="chooserSpan3" class="dateChooser select-free"
-                     style="display: none; visibility: hidden; width: 160px;"></div>
-              </div>
-            </div>
-
-            <div class = "row">
-              <div class = "col-sm-1">
-                <strong>Open:</strong>
-              </div>
-              <div class = "col-sm-9">
-                <select name="starthour">
-                    <?php
-                    for ($i = 0; $i <= 24; $i++) {
-                        echo "<option value=\"" . $i . "\">" . $i . "</option>";
+            <table>
+                <tr>
+                    <td>
+                        <strong>From:</strong>
+                    </td>
+                    <td>
+                        <input id="from" size="10" maxlength="10" name="from" type="text">
+                        <img src="../includes/datechooser/calendar.gif"
+                             onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan3" class="dateChooser select-free"
+                             style="display: none; visibility: hidden; width: 160px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>To:</strong>
+                    </td>
+                    <td>
+                        <input id="to" size="10" maxlength="10" name="to" type="text">
+                        <img src="../includes/datechooser/calendar.gif"
+                             onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan3" class="dateChooser select-free"
+                             style="display: none; visibility: hidden; width: 160px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Open:</strong>
+                    </td>
+                    <td>
+                        <select name="starthour">
+                            <?php
+                            for ($i = 0; $i <= 24; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>:<select name="startminute">
+                            <?php
+                            for ($i = 0; $i <= 59; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Close:</strong>
+                    </td>
+                    <td>
+                        <select name="endhour">
+                            <?php
+                            for ($i = 0; $i <= 24; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>:<select name="endminute">
+                            <?php
+                            for ($i = 0; $i <= 59; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><em>(To close room for entire day, leave hours set to 00:00-00:00.)</em><br/><br/>
+                    </td>
+                </tr>
+            </table>
+            <strong>Rooms Affected:</strong>
+            <table>
+                <?php
+                $pgroupname = "";
+                $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
+                $to5 = 0;
+                $to1 = 0;
+                while ($room = mysqli_fetch_array($rooms)) {
+                    $cgroupname = $room["roomgroupid"];
+                    if ($pgroupname != $cgroupname) {
+                        $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
+                        $rgn = mysqli_fetch_array($roomgroupname);
+                        if ($to1 > 0) echo "</table>\n";
+                        echo "<table><tr><td colspan=\"5\">" . $rgn["roomgroupname"] . "</td></tr>";
+                        $to5 = 0;
+                        $to1++;
                     }
-                    ?>
-                </select>:<select name="startminute">
-                    <?php
-                    for ($i = 0; $i <= 59; $i++) {
-                        echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                    $pgroupname = $cgroupname;
+                    if ($to5 == 0) echo "<tr>";
+                    echo "<td><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></td>\n";
+                    if ($to5 < 5) $to5++;
+                    if ($to5 == 5) {
+                        echo "</tr>";
+                        $to5 = 0;
                     }
-                    ?>
-                </select>
-              </div>
-            </div>
-
-            <div class = "row">
-              <div class = "col-sm-1">
-                <strong>Close:</strong>
-              </div>
-              <div class = "col-sm-8">
-                <select name="endhour">
-                    <?php
-                    for ($i = 0; $i <= 24; $i++) {
-                        echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                    }
-                    ?>
-                </select>:<select name="endminute">
-                    <?php
-                    for ($i = 0; $i <= 59; $i++) {
-                        echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                    }
-                    ?>
-                </select>
-              </div>
-            </div>
-
-            <div class = "row">
-              <div class = "col-sm-12">
-                <em>(To close room for entire day, leave hours set to 00:00-00:00.)</em>
-              </div>
-            </div>
-
-            <div class = "row col-sm-12">
-              <strong>Rooms Affected:</strong>
-            </div>
-
-            <div class = "row">
-              <?php
-              $pgroupname = "";
-              $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
-              $to5 = 0;
-              $to1 = 0;
-              while ($room = mysqli_fetch_array($rooms)) {
-                  $cgroupname = $room["roomgroupid"];
-                  if ($pgroupname != $cgroupname) {
-                      $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
-                      $rgn = mysqli_fetch_array($roomgroupname);
-                      if ($to1 > 0) echo "</table>\n";
-                      echo "<div class = 'row col-sm-auto'>" . $rgn["roomgroupname"] . "</div>";
-                      $to5 = 0;
-                      $to1++;
-                  }
-                  $pgroupname = $cgroupname;
-                  if ($to5 == 0) echo "<tr>";
-                  echo "<td><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></td>\n";
-                  if ($to5 < 5) $to5++;
-                  if ($to5 == 5) {
-                      echo "</tr>";
-                      $to5 = 0;
-                  }
-              }
-              ?>
-            </div>
-
+                }
+                ?>
+            </table>
             <br/>
             <input type="hidden" name="op" value="addspecialhours"/>
-            <input type="submit" value="Add Special Hours"/>
+            <input type="submit" value="Add Special Hours"/><br/><br/><br/>
         </form>
 
         <?php

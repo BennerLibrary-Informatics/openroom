@@ -98,42 +98,20 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Room Groups</h3>
-        <div class="roomgroupslist">
+        <table class="roomgroupslist">
             <?php
             $groupa = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
             while ($group = mysqli_fetch_array($groupa)) {
-                echo "<tr>
-
-
-                    <form name=\"editroomgroup\" action=\"roomgroups.php\" method=\"POST\">
-                    <div class=\"form-group\">
-
-                     <input type=\"text\" name=\"roomgroupname\" value=\"" . $group["roomgroupname"] . "\"/>
-                      <input type=\"hidden\" name=\"roomgroupid\" value=\"" . $group["roomgroupid"] . "\" />
-                      <input type=\"hidden\" name=\"op\" value=\"editgroup\" />
-                      <input type=\"submit\" value=\"Save Changes\" />
-
-                      <a href=\"javascript:confirmdelete(" . $group["roomgroupid"] . ");\">Delete</a>
-
-                      </div>
-                    </form>
-
-
-                  </tr>";
+                echo "<tr><td><form name=\"editroomgroup\" action=\"roomgroups.php\" method=\"POST\"><input type=\"text\" name=\"roomgroupname\" value=\"" . $group["roomgroupname"] . "\"/></td><td><input type=\"hidden\" name=\"roomgroupid\" value=\"" . $group["roomgroupid"] . "\" /><input type=\"hidden\" name=\"op\" value=\"editgroup\" /><input type=\"submit\" value=\"Save Changes\" /></td><td><a href=\"javascript:confirmdelete(" . $group["roomgroupid"] . ");\">Delete</a></form></td></tr>";
             }
             ?>
-        </div>
+        </table>
         <br/>
-        <div class = "col-sm-10">
-        <h4>Add a New Group</h4>
-      </div>
+        <h4>Add Group</h4>
         <form name="addgroup" action="roomgroups.php" method="POST">
-          <div class = "col-sm-10">
             <input type="text" name="roomgroupname"/>
-
             <input type="hidden" name="op" value="addgroup"/>
             <input type="submit" value="Add Group"/>
-            </div>
         </form>
         <?php
         }
