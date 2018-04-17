@@ -73,7 +73,9 @@ body {
 .loginlabel, .passwordlabel{
   text-align: right;
 }
-
+.emailFilter{
+  text-align: left;
+}
 .userhead{
   font-size: 13pt;
 }
@@ -99,58 +101,19 @@ hr {
   margin-top:35px;
 }
 
+.glyphicon-ok {
+    font-size: 25px;
+    color: green;
+    position: relative;
+}
+.glyphicon-remove {
+    font-size: 25px;
+    color: red;
 
-
-
-#open{
-  color:white;
-  background-color: white;
-  padding-left: 12px;
-  border: 2px black solid;
-}
-#openList{
-  color:white;
-  background-color: white;
-  padding-left: 12px;
-  border: 2px black solid;
-  font-size: 20px;
-  margin: 2px;
-}
-
-#closed{
-  color:lightgrey;
-  background-color: lightgrey;
-  padding-left: 12px;
-  border: 2px black solid;
-}
-#closedList{
-  color:lightgrey;
-  background-color: lightgrey;
-  padding-left: 12px;
-  border: 2px black solid;
-  font-size: 20px;
-  margin: 2px;
-
-}
-#reservationList{
-  font-size: 20px;
-  color:green;
-}
-takeList{
-  font-size: 20px;
-  color:red;
-}
-.glyphicon.glyphicon-remove{
-  color:red;
-}
-.glyphicon.glyphicon-ok{
-  color: green;
-}
-.glyphicon.glyphicon-ban-circle{
-  color: black;
 }
 
 
+}
 #loginform ul {
     margin: 0px;
     padding: 0px;
@@ -221,6 +184,7 @@ takeList{
     font-size: 20px;
     color: #FFFFFF;
     border: 0px;
+    /*margin: 0 auto;*/
     padding: 5px;
     text-align: right;
 }
@@ -233,7 +197,7 @@ takeList{
     margin-top: 10px;
     padding: 3px;
     text-align: center;
-    width: auto;
+    width: 700px;
 }
 
 .remindermessage {
@@ -453,7 +417,6 @@ label{
 
 }
 
-
 #legendText{
   font-size: 12px;
   font-weight: bold;
@@ -463,31 +426,23 @@ label{
     border-top: 2px solid black;
     border-bottom:2px solid black;
     padding: 5px;
-    text-align: center;
     position: relative;
-    /* height: auto; */
+    height: auto;
     /* top: 300px; */
 
 }
-
-
-
 #legendTitleText{
   font-weight: bold;
-  font-size: 28px;
+  font-size: 16px;
 
 }
 #legendText {
-    padding-top: 6px;
-    font-size: 22px;
     font-weight: bold;
+
 }
 
 #legendtable td {
     text-align: left;
-}
-.table-responsive{
-  padding: 5px;
 }
 
 #successmsg {
@@ -517,6 +472,11 @@ label{
 }
 @media only screen and (max-width: 990px){
   .validuserchar{
+    text-align: right;
+  }
+}
+@media only screen and (max-width: 992px){
+  .emailFilter{
     text-align: right;
   }
 }
