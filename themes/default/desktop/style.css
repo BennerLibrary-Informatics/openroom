@@ -1,8 +1,13 @@
-@import "css/bootstrap.css";
-@import "css/bootstrap-grid.css";
-@import "css/bootstrap-reboot.css";
-@import "css/bootstrap.min.css";
+@import "bootimp.css";
 
+hr{
+  border-top: 1px solid gray !important;
+  margin-top: 10px !important;
+}
+
+#resbutt:hover{
+  background-color:black;
+}
 
 body {
     margin: 0px;
@@ -233,7 +238,7 @@ p {
     padding: 5px;
     position: absolute;
     visibility: hidden;
-    width: 300px;
+    width: 350px;
     z-index: 20000;
     filter: alpha(opacity=90);
     -moz-opacity: 0.9;
@@ -241,16 +246,6 @@ p {
     opacity: 0.9;
 }
 
-#popupClose {
-    background-color: #ffaaaa;
-    border: 1px #000000 dotted;
-    cursor: pointer;
-    float: right;
-    font-weight: bold;
-    margin: 5px;
-    padding: 3px;
-    text-align: right;
-}
 
 .requiredmarker {
     color: #ff0000;

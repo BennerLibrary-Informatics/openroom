@@ -158,7 +158,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Rooms</h3>
-        <table class="roomslist">
+        <div class="roomslist">
             <?php
             $pgroupname = "";
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
@@ -197,11 +197,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 echo "<tr>" . $orderstring . "<td><form name=\"editroom\" method=\"POST\" action=\"rooms.php\"><input type=\"hidden\" name=\"op\" value=\"editroom\"/><input type=\"hidden\" name=\"roomid\" value=\"" . $room["roomid"] . "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"smalltxt\" type=\"text\" name=\"roomcapacity\" value=\"" . $room["roomcapacity"] . "\"/></td><td>" . $roomgroupstr . "</td><td><textarea rows=\"3\" cols=\"20\" name=\"roomdescription\">" . $room["roomdescription"] . "</textarea></td><td><input type=\"submit\" value=\"Save Changes\" /></form></td><td><a href=\"javascript:confirmdelete(" . $roomid . ",'" . $room["roomname"] . "');\">Delete Room</a></td></tr>\n";
             }
             ?>
-        </table>
+        </div>
         <br/><br/>
         <h3>Add a New Room</h3>
         <form name="addroom" method="POST" action="rooms.php">
-            <table class="adminform">
+            <div class="adminform">
                 <tr>
                     <td><strong>Room Name:</strong></td>
                     <td><input type="text" name="roomname"/></td>
@@ -235,7 +235,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                 </tr>
 
-            </table>
+            </div>
         </form>
         <?php
         }

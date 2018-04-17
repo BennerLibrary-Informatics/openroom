@@ -137,6 +137,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
             while($group = mysqli_fetch_array($roomgroups)){
                 echo "<h4><strong>" . $group["roomgroupname"] . ":</strong></h4>";
+
                 echo "<table border=1 frame=void rules=rows>";
                 echo "<tr><th>Room</th><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>";
                 $rooms =  mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid =" . $group["roomgroupid"] . ";");
@@ -150,6 +151,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             $start = substr($rec["start"], 0, -3);
                             $end = substr($rec["end"], 0, -3);
                             echo  date('h:ia', strtotime($start))."-".date('h:ia', strtotime($end))." <a href=\"javascript:deletehrs(" . $rec["roomhoursid"] . ",'" . $room["roomname"] . "');\">x\n</a>";
+
                         }
                         echo "</td>";
                     }
@@ -166,6 +168,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
             hours. This will be automated in a future version of this system.</em><br/>
         <form name="adddefaulthours" action="defaulthours.php" method="POST">
+
             <table>
                 <tr>
                     <td>

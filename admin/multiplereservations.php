@@ -184,160 +184,166 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Multiple Reservations</h3><br/>
         <span class="notetext">Use this form to make repeating reservations. Choose the date range, what time you would like the reservation to start, the duration, and which days of the week it should occur on.<br/>Clicking "Check Availability" will show a report of what reservations can be made.</span><br/>
-        <form name="multiplereservations" action="multiplereservations.php" method="POST">
-            <table>
-                <tr>
-                    <td>
-                        <strong>Username:</strong>
-                    </td>
-                    <td>
-                        <input type="text" name="altusername" value="
-                        <?php
-                        if(isset($_POST["altusername"]))
-                          echo $_POST["altusername"]; ?>"/>
-                          <em>(The username of the user you're making these reservations for.)</em>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Room:</strong>
-                    </td>
-                    <td>
-                        <select name="roomid">
-                            <?php
-                            $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid, roomname ASC;");
-                            while ($room = mysqli_fetch_array($rooms)) {
-                                $selectstr = "";
-                                if (isset($_POST["roomid"]) && isset($room["roomid"])
-                                    && $_POST["roomid"] == $room["roomid"]) {
-                                      $selectstr = "selected";
-                                }
-                                echo "<option value=" . $room["roomid"] . " " . $selectstr . ">" . $room["roomname"] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>From:</strong>
-                    </td>
-                    <td>
-                        <input id="from" size="10" maxlength="10" name="from" type="text"
-                               value="
-                               <?php if(isset($_POST["from"]))
-                                          echo $_POST["from"]; ?>"/>
-                        <img src="../includes/datechooser/calendar.gif"
-                             onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan3" class="dateChooser select-free"
-                             style="display: none; visibility: hidden; width: 160px;"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>To:</strong>
-                    </td>
-                    <td>
-                        <input id="to" size="10" maxlength="10" name="to" type="text"
-                               value="
-                                <?php if(isset($_POST["to"]))
-                                          echo $_POST["to"]; ?>"/>
-                        <img src="../includes/datechooser/calendar.gif"
-                             onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan3" class="dateChooser select-free"
-                             style="display: none; visibility: hidden; width: 160px;"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Reservation Time:</strong>
-                    </td>
-                    <td>
-                        <select name="starthour">
-                            <?php
-                            for ($i = 0; $i <= 24; $i++) {
-                                $selectstr = "";
-                                if (isset($_POST["starthour"]) && $i == $_POST["starthour"]) {
-                                    $selectstr = "selected";
-                                }
-                                echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
-                            }
-                            ?>
-                        </select>:<select name="startminute">
-                            <?php
-                            for ($i = 0; $i <= 59; $i++) {
-                                $selectstr = "";
-                                if (isset($_POST["startminute"]) && $i == $_POST["startminute"]) {
-                                    $selectstr = "selected";
-                                }
-                                echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Duration:</strong>
-                    </td>
-                    <td>
-                        <input type="text" size="5" name="duration" value="
-                                <?php if(isset($_POST["duration"]))
-                                          echo $_POST["duration"]; ?>"/> (in
-                        minutes)
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Optional Fields</strong>
-                    </td>
-                    <td>
-                        <?php echo $optionalfields_string; ?>
-                    </td>
-                </tr>
-            </table>
-            <strong>Days in Effect:</strong>
-            <table>
-                <tr>
+        <form name="multiplereservations" action="multiplereservations.php" method="POST" class = "form-group">
+          <div class = "row">
+            <div class = "col-sm-7">
+              <label for = "usrnrev"><strong>Username:</strong></label>
+              <input id = "usrnrev" type="text" name="altusername" value="<?php echo $_POST["altusername"]; ?>"/> <em>(The
+                  username of the user you're making these reservations for.)</em>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-sm-8 form-group">
+              <label for = "roomid"><strong>Room:</strong></label>
+              <select name="roomid">
+                  <?php
+                  $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid, roomname ASC;");
+                  while ($room = mysqli_fetch_array($rooms)) {
+                      $selectstr = "";
+                      if ($_POST["roomid"] == $room["roomid"]) {
+                          $selectstr = "selected";
+                      }
+                      echo "<option value=" . $room["roomid"] . " " . $selectstr . ">" . $room["roomname"] . "</option>";
+                  }
+                  ?>
+              </select>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-sm-8">
+              <label for "form"><strong>From:</strong></label>
+              <input id="from" size="10" maxlength="10" name="from" type="text"
+                     value="<?php echo $_POST["from"]; ?>"/>
+              <img src="../includes/datechooser/calendar.gif"
+                   onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+              <div id="chooserSpan3" class="dateChooser select-free"
+                   style="display: none; visibility: hidden; width: 160px;"></div>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-sm-8">
+              <label for = "to"><strong>To:</strong></label>
+              <input id="to" size="10" maxlength="10" name="to" type="text"
+                     value="<?php echo $_POST["to"]; ?>"/>
+              <img src="../includes/datechooser/calendar.gif"
+                   onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+              <div id="chooserSpan3" class="dateChooser select-free"
+                   style="display: none; visibility: hidden; width: 160px;"></div>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div id = "starttime" class = "col-sm-8">
+              <label for = "starttime"><strong>Reservation Time:</strong></label>
+              <div id = "starttime">
+                <select name="starthour">
                     <?php
-                    $dayarray = array("sunday" => "", "monday" => "", "tuesday" => "", "wednesday" => "", "thursday" => "", "friday" => "", "saturday" => "");
-                    if(isset($_POST["daysineffect"]))
-                      foreach ($_POST["daysineffect"] as $affectedday) {
-                        $dayarray[$affectedday] = "checked";
+                    for ($i = 0; $i <= 24; $i++) {
+                        $selectstr = "";
+                        if ($i == $_POST["starthour"]) {
+                            $selectstr = "selected";
+                        }
+                        echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
                     }
                     ?>
-                    <td><input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong>
-                    </td>
-                    <td><input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong>
-                    </td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong>
-                    </td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong></td>
-                </tr>
-            </table>
+                </select>:<select name="startminute">
+                    <?php
+                    for ($i = 0; $i <= 59; $i++) {
+                        $selectstr = "";
+                        if ($i == $_POST["startminute"]) {
+                            $selectstr = "selected";
+                        }
+                        echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+                    }
+                    ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class = "row">
+            <div class = "col-sm-4">
+              <strong>Duration:</strong>
+            </div>
+            <div class = "col-sm-8">
+              <input type="text" size="5" name="duration" value="<?php echo $_POST["duration"]; ?>"/> (in
+                          minutes)
+            </div>
+          </div>
+
+            <div class = "row">
+              <div class = "col-sm-4">
+                  <strong>Optional Fields</strong>
+              </div>
+              <div class = "col-sm-8">
+                <?php echo $optionalfields_string; ?>
+              </div>
+            </div>
+
+            <div class = "row col-sm-12">
+              <strong>Days in Effect:</strong>
+            </div>
+            <div class = "row">
+              <?php
+              $dayarray = array("sunday" => "", "monday" => "", "tuesday" => "", "wednesday" => "", "thursday" => "", "friday" => "", "saturday" => "");
+              foreach ($_POST["daysineffect"] as $affectedday) {
+                  $dayarray[$affectedday] = "checked";
+              }
+              ?>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong>
+              </div>
+              <div class = "col-auto">
+                <input type="checkbox" name="daysineffect[]"
+                           value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong>
+              </div>
+
+            </div>
+
             <br/>
             <input type="hidden" name="op" value="multiplereservations"/>
-            <?php
-            if (isset($_POST["onlychecking"]) && $_POST["onlychecking"] != "multireserve") {
-                $onlychksel = "checked";
-                $onlychkselb = "";
-            } else {
-                $onlychksel = "";
-                $onlychkselb = "checked";
-            }
-            ?>
-            <input type="radio" name="onlychecking" value="TRUE" <?php echo $onlychksel; ?>/><strong>Check
-                Availability</strong> or <input type="radio" name="onlychecking"
-                                                value="multireserve" <?php echo $onlychkselb; ?> /><strong>Finalize
-                Reservations</strong><br/><br/>
-            <input type="submit" value="Submit"/><br/><br/><br/>
+            <div class = "row">
+              <div class = "col-sm-12">
+                <?php
+                if ($_POST["onlychecking"] != "multireserve") {
+                    $onlychksel = "checked";
+                    $onlychkselb = "";
+                } else {
+                    $onlychksel = "";
+                    $onlychkselb = "checked";
+                }
+                ?>
+                <input type="radio" name="onlychecking" value="TRUE" <?php echo $onlychksel; ?>/><strong>Check
+                    Availability</strong> or <input type="radio" name="onlychecking"
+                                                    value="multireserve" <?php echo $onlychkselb; ?> /><strong>Finalize
+                    Reservations</strong>
+              </div>
+            </div>
+
+                <div class = "row col-sm-5 align-self-center">
+                  <input type="submit" value="Submit"/>
+                </div>
         </form>
         <?php
         if (isset($availstr) && $availstr != "") {
