@@ -152,6 +152,25 @@ hr {
 .subbutt{
   margin-top: 10px !important;
 }
+.createaccbutt{
+  border: 1px solid #ced4da !important;
+}
+.createaccbutt, .createacc{
+  background-color: white !important;
+  color: black !important;
+}
+.registrationlink{
+  width: 100%;
+}
+.createacc:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.createacc:active{
+  color: white;
+  text-decoration: none;
+}
 
 #errormessage {
     background-color: #EEAAAA;

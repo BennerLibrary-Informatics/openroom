@@ -76,15 +76,17 @@
             </div>
           </div>
           <div class = "form-group row">
-              <div class = "col-lg-4 col-md-6 col-sm-6 offset-lg-4 offset-sm-3">
-                      <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
-                         onclick="ajaxAuthenticate()"/><br/>
-                  <?php
-                  if ($settings["login_method"] == "normal") {
-                      echo "<span class=\"registrationlink\"><a href=\"createaccount.php\">Create Account</a></span><br/><br/>";
-                  }
-                  ?>
+            <div class = "col-lg-4 col-md-6 col-sm-6 offset-lg-2">
+              <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
+                onclick="ajaxAuthenticate()"/>
             </div>
+            <div class = "col-lg-4 col-md-6 col-sm-6 ">
+                <?php
+                if ($settings["login_method"] == "normal") {
+                    echo "<a href=\"createaccount.php\" class = 'createacc'><span class = 'registrationlink btn btn-primary createaccbutt' >Create Account</span></a>";
+                }
+                ?>
+              </div>
           </div>
         <!--</ul>-->
     </form>
