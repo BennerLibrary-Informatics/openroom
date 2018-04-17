@@ -41,31 +41,28 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 require_once("../includes/ClockTime.php");
 require_once("../includes/or-dbinfo.php");
-
 //If $_POST["fromrange"] and/or $_POST["torange"] aren't set, or manually set to 0, set them to today
 //Whether they're set or not, make sure they are from 00:00:00 on the fromrange day and to 23:59:59 on the torange day so all reservations for the day appear
 $_POST["fromrange"] = (isset($_POST["fromrange"]) && $_POST["fromrange"] != 0) ? mktime(0, 0, 0, date("n", $_POST["fromrange"]), date("j", $_POST["fromrange"]), date("Y", $_POST["fromrange"])) : mktime(0, 0, 0, date("n"), date("j"), date("Y"));
 $_POST["torange"] = (isset($_POST["torange"]) && $_POST["torange"] != 0) ? mktime(23, 59, 59, date("n", $_POST["torange"]), date("j", $_POST["torange"]), date("Y", $_POST["torange"])) : mktime(23, 59, 59, date("n"), date("j"), date("Y"));
 $_POST["group"] = (isset($_POST["group"])) ? $_POST["group"] : "";
-
 if ($_POST["group"] == "") {
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups ORDER BY roomgroupid ASC;");
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
-
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
 $getroominfo = include("../or-getroominfo.php");
-
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
-
 $current_time = new ClockTime($settings["starttime"] ?? 8, 0, 0);
 $last_time = new ClockTime($settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
+
 //$legend = include("legend.php");
+
 
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
@@ -83,6 +80,7 @@ if ($_SESSION["username"] != "") {
         if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center'";
         $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
     }
+
     $group_str .= "</div></div>";
 
     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>" . $group_str;
@@ -93,6 +91,7 @@ if ($_SESSION["username"] != "") {
     /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
 
     include("legend.php");
+
 
     //Create optional field form items string for reservation form
     //Select all records from optionalfields table in order of optionorder ascending
@@ -107,7 +106,6 @@ if ($_SESSION["username"] != "") {
         }
         //Print field question
         $optionalfields_string .= $optionalfield["optionquestion"] . "</strong>: ";
-
         //Determine if this field is a text field or a select field
         if ($optionalfield["optiontype"] == 0) {
             $optionalfields_string .= "<input type=\'text\' name=\'" . $optionalfield["optionformname"] . "\' /><br/>";
@@ -124,10 +122,16 @@ if ($_SESSION["username"] != "") {
 ///////////////////////////////////////////////////////////////////
     //Construct table header WORK HERE
     $dvout .= "<div class = 'row'><div class = 'col-lg-1 hidden-sm-down hidden-lg-up text-nowrap'><label><b>Rooms: </b></label></div>";
+
     foreach ($xmlroominfo->room as $room) {
         $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
     }
+
     $dvout .= "</div></div>";
+
+
+    // INITIAL TIME PRINTS TWICE; THIS IS A QUICK FIX
+    $i = 0;
 
     while ($last_time->isGreaterThan($current_time)) {
         //Format time string
@@ -135,6 +139,7 @@ if ($_SESSION["username"] != "") {
         $current_time_exploded = explode(":", $current_time->getTime());
         $current_time_tf = mktime($current_time_exploded[0], $current_time_exploded[1], $current_time_exploded[2], date("n", $_POST["fromrange"]), date("j", $_POST["fromrange"]), date("Y", $_POST["fromrange"]));
         $time_str = date($time_format, $current_time_tf);
+
         $dvout .= "<div class = 'row'>";
         $dvout .= "<div class = 'col-lg-2 col-sm-12 text-nowrap dayviewTime'>" . $time_str . "</div>";
         //$dvout .= "<tr onMouseOver=\"javascript:this.className='mousedoverrow';\" onMouseOut=\"javascript:this.className='mousedoutrow';\"><td class=\"dayviewTime\">" . $time_str . "</td>";
@@ -284,5 +289,4 @@ if ($_SESSION["username"] != "") {
 else {
     echo "Error: User is not logged in.";
 }
-
 ?>

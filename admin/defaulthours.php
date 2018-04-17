@@ -2,10 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 include("../includes/or-dbinfo.php");
 include("../includes/ClockTime.php");
-
 if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     echo "You are not logged in. Please <a href=\"../index.php\">click here</a> and login with an account that is an authorized administrator or reporter.";
 } elseif ($_SESSION["isadministrator"] != "TRUE") {
@@ -13,12 +11,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 } elseif ($_SESSION["systemid"] != $settings["systemid"]) {
     echo "You are not logged in. Please <a href=\"../index.php\">click here</a> and login with an account that is an authorized administrator or reporter.";
 } else {
-
     $op = isset($_REQUEST["op"]) ? $_REQUEST["op"] : "";
-
     $successmsg = "";
     $errormsg = "";
-
     switch ($op) {
         case "adddefaulthours":
             $starthour = isset($_REQUEST["starthour"]) ? $_REQUEST["starthour"] : "";
@@ -30,13 +25,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $affectedrooms = isset($_REQUEST["affectedrooms"]) ? $_REQUEST["affectedrooms"] : "";
             //days that the change applies to
             $affecteddays = isset($_REQUEST["affecteddays"]) ? $_REQUEST["affecteddays"] : "";
-
             if($startperiod == "PM" && $starthour != 12)
               $starthour += 12;
-
             if($endperiod == "PM" && $endhour != 12)
               $endhour += 12;
-
             //All fields required
             if ($starthour != "" && $startminute != "" && $endhour != "" && $endminute != "" && $affectedrooms != "" && is_array($affectedrooms) && $affecteddays != "" && is_array($affecteddays)) {
                 //Make sure from and to are in proper formats
@@ -74,7 +66,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                             $room = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomid=" . $aroom . ";"));
                                             $errormsg = "There was a problem adding the new hours. Please try again.";
                                             $errormsg .= "<br/>Unable to add default hours to room " . $room["roomname"] . ". Please try again!";
-
                                         }
                                     }
                                 }
@@ -86,7 +77,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $errormsg .= "<br/>Some parameters are missing. Make sure all form fields are filled out.";
             }
             break;
-
         case "deletedefaulthours":
             $roomhoursid = isset($_REQUEST["roomhoursid"]) ? $_REQUEST["roomhoursid"] : "";
             if (mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM roomhours WHERE roomhoursid=" . $roomhoursid . ";")) {
@@ -96,8 +86,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
             break;
     }
-
-
     ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -113,10 +101,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     window.location = "defaulthours.php?op=deletedefaulthours&roomhoursid=" + roomhoursid + "&anchorname=" + anchorname;
                 }
                 else {
-
                 }
             }
-
         </script>
 
         <script src="../includes/datechooser/date-functions.js" type="text/javascript"></script>
@@ -148,7 +134,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3>Current Room Hours:</h3><br>
         <?php
             $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms ORDER BY roomgroupid ASC, roomposition ASC;");
-
             $roomgroups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups;");
             while($group = mysqli_fetch_array($roomgroups)){
                 echo "<h4><strong>" . $group["roomgroupname"] . ":</strong></h4>";
@@ -159,7 +144,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 while($room = mysqli_fetch_array($rooms)){
                     echo "<tr>";
                     echo "<td width=500px align='center'>" . $room['roomname'] . "</td>";
-
                     for ($wkdy = 0; $wkdy <= 6; $wkdy++) {
                         echo "<td width=3000px align='center'>";
                         $thisday = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomhours WHERE roomid=" . $room["roomid"] . " AND dayofweek=" . $wkdy . " ORDER BY start ASC;");
@@ -171,8 +155,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         }
                         echo "</td>";
                     }
-
-
                     echo "</tr>";
                 }
                 echo "</table>";
@@ -269,7 +251,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     }
                     echo "</table>";
                   }
-
                 ?>
             </table>
             <br/>

@@ -2,10 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 require_once(__DIR__ . '/../vendor/autoload.php');
 include("../includes/or-dbinfo.php");
-
 if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     echo "You are not logged in. Please <a href=\"../index.php\">click here</a> and login with an account that is an authorized administrator or reporter.";
 } elseif ($_SESSION["isadministrator"] != "TRUE") {
@@ -15,7 +13,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 } else {
     $successmsg = "";
     $errormsg = "";
-
     if (isset($_REQUEST["starttime"])) {
         $starttime = $_REQUEST["starttime"];
         
@@ -27,7 +24,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     }
     if (isset($_REQUEST["endtime"])) {
         $endtime = $_REQUEST["endtime"];
-
         if (model\Setting::update('endtime', $endtime)) {
             $successmsg = $successmsg . "Closing time updated! ";
         } else {
@@ -71,6 +67,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <form name="openhours" method="POST" action="hours.php">
 
+
           <div class = "row"> <!-- Opening time  -->
             <div class = "col-lg-12">
               Opening time:
@@ -103,6 +100,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               <input type="submit" value="Update"/>
             </div>
           </div>
+
         </form>
         <?php
         }

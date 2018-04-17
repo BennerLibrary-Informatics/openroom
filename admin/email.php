@@ -115,6 +115,19 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $errormsg = "Unable to set System Email. Make sure the format is correct.";
             }
             break;
+        case "phone_number":
+            $phone_number = isset($_REQUEST["phone_number"]) ? $_REQUEST["phone_number"] : "";
+            
+            if ($phone_number != "" && preg_match("/^(?:1(?:[. -])?)?(?:\((?=\d{3}\)))?([2-9]\d{2})(?:(?<=\(\d{3})\))? ?(?:(?<=\d{3})[.-])?([2-9]\d{2})[. -]?(\d{4})(?: (?i:ext)\.? ?(\d{1,5}))?$/", $phone_number)) {
+                if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $phone_number . "' WHERE settingname='phone_number';")) {
+                    $successmsg = "Phone Number has been updated.";
+                } else {
+                    $errormsg = "Unable to set Phone Number. Please try again.";
+                }
+            } else {
+                $errormsg = "Unable to set Phone Number. Make sure the format is correct.";
+            }
+            break;
         case "condition":
             $email_condition = isset($_REQUEST["email_condition"]) ? $_REQUEST["email_condition"] : "";
             $email_condition_value = isset($_REQUEST["email_condition_value"]) ? $_REQUEST["email_condition_value"] : "";
@@ -208,6 +221,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Email Setup</h3><br/>
         <span class="notetext">There are three types of emails: <strong>Verbose</strong> are fully-detailed messages, <strong>Terse</strong> are stripped down to only the most important details, and <strong>GEF (Gmail Event Format)</strong> is formatted to work with Gmail Events.</span>
+
         <div id = "settingsul">
           <!-- Top email setup  -->
           <div class = "row col-sm-12">
