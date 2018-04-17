@@ -93,8 +93,9 @@ if ($_SESSION["username"] != "") {
 
     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>";
 
-
-     $dvout .= "<div style=\"width:80%; margin:0 auto;\" id = \"legend\">";
+        $dvout .= "<div class = 'header' id='roomhead' >";
+       /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
+        $dvout .= "<div id = \"legend\">";
      $dvout .= "<div class=\"container\">";
         $dvout .= "<div class = \"row\">";
 
@@ -172,7 +173,7 @@ if ($_SESSION["username"] != "") {
     foreach ($xmlroominfo->room as $room) {
         $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
       }
-    $dvout .= "</div</div>";
+    $dvout .= "</div></div>";
 
     while ($last_time->isGreaterThan($current_time)) {
         //Format time string
