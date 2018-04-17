@@ -9,5 +9,6 @@
   Copyright (C) 2012 Ball State University Libraries
 </div>
 </div>
+</div>
 </body>
 </html>
