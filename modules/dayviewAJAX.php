@@ -1,7 +1,42 @@
 <!-- create anoter dvout idea and add before others -->
-
-
 <?php
+echo "<script type = 'text/javascript'>
+  alert('hi I'm here');
+  // When the user scrolls the page, execute myFunction
+  window.onscroll = function() {myFunction()};
+
+  // Get the header
+  var header = document.getElementById('roomhead');
+
+  // Get the offset position of the navbar
+  var sticky = header.offsetTop;
+
+  // Add the sticky class to the header when you reach its scroll position. Remove sticky when you leave the scroll position
+  function myFunction() {
+    if (window.pageYOffset >= sticky) {
+      header.classList.add('sticky');
+    } else {
+      header.classList.remove('sticky');
+    }
+  }
+</script>
+
+<style>
+  /* The sticky class is added to the header with JS when it reaches its scroll position */
+  .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+  }
+
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+  padding-top: 102px;
+  }
+</style>";
+
+
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -19,8 +54,6 @@ if ($_POST["group"] == "") {
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
- //$legend = include("legend.php");
-
 
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
@@ -46,26 +79,19 @@ if ($_SESSION["username"] != "") {
         $group_str .= "<option value=\"". $group["roomgroupid"] ."\" ". $selected_str .">". $group["roomgroupname"] ."</option>";
     }
     $group_str .= "</select>";*/
+    //$calendarimg = ("../themes/default/desktop/images/calendarbutt.png");
 
-    $group_str = "<ul class = \"nav nav-tabs\">";
+
+
+    $group_str = "<div class = 'row'>";
     while ($group = mysqli_fetch_array($groups)) {
-        $selected_str = "class=\"grouptab\"";
-        if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class=\"selected\"";
-        $group_str .= "<li onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</li>";
+        $selected_str = "class='grouptab col-sm text-center'";
+        if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center'";
+        $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
     }
-    $group_str .= "</ul>";
+    $group_str .= "</div></div>";
 
-
-    // $group_str = "<table><tr>";
-    // while ($group = mysqli_fetch_array($groups)) {
-    //     $selected_str = "class=\"grouptab\"";
-    //     if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class=\"selected\"";
-    //     $group_str .= "<td onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</td>";
-    // }
-    // $group_str .= "</tr></table>";
-
-
-     $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "</div>";
+    $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>";
 
 
      $dvout .= "<div style=\"width:80%; margin:0 auto;\" id = \"legend\">";
@@ -79,20 +105,17 @@ if ($_SESSION["username"] != "") {
         $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
             $dvout .= "Open: ";
             $dvout .= "<span id=\"open\" class=\"glyphicon glyphicon-stop\"></span>";
-          //  $dvout .= "<img src=\"themes/default/desktop/images/opensign.png\"width=\"40\" height=\"40\"/>";
           $dvout .=  "</div>";
 
           $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
           $dvout .= "Closed: ";
           $dvout .= "<span id=\"closed\" class=\"glyphicon glyphicon-stop\"></span>";
-          //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
           $dvout .=  "</div>";
 
 
           $dvout .= "<div  class = \"col-sm-auto\" id = \"legendText\">";
           $dvout .= "Your Reservations: ";
           $dvout .= "<span class=\"glyphicon glyphicon-ok\"></span>";
-            // $dvout .= "<img src=\"themes/default/desktop/images/cancelbutton.png\"/>";
           $dvout .=  "</div>";
 
 
@@ -101,13 +124,10 @@ if ($_SESSION["username"] != "") {
           $dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
           //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
           $dvout .=  "</div>";
-
-
-
-
-        $dvout .=  "</div>";
-     $dvout .=  "</div>";
-     $dvout .=  "</div> ". $group_str;
+         $dvout .=  "</div>";
+         $dvout .=  "</div>";
+         $dvout .=  "</div>";
+         $dvout .= $group_str;
 
 
 
@@ -148,11 +168,11 @@ if ($_SESSION["username"] != "") {
 
 ///////////////////////////////////////////////////////////////////
     //Construct table header
-    $dvout .= "<tr><th>&nbsp;</th>";
+   $dvout .= "<div class = 'row'><div class = 'col-lg-1 hidden-sm-down hidden-lg-up text-nowrap'><label><b>Rooms: </b></label></div>";
     foreach ($xmlroominfo->room as $room) {
-        $dvout .= "<th>" . $room->name . "</th>";
-    }
-    $dvout .= "</tr>";
+        $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
+      }
+    $dvout .= "</div</div>";
 
     while ($last_time->isGreaterThan($current_time)) {
         //Format time string
@@ -160,8 +180,9 @@ if ($_SESSION["username"] != "") {
         $current_time_exploded = explode(":", $current_time->getTime());
         $current_time_tf = mktime($current_time_exploded[0], $current_time_exploded[1], $current_time_exploded[2], date("n", $_POST["fromrange"]), date("j", $_POST["fromrange"]), date("Y", $_POST["fromrange"]));
         $time_str = date($time_format, $current_time_tf);
-
-        $dvout .= "<tr onMouseOver=\"javascript:this.className='mousedoverrow';\" onMouseOut=\"javascript:this.className='mousedoutrow';\"><td class=\"dayviewTime\">" . $time_str . "</td>";
+        $dvout .= "<div class = 'row'>";	+
+        $dvout .= "<div class = 'col-lg-2 col-sm-12 text-nowrap dayviewTime'>" . $time_str . "</div>";
+        //$dvout .= "<tr onMouseOver=\"javascript:this.className='mousedoverrow';\" onMouseOut=\"javascript:this.className='mousedoutrow';\"><td class=\"dayviewTime\">" . $time_str . "</td>";
 
         $current_stop = new ClockTime(0, 0, 0);
         $current_stop->setMySQLTime((string)$current_time->getTime());
@@ -172,24 +193,9 @@ if ($_SESSION["username"] != "") {
             $specialroomhours = $room->specialhours->hourset;
             $collision = "";
             //Loop runs for all hoursets of this room on this day
-            foreach ($roomhours as $hourset) {
-                $roomstart = new ClockTime(0, 0, 0);
-                $roomstart->setMySQLTime((string)$hourset->start);
-                $roomstop = new ClockTime(0, 0, 0);
-                $roomstop->setMySQLTime((string)$hourset->end);
-                //echo $collision .", ";
-                //If a good collision (stalactite, bat, spelunker, salamander, stalagmite) has already occured, don't run this function
-                if ($collision != "bat" && $collision != "stalactite" && $collision != "spelunker" && $collision != "salamander" && $collision != "stalagmite") {
-                    $collision = collisionCave($roomstart, $roomstop, $current_time, $current_stop);
-                }
-                //echo $roomstart->getTime() .", ". $roomstop->getTime() .", ". $current_time->getTime() .", ". $current_stop->getTime() .", ". $room->name .", ". $collision ."<br/>";
-            }
-
-            //If special hours exist for this day, throw away previous results and
-            //check special hours instead.
-            if ((string)$specialroomhours->start[0] != "") {
-                $collision = "";
-                foreach ($specialroomhours as $hourset) {
+            //Proceed only is room has default hours
+            if(isset($roomhours)) {
+                foreach ($roomhours as $hourset) {
                     $roomstart = new ClockTime(0, 0, 0);
                     $roomstart->setMySQLTime((string)$hourset->start);
                     $roomstop = new ClockTime(0, 0, 0);
@@ -248,8 +254,7 @@ if ($_SESSION["username"] != "") {
                             //Display "taken" button that shows public info.
                             $collision =  "<span id =\"takenList\" class=\"glyphicon glyphicon-remove\" style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" ></span>";
                         } else {
-                            if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<br/><br/><center>Cancel this reservation? <a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center>";
-                            //Display "cancel" button that shows cancellation confirmation.
+                           if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";	                            //Display "cancel" button that shows cancellation confirmation.
                             $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\" style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" ></span>";
 
                             //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
@@ -291,23 +296,22 @@ if ($_SESSION["username"] != "") {
                 $collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
 
             }
+            //This is where the room buttons are printed
+                       $dvout .= "<div class='col' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
+                   }
 
-            $dvout .= "<td class=\"dayviewTD\" onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</td>";
-        }
+                   $dvout .= "</div></div>";
 
-        $dvout .= "</tr>";
+                   //Increment time by Interval
+                   $current_time->addMinutes($settings["interval"]);
+               }
 
-        //Increment time by Interval
-        $current_time->addMinutes($settings["interval"]);
-    }
 
-    $dvout .= "</table>";
-    $dvout .=  "</div>";
 
-    echo $dvout;
-} //User isn't logged in
-else {
-    echo "Error: User is not logged in.";
-}
+               echo $dvout;
+           } //User isn't logged in
+           else {
+               echo "Error: User is not logged in.";
+           }
 
-?>
+           ?>
