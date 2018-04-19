@@ -66,43 +66,43 @@ if ($_SESSION["username"] != "") {
     //$calendarimg = ("../themes/default/desktop/images/calendarbutt.png");
         $group_str = "<div class = 'row'>";
         while ($group = mysqli_fetch_array($groups)) {
-            $selected_str = "class='grouptab col-sm text-center'";
+            $selected_str = "class='grouptab col-sm text-center groups'";
             if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center'";
             $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
         }
         $group_str .= "</div></div>";
         $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>";
-            $dvout .= "<div class = 'header' id='roomhead' >";
-           /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
-            $dvout .= "<div id = \"legend\">";
-         $dvout .= "<div class=\"container\">";
-            $dvout .= "<div class = \"row\">";
-            $dvout .= "<div class = \"col-sm-auto\" id = \"legendTitleText\">";
-              $dvout .= "Legend:";
-            $dvout .=  "</div>";
-            $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
-                $dvout .= "Open: ";
-                $dvout .= "<span id=\"open\" class=\"glyphicon glyphicon-stop\"></span>";
-              $dvout .=  "</div>";
-              $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
-              $dvout .= "Closed: ";
-              $dvout .= "<span id=\"closed\" class=\"glyphicon glyphicon-stop\"></span>";
-              $dvout .=  "</div>";
-              $dvout .= "<div  class = \"col-sm-auto\" id = \"legendText\">";
-              $dvout .= "Your Reservations: ";
-              $dvout .= "<span class=\"glyphicon glyphicon-ok\"></span>";
-              $dvout .=  "</div>";
-              $dvout .= "<div class = \"col-sm-auto\" id = \"legendText\">";
-              $dvout .= "Taken: ";
-              $dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
-              //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
-              $dvout .=  "</div>";
-             $dvout .=  "</div>";
-             $dvout .=  "</div>";
-             $dvout .=  "</div>";
-             $dvout .= $group_str;
-     //$dvout .= .$group_str;
-         $dvout .=  "<div class =\"table-responsive\">";
+        $dvout .= "<div class = 'header' id='roomhead' >";
+       /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
+        $dvout .= "<div id = \"legend\" class = 'row'>";
+        /*$dvout .= "<div class=\"container\">";
+        $dvout .= "<div class = \"row\">";*/
+        $dvout .= "<div class = \"col-1 offset-1\" id = \"legendTitleText\">";
+        $dvout .= "Legend:";
+        $dvout .=  "</div>";
+        $dvout .= "<div class = \"col-2\" id = \"legendText\">";
+        $dvout .= "Open: ";
+        $dvout .= "<span id=\"open\" class=\"glyphicon glyphicon-stop\"></span>";
+        $dvout .=  "</div>";
+        $dvout .= "<div class = \"col-2\" id = \"legendText\">";
+        $dvout .= "Closed: ";
+        $dvout .= "<span id=\"closed\" class=\"glyphicon glyphicon-stop\"></span>";
+        $dvout .=  "</div>";
+        $dvout .= "<div  class = \"col-3\" id = \"legendText\">";
+        $dvout .= "Your Reservations: ";
+        $dvout .= "<span class=\"glyphicon glyphicon-ok\"></span>";
+        $dvout .=  "</div>";
+        $dvout .= "<div class = \"col-3\" id = \"legendText\">";
+        $dvout .= "Taken: ";
+        $dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
+        //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
+        /*$dvout .=  "</div>";
+        $dvout .=  "</div>";*/
+        $dvout .=  "</div>";
+        $dvout .=  "</div>";
+        $dvout .= $group_str;
+        //$dvout .= .$group_str;
+        $dvout .=  "<div class =\"table-responsive\">";
         $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
     //Create optional field form items string for reservation form
     //Select all records from optionalfields table in order of optionorder ascending
