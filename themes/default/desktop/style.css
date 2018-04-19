@@ -372,14 +372,15 @@ label{
     padding: 10px;
 }
 
+.groups{
+  background-color: lightgrey;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 2px;
+}
+
 .selected {
-    background-color: lightgrey;
-    border-top: 1px #000000 solid;
-    border-left: 1px #000000 solid;
-    border-right: 1px #000000 solid;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 2px;
+    background-color: white;
 }
 
 .mousedoverrow {
@@ -409,19 +410,42 @@ label{
     text-align: center;
 }
 
-#popup {
-    background-color: #ffffdd;
+#popup{
+    background-color: #54406b;
     border: 1px #000000 solid;
+    color:white;
     display: none;
     padding: 5px;
     position: absolute;
     visibility: hidden;
-    width: 300px;
+    width: 400px;
     z-index: 20000;
     filter: alpha(opacity=90);
     -moz-opacity: 0.9;
     -khtml-opacity: 0.9;
     opacity: 0.9;
+}
+.bottombuttons{
+  padding-bottom: 8px;
+}
+.roomtitle{
+  font-size: 16pt;
+  font-weight: auto;
+}
+#popup select{
+  color: black;
+}
+#popup a:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+#popup a:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
+#popup a:hover {
+  text-decoration: underline;
 }
 
 #popupClose {
@@ -481,11 +505,6 @@ label{
     /* top: 300px; */
 
 }
-#legendTitleText{
-  font-weight: bold;
-  font-size: 16px;
-
-}
 #legendText {
     font-weight: bold;
 
@@ -537,13 +556,14 @@ label{
 
 #legendTitleText{
   font-weight: bold;
-  font-size: 28px;
+  font-size: 15pt;
 
 }
 #legendText {
     padding-top: 6px;
-    font-size: 22px;
+    font-size: 12pt;
     font-weight: bold;
+    text-align: left;
 }
 
 #legendtable td {
