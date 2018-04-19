@@ -1,6 +1,2 @@
 /vendor
 .idea/
-includes/connection.php
-includes/or-dbinfo.php
-model/Config.php
-includes/connection.php

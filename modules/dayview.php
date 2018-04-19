@@ -77,15 +77,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         }
         popup.style.left = popleft + "px";
         popup.style.top = poptop + "px";
-        popup.innerHTML = "<div class = 'col-12'><div class = 'col-12 text-center'><h5>" /*<div id=\"popupClose\"><\/div>*/ + roomname + "</h5></div>"
-        + "<div class = 'row'><div class = 'col-sm-6'><strong>Start</strong>: " + time_str + "</div> <div class = 'col-sm-6'><strong> End: </strong>--:--</div></div>"
-        + "<form name=\'reserve\' action=\'javascript:reserve(" + group + ");\'>"
-        + "<div class = 'row'><div class = 'col-sm-6'>Duration</strong>: <select name=\'duration\'>"  + durationhtml + "</select></div>"
-        + "<div class = 'col-sm-6'></span>Members</strong>: <select name=\'capacity\'>" + capacity_string + "</select></div></div>"
-        + "<hr><div class = 'row col-12'>" + altusernamestr + "<input type=\'hidden\' name=\'roomid\' value=\'"+ roomid + "\' />"
-          + "<input type=\'hidden\' name=\'starttime\' value=\'"+ currentmdyandtime + "\' />"
-          + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /><strong></div><div class = 'row col-12'"+ optionalfields_string + "</div>"
-        + "<hr><div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'col-6 text-center'><a id = 'popupClose' href=\'javascript:closePopUp();\'>Cancel</a></div></div></form>";
+        popup.innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">Close<\/span><\/div><strong>Room</strong>: " + roomname + "<br/><strong>Start Time</strong>: " + time_str + "<br/><form name=\'reserve\' action=\'javascript:reserve(" + group + ");\'>" + altusernamestr + "<input type=\'hidden\' name=\'roomid\' value=\'" + roomid + "\' /><input type=\'hidden\' name=\'starttime\' value=\'" + currentmdyandtime + "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" + durationhtml + "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" + capacity_string + "</select><br/>" + optionalfields_string + "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" + group + ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
     }
 
     function closePopUp() {

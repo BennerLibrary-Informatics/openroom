@@ -87,25 +87,21 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Administrators</h3>
-        <div class = "row">
+        <ul>
             <?php
             $administrators = model\Administrator::all();
             foreach ($administrators as $admin) {
-                echo "<div class = 'col-lg-12'>" . $admin->username . " <a href=\"javascript:confirmdelete('" . $admin->username . "');\">Delete</a></div>";
+                echo "<li>" . $admin->username . " <a href=\"javascript:confirmdelete('" . $admin->username . "');\">Delete</a></li>";
             }
             ?>
-        </div>
-
-        <div class = "row col-lg-12">
-          <h4>Add Administrator</h4>
-        </div>
-        <div class = "row form-group">
-          <form name="addadministrator" action="administrators.php" method="POST">
-              <div class = "col-lg-8"><input type="text" name="adminname"/></div>
-              <input type="hidden" name="op" value="addadministrator"/>
-              <div class = "col-lg-4"><input type="submit" value="Add Administrator"/></div>
-          </form>
-        </div>
+        </ul>
+        <br/>
+        <h4>Add Administrator</h4>
+        <form name="addadministrator" action="administrators.php" method="POST">
+            <input type="text" name="adminname"/>
+            <input type="hidden" name="op" value="addadministrator"/>
+            <input type="submit" value="Add Administrator"/>
+        </form>
         <?php
         }
         ?>

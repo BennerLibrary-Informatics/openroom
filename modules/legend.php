@@ -1,44 +1,39 @@
 <div id="legend">
     <span id="legendtitle">Legend</span>
-    <div id = "legendtable" class = "row">
-      <div class = "row">
-        <div class = "col-lg-4">
-            <img src="<?php echo $_SESSION["themepath"]; ?>images/reservebutton.png"/>
-        </div>
-        <div class = "col-lg-8">
-            - Available
-        </div>
-      </div>
-
-      <div class = "row">
-        <div class = "col-lg-4">
-            <img src="<?php echo $_SESSION["themepath"]; ?>images/takenbutton.png"/>
-        </div>
-        <div class = "col-lg-8">
-            - Unavailable
-        </div>
-      </div>
-
-      <div class = "row">
-        <div class = "col-lg-4">
-            <img src="<?php echo $_SESSION["themepath"]; ?>images/cancelbutton.png"/>
-        </div>
-        <div class = "col-lg-8">
-            - Your Reservation
-        </div>
-      </div>
-
-      <div class = "row">
-        <div class = "col-lg-4">
-            <img src="<?php echo $_SESSION["themepath"]; ?>images/closedbutton.png"/>
-        </div>
-        <div class = "col-lg-8">
-            - Closed
-        </div>
-      </div>
-    </div>
-
-
+    <table id="legendtable">
+        <tr>
+            <td>
+                <img src="<?php echo $_SESSION["themepath"]; ?>images/reservebutton.png"/>
+            </td>
+            <td>
+                - Available
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="<?php echo $_SESSION["themepath"]; ?>images/takenbutton.png"/>
+            </td>
+            <td>
+                - Unavailable
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="<?php echo $_SESSION["themepath"]; ?>images/cancelbutton.png"/>
+            </td>
+            <td>
+                - Your Reservation
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="<?php echo $_SESSION["themepath"]; ?>images/closedbutton.png"/>
+            </td>
+            <td>
+                - Closed
+            </td>
+        </tr>
+    </table>
     <script language="javaScript">
 
         function popUp(URL) {
