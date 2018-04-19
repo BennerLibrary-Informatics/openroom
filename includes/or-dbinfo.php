@@ -15,8 +15,8 @@
 *$dbdatabase is the name of the database OpenRoom uses (default: openroom)
 */
 $dbhost = "localhost";
-$dbuser = "openroomdemo";
-$dbpass = "53PVs7nj2i2AD5FXNLNpZyW3B3sG31WGPThmPCntdldKwxZ5vvb3Pg266HSN8NG";
+$dbuser = "root";
+$dbpass = "";
 $dbdatabase = "openroom";
 
 ($GLOBALS["___mysqli_ston"] = mysqli_connect($dbhost, $dbuser, $dbpass)) or die('Can\'t connect to the database. Error: ' . mysqli_error($GLOBALS["___mysqli_ston"]));
