@@ -7,15 +7,31 @@ require_once("includes/or-dbinfo.php");
 <head>
     <title><?php echo $settings["instance_name"]; ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo $_SESSION["themepath"]; ?>style.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <meta http-equiv="Content-Script-Type" content="text/javascript"/>
 </head>
 
 <body>
-<div id="heading">
+<div id = "container">
+ <div id="heading" >
+   <div class = "row" >
+   <div class = "col-1 margin-top-20 margin-left-10 margin-bottom-15">
+     <img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
+     </div>
+     <div id = "headerText" class = "col-11 float-right padding-left-30">
+       <div class = "row openroomtitle">
+         <div class = "col">Benner Library</div>
+         <div class = "col text-right">Open Room</div>
+       </div>
+       <div class = "ONUtitle">
+         Olivet Nazerene University
+      </div>
+    </div>
+   </div>
 	<span class="username">
 	<?php
     if ($_SESSION["systemid"] == $settings["systemid"]){
-      
+
     echo isset($_SESSION["username"]) ? "<strong>Logged in as</strong>: " . $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
     echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
 
@@ -36,18 +52,12 @@ require_once("includes/or-dbinfo.php");
     ?>
 </div>
 <?php include("modules/reminder.php"); ?>
-<div id="container">
+<div id="containerInfo">
     <div id="leftside">
-        <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom09.png" alt="OpenRoom"/>
-        <br/>
+
 
         <?php include("modules/calendar.php"); ?>
-        <br/>
-
-        <?php include("modules/legend.php"); ?>
-        <br/>
-
-        <?php include("modules/roomdetails.php"); ?>
+        
 
     </div>
     <div id="rightside">

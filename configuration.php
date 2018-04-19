@@ -12,14 +12,14 @@
  * (For LDAP authentication, you must provide a username for the person that you
  * wish to be the initial administrator.)
 */
-$admin_user = "khada";
+$admin_user = "admin";
 
 //Name
 /*
  * This will set the name of this instance of OpenRoom.
  * Default is "OpenRoom".
 */
-$instance_name = "Openroom Testing";
+$instance_name = "openroom";
 
 //URL
 /*
@@ -27,7 +27,7 @@ $instance_name = "Openroom Testing";
  * This should be the same address you provide to users.
  * DO NOT include protocol (http:// or https://) or filenames (index.html).
 */
-$instance_url = "library-test.qc.cuny.edu/or";
+$instance_url = "localhost/openroom";
 
 //Theme
 /*
@@ -45,7 +45,7 @@ $theme = "default";
 *COMPROMISING SECURITY. PLEASE LEAVE THIS AT ITS DEFAULT SETTING UNLESS YOU HAVE NO OTHER CHOICE.
 *Setting this value to TRUE will add the https protocol where appropriate to insure security.
 */
-$https = "true";
+$https = "false";
 
 
 //Login Method
@@ -55,7 +55,7 @@ $https = "true";
 *"ldap"
 *Users will be granted access as long as they authenticate against your LDAP server.
 */
-$login_method = "ldap";
+$login_method = "normal";
 
 
 //LDAP Settings
@@ -79,7 +79,7 @@ $ldap_baseDN = "DC=qc,DC=ads";
 *LEAVING THE EMAIL FILTER BLANK WHEN USING THE "normal" LOGIN METHOD MAY COMPROMISE SECURITY.
 *THIS SETTING ALLOWS YOU TO RESTRICT USERS TO ONLY THOSE WHO USE YOUR EMAIL SYSTEM.
 */
-$email_filter = array("cuny.edu");
+$email_filter = array("olivet.edu");
 
 
 //Interval

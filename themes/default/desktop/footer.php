@@ -1,14 +1,14 @@
 </div>
 
 <div id="clear_both"></div>
-<br/>
-Developed by Ball State University Libraries<br/>
-Copyright (C) 2012 Ball State University Libraries
+<div class = "col-12">
+  <hr/>
 </div>
-<div id="themeswitch" onClick="javascript:document.cookie='theme=mobile';location.reload(true);">Switch to Mobile View
+<div class = "copyright">
+  Developed by Ball State University Libraries<br/> <!--Put inside div block-->
+  Copyright (C) 2012 Ball State University Libraries
 </div>
-<br/><br/><br/>
-<br/><br/><br/>
-<br/><br/><br/>
+</div>
+</div>
 </body>
 </html>
