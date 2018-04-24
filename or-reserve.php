@@ -395,21 +395,6 @@ if ($username != "") {
                     $user_email = "";
                     $domain = "";
                     if ($settings["login_method"] == "ldap") {
-                        // $ldapdn = explode(",", $settings["ldap_baseDN"]);
-                        // $count = 0;
-                        // foreach($ldapdn as $dn){
-                        // 	if(substr($dn,0,3) == "dc="){
-                        // 		if($count > 0){
-                        // 			$dotstr = ".";
-                        // 		}
-                        // 		$domain .= $dotstr . substr($dn,3);
-                        // 		$count++;
-                        // 	}
-                        // }
-                        // $user_email = $username ."@". $domain;
-                        // $user_real = $_SESSION["displayname"];
-                        // $user_real_str = "Name: ". $user_real ."\n\n";
-                        // $user_real_gef = "<b>Name</b>: ". $user_real ."<br/><br/>";
                         if ($username == $_SESSION["username"]) {
                             $user_email = $_SESSION["emailaddress"];
                             $user_real = $_SESSION["displayname"];
@@ -439,7 +424,7 @@ if ($username != "") {
                         "Room: " . $thisroom->name . "\n\n" .
                         "Date and Time: " . date("F j, Y g:i a", $starttime) . " - " . date("F j, Y g:i a", $endtime) . "\n\n" .
                         "Number in Group: " . $capacity . "\n\n" .
-                        "Please call (718-997-3900) or email (musiclibrary@qc.cuny.edu) the Music Library if you need further assistance.\n\n";
+                        "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n";
 
                     foreach ($ofvalues as $key => $ofval) {
                         $opname = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';"));
