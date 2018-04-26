@@ -1,5 +1,5 @@
 <?php
-require_once("includes/or-dbinfo.php");
+require_once("includes/or-dbinfo.php"); 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -16,16 +16,19 @@ require_once("includes/or-dbinfo.php");
  <div id="heading" >
    <div class = "row" >
    <div class = "col-1 margin-top-20 margin-left-10 margin-bottom-15">
-     <img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
+     <a href="index.php" style="text-decoration:none; color:white;"><img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
      </div>
      <div id = "headerText" class = "col-11 float-right padding-left-30">
-       <div class = "row openroomtitle">
-         <div class = "col">Benner Library</div>
-         <div class = "col text-right">Open Room</div>
-       </div>
-       <div class = "ONUtitle">
-         Olivet Nazarene University
-      </div>
+        <div class = "row openroomtitle">
+            <div class = "col">Benner Library</div>
+           </a>
+            <div class = "col text-right">Open Room</div>
+        </div>
+        <a href="index.php" style="text-decoration:none; color:white;">
+            <div class = "ONUtitle">
+                Olivet Nazarene University
+            </div>
+     </a>
     </div>
    </div>
 	<span class="username">
