@@ -28,8 +28,7 @@ require_once("includes/or-dbinfo.php");
             <div class = "ONUtitle">
                 Olivet Nazarene University
             </div>
-        </a>
-        
+     </a>
     </div>
    </div>
 	<span class="username">

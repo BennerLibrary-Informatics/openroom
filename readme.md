@@ -9,3 +9,5 @@ In order to test out this application or modify for future use, use the followin
 Wamp Server
 http://www.wampserver.com/en/
 
+Documentation on Informatics Google Drive
+

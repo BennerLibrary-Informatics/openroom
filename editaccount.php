@@ -55,7 +55,7 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
     <form name="editaccount" method="POST" action="editaccount.php">
       <div class = "form-group row">
       <div class = "col-lg-3 col-md-4 col-sm-12 offset-lg-1 passwordlabel">
-        <label for = "password">Change Password:</label>
+        <label for = "password">New Password:</label>
       </div>
       <div class = "col-lg-4 col-md-6 col-sm-12 passwordlabel">
         <input id = "password" type="password" name="password"/>
