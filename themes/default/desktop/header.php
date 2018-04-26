@@ -24,7 +24,7 @@ require_once("includes/or-dbinfo.php");
          <div class = "col text-right">Open Room</div>
        </div>
        <div class = "ONUtitle">
-         Olivet Nazerene University
+         Olivet Nazarene University
       </div>
     </div>
    </div>
@@ -54,10 +54,6 @@ require_once("includes/or-dbinfo.php");
 <?php include("modules/reminder.php"); ?>
 <div id="containerInfo">
     <div id="leftside">
-
-
         <?php include("modules/calendar.php"); ?>
-        
-
     </div>
     <div id="rightside">
