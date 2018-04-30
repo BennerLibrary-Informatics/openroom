@@ -16,7 +16,7 @@ require_once("includes/or-dbinfo.php");
  <div id="heading" >
    <div class = "row" >
    <div class = "col-1 margin-top-20 margin-left-10 margin-bottom-15">
-     <a href="index.php" style="text-decoration:none; color:white;"><img src = '<?php echo $_SESSION["themepath"];?>images\/Booklogo.svg'\/>
+     <a href="index.php" style="text-decoration:none; color:white;"><img src = 'http://library.olivet.edu/img/logo.svg'>
      </div>
      <div id = "headerText" class = "col-11 float-right padding-left-30">
         <div class = "row openroomtitle">
