@@ -45,7 +45,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         //Add a new room
         case "addroom":
             $roomname = isset($_REQUEST["roomname"]) ? $_REQUEST["roomname"] : "";
-            $roomcapacity = isset($_REQUEST["roomcapacity"]) ? $_REQUEST["roomcapacity"] : "";
+            $roomcapacitymin = isset($_REQUEST["roomcapacitymin"]) ? $_REQUEST["roomcapacitymin"] : "";
+            $roomcapacitymax = isset($_REQUEST["roomcapacitymax"]) ? $_REQUEST["roomcapacitymax"] : "";
             $roomdescription = isset($_REQUEST["roomdescription"]) ? $_REQUEST["roomdescription"] : "";
             $roomgroupid = isset($_REQUEST["roomgroupid"]) ? $_REQUEST["roomgroupid"] : "";
             if ($roomgroupid != "") {
@@ -56,8 +57,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 } else {
                     $roomposition = 0;
                 }
-                if ($roomname != "" && $roomcapacity != "" && $roomdescription != "" && $roomgroupid != "" && $roomposition >= 0) {
-                    if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rooms(roomname,roomposition,roomcapacity,roomgroupid,roomdescription) VALUES('$roomname',$roomposition,$roomcapacity,$roomgroupid,'$roomdescription');")) {
+                if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomposition >= 0) {
+                    if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rooms(roomname,roomposition,roomcapacitymin, roomcapacitymax,roomgroupid,roomdescription) VALUES('$roomname',$roomposition,$roomcapacitymin, $roomcapacitymax,$roomgroupid,'$roomdescription');")) {
                         $successmsg = "Room $roomname has been added!";
                     } else {
                         $errormsg = "Unable to add room $roomname. (Make sure you've added a <a href=\"roomgroups.php\">Room Group</a> first!)";
@@ -70,12 +71,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         //Edit an existing room
         case "editroom":
             $roomname = isset($_REQUEST["roomname"]) ? $_REQUEST["roomname"] : "";
-            $roomcapacity = isset($_REQUEST["roomcapacity"]) ? $_REQUEST["roomcapacity"] : "";
+            $roomcapacitymin = isset($_REQUEST["roomcapacitymin"]) ? $_REQUEST["roomcapacitymin"] : "";
+            $roomcapacitymax = isset($_REQUEST["roomcapacitymax"]) ? $_REQUEST["roomcapacitymax"] : "";
             $roomdescription = isset($_REQUEST["roomdescription"]) ? $_REQUEST["roomdescription"] : "";
             $roomgroupid = isset($_REQUEST["roomgroupid"]) ? $_REQUEST["roomgroupid"] : "";
             $roomid = isset($_REQUEST["roomid"]) ? $_REQUEST["roomid"] : "";
-            if ($roomname != "" && $roomcapacity != "" && $roomdescription != "" && $roomgroupid != "" && $roomid != "") {
-                if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomname='" . $roomname . "', roomcapacity=" . $roomcapacity . ", roomdescription='" . $roomdescription . "', roomgroupid=" . $roomgroupid . " WHERE roomid=" . $roomid . ";")) {
+            if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomid != "") {
+                if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomname='" . $roomname . "', roomcapacitymin=" . $roomcapacitymin . ", roomcapacitymax=" . $roomcapacitymax . ", roomdescription='" . $roomdescription . "', roomgroupid=" . $roomgroupid . " WHERE roomid=" . $roomid . ";")) {
                     $successmsg = "Room $roomname has been updated!";
                 } else {
                     $errormsg = "Unable to edit room $roomname. Please try again.";
@@ -103,7 +105,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     ob_end_clean();
                 }
                 //Move this room to deletedrooms table (minus position info)
-                if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO deletedrooms(roomid,roomname,roomcapacity,roomgroupid,roomdescription) VALUES(" . $roomnamea["roomid"] . ",'" . $roomnamea["roomname"] . "'," . $roomnamea["roomcapacity"] . "," . $roomnamea["roomgroupid"] . ",'" . $roomnamea["roomdescription"] . "');")) {
+                if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO deletedrooms(roomid,roomname,roomcapacitymin, roomcapacitymax,roomgroupid,roomdescription) VALUES(" . $roomnamea["roomid"] . ",'" . $roomnamea["roomname"] . "'," . $roomnamea["roomcapacitymin"] . "," . $roomnamea["roomcapacitymax"] . ",". $roomnamea["roomgroupid"] . ",'" . $roomnamea["roomdescription"] . "');")) {
                     if (mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM rooms WHERE roomid=" . $opid . ";")) {
                         $rearrr = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomposition > " . $roomposition . " AND roomgroupid = " . $roomgroupid . " ORDER BY roomposition ASC;");
                         while ($rearr = mysqli_fetch_array($rearrr)) {
@@ -168,7 +170,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                     $rgn = mysqli_fetch_array($roomgroupname);
                     echo "<tr><td colspan=\"8\" class=\"tabletitle\">" . $rgn["roomgroupname"] . "</td></tr>";
-                    echo "<tr><td class=\"tableheader\" colspan=\"2\">Order</td><td class=\"tableheader\">Name</td><td class=\"tableheader\">Capacity</td><td class=\"tableheader\">Group</td><td class=\"tableheader\">Description</td><td></td><td></td></tr>";
+                    echo "<tr><td class=\"tableheader\" colspan=\"1\">Order</td><td class=\"tableheader\" colspan=\"1\">Name</td><td class=\"tableheader\" colspan=\"1\">Min Capacity</td><td class=\"tableheader\" colspan=\"1\">Max Capacity</td><td class=\"tableheader\" colspan=\"1\">Group</td><td class=\"tableheader\" colspan=\"1\">Description</td><td></td><td></td></tr>";
                 }
                 $pgroupname = $cgroupname;
                 $roomid = $room["roomid"];
@@ -194,7 +196,15 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     $roomgroupstr .= "<option value=\"" . $roomgroup["roomgroupid"] . "\" " . $selectedstr . ">" . $roomgroup["roomgroupname"] . "</option>";
                 }
                 $roomgroupstr .= "</select>";
-                echo "<tr>" . $orderstring . "<td><form name=\"editroom\" method=\"POST\" action=\"rooms.php\"><input type=\"hidden\" name=\"op\" value=\"editroom\"/><input type=\"hidden\" name=\"roomid\" value=\"" . $room["roomid"] . "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"smalltxt\" type=\"text\" name=\"roomcapacity\" value=\"" . $room["roomcapacity"] . "\"/></td><td>" . $roomgroupstr . "</td><td><textarea rows=\"3\" cols=\"20\" name=\"roomdescription\">" . $room["roomdescription"] . "</textarea></td><td><input type=\"submit\" value=\"Save Changes\" /></form></td><td><a href=\"javascript:confirmdelete(" . $roomid . ",'" . $room["roomname"] . "');\">Delete Room</a></td></tr>\n";
+
+
+
+                echo "<tr>" . $orderstring . "<td><form name=\"editroom\" method=\"POST\" action=\"rooms.php\"><input type=\"hidden\" name=\"op\" value=\"editroom\"/><input type=\"hidden\" name=\"roomid\" value=\"" . $room["roomid"];
+                echo "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"medtxt\" type=\"text\" name=\"roomcapacitymin\" value=\"" . $room["roomcapacitymin"] . "\"/></td><td>";
+                echo "</td><td><input class=\"medtxt\" type=\"text\" name=\"roomcapacitymax\" value=\"" . $room["roomcapacitymax"] . "\"/></td><td>";
+                echo $roomgroupstr . "</td><td><textarea rows=\"3\" cols=\"20\" name=\"roomdescription\">" . $room["roomdescription"] . "</textarea></td><td><input type=\"submit\" value=\"Save Changes\" /></form></td>";
+                echo "<td><a href=\"javascript:confirmdelete( " . $roomid . ",'" . $room["roomname"] . "')\">Delete Room</a></td></tr>\n";
+
             }
             ?>
         </table>
@@ -207,8 +217,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td><input type="text" name="roomname"/></td>
                 </tr>
                 <tr>
-                    <td><strong>Capacity:</strong></td>
-                    <td><input type="text" name="roomcapacity"/></td>
+                    <td><strong>Min Capacity:</strong></td>
+                    <td><input type="text" name="roomcapacitymin"/></td>
+                </tr>
+                <tr>
+                    <td><strong>Max Capacity:</strong></td>
+                    <td><input type="text" name="roomcapacitymax"/></td>
                 </tr>
                 <tr>
                     <td><strong>Description:</strong></td>

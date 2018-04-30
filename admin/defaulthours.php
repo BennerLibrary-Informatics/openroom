@@ -174,14 +174,21 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td>
                         <select name="starthour">
                             <?php
-                            for ($i = 1; $i <= 12; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+
+                            for ($i = 0; $i <= 12; $i++) {
+                              echo "<option value=\"" . $i . "\">" . $i . "</option>";
                             }
                             ?>
                         </select>:<select name="startminute">
                             <?php
-                            for ($i = 0; $i <= 59; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            for ($i = 0; $i <= 59; $i=$i + 15) {
+                              if ($i == 0) {
+                                $formatted_value = sprintf("%02d", $i);
+                                echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
+                              }
+                              else
+                                echo "<option value=\"". $i . "\">" . $i . "</option>";
+
                             }
                             ?>
                         </select>
@@ -202,14 +209,22 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td>
                         <select name="endhour">
                             <?php
-                            for ($i = 1; $i <= 12; $i++) {
+
+                            for ($i = 0; $i <= 12; $i++) {
+
                                 echo "<option value=\"" . $i . "\">" . $i . "</option>";
                             }
                             ?>
                         </select>:<select name="endminute">
                             <?php
-                            for ($i = 0; $i <= 59; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+
+                            for ($i = 0; $i <= 59; $i = $i + 15) {
+                                if ($i == 0) {
+                                  $formatted_value = sprintf("%02d", $i);
+                                  echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
+                                }
+                                else
+                                  echo "<option value=\"". $i . "\">" . $i . "</option>";
                             }
                             ?>
                         </select>
