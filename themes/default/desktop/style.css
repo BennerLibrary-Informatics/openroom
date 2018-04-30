@@ -420,10 +420,6 @@ label{
     visibility: hidden;
     width: 400px;
     z-index: 20000;
-    filter: alpha(opacity=90);
-    -moz-opacity: 0.9;
-    -khtml-opacity: 0.9;
-    opacity: 0.9;
 }
 .bottombuttons{
   padding-bottom: 8px;
