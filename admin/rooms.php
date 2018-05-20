@@ -170,7 +170,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                     $rgn = mysqli_fetch_array($roomgroupname);
                     echo "<tr><td colspan=\"8\" class=\"tabletitle\">" . $rgn["roomgroupname"] . "</td></tr>";
-                    echo "<tr><td class=\"tableheader\" colspan=\"2\">Order</td><td class=\"tableheader\" colspan=\"2\">Name</td><td class=\"tableheader\" colspan=\"1\">Min Capacity</td><td class=\"tableheader\" colspan=\"2\">&nbsp&nbspMax Capacity</td><td class=\"tableheader\" colspan=\"1\">Group</td><td class=\"tableheader\" colspan=\"1\">Description</td><td></td><td></td></tr>";
+                    echo "<tr><td class=\"tableheader\" colspan=\"1\">Order</td><td class=\"tableheader\" colspan=\"2\">Name</td><td class=\"tableheader\" colspan=\"1\">Min Capacity</td><td class=\"tableheader\" colspan=\"2\">&nbsp&nbspMax Capacity</td><td class=\"tableheader\" colspan=\"1\">Group</td><td class=\"tableheader\" colspan=\"1\">Description</td><td></td><td></td></tr>";
                 }
                 $pgroupname = $cgroupname;
                 $roomid = $room["roomid"];
