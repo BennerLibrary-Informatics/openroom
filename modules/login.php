@@ -56,36 +56,38 @@
 
 <div id="loginform">
     <form id="authentication" onsubmit="return false" action="">
-          <div id="loginusername" class = "row">
-              <div class = "col-lg-4 usernamelabel">
-                  <span id="loginusernamelabel">Olivet Username:</span>
-              </div>
-              <div class = "col-lg-8 usernamefield">
-                  <input alt="Enter your Olivet Username" type="text" name="username" id="usernamefield"
-                         class="textfield" placeholder="Your Olivet Username" autofocus="autofocus"/>
-              </div>
-          </div>
+      <div id="loginusername" class = "form-group row">
+        <div class = "col-lg-3 col-md-3 col-sm-12 loginlabel offset-lg-1">
+          <label for="loginusernamelabel">Olivet Username:</label>
+        </div>
+        <div class = "col-lg-4 col-md-6 col-sm-12">
+              <input alt="Enter your Olivet Username" type="text" name="username" id="usernamefield"
+                     class="form-control form-control-sm" placeholder="Your Olivet Username" autofocus="autofocus"/>
+        </div>
+      </div>
 
-          <div id="loginpassword" class = "row">
-              <div class = "col-lg-4">
-                  <span id="loginpasswordlabel">Password:</span>
-              </div>
-              <div class = "col-lg-8">
-                  <input alt="Enter your Olivet Password" type="password" name="password" id="passwordfield"
-                         class="textfield" placeholder="Your Olivet password"/>
-              </div>
+      <div id="loginpassword" class = "form-group row">
+        <div class = "col-lg-3 col-md-3 col-sm-12 passwordlabel offset-lg-1">
+          <label for="loginpasswordlabel">Password:</label>
+        </div>
+        <div class = "col-lg-4 col-md-6 col-sm-12">
+          <input alt="Enter your Olivet Password" type="password" name="password" id="passwordfield"
+                 class="form-control form-control-sm" placeholder="Your Olivet password"/>
+        </div>
+      </div>
+      <div class = "form-group row">
+        <div class = "col-lg-4 col-md-6 col-sm-6 offset-lg-2">
+          <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
+            onclick="ajaxAuthenticate()"/>
+        </div>
+        <div class = "col-lg-4 col-md-6 col-sm-6 ">
+            <?php
+            if ($settings["login_method"] == "normal") {
+                echo "<a href=\"createaccount.php\" class = 'createacc'><span class = 'registrationlink btn btn-primary createaccbutt' >Create Account</span></a>";
+            }
+            ?>
           </div>
-          <div class = "row">
-              <div class = "col-lg-8">
-                  <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
-                         onclick="ajaxAuthenticate()"/><br/>
-                  <?php
-                  if ($settings["login_method"] == "normal") {
-                      echo "<span class=\"registrationlink\"><a href=\"createaccount.php\">Create Account</a></span><br/><br/>";
-                  }
-                  ?>
-            </div>
-          </div>
+      </div>
         <!--</ul>-->
     </form>
     <div id="errormessage"></div>
