@@ -170,7 +170,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                     $rgn = mysqli_fetch_array($roomgroupname);
                     echo "<tr><td colspan=\"8\" class=\"tabletitle\">" . $rgn["roomgroupname"] . "</td></tr>";
-                    echo "<tr><td class=\"tableheader\" colspan=\"1\">Order</td><td class=\"tableheader\" colspan=\"1\">Name</td><td class=\"tableheader\" colspan=\"1\">Min Capacity</td><td class=\"tableheader\" colspan=\"1\">Max Capacity</td><td class=\"tableheader\" colspan=\"1\">Group</td><td class=\"tableheader\" colspan=\"1\">Description</td><td></td><td></td></tr>";
+                    echo "<tr><td class=\"tableheader\" colspan=\"1\">Order</td><td class=\"tableheader\" colspan=\"2\">Name</td><td class=\"tableheader\" colspan=\"1\">Min Capacity</td><td class=\"tableheader\" colspan=\"2\">&nbsp&nbspMax Capacity</td><td class=\"tableheader\" colspan=\"1\">Group</td><td class=\"tableheader\" colspan=\"1\">Description</td><td></td><td></td></tr>";
                 }
                 $pgroupname = $cgroupname;
                 $roomid = $room["roomid"];
@@ -198,7 +198,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $roomgroupstr .= "</select>";
 
 
-
+                //Text fields above "Add a New Room"
                 echo "<tr>" . $orderstring . "<td><form name=\"editroom\" method=\"POST\" action=\"rooms.php\"><input type=\"hidden\" name=\"op\" value=\"editroom\"/><input type=\"hidden\" name=\"roomid\" value=\"" . $room["roomid"];
                 echo "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"medtxt\" type=\"text\" name=\"roomcapacitymin\" value=\"" . $room["roomcapacitymin"] . "\"/></td><td>";
                 echo "</td><td><input class=\"medtxt\" type=\"text\" name=\"roomcapacitymax\" value=\"" . $room["roomcapacitymax"] . "\"/></td><td>";
