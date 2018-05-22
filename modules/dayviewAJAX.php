@@ -146,7 +146,7 @@ if ($_SESSION["username"] != "") {
         $time_str = date($time_format, $current_time_tf);
         //PRINT HOUR START HOUR ON SECOND ITERATION
         if($i != 0){
-          $dvout .= "<div class = 'row'>";	+
+          $dvout .= "<div class = 'row'>";
           $dvout .= "<div class = 'col-lg-2 col-sm-12 text-nowrap dayviewTime'>" . $time_str . "</div>";
           $current_stop = new ClockTime(0, 0, 0);
           $current_stop->setMySQLTime((string)$current_time->getTime());
@@ -255,7 +255,7 @@ if ($_SESSION["username"] != "") {
                   //If this user is an administrator, give them the option of inputting and altusername
                   $altusernamestr = "";
                   if ($isadministrator == "TRUE") {
-                      $altusernamestr = "<strong>Username</strong>: <input type=\'text\' name=\'altusername\' /><br/><strong>Email Confirmation</strong>: <select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
+                      $altusernamestr = "<strong>Username</strong>: <style> input[type=text] {color: black;} </style> <input type=\'text\' name=\'altusername\' color=\'black\' /><br/><strong>Email Confirmation</strong>: <select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
                   }
                   $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime()) . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
                   //$collision = "<img style=\"cursor: pointer;\" src=\"". $_SESSION["themepath"] ."images/reservebutton.png\" border=\"0\" onClick=\"showPopUp(this,'". $info ."');\" />";
