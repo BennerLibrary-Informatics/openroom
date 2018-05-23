@@ -8,6 +8,7 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
     //Form Processing
     $submitted = isset($_POST["submitted"]) ? $_POST["submitted"] : "";
     $errormsg = "";
+    $successmsg = "";
     $emaila = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM users WHERE username='" . $_SESSION["username"] . "';"));
     if ($submitted == "1") {
         $password = isset($_POST["password"]) ? $_POST["password"] : "";

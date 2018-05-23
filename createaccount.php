@@ -29,6 +29,7 @@ $submitted = isset($_POST["submitted"]) ? $_POST["submitted"] : "";
 $activateusername = isset($_GET["username"]) ? $_GET["username"] : "";
 $activatecode = isset($_GET["code"]) ? $_GET["code"] : "";
 $errormsg = "";
+$successmsg = "";
 if ($activatecode == "" && $activateusername == "") {
     if (!(preg_match("/^[A-Za-z0-9_-]+$/", $desiredusername)) && $submitted == "1") {
         $errormsg .= "Invalid characters in username.<br/>";

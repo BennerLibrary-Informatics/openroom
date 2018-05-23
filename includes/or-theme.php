@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 require_once("includes/or-dbinfo.php");
-require_once 'vendor/autoload.php';
+require_once('vendor/autoload.php');
 
 /*
 *Simply include this file and it will set SESSION["device"] appropriately.
@@ -13,13 +13,12 @@ require_once 'vendor/autoload.php';
 *correct theme path in the SESSION. If no theme is specified
 *themes/default is used.
 */
+$_SESSION["device"] = "";
 
 $detect = new \Mobile_Detect();
 if ($_SESSION["device"] != "mobile" && $_SESSION["device"] != "desktop") {
     $_COOKIE["theme"] = "";
 }
-
-$_SESSION["device"] = "";
 
 if ($detect->isMobile() || $detect->isTablet()) {
     $_SESSION["device"] = "mobile";

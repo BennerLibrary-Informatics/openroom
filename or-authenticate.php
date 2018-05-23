@@ -46,7 +46,7 @@ require_once("includes/or-dbinfo.php");
  * @throws Exception
  */
 
-require_once 'ldap-authenticate.php';
+require_once('ldap-authenticate.php');
 /**
  * @param string $username
  * @param string $password
