@@ -73,13 +73,13 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
     </div>
 
     <div class = "form-group row">
-      <div class = "col-lg-1 col-md-2 col-sm-12 offset-md-2 offset-lg-3">
+      <div class = "col-lg-1 col-md-2 col-sm-12 offset-md-2 offset-lg-3 text-right">
         <label for = "">Email: </label>
       </div>
       <div class = "col-lg-4 col-md-6 col-sm-12">
         <input type="text" class = "form-control" name="email" value="<?php echo $email; ?>"/>
       </div>
-      <div class = "col-md-10 col-lg-4 emailFilter"><em><?php
+      <div class = "emailFilter"><em><?php
           $emailfilters = unserialize($settings["email_filter"]);
           $comma = 0;
           foreach ($emailfilters as $filter) {

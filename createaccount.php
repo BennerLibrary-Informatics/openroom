@@ -79,7 +79,7 @@ if ($activatecode == "" && $activateusername == "") {
               <div class = "col-lg-4 col-md-6 col-sm-12">
                 <input type="text" id = "desiredusername" name="desiredusername" value="<?php echo $desiredusername; ?>"/>
               </div>
-              <div class = "col-md-9 col-lg-4 validuserchar">
+              <div class = "validuserchar">
                 <span><em>Valid Characters: a-z, A-Z, 0-9</em></span>
               </div>
             </div>
@@ -103,12 +103,13 @@ if ($activatecode == "" && $activateusername == "") {
             </div>
 
             <div class = "form-group row">
-              <div class = "col-lg-1 col-md-2 col-sm-12 offset-md-1 offset-lg-2 emaillabel">
+              <div class = "col-lg-3 col-md-3 col-sm-12 text-right emaillabel">
                 <label for = "">Email: </label>
               </div>
               <div class = "col-lg-4 col-md-6 col-sm-12">
                 <input type="text" name="email" value="<?php echo $email; ?>"/>
               </div>
+              <div class = "validuserchar">
               <em><?php
                       $emailfilters = unserialize($settings["email_filter"]);
                       $comma = 0;
@@ -121,6 +122,7 @@ if ($activatecode == "" && $activateusername == "") {
                           }
                       }
                       ?></em>
+                    </div>
             </div>
             <div class = "row">
             <div class = "col-md-6 col-sm-6 offset-lg-2 offset-sm-3">
