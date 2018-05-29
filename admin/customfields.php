@@ -33,7 +33,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
                 mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM reservationoptions WHERE optionname='" . $record["optionname"] . "';");
 
-                $successmsg = $record["optionname"] . " has been deleted. <strong>You may want to update On Condition Emails under <a href=\"email.php\">Email Setup</a> if this field was set up as a condition.</strong>";
+                $successmsg = $record["optionname"] . " has been deleted. <strong>You may have to update 'On Condition Emails' in <a href=\"email.php\">Email Setup</a> if this field was set as a condition.</strong>";
             } else {
                 $errormsg = "There was a problem deleting the " . $record["optionname"] . " field. Please try again.";
             }

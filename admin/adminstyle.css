@@ -56,18 +56,24 @@ h3 {
 }
 
 #successmsg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px #00ff00 solid;
     background-color: #ccffcc;
     color: #009900;
-    height: 30px;
+    height: 40px;
     width: 50%;
 }
 
 #errormsg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px #ff0000 solid;
     background-color: #ffcccc;
     color: #990000;
-    height: 30px;
+    height: 40px;
     width: 50%;
 }
 

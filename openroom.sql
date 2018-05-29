@@ -240,6 +240,7 @@ INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES
   ('email_res_terse', 'a:1:{i:0;s:0:"";}'),
   ('email_res_verbose', 'a:1:{i:0;s:0:"";}'),
   ('email_system', ''),
+  ('endtime', '17:00'),
   ('https', 'true'),
   ('instance_name', 'OpenRoom'),
   ('instance_url', ''),
@@ -252,8 +253,10 @@ INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES
   ('limit_total', 'a:2:{i:0;s:3:"240";i:1;s:3:"day";}'),
   ('limit_window', 'a:2:{i:0;i:0;i:1;s:8:"7/1/2010";}'),
   ('login_method', 'normal'),
+  ('phone_number', ''),
   ('policies', ''),
   ('remindermessage', ''),
+  ('starttime', '08:00'),
   ('systemid', '0000000001'),
   ('theme', 'default'),
   ('time_format', 'g:i a');

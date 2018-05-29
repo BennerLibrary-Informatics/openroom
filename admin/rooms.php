@@ -61,11 +61,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rooms(roomname,roomposition,roomcapacitymin, roomcapacitymax,roomgroupid,roomdescription) VALUES('$roomname',$roomposition,$roomcapacitymin, $roomcapacitymax,$roomgroupid,'$roomdescription');")) {
                         $successmsg = "Room $roomname has been added!";
                     } else {
-                        $errormsg = "Unable to add room $roomname. (Make sure you've added a <a href=\"roomgroups.php\">Room Group</a> first!)";
+                        $errormsg = "Unable to add room $roomname. (Make sure you've added a &nbsp;<a href=\"roomgroups.php\">Room Group</a>&nbsp; first!)";
                     }
                 }
             } else {
-                $errormsg = "Unable to add room $roomname. (Make sure you've added a <a href=\"roomgroups.php\">Room Group</a> first!)";
+                $errormsg = "Unable to add room. (Make sure you've added a &nbsp;<a href=\"roomgroups.php\">Room Group</a>&nbsp; first!)";
             }
             break;
         //Edit an existing room
