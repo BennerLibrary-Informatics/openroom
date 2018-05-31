@@ -149,8 +149,8 @@ switch ($op) {
                 <select name="size">
                     <option>How many people in your group?</option>
                     <?php
-                    $max_capacity = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomcapacity FROM rooms ORDER BY roomcapacity DESC;"));
-                    $max_capacity = $max_capacity["roomcapacity"];
+                    $max_capacity = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomcapacitymax FROM rooms ORDER BY roomcapacitymax DESC;"));
+                    $max_capacity = $max_capacity["roomcapacitymax"];
                     for ($cap = 1; $cap <= $max_capacity; $cap++) {
                         echo "<option value=\"" . $cap . "\">" . $cap . "</option>";
                     }

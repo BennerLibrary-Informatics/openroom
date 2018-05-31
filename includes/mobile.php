@@ -38,9 +38,9 @@ switch ($op) {
              * and do not have a reservation during this time
             */
             $non_reserved_rooms = "SELECT * FROM rooms
-					WHERE rooms.roomcapacity >= " . $size . " 
+					WHERE rooms.roomcapacitymax >= " . $size . "
 					AND rooms.roomid NOT IN(
-						SELECT reservations.roomid FROM reservations 
+						SELECT reservations.roomid FROM reservations
 						WHERE(
 							(reservations.start BETWEEN '" . $startTime . "' AND '" . $endTime . "')
 							OR
@@ -112,7 +112,7 @@ switch ($op) {
         $room_info = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomid = " . $_POST["roomid"] . ";");
         $room_info = mysqli_fetch_array($room_info);
 
-        echo "starttime=" . $from . "&fullcapacity=" . $room_info["roomcapacity"];
+        echo "starttime=" . $from . "&fullcapacity=" . $room_info["roomcapacitymax"];
 
         $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields ORDER BY optionorder ASC;");
         while ($optionalfield = mysqli_fetch_array($optionalfieldsarraytemp)) {

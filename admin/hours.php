@@ -36,7 +36,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
     <head>
-        <title><?php echo $settings["instance_name"]; ?> - Administration - Hours</title>
+        <title><?php echo $settings["instance_name"]; ?> - Administration - Open Hours</title>
         <link rel="stylesheet" type="text/css" href="adminstyle.css"/>
         <meta http-equiv="Content-Script-Type" content="text/javascript"/>
     </head>
@@ -57,7 +57,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
             ?>
         </center>
-        <h3><a href="index.php">Administration</a> - Opening and closing time</h3>
+        <h3><a href="index.php">Administration</a> - Open Hours</h3>
         <p>
             <strong>Settings for open and close time</strong><em> as shown by the reservation calendar. 8 represents 8
                 AM; 20 represents 8 PM"</em></p>

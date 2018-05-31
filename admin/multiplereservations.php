@@ -191,10 +191,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Username:</strong>
                     </td>
                     <td>
-                        <input type="text" name="altusername" value="
+                        <input type="text" name="altusername" value=""/>
                         <?php
                         if(isset($_POST["altusername"]))
-                          echo $_POST["altusername"]; ?>"/>
+                          echo $_POST["altusername"]; ?>
                           <em>(The username of the user you're making these reservations for.)</em>
                     </td>
                 </tr>
@@ -224,9 +224,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                     <td>
                         <input id="from" size="10" maxlength="10" name="from" type="text"
-                               value="
+                               value=""/>
                                <?php if(isset($_POST["from"]))
-                                          echo $_POST["from"]; ?>"/>
+                                          echo $_POST["from"]; ?>
                         <img src="../includes/datechooser/calendar.gif"
                              onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                         <div id="chooserSpan3" class="dateChooser select-free"
@@ -239,9 +239,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                     <td>
                         <input id="to" size="10" maxlength="10" name="to" type="text"
-                               value="
+                               value=""/>
                                 <?php if(isset($_POST["to"]))
-                                          echo $_POST["to"]; ?>"/>
+                                          echo $_POST["to"]; ?>
                         <img src="../includes/datechooser/calendar.gif"
                              onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                         <div id="chooserSpan3" class="dateChooser select-free"
@@ -281,9 +281,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Duration:</strong>
                     </td>
                     <td>
-                        <input type="text" size="5" name="duration" value="
+                        <input type="text" size="5" name="duration" value=""/>
                                 <?php if(isset($_POST["duration"]))
-                                          echo $_POST["duration"]; ?>"/> (in
+                                          echo $_POST["duration"]; ?> (in
                         minutes)
                     </td>
                 </tr>

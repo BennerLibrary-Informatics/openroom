@@ -60,7 +60,7 @@ if (($isadministrator || $username == $res_username) && $username != "") {
                 }
             }
             $roomname = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomid=" . $reservation["roomid"] . ";"));
-            $capacity = $roomname["roomcapacity"];
+            $capacity = $roomname["roomcapacitymax"];
             $roomname = $roomname["roomname"];
             $starttime = strtotime($reservation["start"]);
             $endtime = strtotime($reservation["end"]);

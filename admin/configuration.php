@@ -86,9 +86,25 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         case "theme":
             $theme = isset($_REQUEST["theme"]) ? $_REQUEST["theme"] : "";
             if ($theme != "") {
-                if (model\Setting::update('theme', $theme)) {
-                    $successmsg = "Theme updated successfully.";
-                } else {
+                //$themelist is array of directory/folder names in the themes folder
+                $themelist = scandir('../themes');
+                //iterate across the $themelist looking if the user's theme input matches any of the names in $themelist
+                foreach ($themelist as $indexvalue) {
+                  if ($theme === $indexvalue) {
+                    $themematch = true;
+                    break;
+                  }
+                  else {
+                    $themematch = false;
+                  }
+                }
+                if ($themematch == true) {
+                  if (model\Setting::update('theme', $theme)) {
+                      $successmsg = "Theme updated successfully.";
+                    }
+                }
+                //if the user's theme input isn't a theme included in the theme folder, simply show an error message instead of failing
+                else {
                     $errormsg = "Unable to update Theme. Please try again.";
                 }
             }
