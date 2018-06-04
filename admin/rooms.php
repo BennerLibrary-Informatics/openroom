@@ -49,7 +49,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $roomcapacitymax = isset($_REQUEST["roomcapacitymax"]) ? $_REQUEST["roomcapacitymax"] : "";
 
             //Min capacity must be less than max capacity
-            if ($roomcapacitymin >= $roomcapacitymax)
+            if ($roomcapacitymin > $roomcapacitymax)
               $errormsg = "Min capacity must be less than max capacity";
             //Min caacity must be >= 0
             if ($roomcapacitymin < 0)
@@ -65,7 +65,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 } else {
                     $roomposition = 0;
                 }
-                if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomposition >= 0 && $errormsg == "") {
+                if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomposition >= 0) {
                     if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO rooms(roomname,roomposition,roomcapacitymin, roomcapacitymax,roomgroupid,roomdescription) VALUES('$roomname',$roomposition,$roomcapacitymin, $roomcapacitymax,$roomgroupid,'$roomdescription');")) {
                         $successmsg = "Room $roomname has been added!";
                     } else {
@@ -86,13 +86,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $roomid = isset($_REQUEST["roomid"]) ? $_REQUEST["roomid"] : "";
 
             //Min capacity must be less than max capacity
-            if ($roomcapacitymin >= $roomcapacitymax)
+            if ($roomcapacitymin > $roomcapacitymax)
               $errormsg = "Min capacity must be less than max capacity";
             //Min caacity must be >= 0
             if ($roomcapacitymin < 0)
               $errormsg = "Min capacity must be greater than or equal to 0";
 
-            if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomid != "" && $errormsg == "") {
+            if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomid != "") {
                 if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomname='" . $roomname . "', roomcapacitymin=" . $roomcapacitymin . ", roomcapacitymax=" . $roomcapacitymax . ", roomdescription='" . $roomdescription . "', roomgroupid=" . $roomgroupid . " WHERE roomid=" . $roomid . ";")) {
                     $successmsg = "Room $roomname has been updated!";
                 } else {
