@@ -7,4 +7,9 @@ INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES ('endtime', '');
 INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES ('phone_number', '');
 
 --room capacity max and min
+ALTER TABLE `rooms` DROP COLUMN `roomcapacity`;
 ALTER TABLE `rooms` ADD `roomcapacitymin` INT(11) NOT NULL AFTER `roomdescription`, ADD `roomcapacitymax` INT(11) NOT NULL AFTER `roomcapacitymin`;
+
+--deletedrooms table max and min
+ALTER TABLE `deletedrooms` DROP COLUMN `roomcapacity`;
+ALTER TABLE `deletedrooms` ADD `roomcapacitymin` INT(11) NOT NULL AFTER `roomname`, ADD `roomcapacitymax` INT(11) NOT NULL AFTER `roomcapacitymin`;
