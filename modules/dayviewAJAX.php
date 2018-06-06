@@ -1,6 +1,5 @@
 <?php
 echo "<script type = 'text/javascript'>
-  alert('hi I'm here');
   // When the user scrolls the page, execute myFunction
   window.onscroll = function() {myFunction()};
   // Get the header
@@ -156,7 +155,7 @@ if ($_SESSION["username"] != "") {
               $specialroomhours = $room->specialhours->hourset;
               $collision = "";
               //Loop runs for all hoursets of this room on this day
-              //Proceed only is room has default hours
+              //Proceed only if room has default hours
               if(isset($roomhours)) {
                   foreach ($roomhours as $hourset) {
                       $roomstart = new ClockTime(0, 0, 0);
@@ -226,11 +225,11 @@ if ($_SESSION["username"] != "") {
                           }
                           if ($_SESSION["username"] != (string)$reservation->username && $isadministrator != "TRUE") {
                               //Display "taken" button that shows public info.
-                               $collision = "<span id = \"openList\" class=\"glyphicon glyphicon-stop\"  style=\"cursor: pointer;\"  onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','" . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
+                               $collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"  style=\"cursor: pointer;\" onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','" . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
                           } else {
-                              if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";	                            //Display "cancel" button that shows cancellation confirmation.
+                              if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";
                               //Display "cancel" button that shows cancellation confirmation.
-                              $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\" style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" ></span>";
+                              $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\" style=\"cursor: pointer;\" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" ></span>";
                               //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                           }
                           $rescol = TRUE;
