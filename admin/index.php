@@ -85,7 +85,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <ul>
                     <li>
                         <form name="userlookup" method="POST" action="report-userlookup.php">
-                            Username: <input type="text" name="lookupname"/><input type="submit" value="Lookup"/>
+                            Username: <input type="text" name="lookupname" required/><input type="submit" value="Lookup"/>
                         </form>
                     </li>
                 </ul>
@@ -95,12 +95,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <ul>
                     <li>
                         <form name="daily" method="POST" action="report-daily.php">
-                            For the period starting: <input id="from" size="10" maxlength="10" name="from" type="text">
+                            For the period starting: <input id="from" size="10" maxlength="10" name="from" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
                                  onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
-                            and ending: <input id="to" size="10" maxlength="10" name="to" type="text">
+                            and ending: <input id="to" size="10" maxlength="10" name="to" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
                                  onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
@@ -185,12 +185,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <li>
                         <form name="daily" method="POST" action="report-canceldaily.php">
                             For the period starting: <input id="fromc" size="10" maxlength="10" name="fromc"
-                                                            type="text">
+                                                            type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
                                  onclick="showChooser(this, 'fromc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
-                            and ending: <input id="toc" size="10" maxlength="10" name="toc" type="text">
+                            and ending: <input id="toc" size="10" maxlength="10" name="toc" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
                                  onclick="showChooser(this, 'toc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"

@@ -45,9 +45,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                     $ccflag = 0;
                                     //check to see if there any conflicts
                                     while ($record = mysqli_fetch_array($allhoursr)) {
-                                        $tstart = new ClockTime();
+                                        $tstart = new ClockTime(0, 0, 0);
                                         $tstart->setMySQLTime($record["start"]);
-                                        $tend = new ClockTime();
+                                        $tend = new ClockTime(0, 0, 0);
                                         $tend->setMySQLTime($record["end"]);
                                         $ccresult = collisionCave($tstart, $tend, $starttime, $endtime);
                                         //acceptable results: sunmilk, ceiling, moonmilk, floor
@@ -138,7 +138,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             while($group = mysqli_fetch_array($roomgroups)){
                 echo "<h4><strong>" . $group["roomgroupname"] . ":</strong></h4>";
                 echo "<table border=1 frame=void rules=rows>";
-                echo "<tr><th>Room</th><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>";
+                echo "<tr align='center'><th>Room</th><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>";
                 $rooms =  mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid =" . $group["roomgroupid"] . ";");
                 while($room = mysqli_fetch_array($rooms)){
                     echo "<tr>";
@@ -247,9 +247,31 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <?php
                 $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
                 for ($i = 0; $i <= 6; $i++) {
-                    echo "<input type=\"checkbox\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "</strong>";
+                    echo "<input type=\"checkbox\" id=\"" . $i . "\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "&nbsp&nbsp" . "</strong>";
                 }
             ?>
+
+
+            &nbsp;&nbsp;<button type="button" onclick="checkAll();">Select All</button>
+
+            <script language="javascript" type="text/javascript">
+                //code to select all day of the week checkboxes
+                var firstClick = true;
+                function checkAll() {
+                    for (var i = 0; i <= 6; i++) {
+                        var boxID = document.getElementById(i);
+                        var boxValue = boxID.value;
+                        if (firstClick == true) {
+                            document.getElementById(boxValue).checked = true;
+                        }
+                        else if (firstClick == false) {
+                            document.getElementById(boxValue).checked = false;
+                        }
+                    }
+                    firstClick = !firstClick;
+                }
+            </script>
+
             <br><br><h4><strong>Rooms Affected: </strong></h4>
             <table>
                 <?php

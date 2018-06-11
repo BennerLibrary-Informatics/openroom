@@ -33,7 +33,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $postvalue = str_replace("'", "&apos;", $postvalue);
             $postvalue = str_replace('"', "&quot;", $postvalue);
             $postvalue = str_replace("\\", "", $postvalue);
-            $optionalfields_string .= "<input type='text' name='" . $optionformname . "' value='" . $postvalue . "' /><br/>";
+            $optionalfields_string .= "<style> input[type=text] {color: black;} </style><input type='text' color='black' name='" . $optionformname . "' value='" . $postvalue . "' /><br/>";
         } else {
             $optionalfields_string .= "<select name='" . $optionalfield["optionformname"] . "'>";
             $optionchoices = explode(";", $optionalfield["optionchoices"]);
@@ -224,7 +224,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                     <td>
                         <input id="from" size="10" maxlength="10" name="from" type="text"
-                               value=""/>
+                               value="" placeholder="MM/DD/YYYY"/>
                                <?php if(isset($_POST["from"]))
                                           echo $_POST["from"]; ?>
                         <img src="../includes/datechooser/calendar.gif"
@@ -239,7 +239,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                     <td>
                         <input id="to" size="10" maxlength="10" name="to" type="text"
-                               value=""/>
+                               value="" placeholder="MM/DD/YYYY"/>
                                 <?php if(isset($_POST["to"]))
                                           echo $_POST["to"]; ?>
                         <img src="../includes/datechooser/calendar.gif"

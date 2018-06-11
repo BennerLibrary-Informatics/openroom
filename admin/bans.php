@@ -21,7 +21,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     switch ($op) {
         case "ban":
             $bannedusername = isset($_REQUEST["bannedusername"]) ? $_REQUEST["bannedusername"] : "";
-            if ($bannedusername != "") {
+            if ($bannedusername != "" && $bannedusername != "admin") {
                 if (model\BannedUser::add($bannedusername)) {
                     $successmsg = $bannedusername . " has been banned.";
                 } else {

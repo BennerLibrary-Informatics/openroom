@@ -118,7 +118,7 @@ if ($_SESSION["username"] != "") {
         $optionalfields_string .= $optionalfield["optionquestion"] . "</strong>: ";
         //Determine if this field is a text field or a select field
         if ($optionalfield["optiontype"] == 0) {
-            $optionalfields_string .= "<input type=\'text\' name=\'" . $optionalfield["optionformname"] . "\' /><br/>";
+            $optionalfields_string .= "<style> input[type=text] {color: black;} </style><input type=\'text\' color=\'black\' name=\'" . $optionalfield["optionformname"] . "\' /><br/>";
         } else {
             $optionalfields_string .= "<select name=\'" . $optionalfield["optionformname"] . "\'>";
             $optionchoices = explode(";", $optionalfield["optionchoices"]);

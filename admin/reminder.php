@@ -53,6 +53,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Reminder Message</h3>
+        <br/>
+        This message will appear at the top of every public-facing page for every user.
         <form name="remindermessage" action="reminder.php" method="POST">
             <textarea cols="50" rows="10" name="remindermessage"><?php echo $settings["remindermessage"]; ?></textarea>
             <br/><input type="submit" value="Save Changes"/>

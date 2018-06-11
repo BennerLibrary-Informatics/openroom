@@ -287,7 +287,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </ul>
             </li>
             <li>
-                Duration Limit - <span class="notetext">Maximum amount of each reservation in minutes. Default: 240. Set to 0 for no limit.</span>
+                Duration Limit - <span class="notetext">Maximum amount of each reservation in minutes (default: 240).</span>
                 <ul>
                     <li>
                         <form name="limit_duration" action="timing.php" method="POST">
@@ -301,7 +301,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </ul>
             </li>
             <li>
-                Total Limit - <span class="notetext">Maximum amount of total reservation time in minutes per period. Default: 240/day. Set to 0 for no limit.</span>
+                Total Limit - <span class="notetext">Maximum amount of total reservation time in minutes per period (default: 240/day). Set to 0 for no limit.</span>
                 <ul>
                     <li>
                         <form name="limit_total" action="timing.php" method="POST">
@@ -331,7 +331,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </ul>
             </li>
             <li>
-                Frequency Limit - <span class="notetext">Maximum number of reservations per period. Default: 0. Set to 0 for no limit.</span>
+                Frequency Limit - <span class="notetext">Maximum number of reservations per period (default: 0/day). Set to 0 for no limit.</span>
                 <ul>
                     <li>
                         <form name="limit_frequency" action="timing.php" method="POST">
@@ -389,7 +389,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             <input type="radio" name="limit_window_type" value="permanent" <?php echo $permstr; ?>/>Permanent
                             <ul>
                                 <li>
-                                    <input id="limit_window_date" size="10" maxlength="10" name="limit_window_date"
+                                    <input id="limit_window_date" size="10" maxlength="10" name="limit_window_date" placeholder="MM/DD/YYYY"
                                            type="text" value="<?php if(isset($permval)){
                                                echo $permval;}?>">
                                     <img src="../includes/datechooser/calendar.gif"
@@ -425,7 +425,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <li>
                         <form name="limit_openingday" action="timing.php" method="POST">
                             <input type="hidden" name="op" value="limit_openingday"/>
-                            <input id="limit_openingday" size="10" maxlength="10" name="limit_openingday" type="text"
+                            <input id="limit_openingday" size="10" maxlength="10" name="limit_openingday" type="text" placeholder="MM/DD/YYYY"
                                    value="<?php echo $settings["limit_openingday"]; ?>">
                             <img src="../includes/datechooser/calendar.gif"
                                  onclick="showChooser(this, 'limit_openingday', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
