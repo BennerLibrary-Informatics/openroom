@@ -4,6 +4,8 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 include("includes/or-theme.php");
 include($_SESSION["themepath"] . "header.php");
+//prevents the show/hide calendar button from showing on the page
+echo "<script type=\"text/javascript\">document.getElementById('calendarButton').style.display = \"none\"</script>";
 if ($_SESSION["systemid"] == $settings["systemid"]) {
     //Form Processing
     $submitted = isset($_POST["submitted"]) ? $_POST["submitted"] : "";

@@ -289,28 +289,29 @@ label{
 
 #calendarTable {
     border: 1px #CCCCCC solid;
-    width: 100%;
+    width: 15%;
 }
 
 #calendarTableHeader {
     border: 0px;
-    width: 100%;
+    text-align: center;
+    white-space: nowrap;
 }
 
 #prevmonth {
-    background-color: #AD783F;
+    background-color: #54406b;
     color: #FFFFDD;
 }
 
 #nextmonth {
-    background-color: #AD783F;
+    background-color: #54406b;
     color: #FFFFDD;
 }
 
 #month {
-    background-color: #AD783F;
+    background-color: #54406b;
     color: #FFFFDD;
-    width: 65%;
+    width: 75%;
 }
 
 #calendarleftarrow {
@@ -326,25 +327,25 @@ label{
 }
 
 .dayname {
-    background-color: #D2A154;
+    background-color: #7d609f;
 }
 
 .dayfiller {
-    background-color: #D0CA9E;
+    background-color: #d8cfe2;
 }
 
 .calendarday {
-    background-color: #F2EDCB;
+    background-color: #beafcf;
     cursor: pointer;
 }
 
 .currentcalendarday {
-    background-color: #BBBBBB;
+    border: 1px #7d609f solid;
     cursor: pointer;
 }
 
 .clickedday {
-    background-color: #FFFFFF;
+    background-color: #7d609f;
     cursor: pointer;
 }
 

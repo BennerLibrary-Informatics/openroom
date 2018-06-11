@@ -36,12 +36,33 @@ h3 {
     display: inline;
 }
 
+select {
+  height: 24px;
+}
+
 .smalltxt {
     width: 30px;
 }
 
 .medtxt {
-    width: 75px;
+    width: 85px;
+}
+
+td {
+  position: relative;
+}
+
+.textareaexpand {
+    position: absolute;
+    top: 0;
+    height: 25px;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.textareaexpand:focus {
+    height: 8em;
+    z-index: -1;
 }
 
 .tabletitle {
@@ -52,7 +73,7 @@ h3 {
 .tableheader {
     font-style: italic;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
 }
 
 #successmsg {

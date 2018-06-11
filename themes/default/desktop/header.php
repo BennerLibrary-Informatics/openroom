@@ -60,9 +60,34 @@ require_once("includes/or-dbinfo.php");
     }
     ?>
 </div>
+
+<script language="javascript" type="text/javascript">
+function showHideDiv(ele) {
+				var srcElement = document.getElementById(ele);
+				if (srcElement != null) {
+					if (srcElement.style.display == "block") {
+						srcElement.style.display = 'none';
+					}
+					else {
+						srcElement.style.display = 'block';
+					}
+					return false;
+				}
+			}
+</script>
+
 <?php include("modules/reminder.php"); ?>
 <div id="containerInfo">
-    <div id="leftside">
+<?php
+if(isset($_SESSION["username"])) {
+    if ($_SESSION["username"] != "") {
+      echo "<input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/>";
+    }
+}
+?>
+    <div id="calendarDiv" style="display:none">
+        <center>
         <?php include("modules/calendar.php"); ?>
+        </center>
     </div>
     <div id="rightside">
