@@ -27,7 +27,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $startminute = isset($_REQUEST["startminute"]) ? $_REQUEST["startminute"] : "";
             $endhour = isset($_REQUEST["endhour"]) ? $_REQUEST["endhour"] : "";
             $endminute = isset($_REQUEST["endminute"]) ? $_REQUEST["endminute"] : "";
+            $startperiod = isset($_REQUEST["startperiod"]) ? $_REQUEST["startperiod"] : "";
+            $endperiod = isset($_REQUEST["endperiod"]) ? $_REQUEST["endperiod"] : "";
             $affectedrooms = isset($_REQUEST["affectedrooms"]) ? $_REQUEST["affectedrooms"] : "";
+
+            if($startperiod == "PM" && $starthour != 12)
+              $starthour += 12;
+            if($endperiod == "PM" && $endhour != 12)
+              $endhour += 12;
 
             //All fields required
             if ($from != "" && $to != "" && $starthour != "" && $startminute != "" && $endhour != "" && $endminute != "" && $affectedrooms != "" && is_array($affectedrooms)) {
@@ -185,14 +192,28 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td>
                         <select name="starthour">
                             <?php
-                            for ($i = 0; $i <= 24; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            for ($i = 0; $i <= 12; $i++) {
+                              echo "<option value=\"" . $i . "\">" . $i . "</option>";
                             }
                             ?>
                         </select>:<select name="startminute">
                             <?php
-                            for ($i = 0; $i <= 59; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                            for ($i = 0; $i <= 59; $i=$i + 15) {
+                              if ($i == 0) {
+                                $formatted_value = sprintf("%02d", $i);
+                                echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
+                              }
+                              else
+                                echo "<option value=\"". $i . "\">" . $i . "</option>";
+
+                            }
+                            ?>
+                          </select>
+                        <select name="startperiod">
+                            <?php
+                            $timePeriods = ["AM" , "PM"];
+                            for ($i = 0; $i < 2; $i++) {
+                                echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
                             }
                             ?>
                         </select>
@@ -203,18 +224,32 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Close:</strong>
                     </td>
                     <td>
-                        <select name="endhour">
-                            <?php
-                            for ($i = 0; $i <= 24; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                      <select name="starthour">
+                          <?php
+                          for ($i = 0; $i <= 12; $i++) {
+                            echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                          }
+                          ?>
+                      </select>:<select name="startminute">
+                          <?php
+                          for ($i = 0; $i <= 59; $i=$i + 15) {
+                            if ($i == 0) {
+                              $formatted_value = sprintf("%02d", $i);
+                              echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
                             }
-                            ?>
-                        </select>:<select name="endminute">
-                            <?php
-                            for ($i = 0; $i <= 59; $i++) {
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
-                            }
-                            ?>
+                            else
+                              echo "<option value=\"". $i . "\">" . $i . "</option>";
+
+                          }
+                          ?>
+                        </select>
+                      <select name="startperiod">
+                          <?php
+                          $timePeriods = ["AM" , "PM"];
+                          for ($i = 0; $i < 2; $i++) {
+                              echo "<option value=\"" . $timePeriods[$i] . "\">" .  $timePeriods[$i] . "</option>";
+                          }
+                          ?>
                         </select>
                     </td>
                 </tr>
