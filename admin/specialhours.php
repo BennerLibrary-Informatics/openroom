@@ -166,7 +166,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>From:</strong>
                     </td>
                     <td>
-                        <input id="from" size="10" maxlength="10" name="from" type="text">
+                        <input id="from" size="10" maxlength="10" name="from" type="text" placeholder="MM/DD/YYYY">
                         <img src="../includes/datechooser/calendar.gif"
                              onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                         <div id="chooserSpan3" class="dateChooser select-free"
@@ -178,7 +178,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>To:</strong>
                     </td>
                     <td>
-                        <input id="to" size="10" maxlength="10" name="to" type="text">
+                        <input id="to" size="10" maxlength="10" name="to" type="text" placeholder="MM/DD/YYYY">
                         <img src="../includes/datechooser/calendar.gif"
                              onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                         <div id="chooserSpan3" class="dateChooser select-free"
@@ -224,13 +224,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Close:</strong>
                     </td>
                     <td>
-                      <select name="starthour">
+                      <select name="endhour">
                           <?php
                           for ($i = 0; $i <= 12; $i++) {
                             echo "<option value=\"" . $i . "\">" . $i . "</option>";
                           }
                           ?>
-                      </select>:<select name="startminute">
+                      </select>:<select name="endminute">
                           <?php
                           for ($i = 0; $i <= 59; $i=$i + 15) {
                             if ($i == 0) {
@@ -243,7 +243,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                           }
                           ?>
                         </select>
-                      <select name="startperiod">
+                      <select name="endperiod">
                           <?php
                           $timePeriods = ["AM" , "PM"];
                           for ($i = 0; $i < 2; $i++) {

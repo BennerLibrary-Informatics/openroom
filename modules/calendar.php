@@ -46,6 +46,7 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
                 }
                 //Change current obj to clicked class
                 obj.className = "clickedday";
+                showHideDiv('calendarDiv');
                 //Save previous obj for later
                 prevObj = obj;
             }

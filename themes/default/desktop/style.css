@@ -289,13 +289,11 @@ label{
 
 #calendarTable {
     border: 1px #CCCCCC solid;
-    width: 15%;
 }
 
 #calendarTableHeader {
     border: 0px;
     text-align: center;
-    white-space: nowrap;
 }
 
 #prevmonth {
@@ -311,18 +309,18 @@ label{
 #month {
     background-color: #54406b;
     color: #FFFFDD;
-    width: 75%;
+    width: 115px;
 }
 
 #calendarleftarrow {
     font-size: 15px;
-    margin-right: 5px;
+    margin-right: 20px;
     cursor: pointer;
 }
 
 #calendarrightarrow {
     font-size: 15px;
-    margin-left: 5px;
+    margin-left: 20px;
     cursor: pointer;
 }
 
@@ -417,7 +415,7 @@ label{
     color:white;
     display: none;
     padding: 5px;
-    position: absolute;
+    position: fixed;
     visibility: hidden;
     width: 400px;
     z-index: 20000;
