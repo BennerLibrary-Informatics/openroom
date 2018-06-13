@@ -306,20 +306,20 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         $dayarray[$affectedday] = "checked";
                     }
                     ?>
-                    <td><input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong>
+                    <td><label><input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong></label>
                     </td>
-                    <td><input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong>
+                    <td><label><input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong></label>
                     </td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong></td>
-                    <td><input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong>
+                    <td><label><input type="checkbox" name="daysineffect[]"
+                               value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong></label></td>
+                    <td><label><input type="checkbox" name="daysineffect[]"
+                               value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong><label></td>
+                    <td><label><input type="checkbox" name="daysineffect[]"
+                               value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong><label></td>
+                    <td><label><input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong></label>
                     </td>
-                    <td><input type="checkbox" name="daysineffect[]"
-                               value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong></td>
+                    <td><label><input type="checkbox" name="daysineffect[]"
+                               value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong></label></td>
                 </tr>
             </table>
             <br/>

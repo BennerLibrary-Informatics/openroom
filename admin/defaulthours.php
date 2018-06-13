@@ -243,11 +243,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                 </tr>
             </table>
-            <strong>Days Affected:&nbsp;&nbsp;&emsp; </strong>
+            <strong>Days Affected:&nbsp;&nbsp; </strong>
             <?php
                 $weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
                 for ($i = 0; $i <= 6; $i++) {
-                    echo "<input type=\"checkbox\" id=\"" . $i . "\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "&nbsp&nbsp" . "</strong>";
+                    echo "<label><input type=\"checkbox\" id=\"" . $i . "\" name=\"affecteddays[]\" value=\"" . $i . "\" /><strong>" . $weekdays[$i] . "&nbsp&nbsp" . "</strong></label>";
                 }
             ?>
 
@@ -281,7 +281,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     echo "<table>";
                     $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $group["roomgroupid"] . ";");
                     while ($room = mysqli_fetch_array($rooms)){
-                        echo "<tr><td><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></td></tr>\n";
+                        echo "<tr><td><label><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></label></td></tr>\n";
                     }
                     echo "</table>";
                   }

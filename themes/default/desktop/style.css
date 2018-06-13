@@ -104,14 +104,12 @@ hr {
 }
 
 .glyphicon-ok {
-    font-size: 25px;
+    font-size: 24px;
     color: green;
-    position: relative;
 }
 .glyphicon-remove {
-    font-size: 25px;
+    font-size: 24px;
     color: red;
-
 }
 
 #loginform ul {
@@ -170,6 +168,7 @@ hr {
   color: white;
   text-decoration: none;
 }
+
 #open{
   color:white;
   background-color: white;
@@ -186,32 +185,33 @@ hr {
 }
 
 #closed{
-  color:lightgrey;
-  background-color: lightgrey;
+  color: slategrey;
+  background-color: slategrey;
   padding-left: 12px;
   border: 2px black solid;
 }
 #closedList{
-  color:lightgrey;
-  background-color: lightgrey;
+  color: slategrey;
+  background-color: slategrey;
   padding-left: 12px;
   border: 2px black solid;
   font-size: 20px;
   margin: 2px;
-
 }
 #reservationList{
-  font-size: 20px;
+  font-size: 24px;
   color:green;
 }
 #takenList{
-  font-size: 20px;
+  font-size: 24px;
   color:red;
 }
-.glyphicon.glyphicon-remove{
+.glyphicon.glyphicon-remove {
+  font-size: 16px;
   color:red;
 }
-.glyphicon.glyphicon-ok{
+.glyphicon.glyphicon-ok {
+  font-size: 16px;
   color: green;
 }
 .glyphicon.glyphicon-ban-circle{
@@ -372,7 +372,7 @@ label{
 }
 
 .groups{
-  background-color: lightgrey;
+  background-color: slategrey;
   cursor: pointer;
   font-weight: bold;
   padding: 2px;
@@ -383,7 +383,7 @@ label{
 }
 
 .mousedoverrow {
-    background-color: lightgrey;
+    background-color: slategrey;
 }
 
 .mousedoutrow {
@@ -489,6 +489,8 @@ label{
 #legendText{
   font-size: 12px;
   font-weight: bold;
+  width: 25%;
+  text-align: center;
 }
 #legend {
     background-color: #FFFFFF;
@@ -497,11 +499,8 @@ label{
     padding: 5px;
     position: relative;
     height: auto;
+    text-align: center;
     /* top: 300px; */
-
-}
-#legendText {
-    font-weight: bold;
 
 }
 
@@ -555,7 +554,6 @@ label{
 
 }
 #legendText {
-    padding-top: 6px;
     font-size: 12pt;
     font-weight: bold;
     text-align: left;

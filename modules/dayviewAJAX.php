@@ -73,25 +73,22 @@ if ($_SESSION["username"] != "") {
         $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>";
         $dvout .= "<div class = 'header' id='roomhead' >";
        /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
-        $dvout .= "<div id = \"legend\" class = 'row'>";
+        $dvout .= "<div id = \"legend\" class =\"row\">";
         /*$dvout .= "<div class=\"container\">";
         $dvout .= "<div class = \"row\">";*/
-        $dvout .= "<div class = \"col-1 offset-1\" id = \"legendTitleText\">";
-        $dvout .= "Legend:";
-        $dvout .=  "</div>";
-        $dvout .= "<div class = \"col-2\" id = \"legendText\">";
+        $dvout .= "<div id = \"legendText\" style=\"text-align: right\">";
         $dvout .= "Open: ";
         $dvout .= "<span id=\"open\" class=\"glyphicon glyphicon-stop\"></span>";
         $dvout .=  "</div>";
-        $dvout .= "<div class = \"col-2\" id = \"legendText\">";
+        $dvout .= "<div id = \"legendText\" style=\"text-align: center\">";
         $dvout .= "Closed: ";
         $dvout .= "<span id=\"closed\" class=\"glyphicon glyphicon-stop\"></span>";
         $dvout .=  "</div>";
-        $dvout .= "<div  class = \"col-3\" id = \"legendText\">";
+        $dvout .= "<div id = \"legendText\">";
         $dvout .= "Your Reservations: ";
         $dvout .= "<span class=\"glyphicon glyphicon-ok\"></span>";
         $dvout .=  "</div>";
-        $dvout .= "<div class = \"col-3\" id = \"legendText\">";
+        $dvout .= "<div id = \"legendText\">";
         $dvout .= "Taken: ";
         $dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
         //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
@@ -225,11 +222,11 @@ if ($_SESSION["username"] != "") {
                           }
                           if ($_SESSION["username"] != (string)$reservation->username && $isadministrator != "TRUE") {
                               //Display "taken" button that shows public info.
-                               $collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"  style=\"cursor: pointer;\" onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','" . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
+                               $collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
                           } else {
                               if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";
                               //Display "cancel" button that shows cancellation confirmation.
-                              $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\" style=\"cursor: pointer;\" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" ></span>";
+                              $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
                               //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                           }
                           $rescol = TRUE;

@@ -127,6 +127,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Special Hours</h3>
+        <br/>
+        <hr/>
+        <br/>
         <table class="specialhourslist">
             <?php
             $pgroupname = "";
@@ -258,7 +261,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                 </tr>
             </table>
-            <strong>Rooms Affected:</strong>
+            <h4><strong>Rooms Affected:</strong></h4>
             <table>
                 <?php
                 $pgroupname = "";
@@ -271,13 +274,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         $roomgroupname = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups WHERE roomgroupid=" . $cgroupname . ";");
                         $rgn = mysqli_fetch_array($roomgroupname);
                         if ($to1 > 0) echo "</table>\n";
-                        echo "<table><tr><td colspan=\"5\">" . $rgn["roomgroupname"] . "</td></tr>";
+                        echo "<table><tr><td colspan=\"5\"><h4>" . $rgn["roomgroupname"] . "</h4></td></tr>";
                         $to5 = 0;
                         $to1++;
                     }
                     $pgroupname = $cgroupname;
                     if ($to5 == 0) echo "<tr>";
-                    echo "<td><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></td>\n";
+                    echo "<td><label><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></label></td>\n";
                     if ($to5 < 5) $to5++;
                     if ($to5 == 5) {
                         echo "</tr>";
