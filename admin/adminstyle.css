@@ -119,6 +119,11 @@ td {
     font-weight: bold;
 }
 
+#settingsul2 li {
+    font-size: 14px;
+    font-weight: normal;
+}
+
 .notetext {
     font-size: 12px;
     font-style: italic;

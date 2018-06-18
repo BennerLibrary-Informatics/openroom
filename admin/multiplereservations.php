@@ -228,9 +228,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                <?php if(isset($_POST["from"]))
                                           echo $_POST["from"]; ?>
                         <img src="../includes/datechooser/calendar.gif"
-                             onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan3" class="dateChooser select-free"
-                             style="display: none; visibility: hidden; width: 160px;"></div>
+                             onclick="showChooser(this, 'from', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan4" class="dateChooser select-free"
+                             style="display: none; visibility: hidden; width: 160px; z-index: 1;"></div>
                     </td>
                 </tr>
                 <tr>
@@ -243,9 +243,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                 <?php if(isset($_POST["to"]))
                                           echo $_POST["to"]; ?>
                         <img src="../includes/datechooser/calendar.gif"
-                             onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan3" class="dateChooser select-free"
-                             style="display: none; visibility: hidden; width: 160px;"></div>
+                             onclick="showChooser(this, 'to', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan4" class="dateChooser select-free"
+                             style="display: none; visibility: hidden; width: 160px; z-index: 1;"></div>
                     </td>
                 </tr>
                 <tr>

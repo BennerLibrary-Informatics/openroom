@@ -171,9 +171,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td>
                         <input id="from" size="10" maxlength="10" name="from" type="text" placeholder="MM/DD/YYYY">
                         <img src="../includes/datechooser/calendar.gif"
-                             onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan3" class="dateChooser select-free"
-                             style="display: none; visibility: hidden; width: 160px;"></div>
+                             onclick="showChooser(this, 'from', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan4" class="dateChooser select-free"
+                             style="display: none; visibility: hidden; width: 160px; z-index: 1;"></div>
                     </td>
                 </tr>
                 <tr>
@@ -183,9 +183,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td>
                         <input id="to" size="10" maxlength="10" name="to" type="text" placeholder="MM/DD/YYYY">
                         <img src="../includes/datechooser/calendar.gif"
-                             onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan3" class="dateChooser select-free"
-                             style="display: none; visibility: hidden; width: 160px;"></div>
+                             onclick="showChooser(this, 'to', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan4" class="dateChooser select-free"
+                             style="display: none; visibility: hidden; width: 160px; z-index: 1;"></div>
                     </td>
                 </tr>
                 <tr>

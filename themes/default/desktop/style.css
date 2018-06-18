@@ -103,6 +103,12 @@ hr {
   margin-top:35px;
 }
 
+.glyphicon-circle-arrow-left, .glyphicon-circle-arrow-right {
+  color: #54406b;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 .glyphicon-ok {
     font-size: 24px;
     color: green;
@@ -350,12 +356,6 @@ label{
 /*
  * DayView Module
 */
-
-#dayviewheader {
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-}
 
 #dayviewheader {
     font-size: 30px;

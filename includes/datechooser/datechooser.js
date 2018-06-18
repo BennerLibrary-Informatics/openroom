@@ -141,7 +141,12 @@ DateChooser.prototype.show = function () {
     this._div.innerHTML = this.createChooserHtml();
     this._div.style.display = "block";
     this._div.style.visibility = "visible";
-    this._div.style.position = "absolute";
+    if (this._div.id == 'chooserSpan4') {
+      this._div.style.position = "fixed";
+    }
+    else {
+      this._div.style.position = "absolute";
+    }
     this._isVisible = true;
 };
 // Sets the date to what is in the input box

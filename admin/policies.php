@@ -54,15 +54,21 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3><a href="index.php">Administration</a> - Policies</h3>
         <br/>
         This message will appear in emails sent to users and will appear whenever the "Policies" link is clicked.
-        <form name="policies" action="policies.php" method="POST">
-            <textarea cols="50" rows="10" name="policies"><?php echo $settings["policies"]; ?></textarea>
-            <br/><input type="submit" value="Save Changes"/>
+        <form id="policies" name="policies" action="policies.php" method="POST">
+            <textarea id="policiesTextarea" cols="50" rows="10" name="policies"><?php echo $settings["policies"]; ?></textarea>
+            <br/><input type="submit" value="Save Changes"/><input type="button" value="Clear Policies" onclick="clearPolicies();"/>
         </form>
         <?php
         }
         ?>
     </div>
     </body>
+    <script>
+      function clearPolicies() {
+        document.getElementById("policiesTextarea").value = "";
+        document.getElementById("policies").submit();
+      }
+    </script>
     </html>
     <?php
 }

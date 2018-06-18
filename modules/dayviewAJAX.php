@@ -31,6 +31,7 @@ echo "<script type = 'text/javascript'>
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+$pageLoadDT = date('Y-m-d H:i:s');
 require_once("../includes/ClockTime.php");
 require_once("../includes/or-dbinfo.php");
 //If $_POST["fromrange"] and/or $_POST["torange"] aren't set, or manually set to 0, set them to today
@@ -48,7 +49,7 @@ $getdatarange = include("../or-getdatarange.php");
 $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
-$current_time = new ClockTime((float)$settings["starttime"] ?? 8, 0, 0);
+$current_time = new ClockTime((float)$settings["starttime"] ?? 0, 0, 0);
 $last_time = new ClockTime((float)$settings["endtime"] ?? 23, 59, 59);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
@@ -70,9 +71,11 @@ if ($_SESSION["username"] != "") {
             $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
         }
         $group_str .= "</div></div>";
-        $dvout = "<div id=\"dayviewheader\">" . $currentmdy . "<div id = 'calbutton'></div></div>";
+        $yesterday = strtotime($currentmdy) - 86400;
+        $tomorrow = strtotime($currentmdy) + 86400;
+        $dvout = "<div id=\"dayviewheader\"><span onclick=\"dayviewer('$yesterday',0,'','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer($tomorrow,0,'','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
         $dvout .= "<div class = 'header' id='roomhead' >";
-       /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
+        /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
         $dvout .= "<div id = \"legend\" class =\"row\">";
         /*$dvout .= "<div class=\"container\">";
         $dvout .= "<div class = \"row\">";*/
@@ -259,6 +262,18 @@ if ($_SESSION["username"] != "") {
               } elseif (!$rescol) {
                   //Display "closed" button that is not interactive.
                   $collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
+              }
+              //creates combined datetime with the current selected date and the time along the sidebar
+              $combinedDT = date('Y-m-d H:i:s', strtotime($currentmdy . $current_time->getTime()));
+              //"closes" rooms as time passes based on the current time on page load
+              $sapr = $settings["allow_past_reservations"];
+              if ($sapr != "true") {
+                if ($collision != "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>" &&
+                    $collision != "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>") {
+                  if ($pageLoadDT > $combinedDT) {
+                    $collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
+                  }
+                }
               }
               $dvout .= "<div class='col' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
 

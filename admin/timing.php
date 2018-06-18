@@ -46,7 +46,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         case "interval":
             $interval = isset($_REQUEST["interval"]) ? $_REQUEST["interval"] : "";
             if (preg_match("/^\\d*$/", $interval) && $interval != "") {
-                if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $interval . "' WHERE settingname='interval';")) {
+                if ($interval > 0 && $interval < 900 && mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $interval . "' WHERE settingname='interval';")) {
                     $successmsg = "Interval has been updated to " . $interval . " minutes.";
                 } else {
                     $errormsg = "Unable to update Interval. Try again.";
@@ -387,7 +387,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             }
                             ?>
                             <input type="radio" name="limit_window_type" value="permanent" <?php echo $permstr; ?>/>Permanent
-                            <ul>
+                            <ul id="settingsul2">
                                 <li>
                                     <input id="limit_window_date" size="10" maxlength="10" name="limit_window_date" placeholder="MM/DD/YYYY"
                                            type="text" value="<?php if(isset($permval)){

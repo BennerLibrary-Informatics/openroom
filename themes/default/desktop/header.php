@@ -74,6 +74,15 @@ function showHideDiv(ele) {
 					return false;
 				}
 			}
+function hideDiv(ele) {
+      var srcElement = document.getElementById(ele);
+      if (srcElement != null) {
+        if (srcElement.style.display == "block") {
+          srcElement.style.display = 'none';
+        }
+        return false;
+      }
+    }
 </script>
 
 <?php include("modules/reminder.php"); ?>
