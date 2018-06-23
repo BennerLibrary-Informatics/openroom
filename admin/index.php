@@ -81,11 +81,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3>Reports</h3>
         <ul>
             <li>
-                <strong>User Lookup</strong><em> - All reservations made by specified user.</em><br/>
+                <strong>User Lookup</strong><em> - All reservations made by specified user. Leave the field blank to lookup all users.</em><br/>
                 <ul>
                     <li>
                         <form name="userlookup" method="POST" action="report-userlookup.php">
-                            Username: <input type="text" name="lookupname" required/><input type="submit" value="Lookup"/>
+                            Username: <input type="text" name="lookupname"/><input type="submit" value="Lookup"/>
                         </form>
                     </li>
                 </ul>

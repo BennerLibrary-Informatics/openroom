@@ -109,6 +109,9 @@ hr {
   cursor: pointer;
 }
 
+.glyphicon-circle-arrow-left:hover, .glyphicon-circle-arrow-right:hover {
+  color: #7d609f;
+}
 .glyphicon-ok {
     font-size: 24px;
     color: green;
@@ -196,19 +199,28 @@ hr {
   padding-left: 12px;
   border: 2px black solid;
 }
-#closedList{
+#closedList {
+  font-size: 12pt;
+}
+
+#closedList2 {
+  padding-left: 10px;
+  font-size: 24px;
+}
+/*#closedList{
   color: slategrey;
   background-color: slategrey;
   padding-left: 12px;
   border: 2px black solid;
   font-size: 20px;
   margin: 2px;
-}
+}*/
 #reservationList{
   font-size: 24px;
   color:green;
 }
 #takenList{
+  padding-left: 7px;
   font-size: 24px;
   color:red;
 }
@@ -217,6 +229,7 @@ hr {
   color:red;
 }
 .glyphicon.glyphicon-ok {
+  padding-left: 6px;
   font-size: 16px;
   color: green;
 }
@@ -284,6 +297,27 @@ label{
 
 #clear_both {
     clear: both;
+}
+
+#calendarButton {
+    width: auto;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    background-color: #54406b;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+#calendarButton:hover {background-color: #7d609f}
+
+#calendarButton:active {
+    background-color: #7d609f;
+    box-shadow: 0 5px #666;
+    transform: translateY(1px);
 }
 
 /*

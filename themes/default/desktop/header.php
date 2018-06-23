@@ -1,5 +1,5 @@
 <?php
-require_once("includes/or-dbinfo.php"); 
+require_once("includes/or-dbinfo.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -90,7 +90,7 @@ function hideDiv(ele) {
 <?php
 if(isset($_SESSION["username"])) {
     if ($_SESSION["username"] != "") {
-      echo "<input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/>";
+      echo "<center><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></center>";
     }
 }
 ?>

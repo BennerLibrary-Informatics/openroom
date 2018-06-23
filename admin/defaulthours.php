@@ -160,6 +160,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         ?>
         <br/>
         <hr/>
+        <form name="clearAllHours" method="post">
+          <input type="submit" name="clearAllHoursButton" value="Clear All Hours" style="float: right;"/>
+        </form>
+        <?php
+          if (isset($_POST['clearAllHoursButton'])) {
+            mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM roomhours");
+            header("Refresh:0");
+          }?>
         <br/>
 
         <h3>Add Default Hours</h3><br/>

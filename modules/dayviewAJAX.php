@@ -85,15 +85,16 @@ if ($_SESSION["username"] != "") {
         $dvout .=  "</div>";
         $dvout .= "<div id = \"legendText\" style=\"text-align: center\">";
         $dvout .= "Closed: ";
-        $dvout .= "<span id=\"closed\" class=\"glyphicon glyphicon-stop\"></span>";
+        $dvout .= "<span id=\"closedList\">X</span>";
         $dvout .=  "</div>";
         $dvout .= "<div id = \"legendText\">";
         $dvout .= "Your Reservations: ";
         $dvout .= "<span class=\"glyphicon glyphicon-ok\"></span>";
         $dvout .=  "</div>";
         $dvout .= "<div id = \"legendText\">";
-        $dvout .= "Taken: ";
-        $dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
+        $dvout .= "Reserved: ";
+        //$dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
+        $dvout .= "<span style=\"color: red;\">R</span>";
         //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
         /*$dvout .=  "</div>";
         $dvout .=  "</div>";*/
@@ -225,7 +226,8 @@ if ($_SESSION["username"] != "") {
                           }
                           if ($_SESSION["username"] != (string)$reservation->username && $isadministrator != "TRUE") {
                               //Display "taken" button that shows public info.
-                               $collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
+                              //$collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
+                              $collision = "<span id=\"takenList\">R</span>";
                           } else {
                               if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";
                               //Display "cancel" button that shows cancellation confirmation.
@@ -258,25 +260,29 @@ if ($_SESSION["username"] != "") {
                   }
                   $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime()) . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
                   //$collision = "<img style=\"cursor: pointer;\" src=\"". $_SESSION["themepath"] ."images/reservebutton.png\" border=\"0\" onClick=\"showPopUp(this,'". $info ."');\" />";
-                  $collision = "<span id = \"openList\" class=\"glyphicon glyphicon-stop\"  style=\"cursor: pointer;\" onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','" . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
+                  $collision = "<span title=\"Capacity: $room->capacity \nDescription: $room->description\" id=\"openList\" class=\"glyphicon glyphicon-stop\"  style=\"cursor: pointer;\"
+                                onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','" . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
               } elseif (!$rescol) {
                   //Display "closed" button that is not interactive.
-                  $collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
+                  //$collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
+                  $collision = "<span id=\"closedList2\">X</span>";
               }
               //creates combined datetime with the current selected date and the time along the sidebar
               $combinedDT = date('Y-m-d H:i:s', strtotime($currentmdy . $current_time->getTime()));
               //"closes" rooms as time passes based on the current time on page load
               $sapr = $settings["allow_past_reservations"];
               if ($sapr != "true") {
-                if ($collision != "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>" &&
-                    $collision != "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>") {
+                if ($collision != "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\></span>" &&
+                    //$collision != "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>") {
+                    $collision != "<span id=\"takenList\">R</span>") {
                   if ($pageLoadDT > $combinedDT) {
-                    $collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
+                    $collision = "<span id=\"closedList2\">X</span>";
+                    //$collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
                   }
                 }
               }
-              $dvout .= "<div class='col' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
-
+              //$dvout .= "<div class='col' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
+              $dvout .= "<div class='col'> $collision </div>";
             }
             //Increment
             $i++;

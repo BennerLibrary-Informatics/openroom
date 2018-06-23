@@ -21,7 +21,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     $direction = isset($_REQUEST["direction"]) ? $_REQUEST["direction"] : " ";
     $orderbystr = "";
 
-    if (!(preg_match("/^[A-Za-z0-9]+$/", $lookupname))) {
+    if (!(preg_match("/^[A-Za-z0-9]+$/", $lookupname)) && $lookupname != "") {
         $errormsg = "Username is invalid!";
     }
     if (!(preg_match("/^[A-Za-z0-9]+$/", $orderbywhat))) {
@@ -63,7 +63,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Reports - User Lookup</h3>
 
-        <br/><br/><strong>User Lookup for: <?php echo $lookupname; ?></strong><br/><br/>
+        <br/><br/><strong>User Lookup for: <?php
+        if ($lookupname == "") {
+          echo "All Users <em>(showing 50 most recent reservations)</em></br>***sorting is disabled for all user lookup";
+        }
+        else {
+          echo $lookupname;
+        }?></strong><br/><br/>
 
         <table id="reporttable">
             <tr class="reportodd">
@@ -93,12 +99,27 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                 src="images/moveup.gif" border="0"/></a><a
                             href="report-userlookup.php?lookupname=<?php echo $lookupname; ?>&orderbywhat=timeofrequest&direction=DESC"><img
                                 src="images/movedown.gif" border="0"/></a></td>
+                <?php
+                if ($lookupname == "") {
+                  echo "<td><strong>Username</strong></td>";
+                }?>
             </tr>
 
             <?php
-            $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.username='" . $lookupname . "' AND reservations.roomid = rooms.roomid" . $orderbystr . ";");
+            if ($lookupname == "") {
+              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid ORDER BY timeofrequest DESC LIMIT 50;");
+            }
+            else {
+              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.username='" . $lookupname . "' AND reservations.roomid = rooms.roomid" . $orderbystr . ";");
+            }
             $count = 2;
             while ($record = mysqli_fetch_array($records)) {
+              if ($lookupname == "") {
+                $extraTableCell = "<td>" . $record["username"] . "</td>";
+              }
+              else {
+                $extraTableCell = "";
+              }
                 if ($count == 2) {
                     echo "<tr class=\"reporteven\">";
                     $count = 1;
@@ -118,7 +139,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     "<td>" . $record["end"] . "</td>" .
                     "<td>" . $record["numberingroup"] . "</td>" .
                     "<td>" . $record["timeofrequest"] . "</td>" .
-                    "</tr>";
+                    $extraTableCell . "</tr>";
             }
 
             ?>
