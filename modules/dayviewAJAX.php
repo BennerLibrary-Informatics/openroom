@@ -50,7 +50,7 @@ $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
 $current_time = new ClockTime((float)$settings["starttime"] ?? 0, 0, 0);
-$last_time = new ClockTime((float)$settings["endtime"] ?? 23, 59, 59);
+$last_time = new ClockTime((float)$settings["endtime"] ?? 0, 0, 0);
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
 if ($_SESSION["username"] != "") {
@@ -72,8 +72,10 @@ if ($_SESSION["username"] != "") {
         }
         $group_str .= "</div></div>";
         $yesterday = strtotime($currentmdy) - 86400;
+        $endyesterday = $yesterday + 86399;
         $tomorrow = strtotime($currentmdy) + 86400;
-        $dvout = "<div id=\"dayviewheader\"><span onclick=\"dayviewer('$yesterday',0,'','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer($tomorrow,0,'','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
+        $endtomorrow = $tomorrow + 86399;
+        $dvout = "<div id=\"dayviewheader\"><span onclick=\"dayviewer('$yesterday','$endyesterday','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
         $dvout .= "<div class = 'header' id='roomhead' >";
         /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
         $dvout .= "<div id = \"legend\" class =\"row\">";
@@ -145,7 +147,7 @@ if ($_SESSION["username"] != "") {
         $current_time_tf = mktime($current_time_exploded[0], $current_time_exploded[1], $current_time_exploded[2], date("n", $_POST["fromrange"]), date("j", $_POST["fromrange"]), date("Y", $_POST["fromrange"]));
         $time_str = date($time_format, $current_time_tf);
         //PRINT HOUR START HOUR ON SECOND ITERATION
-        if($i != 0){
+        if($i >= 0){
           $dvout .= "<div class = 'row'>";
           $dvout .= "<div class = 'col-lg-2 col-sm-12 text-nowrap dayviewTime'>" . $time_str . "</div>";
           $current_stop = new ClockTime(0, 0, 0);

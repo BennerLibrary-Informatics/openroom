@@ -24,11 +24,11 @@ require_once("includes/or-dbinfo.php");
            </a>
             <div class = "col text-right">Open Room</div>
         </div>
-        <a href="index.php" style="text-decoration:none; color:white;">
             <div class = "ONUtitle">
+              <a href="index.php" style="text-decoration:none; color:white;">
                 Olivet Nazarene University
             </div>
-     </a>
+          </a>
     </div>
    </div>
 	<span class="username">

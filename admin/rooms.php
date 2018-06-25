@@ -261,7 +261,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <center><input type="submit" value="Add Room"/></center>
+                        <input type="submit" value="Add Room"/>
                     </td>
                 </tr>
 

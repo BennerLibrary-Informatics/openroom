@@ -144,7 +144,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     echo "<tr>";
                     echo "<td width=500px align='center'>" . $room['roomname'] . "</td>";
                     for ($wkdy = 0; $wkdy <= 6; $wkdy++) {
-                        echo "<td width=3000px align='center'>";
+                        echo "<td width=12% align='center'>";
                         $thisday = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomhours WHERE roomid=" . $room["roomid"] . " AND dayofweek=" . $wkdy . " ORDER BY start ASC;");
                         while ($rec = mysqli_fetch_array($thisday)) {
                             $start = substr($rec["start"], 0, -3);
@@ -289,7 +289,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     echo "<table>";
                     $rooms = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $group["roomgroupid"] . ";");
                     while ($room = mysqli_fetch_array($rooms)){
-                        echo "<tr><td><label><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></label></td></tr>\n";
+                        echo "<tr><td><label><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></label></td></tr>";
                     }
                     echo "</table>";
                   }

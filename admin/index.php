@@ -45,8 +45,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </ul>
             <h3>Room Management</h3>
             <ul>
-                <li><a href="hours.php">Open Hours</a><em> - Set up the open and closing time, as shown in the
-                        reservation calendar.</em></li>
+                <li><a href="hours.php">Open Hours</a><em> - Set up the open and closing time, as shown on the reservation page.</em></li>
                 <li><a href="specialhours.php">Special Hours</a><em> - Set up room closures, holidays, etc.</em></li>
                 <li><a href="rooms.php">Rooms</a><em> - Add, modify, or remove rooms and their descriptions, capacities,
                         names, etc.</em></li>

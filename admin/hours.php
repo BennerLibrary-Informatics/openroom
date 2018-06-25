@@ -59,7 +59,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Open Hours</h3>
         <p>
-            <strong>Settings for open and close time</strong><em> as shown by the reservation calendar.</em></p>
+            <strong>Settings for open and close time</strong><em> as shown along the lefthand side of the reservation page.</em></p>
         <form name="openhours" method="POST" action="hours.php">
             <ul>
                 <li>

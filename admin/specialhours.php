@@ -280,12 +280,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     }
                     $pgroupname = $cgroupname;
                     if ($to5 == 0) echo "<tr>";
-                    echo "<td><label><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></label></td>\n";
-                    if ($to5 < 5) $to5++;
-                    if ($to5 == 5) {
-                        echo "</tr>";
-                        $to5 = 0;
-                    }
+                    echo "<td><label><input type=\"checkbox\" name=\"affectedrooms[]\" value=\"" . $room["roomid"] . "\" /><strong>" . $room["roomname"] . "</strong></label><br/></td></tr>";
                 }
                 ?>
             </table>

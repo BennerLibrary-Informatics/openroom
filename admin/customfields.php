@@ -49,6 +49,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
             if ($optionname != "") {
                 if ($optionquestion != "") {
+                    $optionformname = str_replace(" ", "", $optionformname);
                     if (preg_match("/^[a-z]/", $optionformname)) {
                         if ($optiontype == "0" || $optiontype == "1") {
                             if ($optiontype == "1" && $optionchoices != "") {
