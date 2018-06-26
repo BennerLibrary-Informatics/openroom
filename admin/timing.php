@@ -226,7 +226,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             ?>
                             <input type="radio" name="allowpastreservations" value="true" <?php echo $trueselect; ?>>Yes<br/>
                             <input type="radio" name="allowpastreservations" value="false" <?php echo $falseselect; ?>>
-                            No<br/>
+                            No <span class="notetext">(admins will still be able to reserve in the past)</span><br/>
                             <input type="submit" value="Save"/>
                         </form>
                         <br/>

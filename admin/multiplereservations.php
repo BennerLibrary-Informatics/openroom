@@ -29,17 +29,17 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         //Determine if this field is a text field or a select field
         if ($optionalfield["optiontype"] == 0) {
-            $postvalue = $_POST[$optionformname];
+            $postvalue = $optionalfield["optionformname"];
             $postvalue = str_replace("'", "&apos;", $postvalue);
             $postvalue = str_replace('"', "&quot;", $postvalue);
             $postvalue = str_replace("\\", "", $postvalue);
             $optionalfields_string .= "<style> input[type=text] {color: black;} </style><input type='text' color='black' name='" . $optionformname . "' value='" . $postvalue . "' /><br/>";
         } else {
-            $optionalfields_string .= "<select name='" . $optionalfield["optionformname"] . "'>";
+            $optionalfields_string .= "<select name='" . $optionformname . "'>";
             $optionchoices = explode(";", $optionalfield["optionchoices"]);
             $optionchkd = "";
             foreach ($optionchoices as $choice) {
-                if ($choice == $_POST[$optionformname]) {
+                if ($choice == $optionalfield["optionformname"]) {
                     $optionchkd = "selected";
                 }
                 $optionalfields_string .= "<option value='" . $choice . "' " . $optionchkd . ">" . $choice . "</option>";
@@ -59,8 +59,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         $to = isset($_POST["to"]) ? $_POST["to"] : "";
         $starthour = isset($_POST["starthour"]) ? $_POST["starthour"] : "";
         $startminute = isset($_POST["startminute"]) ? $_POST["startminute"] : "";
+        $startperiod = isset($_POST["startperiod"]) ? $_POST["startperiod"] : "";
         $duration = isset($_POST["duration"]) ? $_POST["duration"] : "";
         $daysineffect = isset($_POST["daysineffect"]) ? $_POST["daysineffect"] : "";
+
+        if($startperiod == "PM" && $starthour != 12)
+          $starthour += 12;
 
         //Make sure from and to are in proper formats
         if ((preg_match("/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/", $from)) && (preg_match("/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}/", $to))) {
@@ -71,7 +75,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 //Make sure duration is a number
                 if (preg_match("/^\\d*$/", $duration) && $duration != "") {
                     //Make sure at least one day was checked
-                    if ($daysineffect != "" && $roomid != "" && $starthour != "" && $startminute != "") {
+                    if ($daysineffect != "" && $roomid != "" && $starthour != "" && $startminute != "" && $startperiod != "") {
                         //Go through each day and run a check using or-getdatarange.
                         //If anything is returned for the selected room mark it and save the information so it can be printed out report style.
                         $frommonth = date("n", $froma);
@@ -80,7 +84,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         $tomonth = date("n", $toa);
                         $today = date("j", $toa);
                         $toyear = date("Y", $toa);
-                        $starttime = new ClockTime();
+                        $starttime = new ClockTime(0, 0, 0);
                         $starttime->setTime($starthour, $startminute, 0);
                         $starttime = mktime($starthour, $startminute, 0, $frommonth, $fromday, $fromyear);
                         $endtime = $starttime + ($duration * 60);
@@ -191,10 +195,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Username:</strong>
                     </td>
                     <td>
-                        <input type="text" name="altusername" value=""/>
-                        <?php
+                        <input type="text" name="altusername" value="<?php
                         if(isset($_POST["altusername"]))
-                          echo $_POST["altusername"]; ?>
+                          echo $_POST["altusername"]; ?>"/>
                           <em>(The username of the user you're making these reservations for.)</em>
                     </td>
                 </tr>
@@ -224,9 +227,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                     <td>
                         <input id="from" size="10" maxlength="10" name="from" type="text"
-                               value="" placeholder="MM/DD/YYYY"/>
-                               <?php if(isset($_POST["from"]))
-                                          echo $_POST["from"]; ?>
+                               value="<?php if(isset($_POST["from"]))
+                                          echo $_POST["from"]; ?>" placeholder="MM/DD/YYYY"/>
                         <img src="../includes/datechooser/calendar.gif"
                              onclick="showChooser(this, 'from', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                         <div id="chooserSpan4" class="dateChooser select-free"
@@ -239,9 +241,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                     <td>
                         <input id="to" size="10" maxlength="10" name="to" type="text"
-                               value="" placeholder="MM/DD/YYYY"/>
-                                <?php if(isset($_POST["to"]))
-                                          echo $_POST["to"]; ?>
+                               value="<?php if(isset($_POST["to"]))
+                                         echo $_POST["to"]; ?>" placeholder="MM/DD/YYYY"/>
                         <img src="../includes/datechooser/calendar.gif"
                              onclick="showChooser(this, 'to', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                         <div id="chooserSpan4" class="dateChooser select-free"
@@ -253,24 +254,44 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Reservation Time:</strong>
                     </td>
                     <td>
-                        <select name="starthour">
+                        <select name="starthour" style="width: 38px;">
                             <?php
-                            for ($i = 0; $i <= 24; $i++) {
-                                $selectstr = "";
-                                if (isset($_POST["starthour"]) && $i == $_POST["starthour"]) {
-                                    $selectstr = "selected";
-                                }
-                                echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+                            if (isset($_POST["starthour"])) {
+                              echo "<option value=\"" . $_POST["starthour"] . "\">" . $_POST["starthour"] . "</option>";
+                            }
+                            else {
+                              for ($i = 0; $i <= 12; $i++) {
+                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
+                              }
                             }
                             ?>
                         </select>:<select name="startminute">
                             <?php
-                            for ($i = 0; $i <= 59; $i++) {
-                                $selectstr = "";
-                                if (isset($_POST["startminute"]) && $i == $_POST["startminute"]) {
-                                    $selectstr = "selected";
+                            if (isset($_POST["startminute"])) {
+                              echo "<option value=\"" . $_POST["startminute"] . "\">" . sprintf("%02d", $_POST["startminute"]) . "</option>";
+                            }
+                            else {
+                              for ($i = 0; $i <= 59; $i=$i + 15) {
+                                     if ($i == 0) {
+                                       $formatted_value = sprintf("%02d", $i);
+                                       echo "<option value=\"". $i . "\">" . $formatted_value . "</option>";
+                                     }
+                                     else
+                                       echo "<option value=\"". $i . "\">" . $i . "</option>";
                                 }
-                                echo "<option value=\"" . $i . "\" " . $selectstr . ">" . $i . "</option>";
+                              }
+                              ?>
+                        </select> <select name="startperiod">
+                            <?php
+                            $timePeriods = ["AM" , "PM"];
+                            if (isset($_POST["startperiod"])) {
+                                echo "<option value=\"" . $_POST["startperiod"] . "\">" . $_POST["startperiod"] . "</option>";
+                            }
+                            else {
+                              for ($i = 0; $i < 2; $i++) {
+
+                                  echo "<option value=\"" . $timePeriods[$i] . "\">" . $timePeriods[$i] . "</option>";
+                              }
                             }
                             ?>
                         </select>
@@ -281,10 +302,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <strong>Duration:</strong>
                     </td>
                     <td>
-                        <input type="text" size="5" name="duration" value=""/>
-                                <?php if(isset($_POST["duration"]))
-                                          echo $_POST["duration"]; ?> (in
-                        minutes)
+                        <input type="text" size="5" name="duration" value="<?php if(isset($_POST["duration"]))
+                                  echo $_POST["duration"]; ?>"/> (in minutes)
                     </td>
                 </tr>
                 <tr>
@@ -296,7 +315,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     </td>
                 </tr>
             </table>
-            <strong>Days in Effect:</strong>
+          </br>
+
             <table>
                 <tr>
                     <?php
@@ -306,20 +326,21 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         $dayarray[$affectedday] = "checked";
                     }
                     ?>
-                    <td><label><input type="checkbox" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday</strong></label>
+                    <td><strong>Days Affected: &nbsp&nbsp</strong><label><input type="checkbox" id="sunday" name="daysineffect[]" value="sunday" <?php echo $dayarray["sunday"]; ?>/><strong>Sunday&nbsp</strong></label>
                     </td>
-                    <td><label><input type="checkbox" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday</strong></label>
+                    <td><label><input type="checkbox" id="monday" name="daysineffect[]" value="monday" <?php echo $dayarray["monday"]; ?>/><strong>Monday&nbsp</strong></label>
                     </td>
-                    <td><label><input type="checkbox" name="daysineffect[]"
-                               value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday</strong></label></td>
-                    <td><label><input type="checkbox" name="daysineffect[]"
-                               value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday</strong><label></td>
-                    <td><label><input type="checkbox" name="daysineffect[]"
-                               value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday</strong><label></td>
-                    <td><label><input type="checkbox" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday</strong></label>
+                    <td><label><input type="checkbox" id="tuesday" name="daysineffect[]"
+                               value="tuesday" <?php echo $dayarray["tuesday"]; ?>/><strong>Tuesday&nbsp</strong></label></td>
+                    <td><label><input type="checkbox" id="wednesday" name="daysineffect[]"
+                               value="wednesday" <?php echo $dayarray["wednesday"]; ?>/><strong>Wednesday&nbsp</strong><label></td>
+                    <td><label><input type="checkbox" id="thursday" name="daysineffect[]"
+                               value="thursday" <?php echo $dayarray["thursday"]; ?>/><strong>Thursday&nbsp</strong><label></td>
+                    <td><label><input type="checkbox" id="friday" name="daysineffect[]" value="friday" <?php echo $dayarray["friday"]; ?>/><strong>Friday&nbsp</strong></label>
                     </td>
-                    <td><label><input type="checkbox" name="daysineffect[]"
-                               value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday</strong></label></td>
+                    <td><label><input type="checkbox" id="saturday" name="daysineffect[]"
+                               value="saturday" <?php echo $dayarray["saturday"]; ?>/><strong>Saturday&nbsp&nbsp</strong></label></td>
+                               <td>&nbsp;&nbsp;<button type="button" style="position: relative; margin-bottom: 10px;" onclick="checkAll();">Select All</button></td>
                 </tr>
             </table>
             <br/>
@@ -333,10 +354,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $onlychkselb = "checked";
             }
             ?>
-            <input type="radio" name="onlychecking" value="TRUE" <?php echo $onlychksel; ?>/><strong>Check
-                Availability</strong> or <input type="radio" name="onlychecking"
+            <label><input type="radio" name="onlychecking" value="TRUE" <?php echo $onlychksel; ?>/><strong>Check
+                Availability</strong></label> or <label><input type="radio" name="onlychecking"
                                                 value="multireserve" <?php echo $onlychkselb; ?> /><strong>Finalize
-                Reservations</strong><br/><br/>
+                Reservations</strong></label><br/>
             <input type="submit" value="Submit"/><br/><br/><br/>
         </form>
         <?php
@@ -348,6 +369,29 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     </div>
     </body>
     </html>
+    <script language="javascript" type="text/javascript">
+        //code to select all day of the week checkboxes
+        var firstClick = true;
+        function checkAll() {
+            for (var i = 0; i <= 6; i++) {
+                if (i == 0) var boxID = document.getElementById("sunday");
+                if (i == 1) var boxID = document.getElementById("monday");
+                if (i == 2) var boxID = document.getElementById("tuesday");
+                if (i == 3) var boxID = document.getElementById("wednesday");
+                if (i == 4) var boxID = document.getElementById("thursday");
+                if (i == 5) var boxID = document.getElementById("friday");
+                if (i == 6) var boxID = document.getElementById("saturday");
+                var boxValue = boxID.value;
+                if (firstClick == true) {
+                    document.getElementById(boxValue).checked = true;
+                }
+                else if (firstClick == false) {
+                    document.getElementById(boxValue).checked = false;
+                }
+            }
+            firstClick = !firstClick;
+        }
+    </script>
     <?php
 }
 ?>

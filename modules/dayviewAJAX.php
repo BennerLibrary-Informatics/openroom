@@ -273,8 +273,8 @@ if ($_SESSION["username"] != "") {
               $combinedDT = date('Y-m-d H:i:s', strtotime($currentmdy . $current_time->getTime()));
               //"closes" rooms as time passes based on the current time on page load
               $sapr = $settings["allow_past_reservations"];
-              if ($sapr != "true") {
-                if ($collision != "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\></span>" &&
+              if ($sapr != "true" && $isadministrator != "TRUE") {
+                if ($collision != "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>" &&
                     //$collision != "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>") {
                     $collision != "<span id=\"takenList\">R</span>") {
                   if ($pageLoadDT > $combinedDT) {

@@ -166,7 +166,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <?php
           if (isset($_POST['clearAllHoursButton'])) {
             mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM roomhours");
-            header("Refresh:0");
+            echo '<meta http-equiv="refresh" content="0"/>';
           }?>
         <br/>
 
