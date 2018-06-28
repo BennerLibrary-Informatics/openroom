@@ -78,14 +78,22 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         popup.style.left = popleft + "px";
         popup.style.top = poptop + "px";
         popup.innerHTML = "<div class = 'col-12'><div class = 'col-12 text-center'><label class = 'roomtitle'>" /*<div id=\"popupClose\"><\/div>*/ + roomname + "</label></div>"
-        + "<div class = 'row'><div class = 'col-sm-6'><label><strong>Start</strong>:</label> " + time_str + "</div> <div class = 'col-sm-6'></div></div>"
+        + "<div class = 'row'><div class = 'col-sm-6'><label><strong>Start</strong>:</label> " + time_str + "</div> <div id = 'endReservationTime' class = 'col-sm-6'><label><strong>End</strong>:</label> ---" + "</div> <div class = 'col-sm-6'></div></div>"
         + "<form name=\'reserve\' action=\'javascript:reserve(" + group + ");\'>"
-        + "<div class = 'row'><div class = 'col-sm-6'><label>Duration</label></strong>: <select name=\'duration\'>"  + durationhtml + "</select></div>"
+        + "<div class = 'row'><div class = 'col-sm-6'><label>Duration</label></strong>: <select name=\'duration\' onchange=\'changeEndReservationTime(this);\'>"  + durationhtml + "</select></div>"
         + "<div class = 'col-sm-6'><label></span>Members</strong>: </label><select name=\'capacity\'>" + capacity_string + "</select></div></div>"
         + "<hr><div class = 'row col-12'>" + altusernamestr + "<input type=\'hidden\' name=\'roomid\' value=\'"+ roomid + "\' />"
           + "<input type=\'hidden\' name=\'starttime\' value=\'"+ currentmdyandtime + "\' />"
           + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /><strong></div><div class = 'row col-12'"+ optionalfields_string + "</div>"
         + "<hr><div class = 'row'><div class = 'col-6 text-center bottombuttons'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'col-6 text-center'><a id = '' href=\'javascript:closePopUp();\'>Cancel</a></div></div></form>";
+    }
+
+    function changeEndReservationTime(select) {
+        var starttimeint = parseInt(document.reserve.starttime.value);
+        var endtimeint = starttimeint + 60*parseInt(select.options[select.selectedIndex].text.substring(0, select.options[select.selectedIndex].text.length - 5));
+        var endtimedate = new Date(0);
+        d.setUTCSeconds(endtimeint);
+        document.getElementById("endReservationTime").innerHTML = "<label><strong>End</strong>:</label> "  + endtimedate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}).toLowerCase();
     }
 
     function closePopUp() {

@@ -58,10 +58,10 @@
     <form id="authentication" onsubmit="return false" action="">
       <div id="loginusername" class = "form-group row">
         <div class = "col-lg-3 col-md-3 col-sm-12 loginlabel offset-lg-1">
-          <label for="loginusernamelabel">Olivet Username:</label>
+          <label for="loginusernamelabel">Username:</label>
         </div>
         <div class = "col-lg-4 col-md-6 col-sm-12">
-              <input alt="Enter your Olivet Username" type="text" name="username" id="usernamefield"
+              <input type="text" name="username" id="usernamefield"
                      class="form-control form-control-sm" placeholder="Your Olivet Username" autofocus="autofocus"/>
         </div>
       </div>
@@ -71,7 +71,7 @@
           <label for="loginpasswordlabel">Password:</label>
         </div>
         <div class = "col-lg-4 col-md-6 col-sm-12">
-          <input alt="Enter your Olivet Password" type="password" name="password" id="passwordfield"
+          <input type="password" name="password" id="passwordfield"
                  class="form-control form-control-sm" placeholder="Your Olivet password"/>
         </div>
       </div>
@@ -86,6 +86,7 @@
                 echo "<a href=\"createaccount.php\" class = 'createacc'><span class = 'registrationlink btn btn-primary createaccbutt' >Create Account</span></a>";
             }
             ?>
+            <a href="" style="float: right;"> Forgot Password? </a>
           </div>
       </div>
         <!--</ul>-->

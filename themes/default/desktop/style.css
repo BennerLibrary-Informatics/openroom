@@ -399,6 +399,8 @@ label{
 
 .grouptab {
     background-color: #FFFFFF;
+    border-style: outset;
+    border-radius: 15px;
     font-size: 15px;
     width: auto;
     cursor: pointer;
@@ -414,6 +416,9 @@ label{
 
 .selected {
     background-color: white;
+    border-style: inset;
+    border-radius: 15px;
+    width: auto;
 }
 
 .mousedoverrow {

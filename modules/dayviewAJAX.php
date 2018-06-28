@@ -67,7 +67,7 @@ if ($_SESSION["username"] != "") {
         $group_str = "<div class = 'row'>";
         while ($group = mysqli_fetch_array($groups)) {
             $selected_str = "class='grouptab col-sm text-center groups'";
-            if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center'";
+            if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center groups'";
             $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
         }
         $group_str .= "</div></div>";
@@ -132,7 +132,7 @@ if ($_SESSION["username"] != "") {
         }
     }
     //Construct table header
-    $dvout .= "<div class = 'row'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>Rooms: </b></label></div>";
+    $dvout .= "<div class = 'row' style='text-decoration: underline;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>Rooms: </b></label></div>";
    foreach ($xmlroominfo->room as $room) {
        $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
      }
@@ -233,7 +233,12 @@ if ($_SESSION["username"] != "") {
                           } else {
                               if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";
                               //Display "cancel" button that shows cancellation confirmation.
-                              $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                              if ($isadministrator == "TRUE") {
+                                $collision =  "<span title=\"Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                              }
+                              else {
+                                $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                              }
                               //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                           }
                           $rescol = TRUE;
@@ -245,7 +250,7 @@ if ($_SESSION["username"] != "") {
                   $limit_total = unserialize($settings["limit_total"]);
                   $limit_frequency = unserialize($settings["limit_frequency"]);
                   $current_duration = $settings["interval"];
-                  $durationhtml = "";
+                  $durationhtml = "<option disabled selected value>-Choose-</option>";
                   while ($current_duration <= $settings["limit_duration"]) {
                       $durationhtml .= "<option value=\'" . $current_duration . "\'>" . $current_duration . " mins</option>";
                       $current_duration += $settings["interval"];

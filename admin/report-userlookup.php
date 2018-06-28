@@ -135,10 +135,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     echo "<strong>" . $opfield["optionname"] . ": </strong>" . $opfield["optionvalue"] . "<br/>";
                 }
 
-                echo "</div></td><td>" . $record["start"] . "</td>" .
-                    "<td>" . $record["end"] . "</td>" .
+                echo "</div></td><td>" . date('Y-m-d g:i a', strtotime($record["start"])) . "</td>" .
+                    "<td>" . date('Y-m-d g:i a', strtotime($record["end"])) . "</td>" .
                     "<td>" . $record["numberingroup"] . "</td>" .
-                    "<td>" . $record["timeofrequest"] . "</td>" .
+                    "<td>" . date('Y-m-d g:i a', strtotime($record["timeofrequest"])) . "</td>" .
                     $extraTableCell . "</tr>";
             }
 

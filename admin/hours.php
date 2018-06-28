@@ -14,20 +14,33 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     $successmsg = "";
     $errormsg = "";
     if (isset($_REQUEST["starttime"])) {
-        $starttime = $_REQUEST["starttime"];
-        
-        if (model\Setting::update('starttime', $starttime)) {
-            $successmsg = $successmsg . "Start time updated! ";
-        } else {
-            $errormsg = $errormsg . "Unable to update opening time. Please try again. ";
+        if ($settings["starttime"] > $_REQUEST["endtime"]) {
+            model\Setting::update('starttime', '');
+            $errormsg = "Opening time must occur before Closing time!";
+        }
+        else {
+            $starttime = $_REQUEST["starttime"];
+
+            if (model\Setting::update('starttime', $starttime)) {
+                $successmsg = $successmsg . "Start time updated! ";
+            } else {
+                $errormsg = $errormsg . "Unable to update opening time. Please try again. ";
+            }
         }
     }
     if (isset($_REQUEST["endtime"])) {
-        $endtime = $_REQUEST["endtime"];
-        if (model\Setting::update('endtime', $endtime)) {
-            $successmsg = $successmsg . "Closing time updated! ";
-        } else {
-            $errormsg = $errormsg . "Unable to update closing time. Please try again. ";
+        if ($settings["starttime"] > $_REQUEST["endtime"]) {
+            model\Setting::update('endtime', '');
+            $errormsg = "Opening time must occur before Closing time!";
+        }
+        else {
+            $endtime = $_REQUEST["endtime"];
+
+            if (model\Setting::update('endtime', $endtime)) {
+                $successmsg = $successmsg . "Closing time updated! ";
+            } else {
+                $errormsg = $errormsg . "Unable to update closing time. Please try again. ";
+            }
         }
     }
     $settings = model\Setting::fetch_all();
