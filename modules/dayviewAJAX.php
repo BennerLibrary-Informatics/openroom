@@ -231,13 +231,11 @@ if ($_SESSION["username"] != "") {
                               //$collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
                               $collision = "<span id=\"takenList\">R</span>";
                           } else {
-                              if ($isadministrator == "TRUE" || $_SESSION["username"] == (string)$reservation->username) $info .= "<strong>Time of Request</strong>: " . $reservation->timeofrequest . "<div class = 'row'><div class = 'col-6 text-center'><a href=\'javascript:cancel(" . $reservation->id . "," . $_POST["group"] . ");\'>Cancel</a></div><div class = 'col-6 text-center'> <a href=\'javascript:closePopUp();\'>Do Not Cancel</a></div>";
-                              //Display "cancel" button that shows cancellation confirmation.
                               if ($isadministrator == "TRUE") {
-                                $collision =  "<span title=\"Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\"></span>";
                               }
                               else {
-                                $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                                $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\"></span>";
                               }
                               //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                           }

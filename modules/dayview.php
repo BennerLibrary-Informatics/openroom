@@ -92,13 +92,23 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         var starttimeint = parseInt(document.reserve.starttime.value);
         var endtimeint = starttimeint + 60*parseInt(select.options[select.selectedIndex].text.substring(0, select.options[select.selectedIndex].text.length - 5));
         var endtimedate = new Date(0);
-        d.setUTCSeconds(endtimeint);
+        endtimedate.setUTCSeconds(endtimeint);
         document.getElementById("endReservationTime").innerHTML = "<label><strong>End</strong>:</label> "  + endtimedate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}).toLowerCase();
     }
 
     function closePopUp() {
         document.getElementById("popup").style.visibility = "hidden";
         document.getElementById("popup").style.display = "none";
+    }
+
+    function cancelQuestion(reservationid, groupid) {
+        if (confirm('Cancel this reservation?')) {
+          cancel(reservationid, groupid);
+          window.refresh();
+        }
+        else {
+          //do nothing
+        }
     }
 
     function cancel(reservationid, groupid) {
@@ -123,10 +133,13 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
                 var brokenstring = xmlhttp.responseText.split("|");
                 if (brokenstring[0] == "Error: User is not logged in.") location.reload(true);
                 document.getElementById("popup").innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">Close<\/span><\/div>" + brokenstring[0];
+                document.getElementById("calendarButton").style.visibility = "visible";
                 dayviewer(brokenstring[1], brokenstring[2], groupid, '');
             }
             else {
-                document.getElementById("popup").innerHTML = "Cancelling...";
+                document.getElementById("calendarButton").style.visibility = "hidden";
+                document.getElementById("dayviewModule").innerHTML = "";
+                document.getElementById("loader").innerHTML = "<br\/><br\/><br\/><center><img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/><br\/>Cancelling, please wait...<\/center>";
             }
         };
 
