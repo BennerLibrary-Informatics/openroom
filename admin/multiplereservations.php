@@ -38,6 +38,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $optionalfields_string .= "<select name='" . $optionformname . "'>";
             $optionchoices = explode(";", $optionalfield["optionchoices"]);
             $optionchkd = "";
+            if ($optionalfield["optionrequired"] != 1) {
+              $optionalfields_string .="<option></option>";
+            }
             foreach ($optionchoices as $choice) {
                 if ($choice == $optionalfield["optionformname"]) {
                     $optionchkd = "selected";

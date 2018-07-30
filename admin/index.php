@@ -57,8 +57,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             <ul>
                 <li><a href="customfields.php">Custom Fields</a><em> - Set up custom form fields that appear when users
                         make reservations.</em></li>
-                <li><a href="email.php">Email Setup</a><em> - Set up a list of email addresses to send verbose, terse,
-                        or Gmail Event Format reservation/cancellation notices.</em></li>
+                <li><a href="email.php">Email Setup</a><em> - Set up "monitoring" email addresses to receive
+                        reservation/cancellation notices as BCC emails.</em></li>
                 <li><a href="multiplereservations.php">Multiple Reservations</a><em> - Create repeating reservations
                         quickly using this tool.</em></li>
                 <li><a href="timing.php">Timing and Limitations</a><em> - Change the time interval, time format, and set

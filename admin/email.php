@@ -219,8 +219,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
             ?>
         </center>
-        <h3><a href="index.php">Administration</a> - Email Setup</h3><br/>
-        <span class="notetext">There are three types of emails: <strong>Verbose</strong> are fully-detailed messages, <strong>Terse</strong> are stripped down to only the most important details, and <strong>GEF (Gmail Event Format)</strong> is formatted to work with Gmail Events.</span>
+        <h3><a href="index.php">Administration</a> - Email Setup</h3><br/><hr/>
+        <span class="notetext">There are three types of emails: <strong>Verbose</strong> are fully-detailed messages, <strong>Terse</strong> are stripped down to only the most important details, and <strong>GEF (Gmail Event Format)</strong> is formatted to work with Gmail Events.
+        <br/><br/>An email will be sent BCC to any email addresses entered in the fields below whenever the specified action occurs. You can enter multiple addresses in a single field by separating them with semicolons. <strong>Ex: email1@domain.com;email2@domain.com</strong><hr/></span>
         <ul id="settingsul">
             <li>
                 On Reservations - <span class="notetext">This email is sent whenever a reservation is made.</span>
