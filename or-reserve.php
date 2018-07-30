@@ -61,6 +61,9 @@ if ($username != "") {
                         if ($availablechoice == $_POST[$optionalfield["optionformname"]]) {
                             $isachoice = 1;
                         }
+                        if ($_POST[$optionalfield["optionformname"]] == '') {
+                            $isachoice = 1;
+                        }
                     }
                     if ($isachoice == 0) {
                         $errormsg .= $optionalfield["optionname"] . " is invalid.<br/>";
@@ -434,7 +437,7 @@ if ($username != "") {
                     }
 
                     $terse_msg = $verbose_msg;
-                    $verbose_msg .= $settings["policies"] . "\n\n";
+                    $verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
 
                     $gef_msg = "<html><body>" . $user_real_gef . "<b>Date and Time</b>: " . date("F j, Y", $starttime) . " " . date("g:i a", $starttime) . " - " . date("F j, Y", $endtime) . " " . date("g:i a", $endtime) . "<br/><br/><b>Username</b>: " . $username . "<br/><br/>" . $gef_msg_of . "</body></html>";
 

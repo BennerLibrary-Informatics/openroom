@@ -160,7 +160,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         ?>
         <br/>
         <hr/>
-        <form name="clearAllHours" method="post">
+        <form name="clearAllHours" method="post" onsubmit="return confirm('Are you sure you would like to delete these hours?\n\nNOTE: Modifying hours will NOT delete room reservations. For special hours (such as holidays, etc.) please use the Special Hours section in administration.');">
           <input type="submit" name="clearAllHoursButton" value="Clear All Hours" style="float: right;"/>
         </form>
         <?php
@@ -171,8 +171,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <br/>
 
         <h3>Add Default Hours</h3><br/>
-        <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding default
-            hours. This will be automated in a future version of this system.</em><br/>
+        
         <form name="adddefaulthours" action="defaulthours.php" method="POST">
             <table>
                 <tr>

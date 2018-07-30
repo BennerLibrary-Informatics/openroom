@@ -43,6 +43,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     //Make sure from occurs before to
                     $froma = strtotime($from);
                     $toa = strtotime($to);
+                    $endofday = date("Y-m-d H:i:s", $froma + 86399);
                     if ($toa >= $froma) {
                         //Make sure endtime is greater than starttime
                         $starttime = new ClockTime($starthour, $startminute, 0);
@@ -53,6 +54,18 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             $tomysql = date("Y-m-d H:i:s", $toa);
                             foreach ($affectedrooms as $aroom) {
                                 $room = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomid=" . $aroom . ";"));
+                                //create a 2d array $reservedmatch that holds any reservations affected by the special hours
+                                $reservedmatch = mysqli_fetch_all(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations WHERE roomid=" . $aroom . " AND start>'" . $frommysql . "' AND start<'" . $endofday . "';"));
+                                while (!empty($reservedmatch)) {
+                                  //Simply transfer this reservation to the cancelled table. Its ID will still be used when reporting and checking its optional fields (which are left alone).
+                                  $cancel_res = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO cancelled(reservationid,start,end,roomid,username,timeofrequest) VALUES('" . $reservedmatch[0][0] . "','" . $reservedmatch[0][1] . "','" . $reservedmatch[0][2] . "','" . $reservedmatch[0][3] . "','" . $reservedmatch[0][4] . "','" . $reservedmatch[0][6] . "');");
+                                  if ($cancel_res) {
+
+                                      $remove_res = mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM reservations WHERE reservationid=" . $reservedmatch[0][0] . ";");
+                                  }
+                                  //remove the reservation from the 2d array, adjust the array indices, and go back to the while loop again
+                                  array_splice($reservedmatch, 0, 1);
+                                }
                                 if (mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO roomspecialhours(roomid,fromrange,torange,start,end) VALUES(" . $aroom . ",'" . $frommysql . "','" . $tomysql . "','" . $starttime->getTime() . "','" . $endtime->getTime() . "');")) {
                                     $successmsg = "Special Hours have been added!";
                                 } else {

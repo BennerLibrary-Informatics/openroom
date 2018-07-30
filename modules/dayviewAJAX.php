@@ -125,6 +125,10 @@ if ($_SESSION["username"] != "") {
         } else {
             $optionalfields_string .= "<select name=\'" . $optionalfield["optionformname"] . "\'>";
             $optionchoices = explode(";", $optionalfield["optionchoices"]);
+
+            if ($optionalfield["optionrequired"] != 1) {
+              $optionalfields_string .="<option></option>";
+            }
             foreach ($optionchoices as $choice) {
                 $optionalfields_string .= "<option value=\'" . $choice . "\'>" . $choice . "</option>";
             }

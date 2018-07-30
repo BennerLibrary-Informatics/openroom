@@ -53,7 +53,7 @@ if (($isadministrator || $username == $res_username) && $username != "") {
                 }
             }
             if ($settings["login_method"] == "normal") {
-                $emailrecord = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM users WHERE username='" . $username . "';");
+                $emailrecord = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM users WHERE username='" . $res_username . "';");
                 if ($emailrecord) {
                     $user_emaila = mysqli_fetch_array($emailrecord);
                     $user_email = $user_emaila["email"];

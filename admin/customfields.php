@@ -44,7 +44,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $optionquestion = isset($_REQUEST["optionquestion"]) ? $_REQUEST["optionquestion"] : "";
             $optiontype = isset($_REQUEST["optiontype"]) ? $_REQUEST["optiontype"] : "";
             $optionchoices = isset($_REQUEST["optionchoices"]) ? $_REQUEST["optionchoices"] : "";
-            $optionprivate = isset($_REQUEST["optionprivate"]) ? $_REQUEST["optionprivate"] : "";
+            $optionprivate = isset($_REQUEST["optionprivate"]) ? $_REQUEST["optionprivate"] : 0;
             $optionrequired = isset($_REQUEST["optionrequired"]) ? $_REQUEST["optionrequired"] : "";
 
             if ($optionname != "") {
@@ -171,7 +171,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <td class="tableheader">Form Question</td>
                 <td class="tableheader">Type</td>
                 <td class="tableheader">Choices*</td>
-                <td class="tableheader">Private?</td>
+            <!--<td class="tableheader">Private?</td>-->
                 <td class="tableheader">Required?</td>
                 <td class="tableheader">Delete</td>
             </tr>
@@ -224,7 +224,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     "</td><td>" . $of["optionquestion"] .
                     "</td><td>" . $oftype .
                     "</td><td>" . $choicestr .
-                    "</td><td>" . $ofprivate .
+                    /*"</td><td>" . $ofprivate .*/
                     "</td><td>" . $ofrequired .
                     "</td><td><a href=\"javascript:confirmdelete('" . $of["optionformname"] . "','" . $of["optionname"] . "');\">X</a></td></tr>";
 
@@ -267,7 +267,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td><span class="notetext">If you chose "Selection" above, type the available options here, separated by a semi-colon.<br/><em>(Ex.: Choice1;Choice2)</em></span>
                     </td>
                 </tr>
-                <tr>
+                    <!-- commenting out this section to remove display of the private option to the user, since it doesn't appear to do anything
+                    <tr>
                     <td><strong>Private?</strong></td>
                     <td><select name="optionprivate">
                             <option value="0">No</option>
@@ -276,6 +277,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td><span class="notetext">Will this field appear for all other users (when a reservation is clicked or when a search is performed)?</span>
                     </td>
                 </tr>
+                -->
                 <tr>
                     <td><strong>Required?</strong></td>
                     <td><select name="optionrequired">

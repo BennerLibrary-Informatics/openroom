@@ -86,7 +86,7 @@
                 echo "<a href=\"createaccount.php\" class = 'createacc'><span class = 'registrationlink btn btn-primary createaccbutt' >Create Account</span></a>";
             }
             ?>
-            <a href="" style="float: right;"> Forgot Password? </a>
+            <a href="https://changemypassword.olivet.edu/" style="float: right;"> Forgot Password? </a>
           </div>
       </div>
         <!--</ul>-->
