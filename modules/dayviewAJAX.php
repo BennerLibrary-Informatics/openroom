@@ -144,7 +144,7 @@ if ($_SESSION["username"] != "") {
 
     // INITIAL TIME PRINTS TWICE; THIS IS A QUICK FIX
     $i = 0;
-    while ($last_time->isGreaterThan($current_time)) {
+    while ($last_time->isGreaterThan($current_time) || $last_time->isEqualTo($current_time)) {
         //Format time string
         $time_format = $settings["time_format"];
         $current_time_exploded = explode(":", $current_time->getTime());
