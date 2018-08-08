@@ -178,8 +178,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <hr/>
         <br/>
         <h3>Add Special Hours</h3><br/>
-        <em>Note: Please be sure to cancel any current reservations that may be removed as a result of adding special
-            hours. This will be automated in a future version of this system.</em><br/>
+        <em>Note: Any current reservations that may be removed as a result of adding special
+            hours will be automatically cancelled by the system, and an automated cancellation message will be sent out to users.</em><br/>
         <form name="addspecialhours" action="specialhours.php" method="POST">
             <table>
                 <tr>
