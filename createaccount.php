@@ -98,7 +98,7 @@ if ($activatecode == "" && $activateusername == "") {
                 <label for = "confirm">Confirm Password: </label>
               </div>
               <div class = "col-lg-4 col-md-6 col-sm-12">
-                <input type="password" id = "confirm" name="confirm"/>
+                <input type="password" name="confirm"/>
               </div>
             </div>
 

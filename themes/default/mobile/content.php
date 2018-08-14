@@ -1,4 +1,7 @@
 <?php
+if (!isset($_GET["op"])) {
+  $_GET["op"] = "";
+}
 $op = $_GET["op"];
 
 switch ($op) {

@@ -1,9 +1,15 @@
 </div>
-<div id="themeswitch" onClick="javascript:document.cookie='theme=desktop';location.reload(true);">Switch to Desktop
-    View
+<div id="themeswitch" onClick="javascript:document.cookie='theme=desktop';location.reload(true);">Switch to Desktop View
 </div>
-<div id="footnote">Works with Apple iPod, iPhone, iPad, Google Android devices, and Windows Phones<br/>Developed by Ball
-    State University Libraries<br/>Copyright (C) 2012 Ball State University Libraries
+<br/>
+<div id="footnote">
+  <a href onclick="policiesPopUp(); return false;">Polices</a>
+  <br/>Developed by Ball State University Libraries<br/>Copyright (C) 2012 Ball State University Libraries
 </div>
 </body>
+<script language="javascript" type="text/javascript">
+  function policiesPopUp() {
+    alert('<?php echo $settings["policies"]; ?>');
+  }
+</script>
 </html>

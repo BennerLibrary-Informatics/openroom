@@ -65,6 +65,19 @@ p {
     text-decoration: none;
 }
 
+#header_title {
+    float: right;
+    font-weight: bold;
+    font-size: 15px;
+    height: 45px;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-align: center;
+}
+
 .logout {
     background-color: #FFCA9E;
 }
@@ -264,7 +277,7 @@ select {
 #footnote {
     font-size: 8px;
     margin: 0 auto;
-    text-align: right;
+    text-align: left;
     width: 320px;
 }
 

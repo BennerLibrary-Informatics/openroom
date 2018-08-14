@@ -59,12 +59,12 @@ switch ($op) {
             echo "<span id=\"instructions\">";
             if (mysqli_num_rows($available_rooms) < 1) {
                 echo "No rooms are available with these requirements. Please change the fields above and try again.";
+                $norooms = true;
             } else {
                 echo "Select a room below to make your reservation.";
+                $norooms = false;
             }
             echo "</span>";
-
-            $norooms = true;
 
             while ($available_room = mysqli_fetch_array($available_rooms)) {
                 //Can this reservation be made in this room?
@@ -99,6 +99,7 @@ switch ($op) {
                 }
             }
         } else {
+            $norooms = false;
             echo "<div id=\"error_msg\">All fields are required. Please make sure you have completed the form above and try again.</div>";
         }
         if ($norooms) {

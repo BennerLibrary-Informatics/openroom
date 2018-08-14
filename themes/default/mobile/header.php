@@ -13,8 +13,11 @@ require_once("includes/or-dbinfo.php");
 
 <body>
 <div id="heading">
-    <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom.gif" border="0" alt="OpenRoom"/>
+    <a href="index.php"><img src="<?php echo $_SESSION["themepath"]; ?>images/openroom.gif" border="0" alt="OpenRoom"/></a>
     <?php
+    if (!isset($_SESSION["systemid"])) {
+      $_SESSION["systemid"] = "";
+    }
     if ($_SESSION["systemid"] == $settings["systemid"]) {
         if (isset($_SESSION["username"])  ) {
             if($_SESSION["username"] != "") {
@@ -22,6 +25,9 @@ require_once("includes/or-dbinfo.php");
                 echo "<a id=\"navigation_button\" class=\"viewreservations\" href=\"?op=viewreservations\">My Reservations</a>";
                 echo "<a id=\"navigation_button\" class=\"makereservation\" href=\"?op=makereservation\">Reserve</a>";
             }
+        }
+        else {
+          echo "<a id=\"header_title\">Olivet Nazarene University<br/>Benner Library</a>";
         }
     }
     ?>
