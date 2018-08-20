@@ -30,6 +30,9 @@ require_once("includes/or-dbinfo.php");
           echo "<a id=\"header_title\">Olivet Nazarene University<br/>Benner Library</a>";
         }
     }
+    else {
+      echo "<a id=\"header_title\">Olivet Nazarene University<br/>Benner Library</a>";
+    }
     ?>
 </div>
 <?php include("modules/reminder.php"); ?>

@@ -42,7 +42,7 @@ switch ($op) {
                             data: "ajax_indicator=TRUE&duration=" + form.duration.value + "&roomid=" + room_id + "&capacity=" + form.size.value + "&" + msg,
                             success: function (result) {
                                 result = result.split("|");
-                                if (result[0] == "Your reservation has been made!<br/>") {
+                                if (result[0].includes("Your reservation has been made!")) {
                                     $("#makereservation").html("<div id='success_msg'>Reservation was made successfully!</div>");
                                     $("#results").html("");
                                 } else {
@@ -217,10 +217,10 @@ switch ($op) {
                     data: "reservationid=" + reservationid,
                     success: function (result) {
                         result = result.split("|");
-                        if (result[0] == "This reservation has been cancelled!") {
+                        if (result[0].includes("This reservation has been cancelled!")) {
                             window.location = "index.php";
                         } else {
-                            $("#reservation_" + reservationid).html(result[0]);
+                            $("#reservation_" + reservationid).html("<div id='error_msg'>" + result[0] + "</div>");
                         }
                     }
                 });
@@ -230,7 +230,7 @@ switch ($op) {
         <span class="mobilelabel">Your Reservations</span>
         <?php
 
-        $query = "SELECT * FROM reservations 
+        $query = "SELECT * FROM reservations
 				LEFT JOIN rooms ON reservations.roomid = rooms.roomid
 				WHERE username='" . $_SESSION["username"] . "'
 				AND
