@@ -92,7 +92,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         var starttimeint = parseInt(document.reserve.starttime.value);
         var endtimeint = starttimeint + 60*parseInt(select.options[select.selectedIndex].text.substring(0, select.options[select.selectedIndex].text.length - 5));
         var endtimedate = new Date(0);
-        endtimedate.setUTCSeconds(endtimeint);
+        endtimedate.setUTCSeconds(endtimeint + 5*60*60);
         document.getElementById("endReservationTime").innerHTML = "<label><strong>End</strong>:</label> "  + endtimedate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}).toLowerCase();
     }
 
@@ -198,7 +198,8 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
 
         urlstring = "or-reserve.php";
 
-        params = "altusername=" + altusername + "&emailconfirmation=" + emailconfirmation + "&duration=" + document.reserve.duration.value + "&roomid=" + document.reserve.roomid.value + "&starttime=" + document.reserve.starttime.value + "&capacity=" + document.reserve.capacity.value + "&fullcapacity=" + document.reserve.fullcapacity.value + "<?php
+        params = "altusername=" + altusername + "&emailconfirmation=" + emailconfirmation + "&duration=" + document.reserve.duration.value + "&roomid=" + document.reserve.roomid.value + "&starttime=" + document.reserve.starttime.value + "&capacity=" + document.reserve.capacity.value + "&fullcapacity=" + document.reserve.fullcapacity.value +
+        "<?php
             //Use the session var of optional fields to grab field values from the reserve form
             while ($optionalfield = mysqli_fetch_array($optionalfieldsarraytemp)) {
                 echo "&" . $optionalfield["optionformname"] . "=\"+ document.reserve." . $optionalfield["optionformname"] . ".value +\"";
