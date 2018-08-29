@@ -439,13 +439,14 @@ if ($username != "") {
                     $terse_msg = $verbose_msg;
                     $verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
 
-                    $gef_msg = "<html><body>" . $user_real_gef . "<b>Date and Time</b>: " . date("F j, Y", $starttime) . " " . date("g:i a", $starttime) . " - " . date("F j, Y", $endtime) . " " . date("g:i a", $endtime) . "<br/><br/><b>Username</b>: " . $username . "<br/><br/>" . $gef_msg_of . "</body></html>";
+                    $gef_msg = "<html><body>" . $user_real_gef . "<b>Date and Time</b>: " . date("F j, Y", $starttime) . " " . date("g:i a", $starttime) . " - " . date("F j, Y", $endtime) . " " . date("g:i a", $endtime) . "<br></br><b>Username: " . $username
+                    ."<br></br>" . $gef_msg_of . "</body></html>";
 
                     $bccstr = "";
                     if ($email_res_verbose != "") {
                         $bccstr = "\r\nBcc: " . $email_res_verbose;
                     }
-
+                    
                     if ($emailconfirmation != "no") {
                         mail($user_email, $settings["instance_name"] . " Reservation", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system . $bccstr);
                     } else {
