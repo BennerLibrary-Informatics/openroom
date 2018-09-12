@@ -424,6 +424,10 @@ if ($username != "") {
 
                     //Create verbose, terse and GEF messages.
                     //VERBOSE
+                    //Check if admin contact info has been set
+                    $adminContactMsg = (isset($_REQUEST["phone_number"]) && isset($_REQUEST["email_system"]))
+                                       ? "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n"
+                                       : "";
                     $verbose_msg = "Your room has been reserved!\n\n" .
                         $user_real_str .
                         "Username: " . $username . "\n\n" .
@@ -431,7 +435,7 @@ if ($username != "") {
                         "Room: " . $thisroom->name . "\n\n" .
                         "Date and Time: " . date("F j, Y g:i a", $starttime) . " - " . date("F j, Y g:i a", $endtime) . "\n\n" .
                         "Number in Group: " . $capacity . "\n\n" .
-                        "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n";
+                        $adminContactMsg;
 
                     if ($ofvalues != null) {
                       foreach ($ofvalues as $key => $ofval) {

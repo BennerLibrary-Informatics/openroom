@@ -117,7 +117,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             break;
         case "phone_number":
             $phone_number = isset($_REQUEST["phone_number"]) ? $_REQUEST["phone_number"] : "";
-            
             if ($phone_number != "" && preg_match("/^(?:1(?:[. -])?)?(?:\((?=\d{3}\)))?([2-9]\d{2})(?:(?<=\(\d{3})\))? ?(?:(?<=\d{3})[.-])?([2-9]\d{2})[. -]?(\d{4})(?: (?i:ext)\.? ?(\d{1,5}))?$/", $phone_number)) {
                 if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $phone_number . "' WHERE settingname='phone_number';")) {
                     $successmsg = "Phone Number has been updated.";
