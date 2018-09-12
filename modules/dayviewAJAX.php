@@ -27,6 +27,7 @@ echo "<script type = 'text/javascript'>
   padding-top: 102px;
   }
 </style>";
+date_default_timezone_set('America/Chicago');
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
