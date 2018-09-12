@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Chicago');
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -356,7 +358,8 @@ if ($username != "") {
                         $id_a = mysqli_fetch_array($id_res);
                         $reservationid = $id_a["reservationid"];
                         //Then insert the optional field values (reservationoptions table)
-                        foreach ($ofvalues as $key => $ofvalue) {
+                        if ($ofvalues != null) {
+                          foreach ($ofvalues as $key => $ofvalue) {
                             //Get the option's name
                             $opt_name_res = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';");
                             if ($opt_name_res) {
@@ -370,6 +373,7 @@ if ($username != "") {
                                 //Optional fields not selectable, remove reservation
                                 $errormsg .= "Error in reserving room. Please try again. If you continue to have problems, please contact an administrator.<br/>";
                             }
+                          }
                         }
                     } else {
                         //Reservation id not selectable, error out
@@ -429,11 +433,15 @@ if ($username != "") {
                         "Number in Group: " . $capacity . "\n\n" .
                         "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n";
 
-                    foreach ($ofvalues as $key => $ofval) {
+                    if ($ofvalues != null) {
+                      foreach ($ofvalues as $key => $ofval) {
                         $opname = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';"));
                         $opname = $opname["optionname"];
                         $verbose_msg .= $opname . ": " . str_replace("\\", "", $ofval) . "\n\n";
                         $gef_msg_of .= "<b>" . $opname . "</b>: " . str_replace("\\", "", $ofval) . "<br/><br/>";
+                      }
+                    } else{
+                      $gef_msg_of = "";
                     }
 
                     $terse_msg = $verbose_msg;
@@ -446,7 +454,7 @@ if ($username != "") {
                     if ($email_res_verbose != "") {
                         $bccstr = "\r\nBcc: " . $email_res_verbose;
                     }
-                    
+
                     if ($emailconfirmation != "no") {
                         mail($user_email, $settings["instance_name"] . " Reservation", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system . $bccstr);
                     } else {
