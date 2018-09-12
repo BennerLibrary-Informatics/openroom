@@ -36,8 +36,13 @@ require_once("../includes/ClockTime.php");
 require_once("../includes/or-dbinfo.php");
 //If $_POST["fromrange"] and/or $_POST["torange"] aren't set, or manually set to 0, set them to today
 //Whether they're set or not, make sure they are from 00:00:00 on the fromrange day and to 23:59:59 on the torange day so all reservations for the day appear
-$_POST["fromrange"] = (isset($_POST["fromrange"]) && $_POST["fromrange"] != 0) ? mktime(0, 0, 0, date("n", $_POST["fromrange"]), date("j", $_POST["fromrange"]), date("Y", $_POST["fromrange"])) : mktime(0, 0, 0, date("n"), date("j"), date("Y"));
-$_POST["torange"] = (isset($_POST["torange"]) && $_POST["torange"] != 0) ? mktime(23, 59, 59, date("n", $_POST["torange"]), date("j", $_POST["torange"]), date("Y", $_POST["torange"])) : mktime(23, 59, 59, date("n"), date("j"), date("Y"));
+$_POST["fromrange"] = (isset($_POST["fromrange"]) && $_POST["fromrange"] != 0)
+                      ? mktime(0, 0, 0, date("n", (int)$_POST["fromrange"]), date("j", (int)$_POST["fromrange"]), date("Y", (int)$_POST["fromrange"]))
+                      : mktime(0, 0, 0, date("n"), date("j"), date("Y"));
+    echo $_POST["fromrange"];
+$_POST["torange"] = (isset($_POST["torange"]) && $_POST["torange"] != 0)
+                    ? mktime(23, 59, 59, date("n", (int)$_POST["torange"]), date("j", (int)$_POST["torange"]), date("Y", (int)$_POST["torange"]))
+                    : mktime(23, 59, 59, date("n"), date("j"), date("Y"));
 $_POST["group"] = (isset($_POST["group"])) ? $_POST["group"] : "";
 if ($_POST["group"] == "") {
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups ORDER BY roomgroupid ASC;");
@@ -270,7 +275,8 @@ if ($_SESSION["username"] != "") {
                   $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime()) . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
                   //$collision = "<img style=\"cursor: pointer;\" src=\"". $_SESSION["themepath"] ."images/reservebutton.png\" border=\"0\" onClick=\"showPopUp(this,'". $info ."');\" />";
                   $collision = "<span title=\"Capacity: $room->capacity \nDescription: $room->description\" id=\"openList\" class=\"glyphicon glyphicon-stop\"  style=\"cursor: pointer;\"
-                                onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','" . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
+                                onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','"
+                                . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
               } elseif (!$rescol) {
                   //Display "closed" button that is not interactive.
                   //$collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";

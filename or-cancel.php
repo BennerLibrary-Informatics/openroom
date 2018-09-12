@@ -69,7 +69,7 @@ if (($isadministrator || $username == $res_username) && $username != "") {
             //Create verbose, terse and GEF messages.
             //VERBOSE
             $verbose_msg = "Your reservation for Room " . $roomname . " from " . date("F j, Y g:i a", $starttime) . " to " . date("F j, Y g:i a", $endtime) . " has been cancelled.<br/><br/>" . "Thank you for using " . $settings["instance_name"] . "! \n\n";
-            if(isset($settings["phone_number"])  && !isset($settings["email_system"])){ 
+            if(isset($settings["phone_number"])  && !isset($settings["email_system"])){
                 $verbose_msg .= "Please call ". $settings["phone_number"] . " if you need further assistance";
             }
             else if (!isset($settings["phone_number"])  && isset($settings["email_system"])){

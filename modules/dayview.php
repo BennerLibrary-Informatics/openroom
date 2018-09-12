@@ -92,7 +92,8 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         var starttimeint = parseInt(document.reserve.starttime.value);
         var endtimeint = starttimeint + 60*parseInt(select.options[select.selectedIndex].text.substring(0, select.options[select.selectedIndex].text.length - 5));
         var endtimedate = new Date(0);
-        endtimedate.setUTCSeconds(endtimeint + 5*60*60);
+        //endtimeint begins at 12am, but library opens at 7am hence the 5 below
+        endtimedate.setUTCSeconds(endtimeint);
         document.getElementById("endReservationTime").innerHTML = "<label><strong>End</strong>:</label> "  + endtimedate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}).toLowerCase();
     }
 
@@ -167,7 +168,6 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
             }
         }
         if (req != false) var xmlhttp = req;
-
         var starttime = parseInt(document.reserve.starttime.value);
         var duration = parseInt(document.reserve.duration.value);
         if (document.reserve.altusername) {
