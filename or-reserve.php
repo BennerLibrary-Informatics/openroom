@@ -358,7 +358,7 @@ if ($username != "") {
                         $id_a = mysqli_fetch_array($id_res);
                         $reservationid = $id_a["reservationid"];
                         //Then insert the optional field values (reservationoptions table)
-                        if ($ofvalues != null) {
+                        if (isset($ofvalues)) {
                           foreach ($ofvalues as $key => $ofvalue) {
                             //Get the option's name
                             $opt_name_res = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';");
@@ -437,7 +437,7 @@ if ($username != "") {
                         "Number in Group: " . $capacity . "\n\n" .
                         $adminContactMsg;
 
-                    if ($ofvalues != null) {
+                    if (isset($ofvalues)) {
                       foreach ($ofvalues as $key => $ofval) {
                         $opname = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';"));
                         $opname = $opname["optionname"];
@@ -483,7 +483,7 @@ if ($username != "") {
 
                         } else {
                             $thecond = $settings["email_condition"];
-                            if ($ofvalues[$thecond] == $settings["email_condition_value"]) {
+                            if (isset($ofvalues) && $ofvalues[$thecond] == $settings["email_condition_value"]) {
                                 mail($email_cond_verbose, $settings["instance_name"] . " Reservation (Condition Met)", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                                 mail($email_cond_terse, $settings["instance_name"] . " Reservation (Condition Met)", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                                 mail($email_cond_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
