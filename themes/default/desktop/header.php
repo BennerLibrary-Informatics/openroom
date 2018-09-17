@@ -49,12 +49,12 @@ require_once("includes/or-dbinfo.php");
 
     if ($settings["login_method"] == "normal" && isset($_SESSION["username"])) {
          if($_SESSION["username"] != "") {
-            echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;|";
+            echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;";
          }
     }
     if(isset($_SESSION["username"])) {
         if ($_SESSION["username"] != "") {
-            echo "&nbsp;<a href=\"modules/logout.php\">Logout</a>";
+            echo "|&nbsp;<a href=\"modules/logout.php\">Logout</a>";
         }
     }
     }

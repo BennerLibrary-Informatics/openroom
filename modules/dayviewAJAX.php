@@ -40,7 +40,6 @@ require_once("../includes/or-dbinfo.php");
 $_POST["fromrange"] = (isset($_POST["fromrange"]) && $_POST["fromrange"] != 0)
                       ? mktime(0, 0, 0, date("n", (int)$_POST["fromrange"]), date("j", (int)$_POST["fromrange"]), date("Y", (int)$_POST["fromrange"]))
                       : mktime(0, 0, 0, date("n"), date("j"), date("Y"));
-    echo $_POST["fromrange"];
 $_POST["torange"] = (isset($_POST["torange"]) && $_POST["torange"] != 0)
                     ? mktime(23, 59, 59, date("n", (int)$_POST["torange"]), date("j", (int)$_POST["torange"]), date("Y", (int)$_POST["torange"]))
                     : mktime(23, 59, 59, date("n"), date("j"), date("Y"));

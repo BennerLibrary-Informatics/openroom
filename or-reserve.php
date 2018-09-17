@@ -42,6 +42,8 @@ if ($username != "") {
         //information to pull the correct fields from POST and to determine required fields
         $errormsg = "";
 
+        $ofvalues = [];
+
         if ($onlychecking != "TRUE") {
             $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields ORDER BY optionorder ASC;");
             while ($optionalfield = mysqli_fetch_array($optionalfieldsarraytemp)) {

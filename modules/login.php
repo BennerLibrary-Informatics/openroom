@@ -76,20 +76,23 @@
         </div>
       </div>
       <div class = "form-group row">
-        <div class = "col-lg-4 col-md-6 col-sm-6 offset-lg-2">
+        <div class = "col-lg-4 offset-lg-4">
           <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
             onclick="ajaxAuthenticate()"/>
         </div>
+        <!--commenting out section because we are going to use LDAP instead of normal login, so users
+            don't need to be shown a 'create account' button
         <div class = "col-lg-4 col-md-6 col-sm-6 ">
             <?php
-            if ($settings["login_method"] == "normal") {
-                echo "<a href=\"createaccount.php\" class = 'createacc'><span class = 'registrationlink btn btn-primary createaccbutt' >Create Account</span></a>";
-            }
+            //if ($settings["login_method"] == "normal") {
+            //    echo "<a href=\"createaccount.php\" class = 'createacc'><span class = 'registrationlink btn btn-primary createaccbutt' >Create Account</span></a>";
+            //}
             ?>
-            <a href="https://changemypassword.olivet.edu/" style="float: right;"> Forgot Password? </a>
-          </div>
+        </div>-->
       </div>
-        <!--</ul>-->
+      <div class="col-lg-4 offset-lg-4">
+        <a href="https://changemypassword.olivet.edu/" style="float: right;"> Forgot Password?</a>
+      </div>
     </form>
-    <div id="errormessage"></div>
+    <br><div id="errormessage"></div>
 </div>

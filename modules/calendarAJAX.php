@@ -17,7 +17,16 @@ $nextyear = ($month == 12) ? $year + 1 : $year;
 $first_day = mktime(0, 0, 0, $month, 1, $year);
 $title = date('F', $first_day);
 $blank = date('w', $first_day);
-$days_in_month = cal_days_in_month(0, $month, $year);
+
+//cal_days_in_month() function doesn't appear to be supported in php 7.0.7
+if (!function_exists('cal_days_in_month')) {
+        function cal_days_in_month($calendar, $month, $year) {
+          return date('t', mktime(0, 0, 0, $month, 1, $year));
+        }
+}
+else {
+    $days_in_month = cal_days_in_month(0, $month, $year);
+}
 
 ?>
 <table id="calendarTable">
