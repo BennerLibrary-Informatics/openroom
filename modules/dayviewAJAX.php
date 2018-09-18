@@ -155,6 +155,7 @@ if ($_SESSION["username"] != "") {
         $current_time_exploded = explode(":", $current_time->getTime());
         $current_time_tf = mktime($current_time_exploded[0], $current_time_exploded[1], $current_time_exploded[2], date("n", $_POST["fromrange"]), date("j", $_POST["fromrange"]), date("Y", $_POST["fromrange"]));
         $time_str = date($time_format, $current_time_tf);
+        $end_time_str = date($time_format, strtotime("+30 minutes", $current_time_tf));
         //PRINT HOUR START HOUR ON SECOND ITERATION
         if($i >= 0){
           $dvout .= "<div class = 'row'>";
@@ -256,8 +257,8 @@ if ($_SESSION["username"] != "") {
                   //Display "reserve" button that shows reservation form.
                   $limit_total = unserialize($settings["limit_total"]);
                   $limit_frequency = unserialize($settings["limit_frequency"]);
-                  $current_duration = $settings["interval"];
-                  $durationhtml = "<option disabled selected value>-Choose-</option>";
+                  $current_duration = $settings["interval"] + 30;
+                  $durationhtml = "<option value=\'" . "30 mins". "\'>" . 30 . " mins</option>";
                   while ($current_duration <= $settings["limit_duration"]) {
                       $durationhtml .= "<option value=\'" . $current_duration . "\'>" . $current_duration . " mins</option>";
                       $current_duration += $settings["interval"];
@@ -272,11 +273,12 @@ if ($_SESSION["username"] != "") {
                   if ($isadministrator == "TRUE") {
                       $altusernamestr = "<strong>Username</strong>: <style> input[type=text] {color: black;} </style> <input type=\'text\' name=\'altusername\' color=\'black\' /><br/><strong>Email Confirmation</strong>: <select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
                   }
-                  $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime()) . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
+                  $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime())
+                  . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
                   //$collision = "<img style=\"cursor: pointer;\" src=\"". $_SESSION["themepath"] ."images/reservebutton.png\" border=\"0\" onClick=\"showPopUp(this,'". $info ."');\" />";
                   $collision = "<span title=\"Capacity: $room->capacity \nDescription: $room->description\" id=\"openList\" class=\"glyphicon glyphicon-stop\"  style=\"cursor: pointer;\"
                                 onClick=\"showPopUpReserve(this,'" . $room->name . "','" . $time_str . "','" . $_POST["group"] . "','" . $altusernamestr . "','" . $room->id . "','" . strtotime($currentmdy . " " . $current_time->getTime()) . "','"
-                                . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "');\" />\n";
+                                . $capacity . "','" . $durationhtml . "','" . $capacity_string . "','" . $optionalfields_string . "','" . $end_time_str . "');\" />\n";
               } elseif (!$rescol) {
                   //Display "closed" button that is not interactive.
                   //$collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
