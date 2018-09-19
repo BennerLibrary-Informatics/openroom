@@ -54,8 +54,9 @@ $getdatarange = include("../or-getdatarange.php");
 $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
-$current_time = new ClockTime((float)$settings["starttime"] ?? 0, 0, 0);
-$last_time = new ClockTime((float)$settings["endtime"] ?? 0, 0, 0);
+$current_time = new ClockTime($settings["starttime"] ?? 0, 0, 0);
+$last_time = new ClockTime($settings["endtime"] ?? 0, 0, 0);
+
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
 if ($_SESSION["username"] != "") {
@@ -148,7 +149,7 @@ if ($_SESSION["username"] != "") {
    $dvout .= "</div></div>";
 
     // INITIAL TIME PRINTS TWICE; THIS IS A QUICK FIX
-    $i = 0;
+    $i = -1;
     while ($last_time->isGreaterThan($current_time) || $last_time->isEqualTo($current_time)) {
         //Format time string
         $time_format = $settings["time_format"];
