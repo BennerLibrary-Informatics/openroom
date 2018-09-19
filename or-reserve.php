@@ -439,6 +439,8 @@ if ($username != "") {
                         "Number in Group: " . $capacity . "\n\n" .
                         $adminContactMsg;
 
+                    $gef_msg_of = "";
+
                     if (isset($ofvalues)) {
                       foreach ($ofvalues as $key => $ofval) {
                         $opname = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';"));
@@ -446,8 +448,6 @@ if ($username != "") {
                         $verbose_msg .= $opname . ": " . str_replace("\\", "", $ofval) . "\n\n";
                         $gef_msg_of .= "<b>" . $opname . "</b>: " . str_replace("\\", "", $ofval) . "<br/><br/>";
                       }
-                    } else{
-                      $gef_msg_of = "";
                     }
 
                     $terse_msg = $verbose_msg;
@@ -484,7 +484,7 @@ if ($username != "") {
                             mail($email_cond_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
 
                         } else {
-                            $thecond = $settings["email_condition"];
+                            $thecond = isset($settings["email_condition"]) ? $settings["email_condition"] : "";
                             if (isset($ofvalues) && $ofvalues[$thecond] == $settings["email_condition_value"]) {
                                 mail($email_cond_verbose, $settings["instance_name"] . " Reservation (Condition Met)", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                                 mail($email_cond_terse, $settings["instance_name"] . " Reservation (Condition Met)", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
