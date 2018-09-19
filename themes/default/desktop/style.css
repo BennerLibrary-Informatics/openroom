@@ -475,6 +475,7 @@ label{
   text-align: center;
   color: black;
   border-radius: 100px;
+  line-height: 25px;
 }
 .bottombutton2{
   position: relative;
@@ -485,6 +486,7 @@ label{
   text-align: center;
   color: black;
   border-radius: 100px;
+  line-height: 25px;
 }
 .roomtitle{
   font-size: 16pt;
@@ -507,7 +509,7 @@ label{
 }
 
 #popupClose {
-    background-color: #ffaaaa;
+    background-color: slategrey;
     border: 1px #000000 dotted;
     cursor: pointer;
     float: right;
