@@ -67,7 +67,7 @@ else {
 
     $day_num = 1;
 
-    while ($day_num <= $days_in_month) {
+    while ($day_num <= date('t', mktime(0, 0, 0, $month, 1, $year)) {
         $classString = "calendarday";
         if ($day_num == date('d', $date) && $month == date('m', $date) && $year == date('Y', $date)) $classString = "currentcalendarday";
         $fromrange = mktime(0, 0, 0, $month, $day_num, $year);
