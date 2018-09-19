@@ -48,7 +48,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         /*&popup.innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">Close<\/span><\/div>" + content;*/
     }
 
-    function showPopUpReserve(obj, roomname, time_str, group, altusernamestr, roomid, currentmdyandtime, capacity, durationhtml, capacity_string, optionalfields_string) {
+    function showPopUpReserve(obj, roomname, time_str, group, altusernamestr, roomid, currentmdyandtime, capacity, durationhtml, capacity_string, optionalfields_string, end_time_str) {
         var popup = document.getElementById("popup");
         popup.style.visibility = "visible";
         popup.style.display = "inline";
@@ -75,10 +75,11 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         if (popleft >= limit) {
             popleft = popleft - popup.clientWidth;
         }
+
         popup.style.left = popleft + "px";
         popup.style.top = poptop + "px";
         popup.innerHTML = "<div class = 'col-12'><div class = 'col-12 text-center'><label class = 'roomtitle'>" /*<div id=\"popupClose\"><\/div>*/ + roomname + "</label></div>"
-        + "<div class = 'row'><div class = 'col-sm-6'><label><strong>Start</strong>:</label> " + time_str + "</div> <div id = 'endReservationTime' class = 'col-sm-6'><label><strong>End</strong>:</label> ---" + "</div> <div class = 'col-sm-6'></div></div>"
+        + "<div class = 'row'><div class = 'col-sm-6'><label><strong>Start</strong>:</label> " + time_str + "</div> <div id = 'endReservationTime' class = 'col-sm-6'><label><strong>End</strong>:</label>" + end_time_str + "</div> <div class = 'col-sm-6'></div></div>"
         + "<form name=\'reserve\' action=\'javascript:reserve(" + group + ");\'>"
         + "<div class = 'row'><div class = 'col-sm-6'><label>Duration</label></strong>: <select name=\'duration\' onchange=\'changeEndReservationTime(this);\'>"  + durationhtml + "</select></div>"
         + "<div class = 'col-sm-6'><label></span>Members</strong>: </label><select name=\'capacity\'>" + capacity_string + "</select></div></div>"
