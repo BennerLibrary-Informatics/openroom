@@ -86,7 +86,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         + "<hr><div class = 'row col-12'>" + altusernamestr + "<input type=\'hidden\' name=\'roomid\' value=\'"+ roomid + "\' />"
           + "<input type=\'hidden\' name=\'starttime\' value=\'"+ currentmdyandtime + "\' />"
           + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /><strong></div><div class = 'row col-12'"+ optionalfields_string + "</div>"
-        + "<hr><div class = 'row'><div class = 'col-6 text-center bottombuttons'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'col-6 text-center'><a id = '' href=\'javascript:closePopUp();\'>Cancel</a></div></div></form>";
+        + "<hr><div class = 'row'><div class = 'col-6 text-center bottombutton1'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'col-6 text-center bottombutton2'><a id = '' href=\'javascript:closePopUp();\'>Cancel</a></div></div></form>";
     }
 
     function changeEndReservationTime(select) {
