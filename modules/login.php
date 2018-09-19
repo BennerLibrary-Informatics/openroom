@@ -22,6 +22,7 @@
         }
 
         xmlHttp.onreadystatechange = function () {
+            alert("Hello");
             if (xmlHttp.readyState == 4) {
                 var xmldoc = xmlHttp.responseXML;
                 var authenticated = xmldoc.getElementsByTagName('authenticated')[0].firstChild.nodeValue;

@@ -5,7 +5,7 @@
   <hr/>
 </div>
 <div class = "copyright">
-  <a href onclick="policiesPopUp(); return false;">Polices</a><br/>
+  <a href onclick="policiesPopUp(); return false;">Policies</a><br/>
   Developed by Ball State University Libraries<br/> <!--Put inside div block-->
   Copyright (C) 2012 Ball State University Libraries
 </div>

@@ -15,7 +15,7 @@ require_once("includes/or-dbinfo.php");
 	<span class="username">
 	<?php
     if ($_SESSION["systemid"] == $settings["systemid"]){
-    echo isset($_SESSION["displayname"]) ? "<strong>Logged in as</strong>: " . $_SESSION["displayname"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
+    echo isset($_SESSION["displayname"]) ? $_SESSION["displayname"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
     echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
     if ($settings["login_method"] == "normal" && $_SESSION["username"] != "") {
         echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;|";
@@ -32,10 +32,10 @@ require_once("includes/or-dbinfo.php");
         <img src="<?php echo $_SESSION["themepath"]; ?>images/openroom09.png" alt="OpenRoom"/>
         <br/>
 
-        <?php include("modules/calendar.php"); ?>
+        <?php include("modules/legend.php"); ?>
         <br/>
 
-        <?php include("modules/legend.php"); ?>
+        <?php include("modules/calendar.php"); ?>
         <br/>
 
         <?php include("modules/roomdetails.php"); ?>

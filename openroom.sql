@@ -254,7 +254,7 @@ INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES
   ('limit_window', 'a:2:{i:0;i:0;i:1;s:8:"7/1/2010";}'),
   ('login_method', 'normal'),
   ('phone_number', ''),
-  ('policies', 'The default polices have not been set by the admin.'),
+  ('policies', 'The default policies have not been set by the admin.'),
   ('remindermessage', ''),
   ('starttime', '08:00'),
   ('systemid', '0000000001'),

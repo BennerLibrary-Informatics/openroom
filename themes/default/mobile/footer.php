@@ -3,7 +3,7 @@
 </div>
 <br/>
 <div id="footnote">
-  <a href onclick="policiesPopUp(); return false;">Polices</a>
+  <a href onclick="policiesPopUp(); return false;">Policies</a>
   <br/>Developed by Ball State University Libraries<br/>Copyright (C) 2012 Ball State University Libraries
 </div>
 </body>
