@@ -46,7 +46,8 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
                 }
                 //Change current obj to clicked class
                 obj.className = "clickedday";
-                showHideDiv('calendarDiv');
+                //comment out this line to prevent auto-closing of calendar display after selection
+                //showHideDiv('calendarDiv');
                 //Save previous obj for later
                 prevObj = obj;
             }
