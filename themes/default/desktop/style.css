@@ -55,18 +55,18 @@ body {
 }
 
 #headerText{
-  margin-left: -10px;
+  margin-left: -25px;
 }
 .openroomtitle{
   font-family: "PT Serif Caption" ;
-  font-size: 35px ;
+  font-size: 25px ;
   text-align: left;
-  margin-top: 6px;
+  margin-top: 18px;
 }
 
 .ONUtitle{
   font-family: "PT Serif Caption";
-  margin-top: -8px;
+  margin-top: -5px;
   margin-left: 1px;
   font-size: 17px;
   text-align: left;
