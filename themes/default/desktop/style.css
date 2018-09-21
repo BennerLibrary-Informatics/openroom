@@ -400,6 +400,7 @@ label{
 .grouptab {
     background-color: #FFFFFF;
     border-style: outset;
+    border-color: lightgray;
     border-radius: 15px;
     font-size: 15px;
     width: auto;
@@ -410,7 +411,7 @@ label{
 }
 
 .groups{
-  background-color: slategrey;
+  background-color: lightgray;
   cursor: pointer;
   font-weight: bold;
   padding: 2px;
@@ -421,6 +422,7 @@ label{
 .selected {
     background-color: white;
     border-style: inset;
+    border-color: black;
     border-radius: 15px;
     width: auto;
     margin-top: 5px;
