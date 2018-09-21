@@ -22,14 +22,13 @@
         }
 
         xmlHttp.onreadystatechange = function () {
-            alert("Hello");
             if (xmlHttp.readyState == 4) {
                 var xmldoc = xmlHttp.responseXML;
                 var authenticated = xmldoc.getElementsByTagName('authenticated')[0].firstChild.nodeValue;
                 var errormessage = xmldoc.getElementsByTagName('errormessage')[0].firstChild;
 
                 if (authenticated == "false") {
-                    if (errormessage.nodeValue == "No such object") errormessage.nodeValue = "Incorrect username or password.";
+                    if (errormessage.nodeValue == "No such object" || errormessage.nodeValue == "Sorry, authentication failed.") errormessage.nodeValue = "Incorrect username or password.";
                     document.getElementById('errormessage').style.visibility = "visible";
                     document.getElementById('errormessage').innerHTML = ("<strong>Error: <\/strong>" + errormessage.nodeValue);
                 }
