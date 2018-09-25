@@ -189,7 +189,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
             if (xmlhttp.readyState == 4) {
                 var brokenstring = xmlhttp.responseText.split("|");
                 if (brokenstring[0] == "Error: User is not logged in.") location.reload(true);
-                document.getElementById("popup").innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">Close<\/span><\/div>" + brokenstring[0];
+                document.getElementById("popup").innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">x<\/span><\/div>" + brokenstring[0];
                 dayviewer(starttime, brokenstring[2], groupid, '');
             }
             else {

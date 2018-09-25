@@ -512,13 +512,16 @@ label{
 
 #popupClose {
     background-color: slategrey;
-    border: 1px #000000 dotted;
+    border: 1px #000000 solid;
     cursor: pointer;
     float: right;
     font-weight: bold;
     margin: 5px;
     padding: 3px;
-    text-align: right;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 10px;
 }
 
 .requiredmarker {
