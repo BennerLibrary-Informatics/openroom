@@ -29,7 +29,8 @@
                 var errormessage = xmldoc.getElementsByTagName('errormessage')[0].firstChild;
 
                 if (authenticated == "false") {
-                    if (errormessage.nodeValue == "No such object" || errormessage.nodeValue == "Sorry, authentication failed.") errormessage.nodeValue = "Incorrect username or password.";
+                    alert(errormessage.nodeValue);
+                    if (errormessage.nodeValue == "No such object" || errormessage.nodeValue == "Sorry, authentication failed." || errormessage.nodeValue == "Incorrect username or password. Please try again.") errormessage.nodeValue = "Incorrect username or password.";
                     document.getElementById('errormessage').style.visibility = "visible";
                     document.getElementById('errormessage').innerHTML = ("<strong>Error: <\/strong>" + errormessage.nodeValue);
                 }
