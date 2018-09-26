@@ -399,7 +399,7 @@ label{
 
 .grouptab {
     background-color: #FFFFFF;
-    border-style: outset;
+    border-style: solid;
     border-color: lightgray;
     border-radius: 15px;
     font-size: 15px;
@@ -412,6 +412,7 @@ label{
 
 .groups{
   background-color: lightgray;
+  border-style: solid;
   cursor: pointer;
   font-weight: bold;
   padding: 2px;
@@ -421,7 +422,7 @@ label{
 
 .selected {
     background-color: white;
-    border-style: inset;
+    border-style: solid;
     border-color: black;
     border-radius: 15px;
     width: auto;
@@ -450,6 +451,7 @@ label{
 .dayviewTime {
     font-weight: bold;
     font-size: 15pt;
+    text-align: right;
 }
 
 .dayviewTD {

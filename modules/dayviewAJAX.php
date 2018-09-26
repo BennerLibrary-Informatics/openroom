@@ -110,7 +110,9 @@ if ($_SESSION["username"] != "") {
         $dvout .=  "</div>";
         $dvout .= $group_str;
         //$dvout .= .$group_str;
-        $dvout .=  "<div class =\"table-responsive\">";
+        $dvout .= "<div>";
+        //or use this line instead to have the horizontal scrollbar at bottom of screen
+        //$dvout .=  "<div class =\"table-responsive\">";
         $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
     //Create optional field form items string for reservation form
     //Select all records from optionalfields table in order of optionorder ascending
@@ -142,7 +144,7 @@ if ($_SESSION["username"] != "") {
         }
     }
     //Construct table header
-    $dvout .= "<div class = 'row' style='text-decoration: underline;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>Rooms: </b></label></div>";
+    $dvout .= "<div class = 'row' style='text-decoration: underline;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rooms: </b></label></div>";
    foreach ($xmlroominfo->room as $room) {
        $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
      }
