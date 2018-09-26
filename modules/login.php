@@ -26,7 +26,6 @@
             if (xmlHttp.readyState == 4) {
                 var xmldoc = xmlHttp.responseXML;
                 var authenticated = xmldoc.getElementsByTagName('authenticated')[0].firstChild.nodeValue;
-                alert(authenticated);
                 var errormessage = xmldoc.getElementsByTagName('errormessage')[0].firstChild;
 
                 if (authenticated == "false") {
@@ -35,6 +34,7 @@
                     document.getElementById('errormessage').innerHTML = ("<strong>Error: <\/strong>" + errormessage.nodeValue);
                 }
                 else {
+                    alert("login failed");
                     window.location.href = "index.php";
                 }
             }
