@@ -25,11 +25,9 @@
 
             if (xmlHttp.readyState == 4) {
                 var xmldoc = xmlHttp.responseXML;
-                var authenticated = false;
                 var authenticated = xmldoc.getElementsByTagName('authenticated')[0].firstChild.nodeValue;
+                if (typeof authenticated == "null" || typeof authenticated == "undefined") authenticated = "false";
                 var errormessage = xmldoc.getElementsByTagName('errormessage')[0].firstChild;
-                var ldaperror = xmldoc.getElementsByTagName('authresponse')[0];
-                console.log(ldaperror);
 
                 if (authenticated == "false") {
                     errormessage.nodeValue = "Incorrect username or password.";
