@@ -219,7 +219,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 echo "\" /><input name=\"roomname\" type=\"text\" class=\"medtxt\" value=\"" . $room["roomname"] . "\" /></td><td><input class=\"medtxt\" type=\"text\" name=\"roomcapacitymin\" value=\"" . $room["roomcapacitymin"] . "\"/></td><td>";
                 echo "</td><td><input class=\"medtxt\" type=\"text\" name=\"roomcapacitymax\" value=\"" . $room["roomcapacitymax"] . "\"/></td><td>";
                 echo $roomgroupstr . "</td><td style=\"width:195px\"><textarea class=\"textareaexpand\" rows=\"1\" cols=\"30\" name=\"roomdescription\">" . $room["roomdescription"] . "</textarea></td><td><input type=\"submit\" value=\"Save Changes\" /></form></td>";
-                echo "<td><a href=\"javascript:confirmdelete( " . $roomid . ",'" . $room["roomname"] . "')\">Delete Room</a></td></tr>\n";
+                echo "<td><a href=\"javascript:confirmdelete( " . $roomid . ",'" . $room["roomname"] . "')\"><img src=\"../themes/default/desktop/images/fa trash-o.png\" alt=\"Delete Room\" style=\"height: 24px;\"></a></td></tr>\n";
 
             }
             ?>
