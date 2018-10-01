@@ -65,7 +65,7 @@
   <hr/>
 </div>
 <div class = "copyright">
-  <button id="policiesButton">Policies</button>
+  <a href onclick="policiesPopUp(); return false;">Policies</a>
 
   <!-- The Modal -->
   <div id="policiesModal" class="modal">
@@ -121,14 +121,11 @@
 // Get the modal
 var modal = document.getElementById('policiesModal');
 
-// Get the button that opens the modal
-var btn = document.getElementById("policiesButton");
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-btn.onclick = function() {
+function policiesPopUp() {
     modal.style.display = "block";
 }
 
