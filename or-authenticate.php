@@ -55,10 +55,6 @@ require_once('ldap-authenticate.php');
  */
 function AuthenticateUser(string $username, string $password, array $settings): bool
 {
-    /*if (!ConnectLdap($username, $password, $settings) && preg_match('/@olivet.edu/', $username)) {
-      $emailArray = preg_split('/@olivet.edu/', $username);
-      $username = $emailArray[0];
-    }*/
     if (ConnectLdap($username, $password, $settings)) {
         return true;
     }
