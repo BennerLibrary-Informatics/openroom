@@ -239,12 +239,12 @@ if ($_SESSION["username"] != "") {
                               $strip_rep = array("\'", "\'");
                               $info .= "<strong>" . $option->optionname . "</strong>: " . str_replace($strip, $strip_rep, $option->optionvalue) . "<br/>";
                           }
-                          if ($_SESSION["username"] != (string)$reservation->username && $isadministrator != "TRUE") {
+                          if ($_SESSION["username"] != (string)$reservation->username && $isadministrator != "TRUE" && $issupervisor != "TRUE") {
                               //Display "taken" button that shows public info.
                               //$collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
                               $collision = "<span id=\"takenList\">R</span>";
                           } else {
-                              if ($isadministrator == "TRUE") {
+                              if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
                                 $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\"></span>";
                               }
                               else {
@@ -273,7 +273,7 @@ if ($_SESSION["username"] != "") {
                   }
                   //If this user is an administrator, give them the option of inputting and altusername
                   $altusernamestr = "";
-                  if ($isadministrator == "TRUE") {
+                  if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
                       $altusernamestr = "<strong>Username</strong>: <style> input[type=text] {color: black;} </style> <input type=\'text\' name=\'altusername\' color=\'black\' /><br/><strong>Email Confirmation</strong>: <select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
                   }
                   $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime())

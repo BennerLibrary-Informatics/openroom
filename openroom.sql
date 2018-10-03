@@ -101,6 +101,19 @@ CREATE TABLE IF NOT EXISTS `reporters` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `supervisors`
+--
+
+CREATE TABLE IF NOT EXISTS `supervisors` (
+  `username` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`username`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `reservationoptions`
 --
 

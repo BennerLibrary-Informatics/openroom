@@ -10,6 +10,7 @@ unset($_SESSION["emailaddress"]);
 unset($_SESSION["displayname"]);
 unset($_SESSION["isadministrator"]);
 unset($_SESSION["isreporter"]);
+unset($_SESSION["issupervisor"]);
 
 header("Location:../index.php");
 ?>
