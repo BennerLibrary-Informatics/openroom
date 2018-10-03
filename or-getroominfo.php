@@ -4,13 +4,13 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 /*
  * or-getroominfo.php(POST:ajax_indicator,[roomid],[roomgroup],[fromrange],[torange])
- * 
+ *
  * Returns: By default: XML representation of all rooms including room groupings, room features, room's normal hours for each weekday, etc.
  * 		If [roomid] is supplied, returns this information specifically for that room.
  * 		If [fromrange] and [torange] are supplied as timestamps, returns this information, and room hour information associated with those dates, including any special hours, for all rooms.
- * 
+ *
  * Note: In order to return special room hours (such as closures or holiday hours) it is REQUIRED to supply [fromrange] and [torange]. Failure to supply both values will result in only default hours.
- * 
+ *
  * <roominfo>
  * 	<room position="">					Only list room if id is provided, list all rooms if none provided
  * 		<id>x</id>
@@ -66,6 +66,9 @@ $username = isset($_SESSION["username"]) ? $_SESSION["username"] : "";
 
 //Check if user is an administrative user. Set $isadministrator accordingly.
 $isadministrator = isset($_SESSION["isadministrator"]) ? $_SESSION["isadministrator"] : "FALSE";
+
+//Check if user is a supervisor user. Set $issupervisor accordingly.
+$issupervisor = isset($_SESSION["issupervisor"]) ? $_SESSION["issupervisor"] : "FALSE";
 
 //Check AJAX use indication.
 $ajax_indicator = isset($_POST["ajax_indicator"]) ? $_POST["ajax_indicator"] : "TRUE";

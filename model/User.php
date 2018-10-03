@@ -11,6 +11,7 @@ class User
     private $activationCode;
     private $isAdministrator;
     private $isReporter;
+    private $isSupervisor;
 
     public function __construct($username)
     {
@@ -43,9 +44,14 @@ class User
         } else {
             $this->isReporter = false;
         }
+        if (Supervisor::exists($this->username)) {
+            $this->isSupervisor = true;
+        } else {
+            $this->isSupervisor = false;
+        }
         // if(!User::exists($this->username))
         // {
-        //     try 
+        //     try
         //     {
         //         $db = Db::getInstance();
         //         echo $this->username . " " . $this->password ." " . $this->emailaddress ." " . $this->activationCode;
@@ -55,7 +61,7 @@ class User
         //         $req->bindParam(':emailaddress', $this->emailaddress, \PDO::PARAM_STR, 255);
         //         $req->bindParam(':actvationCode', $this->activationCode, \PDO::PARAM_STR, 255);
         //         $req->execute();
-        //     } catch (PDOException $e) 
+        //     } catch (PDOException $e)
         //     {
         //         echo 'Database connection has failed. Contact system administrator to resolve this issue!<br>';
         //         $e->getMessage();
@@ -159,6 +165,11 @@ class User
         return $this->isReporter;
     }
 
+    public function get_isSupervisor()
+    {
+        return $this->isSupervisor;
+    }
+
     function IsNotNullOrEmptyString($question)
     {
         return (!isset($question) || trim($question) === '');
@@ -188,6 +199,11 @@ class User
             $this->isReporter = true;
         } else {
             $this->isReporter = false;
+        }
+        if (Supervisor::exists($this->username)) {
+            $this->isSupervisor = true;
+        } else {
+            $this->isSupervisor = false;
         }
     }
 }

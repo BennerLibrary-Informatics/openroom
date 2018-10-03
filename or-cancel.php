@@ -7,12 +7,13 @@ require_once("includes/or-dbinfo.php");
 $username = isset($_SESSION["username"]) ? $_SESSION["username"] : "";
 //Check if user is an administrative user. Set $isadministrator accordingly.
 $isadministrator = isset($_SESSION["isadministrator"]) ? $_SESSION["isadministrator"] : "FALSE";
+$issupervisor = isset($_SESSION["issupervisor"]) ? $_SESSION["issupervisor"] : "FALSE";
 $reservationid = isset($_POST["reservationid"]) ? $_POST["reservationid"] : 0;
 $reservation_res = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations WHERE reservationid='" . $reservationid . "';");
 $reservation = mysqli_fetch_array($reservation_res);
 $res_username = $reservation["username"];
 $errormsg = "";
-if (($isadministrator || $username == $res_username) && $username != "") {
+if (($isadministrator || $username == $res_username || $issupervisor) && $username != "") {
     //Simply transfer this reservation to the cancelled table. Its ID will still be used when reporting and checking its optional fields (which are left alone).
     $cancel_res = mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO cancelled(reservationid,start,end,roomid,username,timeofrequest) VALUES('" . $reservationid . "','" . $reservation["start"] . "','" . $reservation["end"] . "','" . $reservation["roomid"] . "','" . $reservation["username"] . "','" . $reservation["timeofrequest"] . "');");
     //Then delete it from the reservations table

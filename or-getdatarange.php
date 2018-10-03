@@ -34,6 +34,9 @@ $username = isset($_SESSION["username"]) ? $_SESSION["username"] : "";
 //Check if user is an administrative user. Set $isadministrator accordingly.
 $isadministrator = isset($_SESSION["isadministrator"]) ? $_SESSION["isadministrator"] : "FALSE";
 
+//Check if user is a supervisor user. Set $issupervisor accordingly.
+$issupervisor = isset($_SESSION["issupervisor"]) ? $_SESSION["issupervisor"] : "FALSE";
+
 //Check AJAX use indication.
 $ajax_indicator = isset($_POST["ajax_indicator"]) ? $_POST["ajax_indicator"] : "TRUE";
 
@@ -53,15 +56,15 @@ if ($fromrange == 0 || $torange == 0) {
     //Grab all reservations from DB with start OR end times between fromrange and torange
     $reservations_result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT reservationid, UNIX_TIMESTAMP(start), UNIX_TIMESTAMP(end), roomid, username, timeofrequest FROM reservations WHERE (UNIX_TIMESTAMP(start) >= " . $fromrange . " AND UNIX_TIMESTAMP(start) <= " . $torange . ") OR (UNIX_TIMESTAMP(end) >= " . $fromrange . " AND UNIX_TIMESTAMP(end) <= " . $torange . ") OR (UNIX_TIMESTAMP(end) >= " . $torange . " AND UNIX_TIMESTAMP(start) <= " . $fromrange . ") ORDER BY roomid, start ASC;");
     while ($record = mysqli_fetch_array($reservations_result)) {
-        $output .= "<reservation>\n<id>" . $record["reservationid"] . "</id>\n<start>" . $record["UNIX_TIMESTAMP(start)"] . "</start>\n<end>" . $record["UNIX_TIMESTAMP(end)"] . "</end>\n<roomid>" . $record["roomid"] . "</roomid>\n<username>" . (($record["username"] == $username || $isadministrator == "TRUE") ? $record["username"] : "") . "</username>\n";
-        if ($isadministrator == "TRUE") {
+        $output .= "<reservation>\n<id>" . $record["reservationid"] . "</id>\n<start>" . $record["UNIX_TIMESTAMP(start)"] . "</start>\n<end>" . $record["UNIX_TIMESTAMP(end)"] . "</end>\n<roomid>" . $record["roomid"] . "</roomid>\n<username>" . (($record["username"] == $username || $isadministrator == "TRUE" || $issupervisor == "TRUE") ? $record["username"] : "") . "</username>\n";
+        if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
             $output .= "<timeofrequest>" . $record["timeofrequest"] . "</timeofrequest>\n";
         }
         $output .= "<optionalfields>";
         //displayprivateoptions by default only shows public optional fields
         $displayprivateoptions = " AND optionalfields.optionprivate = 0";
         //if user is an administrator all options, public or private, are displayed
-        if ($isadministrator == "TRUE") {
+        if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
             $displayprivateoptions = "";
         }
         //Retrieve optional field data
