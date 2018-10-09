@@ -1,7 +1,7 @@
 <?php
 function ConnectLdap($name, $password, $settings)
 {
-    $ldapserver = $settings["ldap_baseDN"];;
+    $ldapserver = $settings["ldap_baseDN"];
     $qc_username = "qc\\";
     $instr_username = "instr\\";
     $name = trim(htmlspecialchars($name));
