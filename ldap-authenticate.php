@@ -1,13 +1,12 @@
 <?php
 function ConnectLdap($name, $password, $settings)
 {
-    $ldapserver = $settings["ldap_baseDN"];
-    $qc_username = "qc\\";
-    $instr_username = "instr\\";
+    $ldapserver = $settings["ldap_host"];
+    $qc_username = $name;
+    $qc_username .= "@olivet.edu";
+    $instr_username = "";
     $name = trim(htmlspecialchars($name));
-    $qc_username .= $name;
-    $instr_username .= $name;
-    $password = trim(htmlspecialchars($password));
+    $password = $password;
     $ldap = ldap_connect($ldapserver);
     if (!IsNotNullOrEmptyString($name) && !IsNotNullOrEmptyString($password)) {
         sleep(1);
@@ -35,22 +34,7 @@ function ReturnDisplayName($input_username, $settings)
 
 function ReturnParameter($input_username, $input_parameter, $settings)
 {
-    $ldapserver = $settings["ldap_baseDN"];
-    $qc_username = "library2sa";
-    $password = "Nicaragua1942!";
-    $ldap = ldap_connect($ldapserver);
-    if ($bind = ldap_bind($ldap, $qc_username, $password)) {
-        $result = ldap_search($ldap, "", "(CN=$input_username)") or die ("Error in search query: " . ldap_error($ldap));
-        $data = ldap_get_entries($ldap, $result);
-        if (isset($data[0][$input_parameter][0])) {
-            return $data[0][$input_parameter][0];
-
-        } else {
-            return "fail";
-        }
-    }
-    ldap_close($ldap);
-    return "fail";
+    return "TRUE";
 }
 
 function IsNotNullOrEmptyString($question)
