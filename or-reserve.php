@@ -189,7 +189,7 @@ if ($username != "") {
         //Check LIMITS for this user and make sure they are allowed to make the reservation
         //First check frequency (get all reservations within the specified time range and count the reservations)
         //Administrators are not affected by these limits
-        if ($isadministrator != "TRUE" || $issupervisor != "TRUE") {
+        if ($isadministrator != "TRUE") {
             $settings_frequency = unserialize($settings["limit_frequency"]);
             $sf_count = $settings_frequency[0];
             $sf_freq = $settings_frequency[1];
@@ -342,9 +342,14 @@ if ($username != "") {
                     $errormsg .= "You may not make reservations more than " . $win_amount . " " . $win_type . $s_str . " in advance.<br/>";
                 }
             }
-        }//end if $isadministrator != "true" or $issupervisor != "true"
-        //else is an administrator or supervisor
+        }//end if $isadministrator != "true"
+        //else is an administrator
         else {
+            if ($altusername != "") {
+                $username = $altusername;
+            }
+        }
+        if ($issupervisor == "TRUE") {
             if ($altusername != "") {
                 $username = $altusername;
             }

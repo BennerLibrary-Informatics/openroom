@@ -59,6 +59,7 @@ $last_time = new ClockTime($settings["endtime"] ?? 0, 0, 0);
 
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
+$todayonlymdy = date('l, F d, Y');
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups ORDER BY roomgroupid ASC;");
@@ -239,10 +240,15 @@ if ($_SESSION["username"] != "") {
                               $strip_rep = array("\'", "\'");
                               $info .= "<strong>" . $option->optionname . "</strong>: " . str_replace($strip, $strip_rep, $option->optionvalue) . "<br/>";
                           }
-                          if ($_SESSION["username"] != (string)$reservation->username && $isadministrator != "TRUE" && $issupervisor != "TRUE") {
+                          if ($_SESSION["username"] != (string)$reservation->username) {
                               //Display "taken" button that shows public info.
                               //$collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
-                              $collision = "<span id=\"takenList\">R</span>";
+                              if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
+                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"takenList\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\">R</span>";
+                              }
+                              else {
+                                $collision = "<span id=\"takenList\">R</span>";
+                              }
                           } else {
                               if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
                                 $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\"></span>";
@@ -289,6 +295,7 @@ if ($_SESSION["username"] != "") {
               }
               //creates combined datetime with the current selected date and the time along the sidebar
               $combinedDT = date('Y-m-d H:i:s', strtotime($currentmdy . $current_time->getTime()));
+              $dayEndDT = date('Y-m-d H:i:s', strtotime($todayonlymdy . $last_time->getTime()));
               //"closes" rooms as time passes based on the current time on page load
               $sapr = $settings["allow_past_reservations"];
               if ($sapr != "true" && $isadministrator != "TRUE") {
@@ -298,6 +305,15 @@ if ($_SESSION["username"] != "") {
                   if ($pageLoadDT > $combinedDT) {
                     $collision = "<span id=\"closedList2\">X</span>";
                     //$collision = "<span id=\"closedList\" class=\"glyphicon glyphicon-stop\"></span>";
+                  }
+                  //$combinedDT values that reach this point are the remaining reservation boxes that are still
+                  //open for reservation for the rest of the current day. This if statement effectively
+                  //closes the room for the rest of the current day, forcing users to consult a supervisor or
+                  //admin if they want to make a room reservation for the current day
+                  if ($issupervisor != "TRUE") {
+                    if ($combinedDT <= $dayEndDT) {
+                      $collision = "<span id=\"closedList2\">X</span>";
+                    }
                   }
                 }
               }

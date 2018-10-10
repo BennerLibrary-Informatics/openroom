@@ -38,12 +38,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
                 <li><a href="administrators.php">Administrators</a><em> - Add/Remove users with full administrative
                         access (can make reservations in past and for other users, and has access to admin settings).</em></li>
+                <li><a href="supervisors.php">Supervisors</a><em> - Add/Remove users with limited administrative
+                        access (can't make reservations in past but can for other users, has no access to admin settings).</em></li>
                 <li><a href="reporters.php">Reporters</a><em> - Add/Remove users with limited administrative
                         access (can't make reservations in past or for other users, but has access to reporting settings).</em></li>
                 <li><a href="bans.php">Banned Users</a><em> - Prevent certain users from accessing the reservation
                         system.</em></li>
-                <li><a href="supervisors.php">Supervisors</a><em> - Add/Remove users who with limited administrative
-                        access (can't make reservations in past but can for other users, has no access to admin settings).</em></li>
             </ul>
             <h3>Room Management</h3>
             <ul>

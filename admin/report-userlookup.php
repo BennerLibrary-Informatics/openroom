@@ -89,7 +89,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                 src="images/moveup.gif" border="0"/></a><a
                             href="report-userlookup.php?lookupname=<?php echo $lookupname; ?>&orderbywhat=end&direction=DESC"><img
                                 src="images/movedown.gif" border="0"/></a></td>
-                <td><strong>Number in Group</strong>&nbsp;<a
+                <td><strong># in Group</strong>&nbsp;<a
                             href="report-userlookup.php?lookupname=<?php echo $lookupname; ?>&orderbywhat=numberingroup&direction=ASC"><img
                                 src="images/moveup.gif" border="0"/></a><a
                             href="report-userlookup.php?lookupname=<?php echo $lookupname; ?>&orderbywhat=numberingroup&direction=DESC"><img
