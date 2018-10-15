@@ -108,8 +108,8 @@
 
 
   <br/>
-  Developed by Ball State University Libraries<br/> <!--Put inside div block-->
-  Copyright (C) 2012 Ball State University Libraries
+  Copyright (C) 2012 Ball State University Libraries<br/> <!--Put inside div block-->
+  Modified by Olivet Nazarene University
 </div>
 </div>
 </div>

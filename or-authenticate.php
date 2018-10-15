@@ -95,6 +95,15 @@ if ($username != "" && $password != "" && $ajax_indicator != "") {
                     $_SESSION["isadministrator"] = "FALSE";
                     $output .= "\t<isadministrator>false</isadministrator>\n";
                 }
+                //Check if logged in user is a supervisor
+                $sresult = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM supervisors WHERE username='" . $username . "';");
+                if (mysqli_num_rows($sresult) == 1) {
+                    $_SESSION["issupervisor"] = "TRUE";
+                    $output .= "\t<issupervisor>true</issupervisor>\n";
+                } else {
+                    $_SESSION["issupervisor"] = "FALSE";
+                    $output .= "\t<issupervisor>false</issupervisor>\n";
+                }
                 //Check if logged in user is a reporter
                 $rresult = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reporters WHERE username='" . $username . "';");
                 if (mysqli_num_rows($rresult) == 1) {
@@ -140,8 +149,8 @@ if ($username != "" && $password != "" && $ajax_indicator != "") {
                         $output .= "\t<isadministrator>false</isadministrator>\n";
                     }
                     //Check if logged in user is a supervisor
-                    $aresult = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM supervisors WHERE username='" . $username . "';");
-                    if (mysqli_num_rows($aresult) == 1) {
+                    $sresult = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM supervisors WHERE username='" . $username . "';");
+                    if (mysqli_num_rows($sresult) == 1) {
                         $_SESSION["issupervisor"] = "TRUE";
                         $output .= "\t<issupervisor>true</issupervisor>\n";
                     } else {
