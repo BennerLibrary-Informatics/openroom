@@ -68,8 +68,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </ul>
             <h3>Settings</h3>
             <ul>
+                <li><a href="about.php">About</a><em> - Edit the text on the page that users see when they click
+                        "About".</em></li>
                 <li><a href="configuration.php">Configuration</a><em> - Change the name of the system, security
                         settings, login settings, email filters, themes, etc.</em></li>
+                <li><a href="help.php">Help</a><em> - Edit the text on the page that users see when they click
+                        "Help".</em></li>
                 <li><a href="policies.php">Policies</a><em> - Edit the text on the page that users see when they click
                         "Policies".</em></li>
                 <li><a href="reminder.php">Reminder Message</a><em> - The Reminder Message appears at the top of every
@@ -81,6 +85,16 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <h3>Reports</h3>
         <ul>
+          <li>
+              <strong>Daily Schedule</strong><em> - All reservations made for a specific room. Leave the field blank to lookup all rooms.</em><br/>
+              <ul>
+                  <li>
+                      <form name="roomlookup" method="POST" action="report-schedule.php">
+                          Room: <input type="text" name="lookuproom"/><input type="submit" value="Lookup"/>
+                      </form>
+                  </li>
+              </ul>
+          </li>
             <li>
                 <strong>User Lookup</strong><em> - All reservations made by specified user. Leave the field blank to lookup all users.</em><br/>
                 <ul>
