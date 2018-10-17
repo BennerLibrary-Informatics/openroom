@@ -189,7 +189,7 @@ if ($username != "") {
         //Check LIMITS for this user and make sure they are allowed to make the reservation
         //First check frequency (get all reservations within the specified time range and count the reservations)
         //Administrators are not affected by these limits
-        if ($isadministrator != "TRUE") {
+        if ($isadministrator != "TRUE" && $issupervisor != "TRUE") {
             $settings_frequency = unserialize($settings["limit_frequency"]);
             $sf_count = $settings_frequency[0];
             $sf_freq = $settings_frequency[1];

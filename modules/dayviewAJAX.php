@@ -298,7 +298,7 @@ if ($_SESSION["username"] != "") {
               $dayEndDT = date('Y-m-d H:i:s', strtotime($todayonlymdy . $last_time->getTime()));
               //"closes" rooms as time passes based on the current time on page load
               $sapr = $settings["allow_past_reservations"];
-              if ($sapr != "true" && $isadministrator != "TRUE") {
+              if ($sapr != "true" && $isadministrator != "TRUE" && $issupervisor != "TRUE") {
                 if ($collision != "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>" &&
                     //$collision != "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>") {
                     $collision != "<span id=\"takenList\">R</span>") {
