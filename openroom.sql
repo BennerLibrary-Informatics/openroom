@@ -238,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 --
 
 INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES
+  ('about', 'The default About message has not been set by the admin.'),
   ('allow_past_reservations', 'false'),
   ('allow_simultaneous_reservations', 'false'),
   ('email_can_gef', 'a:1:{i:0;s:0:"";}'),
@@ -254,6 +255,7 @@ INSERT INTO `settings` (`settingname`, `settingvalue`) VALUES
   ('email_res_verbose', 'a:1:{i:0;s:0:"";}'),
   ('email_system', ''),
   ('endtime', '17:00'),
+  ('help', 'The default Help message has not been set by the admin.'),
   ('https', 'true'),
   ('instance_name', 'OpenRoom'),
   ('instance_url', ''),
