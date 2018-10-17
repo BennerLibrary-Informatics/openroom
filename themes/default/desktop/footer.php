@@ -30,15 +30,18 @@
     to {top:0; opacity:1}
 }
 
-.close {
-    color: white;
+.policiesClose {
+    color: grey;
     float: right;
+    margin-left:12.5em;
     font-size: 35px;
     font-weight: bold;
+    background: none;
+    border: none;
 }
 
-.close:hover,
-.close:focus {
+.policiesClose:hover,
+.policiesClose:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -76,8 +79,9 @@
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
-          <span class="close">&times;</span>
-            <h2></h2>
+          <button type="button" class="policiesClose" aria-label="policiesClose">
+                <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       <div class="modal-body">
       <?php
@@ -110,8 +114,9 @@
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
-        <span class="close">&times;</span>
-        <h2></h2>
+        <button type="button" class="policiesClose" aria-label="policiesClose">
+              <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
     <?php
@@ -159,10 +164,9 @@
 var policiesModal = document.getElementById('policiesModal');
 var aboutModal = document.getElementById('aboutModal');
 
-
 // Get the <span> element that closes the modal
-var policiesSpan = document.getElementsByClassName("close")[0];
-var aboutSpan = document.getElementsByClassName("close")[0];
+var policiesSpan = document.getElementsByClassName("policiesClose")[0];
+var aboutSpan = document.getElementsByClassName("policiesClose")[0];
 
 // When the user clicks the button, open the modal
 function policiesPopUp() {

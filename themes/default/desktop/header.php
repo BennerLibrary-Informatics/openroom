@@ -30,15 +30,18 @@
     to {top:0; opacity:1}
 }
 
-.close {
-    color: white;
+.helpClose {
+    color: grey;
     float: right;
+    margin-left:12.5em;
     font-size: 35px;
     font-weight: bold;
+    background: none;
+    border: none;
 }
 
-.close:hover,
-.close:focus {
+.helpClose:hover,
+.helpClose:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -133,12 +136,12 @@ require_once("includes/or-dbinfo.php");
 
               <!-- The Modal -->
               <div id="helpModal" class="modal">
-
                 <!-- Modal content -->
                 <div class="modal-content">
                   <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2></h2>
+                    <button type="button" class="helpClose" aria-label="helpClose">
+                          <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
                   <div class="modal-body">
                 <?php
@@ -203,7 +206,7 @@ function hideDiv(ele) {
   var helpModal = document.getElementById('helpModal');
 
   // Get the <span> element that closes the modal
-  var helpSpan = document.getElementsByClassName("close")[0];
+  var helpSpan = document.getElementsByClassName("helpClose")[0];
 
   // When the user clicks the button, open the modal
   function helpPopUp() {
