@@ -32,8 +32,7 @@
 
 .helpClose {
     color: grey;
-    float: right;
-    margin-left:12.5em;
+    margin-left: auto;
     font-size: 35px;
     font-weight: bold;
     background: none;
@@ -219,11 +218,11 @@ function hideDiv(ele) {
   }
 
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
+  window.addEventListener("click", function(event) {
     if (event.target == helpModal) {
         helpModal.style.display = "none";
     }
-  }
+  })
 </script>
 
 <?php include("modules/reminder.php"); ?>

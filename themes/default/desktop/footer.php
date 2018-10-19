@@ -30,18 +30,17 @@
     to {top:0; opacity:1}
 }
 
-.policiesClose {
+.policiesClose, .aboutClose {
     color: grey;
-    float: right;
-    margin-left:12.5em;
+    margin-left: auto;
     font-size: 35px;
     font-weight: bold;
     background: none;
     border: none;
 }
 
-.policiesClose:hover,
-.policiesClose:focus {
+.policiesClose:hover, .aboutClose:hover,
+.policiesClose:focus, .aboutClose:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -79,7 +78,7 @@
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="policiesClose" aria-label="policiesClose">
+          <button type="button" class="aboutClose" aria-label="policiesClose">
                 <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -166,7 +165,7 @@ var aboutModal = document.getElementById('aboutModal');
 
 // Get the <span> element that closes the modal
 var policiesSpan = document.getElementsByClassName("policiesClose")[0];
-var aboutSpan = document.getElementsByClassName("policiesClose")[0];
+var aboutSpan = document.getElementsByClassName("aboutClose")[0];
 
 // When the user clicks the button, open the modal
 function policiesPopUp() {
@@ -187,12 +186,12 @@ aboutSpan.onclick = function() {
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.addEventListener("click", function(event) {
     if (event.target == policiesModal) {
         policiesModal.style.display = "none";
     }
     if (event.target == aboutModal) {
         aboutModal.style.display = "none";
     }
-}
+})
 </script>
