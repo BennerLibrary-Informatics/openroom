@@ -17,6 +17,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     $errormsg = "";
 
     $lookuproom = isset($_REQUEST["lookuproom"]) ? $_REQUEST["lookuproom"] : "";
+    $date = isset($_REQUEST["date"]) ? $_REQUEST["date"] : "";
     $orderbywhat = isset($_REQUEST["orderbywhat"]) ? $_REQUEST["orderbywhat"] : " ";
     $direction = isset($_REQUEST["direction"]) ? $_REQUEST["direction"] : " ";
     $orderbystr = "";
@@ -65,11 +66,19 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <br/><br/><strong>Daily schedule for Room: <?php
         if ($lookuproom == "") {
-          echo "All Users <em>(showing 50 most recent reservations)</em></br>***sorting is disabled for all user lookup";
+          echo "all";
         }
         else {
           echo $lookuproom;
-        }?></strong><br/><br/>
+        }?>
+        <br/><br/><strong>For date: <?php
+        if ($date == "") {
+          echo date("m/d/Y");
+        }
+        else {
+          echo $date;
+        } ?>
+        </strong><br/><br/>
 
         <table id="reporttable">
             <tr class="reportodd">
@@ -106,11 +115,17 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             </tr>
 
             <?php
+            if ($date == "") {
+              $date = date('Y-m-d');
+            }
+            $date = date('Y-m-d H:i:s', strtotime($date));
+            $nextDay = date('Y-m-d H:i:s', strtotime($date . "+1 days"));
+
             if ($lookuproom == "") {
-              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid ORDER BY timeofrequest DESC LIMIT 50;");
+              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY timeofrequest DESC LIMIT 50;");
             }
             else {
-              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > DATE(NOW()) AND reservations.end < (DATE(NOW()) + 1)" . $orderbystr . ";");
+              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "'" . $orderbystr . ";");
             }
             $count = 2;
             while ($record = mysqli_fetch_array($records)) {
@@ -135,10 +150,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     echo "<strong>" . $opfield["optionname"] . ": </strong>" . $opfield["optionvalue"] . "<br/>";
                 }
 
-                echo "</div></td><td>" . date('Y-m-d g:i a', strtotime($record["start"])) . "</td>" .
-                    "<td>" . date('Y-m-d g:i a', strtotime($record["end"])) . "</td>" .
+                echo "</div></td><td>" . date('g:i a', strtotime($record["start"])) . "</td>" .
+                    "<td>" . date('g:i a', strtotime($record["end"])) . "</td>" .
                     "<td>" . $record["numberingroup"] . "</td>" .
-                    "<td>" . date('Y-m-d g:i a', strtotime($record["timeofrequest"])) . "</td>" .
+                    "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>" .
                     $extraTableCell . "</tr>";
             }
 

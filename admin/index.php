@@ -86,11 +86,17 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         <h3>Reports</h3>
         <ul>
           <li>
-              <strong>Daily Schedule</strong><em> - All reservations made for a specific room. Leave the field blank to lookup all rooms.</em><br/>
+              <strong>Daily Schedule</strong><em> - All reservations made for a specific room. Leave the fields blank to lookup all rooms for today.</em><br/>
               <ul>
                   <li>
                       <form name="roomlookup" method="POST" action="report-schedule.php">
-                          Room: <input type="text" name="lookuproom"/><input type="submit" value="Lookup"/>
+                          Room: <input type="text" name="lookuproom"/>
+                          Date: <input id="date" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
+                          <img src="../includes/datechooser/calendar.gif"
+                               onclick="showChooser(this, 'date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                          <div id="chooserSpan3" class="dateChooser select-free"
+                               style="display: none; visibility: hidden; width: 160px;"></div>
+                          <input type="submit" value="Run Report"/>
                       </form>
                   </li>
               </ul>
@@ -110,7 +116,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <ul>
                     <li>
                         <form name="daily" method="POST" action="report-daily.php">
-                            For the period starting: <input id="from" size="10" maxlength="10" name="from" type="text" placeholder="MM/DD/YYYY" required>
+                            For the date: <input id="from" size="10" maxlength="10" name="from" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
                                  onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
