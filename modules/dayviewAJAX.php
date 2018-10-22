@@ -54,8 +54,8 @@ $getdatarange = include("../or-getdatarange.php");
 $getroominfo = include("../or-getroominfo.php");
 $xmlreservations = new SimpleXMLElement($getdatarange);
 $xmlroominfo = new SimpleXMLElement($getroominfo);
-$current_time = new ClockTime($settings["starttime"] ?? 0, 0, 0);
-$last_time = new ClockTime($settings["endtime"] ?? 0, 0, 0);
+$current_time = new ClockTime((float)$settings["starttime"] ?? 0, 0, 0);
+$last_time = new ClockTime((float)$settings["endtime"] ?? 0, 0, 0);
 
 $currentweekday = strtolower(date('l', $_POST["fromrange"]));
 $currentmdy = date('l, F d, Y', $_POST["fromrange"]);
