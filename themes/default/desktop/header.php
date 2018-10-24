@@ -48,8 +48,8 @@
 
 .modal-header {
     padding: 2px 16px;
-    background-color: rgb(84, 64, 107);
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .modal-body {
@@ -61,8 +61,8 @@
 
 .modal-footer {
     padding: 2px 10px;
-    background-color: rgb(84, 64, 107);
-    color: white;
+    background-color: white;
+    color: black;
 }
 </style>
 </div>

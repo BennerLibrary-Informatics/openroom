@@ -441,6 +441,7 @@ label{
     border-collapse: collapse;
     width: 100%;
     display:block;
+    margin-bottom: 20px;
 }
 
 #dayviewTable th {
