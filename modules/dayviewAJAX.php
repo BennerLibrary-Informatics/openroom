@@ -82,33 +82,10 @@ if ($_SESSION["username"] != "") {
         $endyesterday = $yesterday + 86399;
         $tomorrow = strtotime($currentmdy) + 86400;
         $endtomorrow = $tomorrow + 86399;
-        $dvout = "<div id=\"dayviewheader\"><span onclick=\"dayviewer('$yesterday','$endyesterday','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
+        $dvout = "<center><div id = \"legend\" class =\"row\"><div id = \"legendText\" style=\"text-align: right\">Open: <span id=\"open\" class=\"glyphicon glyphicon-stop\"></span></div><div id = \"legendText\" style=\"text-align: center\">Closed: <span id=\"closedList\">X</span></div><div id = \"legendText\">Your Reservations: <span class=\"glyphicon glyphicon-ok\"></span></div><div id = \"legendText\">Reserved: <span style=\"color: red;\">R</span></div></div><div class = 'row'></div></center>";
+        $dvout .= "<div id=\"dayviewheader\"><span onclick=\"dayviewer('$yesterday','$endyesterday','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
+        $dvout .= "</div><center><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></center>";
         $dvout .= "<div class = 'header' id='roomhead' >";
-        /*$dvout .= "<table id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";*/
-        $dvout .= "<div id = \"legend\" class =\"row\">";
-        /*$dvout .= "<div class=\"container\">";
-        $dvout .= "<div class = \"row\">";*/
-        $dvout .= "<div id = \"legendText\" style=\"text-align: right\">";
-        $dvout .= "Open: ";
-        $dvout .= "<span id=\"open\" class=\"glyphicon glyphicon-stop\"></span>";
-        $dvout .=  "</div>";
-        $dvout .= "<div id = \"legendText\" style=\"text-align: center\">";
-        $dvout .= "Closed: ";
-        $dvout .= "<span id=\"closedList\">X</span>";
-        $dvout .=  "</div>";
-        $dvout .= "<div id = \"legendText\">";
-        $dvout .= "Your Reservations: ";
-        $dvout .= "<span class=\"glyphicon glyphicon-ok\"></span>";
-        $dvout .=  "</div>";
-        $dvout .= "<div id = \"legendText\">";
-        $dvout .= "Reserved: ";
-        //$dvout .= "<span class=\"glyphicon glyphicon-remove\"></span>";
-        $dvout .= "<span style=\"color: red;\">R</span>";
-        //$dvout .= "<img src=\"themes/default/desktop/images/takenbutton.png\"/>";
-        /*$dvout .=  "</div>";
-        $dvout .=  "</div>";*/
-        $dvout .=  "</div>";
-        $dvout .=  "</div>";
         $dvout .= $group_str;
         //$dvout .= .$group_str;
         $dvout .= "<div>";

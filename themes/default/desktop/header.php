@@ -213,8 +213,10 @@ function hideDiv(ele) {
   }
 
   // When the user clicks on <span> (x), close the modal
-  helpSpan.onclick = function() {
-      helpModal.style.display = "none";
+  if (typeof helpSpan !== 'undefined') {
+    helpSpan.onclick = function() {
+        helpModal.style.display = "none";
+    }
   }
 
   // When the user clicks anywhere outside of the modal, close it
@@ -227,13 +229,6 @@ function hideDiv(ele) {
 
 <?php include("modules/reminder.php"); ?>
 <div id="containerInfo">
-<?php
-if(isset($_SESSION["username"])) {
-    if ($_SESSION["username"] != "") {
-      echo "<center><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></center>";
-    }
-}
-?>
     <div id="calendarDiv" style="display:none">
         <center>
         <?php include("modules/calendar.php"); ?>

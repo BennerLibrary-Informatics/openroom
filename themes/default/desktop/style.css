@@ -323,7 +323,11 @@ label{
  * Calendar Module
 */
 #calendarModule {
-
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    border: 3px solid #7d609f;
 }
 
 #calendarTable {
@@ -554,32 +558,6 @@ label{
     font-weight: bold;
 }
 
-#roomdetailscapacity {
-
-}
-
-#legendText{
-  font-size: 12px;
-  font-weight: bold;
-  width: 25%;
-  text-align: center;
-}
-#legend {
-    background-color: #FFFFFF;
-    border-top: 2px solid black;
-    border-bottom:2px solid black;
-    padding: 5px;
-    position: relative;
-    height: auto;
-    text-align: center;
-    /* top: 300px; */
-
-}
-
-#legendtable td {
-    text-align: left;
-}
-
 #successmsg {
     border: 1px #00ff00 solid;
     background-color: #ccffcc;
@@ -609,26 +587,24 @@ label{
 #legend {
     background-color: #FFFFFF;
     border-top: 2px solid black;
-    border-bottom:2px solid black;
+    border-bottom: 2px solid black;
     padding: 5px;
     text-align: center;
     position: relative;
+    width: 100%
     /* height: auto; */
     /* top: 300px; */
-
 }
-
-
 
 #legendTitleText{
   font-weight: bold;
   font-size: 15pt;
-
 }
 #legendText {
     font-size: 12pt;
     font-weight: bold;
-    text-align: left;
+    width: 25%;
+    text-align: center;
 }
 
 #legendtable td {
