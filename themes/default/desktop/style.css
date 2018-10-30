@@ -250,6 +250,8 @@ hr {
     border: 0px;
     /*margin: 0 auto;*/
     padding: 5px;
+    padding-top: 5px;
+    margin-top:8px;
     text-align: right;
 }
 
@@ -276,9 +278,18 @@ hr {
     margin-bottom: 20px;
 }
 
-#containerInfo {
-    background-color: #FFFFFF;
+#grayHeader {
+    background-color: #2b3e42;
+    color: white;
+    text-align: right;
+    font-size: 16px;
     padding: 0px;
+    margin-bottom: -10px;
+}
+
+#containerInfo {
+    background-color: #c4bccd;
+    padding: 10px;
 }
 
 #leftside {
@@ -414,7 +425,7 @@ label{
 }
 
 .groups{
-  background-color: lightgray;
+  background-color: slategrey;
   border-style: solid;
   cursor: pointer;
   font-weight: bold;
@@ -585,7 +596,7 @@ label{
 }
 
 #legend {
-    background-color: #FFFFFF;
+    background-color: #c4bccd;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
     padding: 5px;

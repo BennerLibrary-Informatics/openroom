@@ -102,81 +102,7 @@ require_once("includes/or-dbinfo.php");
           </a>
     </div>
    </div>
-	<span class="username">
-	<?php
-    if (!isset($_SESSION["systemid"])) {
-      $_SESSION["systemid"] = "";
-    }
-
-    if ($_SESSION["systemid"] == $settings["systemid"]) {
-
-    if (!isset($_SESSION["username"])) {
-      $_SESSION["isadministrator"] = "FALSE";
-      $_SESSION["isreporter"] = "FALSE";
-    }
-
-    echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
-    echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
-
-    if ($settings["login_method"] == "normal" && isset($_SESSION["username"])) {
-         if($_SESSION["username"] != "") {
-            echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;";
-         }
-    }
-    if(isset($_SESSION["username"])) {
-        if ($_SESSION["username"] != "") {
-            echo "|";
-            ?>
-            <!--<div id="clear_both"></div>
-            <div class = "col-12">
-            </div>
-            <div class = "copyright">-->
-              <a href onclick="helpPopUp(); return false;">Help</a>
-
-              <!-- The Modal -->
-              <div id="helpModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="helpClose" aria-label="helpClose">
-                          <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                <?php
-                // The Regular Expression filter
-                $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-                // The Text you want to filter for urls
-                $text = $settings["help"];
-                // Check if there is a url in the text
-                if(preg_match($reg_exUrl, $text, $url)) {
-
-                       // make the urls hyper links
-                       echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
-
-                } else {
-                       // if no urls in the text just return the text
-                       echo $text;
-                }
-                ?>
-                  </div>
-                  <div class="modal-footer">
-                    <h3>Help</h3>
-                  </div>
-                </div>
-              </div>
-            </body>
-            </html>
-  <?php
-        }
-    }
-    if(isset($_SESSION["username"])) {
-        if ($_SESSION["username"] != "") {
-            echo "|&nbsp;<a href=\"modules/logout.php\">Logout</a>";
-        }
-    }
-    }
-    ?>
+   <br>
 </div>
 
 <script language="javascript" type="text/javascript">
@@ -228,6 +154,88 @@ function hideDiv(ele) {
 </script>
 
 <?php include("modules/reminder.php"); ?>
+<div id="grayHeader">
+  <ul style = "background-color: #262626">
+    <br>
+    <span class="username">
+    <?php
+      if (!isset($_SESSION["systemid"])) {
+        $_SESSION["systemid"] = "";
+      }
+
+      if ($_SESSION["systemid"] == $settings["systemid"]) {
+
+      if (!isset($_SESSION["username"])) {
+        $_SESSION["isadministrator"] = "FALSE";
+        $_SESSION["isreporter"] = "FALSE";
+      }
+
+      echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
+      echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
+
+      if ($settings["login_method"] == "normal" && isset($_SESSION["username"])) {
+           if($_SESSION["username"] != "") {
+              echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;";
+           }
+      }
+      if(isset($_SESSION["username"])) {
+          if ($_SESSION["username"] != "") {
+              echo "|";
+              ?>
+              <!--<div id="clear_both"></div>
+              <div class = "col-12">
+              </div>
+              <div class = "copyright">-->
+                <a href onclick="helpPopUp(); return false;">Help</a>
+
+                <!-- The Modal -->
+                <div id="helpModal" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="helpClose" aria-label="helpClose">
+                            <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                  <?php
+                  // The Regular Expression filter
+                  $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+                  // The Text you want to filter for urls
+                  $text = $settings["help"];
+                  // Check if there is a url in the text
+                  if(preg_match($reg_exUrl, $text, $url)) {
+
+                         // make the urls hyper links
+                         echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
+
+                  } else {
+                         // if no urls in the text just return the text
+                         echo $text;
+                  }
+                  ?>
+                    </div>
+                    <div class="modal-footer">
+                      <h3>Help</h3>
+                    </div>
+                  </div>
+                </div>
+              </body>
+              </html>
+    <?php
+          }
+      }
+      if(isset($_SESSION["username"])) {
+          if ($_SESSION["username"] != "") {
+              echo "|&nbsp;<a href=\"modules/logout.php\">Logout</a>";
+          }
+      }
+      }
+      ?>
+    </br>
+    <br>
+  </ul>
+</div>
 <div id="containerInfo">
     <div id="calendarDiv" style="display:none">
         <center>
