@@ -73,7 +73,7 @@ a.nav-link:hover
       <a href="https://library.olivet.edu/forms/student-job-application/index.php" class = "nav-link">Student Job Application</a>
     </li>
     <li>
-      <a href="https://apps.bennerlibrary.com/sa/" class="nav-link">Staff Access</a>-
+      <a href="https://apps.bennerlibrary.com/sa/" class="nav-link">Staff Access</a> -
       <a href="https://library.olivet.edu/bin/imus/login.php" class="nav-link">IMUS</a>
     </li>
     <li>
