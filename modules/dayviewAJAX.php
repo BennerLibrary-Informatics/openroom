@@ -311,5 +311,4 @@ if ($_SESSION["username"] != "") {
 else {
     echo "Error: User is not logged in.";
 }
-//include($_SESSION["modulespath"] . "footer.php");
 ?>

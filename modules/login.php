@@ -95,6 +95,8 @@
       <div class="col-lg-4 offset-lg-4">
         <a href="https://changemypassword.olivet.edu/" style="float: right;"> Forgot Password?</a>
       </div>
+      <div id="clear_both"></div>
     </form>
     <br><div id="errormessage"></div>
+</div>
 </div>

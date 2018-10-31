@@ -56,11 +56,6 @@ a.nav-link:hover
   bottom: 0;
   left: 0;
 }
-
-.clear {
-  clear: both;
-}
-
 </style>
 </div>
 <div class = "libraryfooter">
@@ -96,7 +91,7 @@ a.nav-link:hover
     </li>
   </libraryfooter-ul>
 </div>
-<div class="clear"></div>
+<div id="clear_both"></div>
 <div id = "center">
   <libraryfooter-ul>
     <img src = 'https://library.olivet.edu/img/logo.svg'>
