@@ -105,53 +105,7 @@ require_once("includes/or-dbinfo.php");
    <br>
 </div>
 
-<script language="javascript" type="text/javascript">
-function showHideDiv(ele) {
-				var srcElement = document.getElementById(ele);
-				if (srcElement != null) {
-					if (srcElement.style.display == "block") {
-						srcElement.style.display = 'none';
-					}
-					else {
-						srcElement.style.display = 'block';
-					}
-					return false;
-				}
-			}
-function hideDiv(ele) {
-      var srcElement = document.getElementById(ele);
-      if (srcElement != null) {
-        if (srcElement.style.display == "block") {
-          srcElement.style.display = 'none';
-        }
-        return false;
-      }
-    }
-  // Get the modal
-  var helpModal = document.getElementById('helpModal');
 
-  // Get the <span> element that closes the modal
-  var helpSpan = document.getElementsByClassName("helpClose")[0];
-
-  // When the user clicks the button, open the modal
-  function helpPopUp() {
-      helpModal.style.display = "block";
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  if (typeof helpSpan !== 'undefined') {
-    helpSpan.onclick = function() {
-        helpModal.style.display = "none";
-    }
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.addEventListener("click", function(event) {
-    if (event.target == helpModal) {
-        helpModal.style.display = "none";
-    }
-  })
-</script>
 
 <?php include("modules/reminder.php"); ?>
 <div id="grayHeader">
@@ -236,6 +190,53 @@ function hideDiv(ele) {
     <br>
   </ul>
 </div>
+<script language="javascript" type="text/javascript">
+function showHideDiv(ele) {
+				var srcElement = document.getElementById(ele);
+				if (srcElement != null) {
+					if (srcElement.style.display == "block") {
+						srcElement.style.display = 'none';
+					}
+					else {
+						srcElement.style.display = 'block';
+					}
+					return false;
+				}
+			}
+function hideDiv(ele) {
+      var srcElement = document.getElementById(ele);
+      if (srcElement != null) {
+        if (srcElement.style.display == "block") {
+          srcElement.style.display = 'none';
+        }
+        return false;
+      }
+    }
+  // Get the modal
+  var helpModal = document.getElementById('helpModal');
+
+  // Get the <span> element that closes the modal
+  var helpSpan = document.getElementsByClassName("helpClose")[0];
+
+  // When the user clicks the button, open the modal
+  function helpPopUp() {
+      helpModal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  if (typeof helpSpan !== 'undefined') {
+    helpSpan.onclick = function() {
+        helpModal.style.display = "none";
+    }
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.addEventListener("click", function(event) {
+    if (event.target == helpModal) {
+        helpModal.style.display = "none";
+    }
+  })
+</script>
 <div id="containerInfo">
     <div id="calendarDiv" style="display:none">
         <center>
