@@ -98,8 +98,27 @@ require_once("includes/or-dbinfo.php");
               <a style="text-decoration:none; color:white; float: right;">
                 Reserve a Space
             </div>
-          </a>
-          </a>
+              </a>
+              </a>
+            <div class = "usernametitle">
+              <span class="username">
+                <?php
+                if (!isset($_SESSION["systemid"])) {
+                  $_SESSION["systemid"] = "";
+                }
+
+                if ($_SESSION["systemid"] == $settings["systemid"]) {
+
+                  if (!isset($_SESSION["username"])) {
+                    $_SESSION["isadministrator"] = "FALSE";
+                    $_SESSION["isreporter"] = "FALSE";
+                  }
+                  echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php
+                  echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\" style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
+                  echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
+                }
+                 ?>
+            </div>
     </div>
    </div>
    <br>
@@ -119,17 +138,9 @@ require_once("includes/or-dbinfo.php");
 
       if ($_SESSION["systemid"] == $settings["systemid"]) {
 
-      if (!isset($_SESSION["username"])) {
-        $_SESSION["isadministrator"] = "FALSE";
-        $_SESSION["isreporter"] = "FALSE";
-      }
-
-      echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\">Admin</a>)</span>&nbsp;" : "";
-      echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
-
       if ($settings["login_method"] == "normal" && isset($_SESSION["username"])) {
            if($_SESSION["username"] != "") {
-              echo "|&nbsp;<a href=\"editaccount.php\">Edit Account</a>&nbsp;";
+              echo "&nbsp;<a href=\"editaccount.php\"style=\"color:white;\">Edit Account</a>&nbsp;";
            }
       }
       if(isset($_SESSION["username"])) {
@@ -140,7 +151,7 @@ require_once("includes/or-dbinfo.php");
               <div class = "col-12">
               </div>
               <div class = "copyright">-->
-                <a href onclick="helpPopUp(); return false;">Help</a>
+                <a href onclick="helpPopUp(); return false;" style= "color:white;">Help</a>
 
                 <!-- The Modal -->
                 <div id="helpModal" class="modal">
@@ -181,7 +192,8 @@ require_once("includes/or-dbinfo.php");
       }
       if(isset($_SESSION["username"])) {
           if ($_SESSION["username"] != "") {
-              echo "|&nbsp;<a href=\"modules/logout.php\">Logout</a>";
+              echo "|&nbsp;<a href=\"modules/logout.php\"style=\"color:white;\">Logout</a>";
+              echo "&nbsp&nbsp";
           }
       }
       }

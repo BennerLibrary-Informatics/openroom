@@ -72,6 +72,15 @@ body {
   text-align: left;
 }
 
+.usernametitle {
+  font-family: "PT Serif Caption";
+  margin-top: -3px;
+  margin-left: 1px;
+  font-size: 17px;
+  text-align: right;
+  float: right;
+}
+
 .loginlabel, .passwordlabel{
   text-align: right;
 }

@@ -80,10 +80,10 @@ a.nav-link:hover
 <div id = "right">
   <libraryfooter-ul>
     <li>
-      <a href="https://library.olivet.edu/index.php" class = "nav-link">Benner Library & Resource Center</a>
+      <a href="https://library.olivet.edu/index.php" class = "nav-link" target="_blank">Benner Library & Resource Center</a>
     </li>
     <li>
-      <a href="https://www.olivet.edu/" class = "nav-link">Olivet Nazarene University</a>
+      <a href="https://www.olivet.edu/" class = "nav-link" target="_blank">Olivet Nazarene University</a>
     </li>
     <li>
       One University Ave · Bourbonnais, IL 60914</br>
