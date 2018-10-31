@@ -66,9 +66,7 @@
 </div>
 
 <div id="clear_both"></div>
-<div class = "col-12">
-  <hr/>
-</div>
+<br>
 <div class = "copyright">
     <a href onclick="aboutPopUp(); return false;">About</a>
 
@@ -152,9 +150,6 @@
   Copyright (C) 2012 Ball State University Libraries<br/> <!--Put inside div block-->
   Modified by Olivet Nazarene University
 </div>
-</div>
-</div>
-</body>
 </html>
 
 <script language="javascript" type="text/javascript">
