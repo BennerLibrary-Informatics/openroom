@@ -257,7 +257,7 @@ if ($_SESSION["username"] != "") {
                   //If this user is an administrator, give them the option of inputting and altusername
                   $altusernamestr = "";
                   if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
-                      $altusernamestr = "<strong>Username</strong>: <style> input[type=text] {color: black;} </style> <input type=\'text\' name=\'altusername\' color=\'black\' /><br/><strong>Email Confirmation</strong>: <select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
+                      $altusernamestr = "<strong>Username</strong>: <style> input[type=text] {color: black; margin: 5px;}</style> <input type=\'text\' name=\'altusername\' color=\'black\' /><br/><strong>Email Confirmation: </strong>&nbsp<select name=\'emailconfirmation\'><option value=\'no\'>No</option><option value=\'yes\'>Yes</option></select><br/>";
                   }
                   $info = "<strong>Room</strong>: " . $room->name . "<br/><strong>Start Time</strong>: " . $time_str . "<br/><form name=\'reserve\' action=\'javascript:reserve(" . $_POST["group"] . ");\'>" . $altusernamestr . "<input type=\'hidden\' name=\'roomid\' value=\'" . $room->id . "\' /><input type=\'hidden\' name=\'starttime\' value=\'" . strtotime($currentmdy . " " . $current_time->getTime())
                   . "\' /><input type=\'hidden\' name=\'fullcapacity\' value=\'" . $capacity . "\' /><strong><span class=\'requiredmarker\'>*</span>Duration</strong>: <select name=\'duration\'>" . $durationhtml . "</select><br/><strong><span class=\'requiredmarker\'>*</span>Number in group</strong>: <select name=\'capacity\'>" . $capacity_string . "</select><br/>" . $optionalfields_string . "<br/><center><strong>Reserve this room?</strong>: <a href=\'javascript:reserve(" . $_POST["group"] . ");\'>Yes</a> <a href=\'javascript:closePopUp();\'>No</a></center></form><br/><span class=\'requirednote\'><span class=\'requiredmarker\'>*</span> denotes a required field</span>";
@@ -311,4 +311,5 @@ if ($_SESSION["username"] != "") {
 else {
     echo "Error: User is not logged in.";
 }
+include($_SESSION["themespath"] . "footer.php");
 ?>

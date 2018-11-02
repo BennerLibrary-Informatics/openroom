@@ -303,7 +303,7 @@ hr {
 }
 
 #containerInfo {
-    background-color: #c4bccd;
+    background-color: #c4bcc9;
     padding: 10px;
 }
 
@@ -487,9 +487,10 @@ label{
 }
 
 #popup{
-    background-color: #54406b;
-    border: 1px #000000 solid;
-    color:white;
+    background-color: #c4bccd;
+    border: 5px #54406b solid;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    color:black;
     display: none;
     padding: 5px;
     position: fixed;
