@@ -296,6 +296,11 @@ hr {
     padding: 0px;
     margin-bottom: -10px;
 }
+#whiteBreak {
+    background-color: white;
+    color: white;
+    height: 5px;
+}
 
 #containerInfo {
     background-color: #c4bccd;
@@ -436,7 +441,7 @@ label{
 
 .groups{
   background-color: slategrey;
-  border-style: solid;
+  border-style: none;
   cursor: pointer;
   font-weight: bold;
   padding: 2px;
@@ -445,9 +450,7 @@ label{
 }
 
 .selected {
-    background-color: white;
-    border-style: solid;
-    border-color: black;
+    background-color: #c4bccd;
     border-radius: 15px;
     width: auto;
     margin-top: 5px;

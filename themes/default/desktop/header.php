@@ -127,6 +127,11 @@ require_once("includes/or-dbinfo.php");
 
 
 <?php include("modules/reminder.php"); ?>
+<div id="whiteBreak">
+  <ul style = "background-color: white">
+    <br>
+  </ul>
+</div>
 <div id="grayHeader">
   <ul style = "background-color: #262626">
     <br>
