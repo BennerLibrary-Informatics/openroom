@@ -99,8 +99,9 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
       <input type="hidden" name="submitted" value="1"/><input type="submit" value="Save"/>
     </div>
     </form>
+  </div>
     <?php
-    include($_SESSION["themepath"] . "footer.php");
+    include($_SESSION["themepath"] . "libraryfooter.php");
 } else {
     echo "You are not logged in. Please <a href=\"index.php\">click here</a> and login with an authorized account.";
 }

@@ -215,6 +215,3 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
 </script>
 <div id="popup"></div>
 <div id="dayviewModule"></div>
-<?php
-include($_SESSION["themepath"] . "footer.php");
-?>

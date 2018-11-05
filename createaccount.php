@@ -138,7 +138,7 @@ if ($activatecode == "" && $activateusername == "") {
         <?php
     }
     ?>
-    <br/><br/>
+    <br/><br/></div>
     <?php
 } else {
     if (!(preg_match("/^[A-Za-z0-9_-]+$/", $activateusername))) {
@@ -155,5 +155,5 @@ if ($activatecode == "" && $activateusername == "") {
         echo "There was a problem activating your account.";
     }
 }
-include($_SESSION["themepath"] . "footer.php");
+include($_SESSION["themepath"] . "libraryfooter.php");
 ?>

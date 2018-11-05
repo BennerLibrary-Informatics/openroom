@@ -1,20 +1,18 @@
 <?php
 function ConnectLdap($name, $password, $settings)
 {
-    $ldapserver = $settings["ldap_host"];
+    $ldapserver = $settings["ldap_baseDN"];
+    $name = trim(htmlspecialchars($name));
+    $password = trim(htmlspecialchars($password));
     $qc_username = $name;
     $qc_username .= "@olivet.edu";
-    $instr_username = "";
-    $name = trim(htmlspecialchars($name));
-    $password = $password;
     $ldap = ldap_connect($ldapserver);
     if (!IsNotNullOrEmptyString($name) && !IsNotNullOrEmptyString($password)) {
         sleep(1);
-        if ($bind = ldap_bind($ldap, $qc_username, $password)) {
-            return true;
-        } else if ($bind = @ldap_bind($ldap, $instr_username, $password)) {
+        if (@ldap_bind($ldap, $qc_username, $password)) {
             return true;
         } else {
+            ldap_close($ldap);
             return false;
         }
     }
