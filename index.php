@@ -28,4 +28,4 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     include($_SESSION["themepath"] . "content.php");
 }
 
-include($_SESSION["themepath"] . "libraryfooter.php");
+include($_SESSION["themepath"] . "footer.php");

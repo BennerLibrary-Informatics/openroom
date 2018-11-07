@@ -101,7 +101,7 @@ if ($_SESSION["systemid"] == $settings["systemid"]) {
     </form>
   </div>
     <?php
-    include($_SESSION["themepath"] . "libraryfooter.php");
+    include($_SESSION["themepath"] . "footer.php");
 } else {
     echo "You are not logged in. Please <a href=\"index.php\">click here</a> and login with an authorized account.";
 }

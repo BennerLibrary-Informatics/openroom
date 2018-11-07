@@ -30,7 +30,7 @@
     to {top:0; opacity:1}
 }
 
-.helpClose {
+.helpClose, .aboutClose, .policiesClose {
     color: grey;
     margin-left: auto;
     font-size: 35px;
@@ -39,8 +39,8 @@
     border: none;
 }
 
-.helpClose:hover,
-.helpClose:focus {
+.helpClose:hover, .aboutClose:hover, .policiesClose:hover,
+.helpClose:focus, .aboutClose:focus, .policiesClose:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -133,9 +133,81 @@ require_once("includes/or-dbinfo.php");
   </ul>
 </div>
 <div id="grayHeader">
-  <ul style = "background-color: #262626">
-    <br>
+  <ul style = "background-color: #54406b; height: 5%; padding-top: 0.5%;">
     <span class="username">
+      <a href onclick="aboutPopUp(); return false;" style= "color:white; position: absolute; left: 11%;">About</a>
+      <!-- The Modal -->
+      <div id="aboutModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="aboutClose" aria-label="aboutClose">
+                  <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <div class="modal-body">
+        <?php
+          // The Regular Expression filter
+          $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+          // The Text you want to filter for urls
+          $text = $settings["about"];
+          // Check if there is a url in the text
+          if(preg_match($reg_exUrl, $text, $url)) {
+          // make the urls hyper links
+            echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
+          } else {
+            // if no urls in the text just return the text
+            echo $text;
+          }
+        ?>
+        </div>
+      <div class="modal-footer">
+        <h3>About</h3>
+      </div>
+    </div>
+  </div>
+  <div style="color:white; position: absolute; left: 14%;">&nbsp;|&nbsp;</div>
+    <a href onclick="policiesPopUp(); return false;" style= "color:white; position: absolute; left: 15%;">Policies</a>
+    <!-- The Modal -->
+    <div id="policiesModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="policiesClose" aria-label="policiesClose">
+                <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      <?php
+      // The Regular Expression filter
+      $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+
+      // The Text you want to filter for urls
+      $text = $settings["policies"];
+
+      // Check if there is a url in the text
+      if(preg_match($reg_exUrl, $text, $url)) {
+
+             // make the urls hyper links
+             echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
+
+      } else {
+
+             // if no urls in the text just return the text
+             echo $text;
+
+      }
+      ?>
+        </div>
+        <div class="modal-footer">
+          <h3>Policies</h3>
+        </div>
+      </div>
+
+    </div>
+
     <?php
       if (!isset($_SESSION["systemid"])) {
         $_SESSION["systemid"] = "";
@@ -204,7 +276,6 @@ require_once("includes/or-dbinfo.php");
       }
       ?>
     </br>
-    <br>
   </ul>
 </div>
 <script language="javascript" type="text/javascript">
@@ -231,13 +302,23 @@ function hideDiv(ele) {
     }
   // Get the modal
   var helpModal = document.getElementById('helpModal');
+  var aboutModal = document.getElementById('aboutModal');
+  var policiesModal = document.getElementById('policiesModal');
 
   // Get the <span> element that closes the modal
   var helpSpan = document.getElementsByClassName("helpClose")[0];
+  var aboutSpan = document.getElementsByClassName("aboutClose")[0];
+  var policiesSpan = document.getElementsByClassName("policiesClose")[0];
 
   // When the user clicks the button, open the modal
   function helpPopUp() {
       helpModal.style.display = "block";
+  }
+  function aboutPopUp() {
+      aboutModal.style.display = "block";
+  }
+  function policiesPopUp() {
+      policiesModal.style.display = "block";
   }
 
   // When the user clicks on <span> (x), close the modal
@@ -246,11 +327,23 @@ function hideDiv(ele) {
         helpModal.style.display = "none";
     }
   }
+  aboutSpan.onclick = function() {
+      aboutModal.style.display = "none";
+  }
+  policiesSpan.onclick = function() {
+      policiesModal.style.display = "none";
+  }
 
   // When the user clicks anywhere outside of the modal, close it
   window.addEventListener("click", function(event) {
     if (event.target == helpModal) {
         helpModal.style.display = "none";
+    }
+    if (event.target == aboutModal) {
+        aboutModal.style.display = "none";
+    }
+    if (event.target == policiesModal) {
+        policiesModal.style.display = "none";
     }
   })
 </script>

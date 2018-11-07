@@ -155,5 +155,5 @@ if ($activatecode == "" && $activateusername == "") {
         echo "There was a problem activating your account.";
     }
 }
-include($_SESSION["themepath"] . "libraryfooter.php");
+include($_SESSION["themepath"] . "footer.php");
 ?>
