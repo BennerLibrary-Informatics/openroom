@@ -122,7 +122,7 @@ if ($_SESSION["username"] != "") {
         }
     }
     //Construct table header
-    $dvout .= "<div class = 'row' style='text-decoration: underline;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rooms: </b></label></div>";
+    $dvout .= "<div class = 'row' style='font-weight: bold;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rooms: </b></label></div>";
    foreach ($xmlroominfo->room as $room) {
        $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
      }

@@ -441,7 +441,8 @@ label{
 }
 
 .groups{
-  background-color: slategrey;
+  background-color: #54406b;
+  color: white;
   border-style: none;
   cursor: pointer;
   font-weight: bold;
@@ -452,6 +453,8 @@ label{
 
 .selected {
     background-color: #c4bccd;
+    color: black;
+    border-style: solid;
     border-radius: 15px;
     width: auto;
     margin-top: 5px;
