@@ -169,14 +169,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     "<td>" . $record["numberingroup"] . "</td>" .
                     "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>" .
                     $extraTableCell . "</tr>";
-
-                if ($record["roomname"] != $nextRoom["roomname"]) {
-                  echo ("</tr>");
-                  echo ("<tr style='page-break-after:always;'>");
-                  echo ("</tr>");
-              } else {
-                  echo ("</tr>");
-              }
             }
 
             ?>
