@@ -82,32 +82,17 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <table id="reporttable">
             <tr class="reportodd">
-                <td><strong>Room</strong>&nbsp;<a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=roomname&direction=ASC"><img
-                                src="images/moveup.gif" border="0"/></a><a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=roomname&direction=DESC"><img
-                                src="images/movedown.gif" border="0"/></a></td>
+                <td><strong>Room</strong>&nbsp;
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=roomname&direction=ASC"></a></td>
                 <td><strong>Information</strong></td>
-                <td><strong>Start Time</strong>&nbsp;<a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=start&direction=ASC"><img
-                                src="images/moveup.gif" border="0"/></a><a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=start&direction=DESC"><img
-                                src="images/movedown.gif" border="0"/></a></td>
-                <td><strong>End Time</strong>&nbsp;<a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=end&direction=ASC"><img
-                                src="images/moveup.gif" border="0"/></a><a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=end&direction=DESC"><img
-                                src="images/movedown.gif" border="0"/></a></td>
-                <td><strong>Number in Group</strong>&nbsp;<a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=numberingroup&direction=ASC"><img
-                                src="images/moveup.gif" border="0"/></a><a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=numberingroup&direction=DESC"><img
-                                src="images/movedown.gif" border="0"/></a></td>
-                <td><strong>Time of Request</strong>&nbsp;<a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"><img
-                                src="images/moveup.gif" border="0"/></a><a
-                            href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=DESC"><img
-                                src="images/movedown.gif" border="0"/></a></td>
+                <td><strong>Start Time</strong>&nbsp;
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=start&direction=ASC"></a></td>
+                <td><strong>End Time</strong>&nbsp;
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=end&direction=ASC"></a></td>
+                <td><strong>Number in Group</strong>&nbsp;
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=numberingroup&direction=ASC"></a></td>
+                <td><strong>Time of Request</strong>&nbsp;
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
                 <?php
                 if ($lookuproom == "") {
                   echo "<td><strong>Room</strong></td>";
@@ -122,13 +107,42 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $nextDay = date('Y-m-d H:i:s', strtotime($date . "+1 days"));
 
             if ($lookuproom == "") {
-              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY timeofrequest DESC LIMIT 50;");
+              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomid, reservations.start ASC;");
             }
             else {
               $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "'" . $orderbystr . ";");
             }
             $count = 2;
+            $previousRoomID = 0;
             while ($record = mysqli_fetch_array($records)) {
+              if ($record["roomid"] != $previousRoomID) {
+                if ($previousRoomID != 0) {
+                  echo "</table>";
+                  //echo "<br>";
+
+                  echo "<div class='page-break'></div>";
+                  echo "<br>";
+
+                  echo "<table id='reporttable' style='page-break-after:always;>";
+                  echo "<tr class='reportodd'>";
+                  echo "<td><strong>Room</strong>&nbsp;";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=roomname&direction=ASC'></a></td>";
+                  echo "<td><strong>Information</strong></td>";
+                  echo "<td><strong>Start Time</strong>&nbsp;";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=start&direction=ASC'></a></td>";
+                  echo "<td><strong>End Time</strong>&nbsp;";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=end&direction=ASC'></a></td>";
+                  echo "<td><strong>Number in Group</strong>&nbsp;";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=numberingroup&direction=ASC'></a></td>";
+                  echo "<td><strong>Time of Request</strong>&nbsp;";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
+                  if ($lookuproom == "") {
+                    echo "<td><strong>Room</strong></td>";
+                  }
+                }
+                $previousRoomID = $record["roomid"];
+              }
+
               if ($lookuproom == "") {
                 $extraTableCell = "<td>" . $record["roomid"] . "</td>";
               }
@@ -155,6 +169,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     "<td>" . $record["numberingroup"] . "</td>" .
                     "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>" .
                     $extraTableCell . "</tr>";
+
+                if ($record["roomname"] != $nextRoom["roomname"]) {
+                  echo ("</tr>");
+                  echo ("<tr style='page-break-after:always;'>");
+                  echo ("</tr>");
+              } else {
+                  echo ("</tr>");
+              }
             }
 
             ?>
