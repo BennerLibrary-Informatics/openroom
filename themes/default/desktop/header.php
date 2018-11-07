@@ -135,7 +135,7 @@ require_once("includes/or-dbinfo.php");
 <div id="grayHeader">
   <ul style = "background-color: #54406b; height: 30px; padding-top: 4px;">
     <span class="username">
-      <a href onclick="aboutPopUp(); return false;" style= "color:white; position: absolute; left: 11%;">About</a>
+      <a href onclick="aboutPopUp(); return false;" style= "color:white; position: absolute; left: 150px;">About</a>
       <!-- The Modal -->
       <div id="aboutModal" class="modal">
 
@@ -167,8 +167,8 @@ require_once("includes/or-dbinfo.php");
       </div>
     </div>
   </div>
-  <div style="color:white; position: absolute; left: 14%;">&nbsp;|&nbsp;</div>
-    <a href onclick="policiesPopUp(); return false;" style= "color:white; position: absolute; left: 15%;">Policies</a>
+  <div style="color:white; position: absolute; left: 190px;">&nbsp;|&nbsp;</div>
+    <a href onclick="policiesPopUp(); return false;" style= "color:white; position: absolute; left: 200px;">Policies</a>
     <!-- The Modal -->
     <div id="policiesModal" class="modal">
 
@@ -222,7 +222,8 @@ require_once("includes/or-dbinfo.php");
       }
       if(isset($_SESSION["username"])) {
           if ($_SESSION["username"] != "") {
-              echo "|";
+              if ($settings["login_method"] != "ldap")
+                echo "|";
               ?>
               <!--<div id="clear_both"></div>
               <div class = "col-12">
