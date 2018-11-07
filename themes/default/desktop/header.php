@@ -133,7 +133,7 @@ require_once("includes/or-dbinfo.php");
   </ul>
 </div>
 <div id="grayHeader">
-  <ul style = "background-color: #54406b; height: 5%; padding-top: 0.5%;">
+  <ul style = "background-color: #54406b; height: 30px; padding-top: 4px;">
     <span class="username">
       <a href onclick="aboutPopUp(); return false;" style= "color:white; position: absolute; left: 11%;">About</a>
       <!-- The Modal -->
