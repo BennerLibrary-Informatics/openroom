@@ -121,21 +121,16 @@ require_once("includes/or-dbinfo.php");
             </div>
     </div>
    </div>
-   <br>
 </div>
 
 
 
 <?php include("modules/reminder.php"); ?>
-<div id="whiteBreak">
-  <ul style = "background-color: white">
-    <br>
-  </ul>
-</div>
-<div id="grayHeader">
-  <ul style = "background-color: #54406b; height: 30px; padding-top: 4px;">
+<div id="whiteBreak"></div>
+<div id="menuHeader">
     <span class="username">
-      <a href onclick="aboutPopUp(); return false;" style= "color:white; position: absolute; left: 150px;">About</a>
+      <p style="float: left;">&nbsp;</p>
+      <a href onclick="aboutPopUp(); return false;" style= "color:white;">About</a>
       <!-- The Modal -->
       <div id="aboutModal" class="modal">
 
@@ -166,9 +161,8 @@ require_once("includes/or-dbinfo.php");
         <h3>About</h3>
       </div>
     </div>
-  </div>
-  <div style="color:white; position: absolute; left: 190px;">&nbsp;|&nbsp;</div>
-    <a href onclick="policiesPopUp(); return false;" style= "color:white; position: absolute; left: 200px;">Policies</a>
+  </div> |
+    <a href onclick="policiesPopUp(); return false;" style= "color:white;">Policies</a>
     <!-- The Modal -->
     <div id="policiesModal" class="modal">
 
@@ -212,24 +206,24 @@ require_once("includes/or-dbinfo.php");
       if (!isset($_SESSION["systemid"])) {
         $_SESSION["systemid"] = "";
       }
+      if(isset($_SESSION["username"])) {
+          if ($_SESSION["username"] != "") {
+            echo "<p style=\"float: right;\">&nbsp;</p>";
+              echo "<a href=\"modules/logout.php\"style=\"color:white; float: right;\">Logout</a>";
+          }
+      }
 
       if ($_SESSION["systemid"] == $settings["systemid"]) {
 
-      if ($settings["login_method"] == "normal" && isset($_SESSION["username"])) {
-           if($_SESSION["username"] != "") {
-              echo "&nbsp;<a href=\"editaccount.php\"style=\"color:white;\">Edit Account</a>&nbsp;";
-           }
-      }
       if(isset($_SESSION["username"])) {
           if ($_SESSION["username"] != "") {
-              if ($settings["login_method"] != "ldap")
-                echo "|";
+              echo "<p style=\"float: right;\">&nbsp;|&nbsp;</p>";
               ?>
               <!--<div id="clear_both"></div>
               <div class = "col-12">
               </div>
               <div class = "copyright">-->
-                <a href onclick="helpPopUp(); return false;" style= "color:white;">Help</a>
+                <a href onclick="helpPopUp(); return false;" style= "color:white; float: right;">Help</a>
 
                 <!-- The Modal -->
                 <div id="helpModal" class="modal">
@@ -268,16 +262,17 @@ require_once("includes/or-dbinfo.php");
     <?php
           }
       }
-      if(isset($_SESSION["username"])) {
-          if ($_SESSION["username"] != "") {
-              echo "|&nbsp;<a href=\"modules/logout.php\"style=\"color:white;\">Logout</a>";
-              echo "&nbsp&nbsp";
-          }
+
       }
+
+      if ($settings["login_method"] == "normal" && isset($_SESSION["username"])) {
+           if($_SESSION["username"] != "") {
+              echo "<p style=\"float: right;\">&nbsp;|&nbsp;</p>";
+              echo "<a href=\"editaccount.php\"style=\"color:white; float: right;\">Edit Account</a>";
+            }
       }
       ?>
-    </br>
-  </ul>
+    </span>
 </div>
 <script language="javascript" type="text/javascript">
 function showHideDiv(ele) {

@@ -90,7 +90,7 @@ a.nav-link:hover
 <div class = "libraryfooter">
   <div id = "left">
   <libraryfooter-ul>
-    <br>
+    <br/><br/>
     <li>
       Copyright (C) 2012 Ball State University Libraries
     </li>
@@ -109,7 +109,7 @@ a.nav-link:hover
       <a href="https://www.olivet.edu/" class = "nav-link" target="_blank">Olivet Nazarene University</a>
     </li>
     <li>
-      One University Ave · Bourbonnais, IL 60914</br>
+      One University Ave · Bourbonnais, IL 60914<br/>
       Phone: 815-939-5354 · Fax: 815-939-5170
     </li>
   </libraryfooter-ul>
