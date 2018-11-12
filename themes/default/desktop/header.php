@@ -81,50 +81,48 @@ require_once("includes/or-dbinfo.php");
 
 <body>
 <div id = "container">
- <div id="heading" >
-   <div class = "row" >
-   <div class = "col-1 margin-top-20 margin-left-10 margin-bottom-15">
-     <a href="https://library.olivet.edu/index.php" style="text-decoration:none; color:white;"><img src = 'https://library.olivet.edu/img/logo.svg'>
-     </div>
-     <div id = "headerText" class = "col-11 float-right padding-left-30">
-        <div class = "row openroomtitle">
-            <div class = "col">Benner Library</div>
-           </a>
-            <div class = "col text-right">Open Room</div>
-        </div>
-            <div class = "ONUtitle">
-              <a href="https://library.olivet.edu/index.php" style="text-decoration:none; color:white;">
-                Olivet Nazarene University
-              <a style="text-decoration:none; color:white; float: right;">
-                Reserve a Space
+ <div id="heading">
+     <a href="https://library.olivet.edu/index.php" style="text-decoration:none; color:white; float: left; margin-top: 20; margin-left: 10; margin-right: -7;"><img src = 'https://library.olivet.edu/img/logo.svg'>
+     <div id = "headerText">
+       <div class = "ONUtitle">
+         <a href="https://library.olivet.edu/index.php" style="text-decoration:none; color:white; margin-left: 8;">
+           Benner Library
+         <a style="text-decoration:none; color:white; float: right;">
+           Open Room
+       </div>
+         </a>
+         </a>
+       </div>
+       <div class = "ONUsubtitle">
+         <a href="https://library.olivet.edu/index.php" style="text-decoration:none; color:white; margin-left: 15;">
+           Olivet Nazarene University
+         <a style="text-decoration:none; color:white; float: right;">
+           Reserve a Space
+       </div>
+         </a>
+         </a>
+         <div class = "usernametitle">
+           <span class="username">
+             <?php
+             if (!isset($_SESSION["systemid"])) {
+               $_SESSION["systemid"] = "";
+             }
+
+             if ($_SESSION["systemid"] == $settings["systemid"]) {
+
+               if (!isset($_SESSION["username"])) {
+                 $_SESSION["isadministrator"] = "FALSE";
+                 $_SESSION["isreporter"] = "FALSE";
+                 $_SESSION["issupervisor"] = "FALSE";
+               }
+               echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php
+               echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\" style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
+               echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\" style=\"color:white;\">Reporter</a>)</span>&nbsp;" : "";
+               echo ($_SESSION["issupervisor"] == "TRUE") ? "<span class=\"issupervisor\">(<a style=\"color:white;\">Supervisor</a>)</span>&nbsp;" : "";
+             }
+              ?>
             </div>
-              </a>
-              </a>
-            <div class = "usernametitle">
-              <span class="username">
-                <?php
-                if (!isset($_SESSION["systemid"])) {
-                  $_SESSION["systemid"] = "";
-                }
-
-                if ($_SESSION["systemid"] == $settings["systemid"]) {
-
-                  if (!isset($_SESSION["username"])) {
-                    $_SESSION["isadministrator"] = "FALSE";
-                    $_SESSION["isreporter"] = "FALSE";
-                  }
-                  echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php
-                  echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(<a href=\"admin/index.php\" style=\"color:white;\">Admin</a>)</span>&nbsp;" : "";
-                  echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(<a href=\"admin/index.php\">Reporter</a>)</span>&nbsp;" : "";
-                }
-                 ?>
-            </div>
-    </div>
-   </div>
-</div>
-
-
-
+ </div>
 <?php include("modules/reminder.php"); ?>
 <div id="whiteBreak"></div>
 <div id="menuHeader">

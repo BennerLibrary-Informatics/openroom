@@ -66,8 +66,15 @@ body {
 
 .ONUtitle{
   font-family: "PT Serif Caption";
-  margin-top: -5px;
-  margin-left: 1px;
+  position: relative;
+  top: 18px;
+  margin-left: 105px;
+  font-size: 25px;
+  text-align: left;
+}
+.ONUsubtitle{
+  font-family: "PT Serif Caption";
+  margin-top: 10px;
   font-size: 17px;
   text-align: left;
 }
