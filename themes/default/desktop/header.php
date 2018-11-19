@@ -1,70 +1,4 @@
-<!--style for the modal help popup-->
-<style>
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-}
 
-.modal-content {
-    position: relative;
-    margin: auto;
-    padding: 0;
-    border: 5px solid #888;
-    width: 35%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-.helpClose, .aboutClose, .policiesClose {
-    color: grey;
-    margin-left: auto;
-    font-size: 35px;
-    font-weight: bold;
-    background: none;
-    border: none;
-}
-
-.helpClose:hover, .aboutClose:hover, .policiesClose:hover,
-.helpClose:focus, .aboutClose:focus, .policiesClose:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: white;
-    color: black;
-}
-
-.modal-body {
-  padding: 2px 16px;
-  color: black;
-  text-align: left;
-  word-wrap: break-word;
-}
-
-.modal-footer {
-    padding: 2px 10px;
-    background-color: white;
-    color: black;
-}
-</style>
 </div>
 <?php
 require_once("includes/or-dbinfo.php");
@@ -131,73 +65,44 @@ require_once("includes/or-dbinfo.php");
       <a href onclick="aboutPopUp(); return false;" style= "color:white;">About</a>
       <!-- The Modal -->
       <div id="aboutModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="aboutClose" aria-label="aboutClose">
-                  <span aria-hidden="true">&times;</span>
-            </button>
+            About
           </div>
         <div class="modal-body">
-        <?php
-          // The Regular Expression filter
-          $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-          // The Text you want to filter for urls
-          $text = $settings["about"];
-          // Check if there is a url in the text
-          if(preg_match($reg_exUrl, $text, $url)) {
-          // make the urls hyper links
-            echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
-          } else {
-            // if no urls in the text just return the text
+          <?php
+            $text = $settings["about"];
             echo $text;
-          }
-        ?>
+          ?>
         </div>
       <div class="modal-footer">
-        <h3>About</h3>
+        <button type="button" class="aboutClose" aria-label="aboutClose">
+              <span aria-hidden="true"><b>&times;</b> Close</span>
+        </button>
       </div>
     </div>
   </div> |
     <a href onclick="policiesPopUp(); return false;" style= "color:white;">Policies</a>
     <!-- The Modal -->
     <div id="policiesModal" class="modal">
-
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="policiesClose" aria-label="policiesClose">
-                <span aria-hidden="true">&times;</span>
-          </button>
+          Policies
         </div>
         <div class="modal-body">
-      <?php
-      // The Regular Expression filter
-      $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-
-      // The Text you want to filter for urls
-      $text = $settings["policies"];
-
-      // Check if there is a url in the text
-      if(preg_match($reg_exUrl, $text, $url)) {
-
-             // make the urls hyper links
-             echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
-
-      } else {
-
-             // if no urls in the text just return the text
-             echo $text;
-
-      }
-      ?>
+          <?php
+            $text = $settings["policies"];
+            echo $text;
+          ?>
         </div>
         <div class="modal-footer">
-          <h3>Policies</h3>
+          <button type="button" class="policiesClose" aria-label="policiesClose">
+                <span aria-hidden="true"><b>&times;</b> Close</span>
+          </button>
         </div>
       </div>
-
     </div>
 
     <?php
@@ -217,10 +122,6 @@ require_once("includes/or-dbinfo.php");
           if ($_SESSION["username"] != "") {
               echo "<p style=\"float: right;\">&nbsp;|&nbsp;</p>";
               ?>
-              <!--<div id="clear_both"></div>
-              <div class = "col-12">
-              </div>
-              <div class = "copyright">-->
                 <a href onclick="helpPopUp(); return false;" style= "color:white; float: right;">Help</a>
 
                 <!-- The Modal -->
@@ -228,30 +129,18 @@ require_once("includes/or-dbinfo.php");
                   <!-- Modal content -->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="helpClose" aria-label="helpClose">
-                            <span aria-hidden="true">&times;</span>
-                      </button>
+                      Help
                     </div>
                     <div class="modal-body">
-                  <?php
-                  // The Regular Expression filter
-                  $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-                  // The Text you want to filter for urls
-                  $text = $settings["help"];
-                  // Check if there is a url in the text
-                  if(preg_match($reg_exUrl, $text, $url)) {
-
-                         // make the urls hyper links
-                         echo preg_replace($reg_exUrl, '<a href="'.$url[0].'" rel="nofollow" target="_blank">'.$url[0].'</a>', $text);
-
-                  } else {
-                         // if no urls in the text just return the text
-                         echo $text;
-                  }
-                  ?>
+                      <?php
+                        $text = $settings["help"];
+                        echo $text;
+                      ?>
                     </div>
                     <div class="modal-footer">
-                      <h3>Help</h3>
+                      <button type="button" class="helpClose" aria-label="helpClose">
+                            <span aria-hidden="true"><b>&times;</b> Close</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -341,6 +230,89 @@ function hideDiv(ele) {
     }
   })
 </script>
+<!--style for the modal help popup-->
+<style>
+.modal {
+    background-color: rgba(43,62,66,.85);
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 30px; /* Location of the box */
+    padding-bottom: 30px;
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    border: 5px solid #888;
+    width: 35%;
+    border: 1px solid transparent;
+    border-color: #54406b;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.helpClose, .aboutClose, .policiesClose {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    border-color: #54406b;
+    margin-left: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    background: none;
+}
+
+.helpClose:hover, .aboutClose:hover, .policiesClose:hover,
+.helpClose:focus, .aboutClose:focus, .policiesClose:focus {
+    color: red;
+    background: #e8deda;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    font-size: 16px;
+    font-family: sans-serif;
+    padding: 10px 15px;
+    background-color: white;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+    color: black;
+    justify-content: flex-start;
+    font-weight: bold;
+}
+
+.modal-body {
+  padding: 2px 16px;
+  color: black;
+  text-align: left;
+  word-wrap: break-word;
+  border-top: 1px solid transparent;
+  border-color: #54406b;
+}
+
+.modal-footer {
+    padding: 10px 15px;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    background-color: white;
+    color: black;
+}
+</style>
 <div id="containerInfo">
     <div id="calendarDiv" style="display:none">
         <center>

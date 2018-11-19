@@ -1,35 +1,5 @@
 <!--style for the library footer popup-->
 <style>
-.modal-content {
-    position: relative;
-    margin: auto;
-    padding: 0;
-    border: 5px solid #888;
-    width: 35%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: white;
-    color: black;
-}
-
-.modal-body {
-  padding: 2px 16px;
-  word-wrap: break-word;
-}
-
-.modal-footer {
-    padding: 2px 10px;
-    background-color: white;
-    color: black;
-}
-
 .libraryfooter {
   background-color: #54406b;
   font-size: 15px;
