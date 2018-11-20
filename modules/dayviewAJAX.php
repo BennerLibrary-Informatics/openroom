@@ -83,8 +83,8 @@ if ($_SESSION["username"] != "") {
         $tomorrow = strtotime($currentmdy) + 86400;
         $endtomorrow = $tomorrow + 86399;
         $dvout = "<center><div id = \"legend\" class =\"row\"><div id = \"legendText\" style=\"text-align: right\">Open: <span id=\"open\" class=\"glyphicon glyphicon-stop\"></span></div><div id = \"legendText\" style=\"text-align: center\">Closed: <span id=\"closedList\">X</span></div><div id = \"legendText\">Your Reservations: <span class=\"glyphicon glyphicon-ok\"></span></div><div id = \"legendText\">Reserved: <span style=\"color: red;\">R</span></div></div><div class = 'row'></div></center>";
-        $dvout .= "<div id=\"dayviewheader\"><span onclick=\"dayviewer('$yesterday','$endyesterday','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
-        $dvout .= "</div><center><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></center>";
+        $dvout .= "<div id=\"dayviewheader\" style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1;\"><span onclick=\"dayviewer('$yesterday','$endyesterday','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span></div>";
+        $dvout .= "</div><div style=\"position: -webkit-sticky; position: sticky; top: 40; z-index: 10;\"><center><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></center></div>";
         $dvout .= "<div class = 'header' id='roomhead' >";
         $dvout .= $group_str;
         //$dvout .= .$group_str;

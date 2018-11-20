@@ -321,7 +321,6 @@ hr {
 
 #rightside {
   padding: 0 30px;
-  overflow: hidden;
 }
 label{
   font-size: 12pt;
@@ -360,7 +359,7 @@ label{
     position: fixed;
     bottom: 0;
     right: 0;
-    z-index: 1;
+    z-index: 100;
     border: 3px solid #7d609f;
 }
 
@@ -416,6 +415,7 @@ label{
 
 .currentcalendarday {
     border: 1px #7d609f solid;
+    background-color: #d8cfe2;
     cursor: pointer;
 }
 
