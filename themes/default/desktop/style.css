@@ -333,15 +333,17 @@ label{
 
 #calendarButton {
     width: auto;
+    display: inline;
     font-size: 15px;
     text-align: center;
+    vertical-align: middle;
     color: #fff;
     margin-top: 1px;
     margin-bottom: 10px;
     background-color: #54406b;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 5px #999;
 }
 
 #calendarButton:hover {background-color: #7d609f}
@@ -432,6 +434,12 @@ label{
     font-size: 30px;
     font-weight: bold;
     text-align: center;
+    white-space: nowrap;
+    overflow:hidden;
+}
+
+.row {
+  background-color: #c4bcc9;
 }
 
 .grouptab {
@@ -445,12 +453,26 @@ label{
     padding: 10px;
     margin-top: 5px;
     margin-bottom:5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    -webkit-box-shadow: 0px 6px 0px black, 0px 3px 15px rgba(0,0,0,.4);
+    -moz-box-shadow: 0px 6px 0px black, 0px 3px 15px rgba(0,0,0,.4);
+    box-shadow: 0px 4px 0px #595959, 0px 3px 15px rgba(0,0,0,.4);
+}
+
+.grouptab:hover {
+    background-color: #a48fbc;
+    color: white;
+    box-shadow: inset 0 0 15px #54406b;
 }
 
 .groups{
-  background-color: #54406b;
-  color: white;
-  border-style: none;
+  background-color: #8a70a9;
+  color: black;
+  border-style: solid;
+  border-color: black;
+  border-radius: 15px;
+  border-width: 1px;
   cursor: pointer;
   font-weight: bold;
   padding: 2px;
@@ -459,13 +481,19 @@ label{
 }
 
 .selected {
-    background-color: #c4bccd;
+    background-color: #c4bcc9;
     color: black;
-    border-style: solid;
-    border-radius: 15px;
+    border-top: 5px solid black;
+    border-left: 3px solid black;
+    border-color: #333333;
     width: auto;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #4d4d4d;
 }
 
 .mousedoverrow {

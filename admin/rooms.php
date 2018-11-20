@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Chicago');
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
