@@ -434,8 +434,8 @@ label{
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    white-space: nowrap;
-    overflow:hidden;
+    margin-right: -22px;
+    margin-left: -15px;
 }
 
 .row {
