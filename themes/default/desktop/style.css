@@ -361,7 +361,7 @@ label{
     position: fixed;
     bottom: 0;
     right: 0;
-    z-index: 100;
+    z-index: 2;
     border: 3px solid #7d609f;
 }
 
@@ -535,7 +535,7 @@ label{
     position: fixed;
     visibility: hidden;
     width: 400px;
-    z-index: 20000;
+    z-index: 2;
 }
 .bottombutton1{
   position: relative;

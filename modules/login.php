@@ -57,7 +57,7 @@
 </script>
 
 <div id="loginform">
-    <form id="authentication" onsubmit="return false" action="">
+    <form id="authentication" onsubmit="return false;" action="">
       <div id="loginusername" class = "form-group row">
         <div class = "col-lg-3 col-md-3 col-sm-12 loginlabel offset-lg-1">
           <label for="loginusernamelabel">Username:</label>

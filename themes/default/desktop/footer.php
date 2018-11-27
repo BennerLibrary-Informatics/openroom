@@ -22,7 +22,7 @@ a.nav-link { /* Adjust 'a' color in style.css to make all links white*/
   margin-left: -10px;
   margin-right: -10px;
   line-height: 12px;
-  z-index: 10;
+  z-index: 1;
   position: relative;
 }
 

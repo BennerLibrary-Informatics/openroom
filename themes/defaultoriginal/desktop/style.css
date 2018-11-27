@@ -228,7 +228,7 @@ p {
     position: absolute;
     visibility: hidden;
     width: 300px;
-    z-index: 20000;
+    z-index: 2;
     filter: alpha(opacity=90);
     -moz-opacity: 0.9;
     -khtml-opacity: 0.9;

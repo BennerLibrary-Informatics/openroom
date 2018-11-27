@@ -236,7 +236,7 @@ function hideDiv(ele) {
     background-color: rgba(43,62,66,.85);
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 3; /* Sit on top */
     padding-top: 30px; /* Location of the box */
     padding-bottom: 30px;
 }
