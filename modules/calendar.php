@@ -70,15 +70,21 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
             if (req != false) var xmlhttp = req;
 
             xmlhttp.onreadystatechange = function () {
-                document.getElementById("rightside").innerHTML += "<div id='loader'></div>";
+                if(document.getElementById("rightside") != null) {
+                    document.getElementById("rightside").innerHTML += "<div id='loader'></div>";
+                }
                 if (xmlhttp.readyState == 4) {
                     document.getElementById("loader").innerHTML = "";
                     document.getElementById("dayviewModule").innerHTML = xmlhttp.responseText;
                     if (xmlhttp.responseText == "Error: User is not logged in.") location.reload(true);
                 }
                 else {
-                    document.getElementById("dayviewModule").innerHTML = "";
-                    document.getElementById("loader").innerHTML = "<br\/><br\/><br\/><center><img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/><br\/>Please wait...<\/center>";
+                    if (document.getElementById("dayviewmodule") != null) {
+                      document.getElementById("dayviewModule").innerHTML = "";
+                    }
+                    if (document.getElementById("loader") != null) {
+                      document.getElementById("loader").innerHTML = "<br\/><br\/><br\/><center><img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/><br\/>Please wait...<\/center>";
+                    }
                 }
             };
 
