@@ -70,21 +70,31 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         }
         else {
           echo $lookuproom;
-        }?>
-        <br/><br/><strong>For date: <?php
-        if ($date == "") {
-          echo date("m/d/Y");
         }
-        else {
-          echo $date;
-        } ?>
-        </strong><br/><br/>
+
+        if ($date == "") {
+          $date = date('Y-m-d');
+        }
+        $date = date('Y-m-d H:i:s', strtotime($date));
+        $nextDay = date('Y-m-d H:i:s', strtotime($date . "+1 days"));
+
+        $records = getReservationInfo($date, $nextDay);
+        $firstRoom = mysqli_fetch_array($records);
+        ?>
+        </strong><br/>
 
         <table id="reporttable">
-            <tr class="reportodd">
-                <td><strong>Room</strong>&nbsp;
-                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=roomname&direction=ASC"></a></td>
-                <td><strong>Information</strong></td>
+              <tr>
+                <th colspan="5"><h4><strong><center>Room: &nbsp;
+              <?php
+                echo $firstRoom["roomname"];
+                echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                echo date("m/d/Y");
+              ?>
+              </center></strong></h4>
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=roomname&direction=ASC"></a></th>
+              </tr>
+              <tr class="reportodd">
                 <td><strong>Start Time</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=start&direction=ASC"></a></td>
                 <td><strong>End Time</strong>&nbsp;
@@ -95,39 +105,28 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
                 <?php
                 if ($lookuproom == "") {
-                  echo "<td><strong>Room</strong></td>";
-                }?>
+                  echo "<td><strong>Username</strong></td>";
+                }
+                ?>
             </tr>
 
             <?php
-            if ($date == "") {
-              $date = date('Y-m-d');
-            }
-            $date = date('Y-m-d H:i:s', strtotime($date));
-            $nextDay = date('Y-m-d H:i:s', strtotime($date . "+1 days"));
-
-            if ($lookuproom == "") {
-              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomid, reservations.start ASC;");
-            }
-            else {
-              $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "'" . $orderbystr . ";");
-            }
-            $count = 2;
+            $records = getReservationInfo($date, $nextDay);
+            $count = 1;
             $previousRoomID = 0;
             while ($record = mysqli_fetch_array($records)) {
               if ($record["roomid"] != $previousRoomID) {
                 if ($previousRoomID != 0) {
-                  echo "</table>";
-                  //echo "<br>";
-
                   echo "<div class='page-break'></div>";
-                  echo "<br>";
 
                   echo "<table id='reporttable' style='page-break-after:always;>";
+                  echo "<tr class='reportheader'><th colspan = '5'><h4><strong><center>Room:&nbsp;";
+                  echo $record['roomname'];
+                  echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                  echo date("m/d/Y");
+                  echo "</strong></center></h4>";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=roomname&direction=ASC'></a></th></tr>";
                   echo "<tr class='reportodd'>";
-                  echo "<td><strong>Room</strong>&nbsp;";
-                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=roomname&direction=ASC'></a></td>";
-                  echo "<td><strong>Information</strong></td>";
                   echo "<td><strong>Start Time</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=start&direction=ASC'></a></td>";
                   echo "<td><strong>End Time</strong>&nbsp;";
@@ -137,42 +136,36 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "<td><strong>Time of Request</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
                   if ($lookuproom == "") {
-                    echo "<td><strong>Room</strong></td>";
+                    echo "<td><strong>Username</strong></td>";
                   }
                 }
                 $previousRoomID = $record["roomid"];
               }
 
               if ($lookuproom == "") {
-                $extraTableCell = "<td>" . $record["roomid"] . "</td>";
+                $extraTableCell = "<td>" . $record["username"] . "</td>";
               }
               else {
                 $extraTableCell = "";
               }
-                if ($count == 2) {
-                    echo "<tr class=\"reporteven\">";
-                    $count = 1;
-                } else {
-                    echo "<tr class=\"reportodd\">";
-                    $count = 2;
-                }
-                echo "<td>" . $record["roomname"] . "</td><td><div class=\"reportscroll\">";
 
-                //Optional Fields
-                $opfields = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservationoptions WHERE reservationid = " . $record["reservationid"] . ";");
-                while ($opfield = mysqli_fetch_array($opfields)) {
-                    echo "<strong>" . $opfield["optionname"] . ": </strong>" . $opfield["optionvalue"] . "<br/>";
-                }
+              echo "<tr class=\"reportodd\">";
 
-                echo "</div></td><td>" . date('g:i a', strtotime($record["start"])) . "</td>" .
-                    "<td>" . date('g:i a', strtotime($record["end"])) . "</td>" .
-                    "<td>" . $record["numberingroup"] . "</td>" .
-                    "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>" .
-                    $extraTableCell . "</tr>";
+              //Optional Fields
+              $opfields = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservationoptions WHERE reservationid = " . $record["reservationid"] . ";");
+              while ($opfield = mysqli_fetch_array($opfields)) {
+                  echo "<strong>" . $opfield["optionname"] . ": </strong>" . $opfield["optionvalue"] . "<br/>";
+              }
+
+              echo "</div></td><td>" . date('g:i a', strtotime($record["start"])) . "</td>" .
+                  "<td>" . date('g:i a', strtotime($record["end"])) . "</td>" .
+                  "<td>" . $record["numberingroup"] . "</td>" .
+                  "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>" .
+                  $extraTableCell . "</tr>";
+
+              echo "<br>";
             }
-
             ?>
-
         </table>
 
         <br/>
@@ -183,5 +176,16 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     </body>
     </html>
     <?php
+}
+
+// function to call msqli_query
+function getReservationInfo($date, $nextDay) {
+  if ($lookuproom == "") {
+    $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomid, reservations.start ASC;");
+  }
+  else {
+    $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "'" . $orderbystr . ";");
+  }
+  return $records;
 }
 ?>
