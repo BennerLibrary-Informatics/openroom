@@ -84,7 +84,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </strong><br/>
 
         <table id="reporttable">
-              <tr>
+              <tr class="reportheader">
                 <th colspan="5"><h4><strong><center>Room: &nbsp;
               <?php
                 echo $firstRoom["roomname"];
@@ -117,9 +117,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             while ($record = mysqli_fetch_array($records)) {
               if ($record["roomid"] != $previousRoomID) {
                 if ($previousRoomID != 0) {
-                  echo "<div class='page-break'></div>";
-
-                  echo "<table id='reporttable' style='page-break-after:always;>";
+                  echo "<table id='reporttable'>";
                   echo "<tr class='reportheader'><th colspan = '5'><h4><strong><center>Room:&nbsp;";
                   echo $record['roomname'];
                   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
@@ -138,6 +136,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   if ($lookuproom == "") {
                     echo "<td><strong>Username</strong></td>";
                   }
+                  echo "<div class='page-break'></div>";
+
                 }
                 $previousRoomID = $record["roomid"];
               }

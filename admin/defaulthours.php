@@ -2,6 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+date_default_timezone_set('America/Chicago');
 include("../includes/or-dbinfo.php");
 include("../includes/ClockTime.php");
 if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
