@@ -77,8 +77,8 @@
                  class="form-control form-control-sm" placeholder="Your Olivet password"/>
         </div>
       </div>
-      <div class = "form-group row">
-        <div class = "col-lg-4 offset-lg-4">
+
+        <div class = "col-lg-4 col-md-6 col-sm-12 offset-lg-4 offset-md-3">
           <input id="loginsubmitbutton" class="button btn btn-primary" type="submit" value="Log In"
             onclick="ajaxAuthenticate()"/>
         </div>
@@ -91,8 +91,8 @@
             //}
             ?>
         </div>-->
-      </div>
-      <div class="col-lg-4 offset-lg-4">
+
+      <div class="col-lg-4 col-md-6 offset-lg-4 offset-md-3">
         <a href="https://changemypassword.olivet.edu/" style="float: right;"> Forgot Password?</a>
       </div>
       <div id="clear_both"></div>
