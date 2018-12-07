@@ -41,7 +41,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
     <head>
-        <title><?php echo $settings["instance_name"]; ?> - Administration - Reports - Daily Schedule</title>
+        <title><?php echo $settings["instance_name"]; ?> - Administration - Reports - Daily Schedule with Usernames</title>
         <link rel="stylesheet" type="text/css" href="adminstyle.css"/>
         <meta http-equiv="Content-Script-Type" content="text/javascript"/>
     </head>
@@ -62,10 +62,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
             ?>
         </center>
-        <h3><a href="index.php">Administration</a> - Reports - Daily Schedule</h3>
+        <h3><a href="index.php">Administration</a> - Reports - Daily Schedule with Usernames</h3>
 
-        <br/><strong>Daily schedule for rooms</strong><br>
-          <?php
+        <br/><strong>Daily schedule for rooms with usernames</strong>
+
+        <?php
 
         if ($date == "") {
           $date = date('Y-m-d');
@@ -76,10 +77,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         $records = getReservationInfo($date, $nextDay);
         $firstRoom = mysqli_fetch_array($records);
         ?>
+        <br/>
 
         <table id="reporttable" align="center">
               <tr class="reportheader">
-                <th colspan="4"><h4><strong><center>Room: &nbsp;
+                <th colspan="5" border = "solid";><h4><strong><center>Room: &nbsp;
               <?php
                 echo $firstRoom["roomname"];
                 echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
@@ -98,6 +100,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <td><strong>Time of Request</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
                 <?php
+                if ($lookuproom == "") {
+                  echo "<td><strong>Username</strong></td>";
+                }
                 ?>
             </tr>
 
@@ -109,7 +114,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               if ($record["roomid"] != $previousRoomID) {
                 if ($previousRoomID != 0) {
                   echo "<table id='reporttable' align='center'>";
-                  echo "<tr class='reportheader'><th colspan = '4'><h4><strong><center>Room:&nbsp;";
+                  echo "<tr class='reportheader'><th colspan = '5'><h4><strong><center>Room:&nbsp;";
                   echo $record['roomname'];
                   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                   echo date("m/d/Y");
@@ -124,11 +129,19 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=numberingroup&direction=ASC'></a></td>";
                   echo "<td><strong>Time of Request</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
-                  echo "<div class='page-break'></div>";
-                  echo "<br><br>";
-
+                  if ($lookuproom == "") {
+                    echo "<td><strong>Username</strong></td>";
+                  }
+                  echo "<br>";
                 }
                 $previousRoomID = $record["roomid"];
+              }
+
+              if ($lookuproom == "") {
+                $extraTableCell = "<td>" . $record["username"] . "</td>";
+              }
+              else {
+                $extraTableCell = "";
               }
 
               echo "<tr class=\"reportodd\">";
@@ -142,7 +155,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               echo "</div></td><td>" . date('g:i a', strtotime($record["start"])) . "</td>" .
                   "<td>" . date('g:i a', strtotime($record["end"])) . "</td>" .
                   "<td>" . $record["numberingroup"] . "</td>" .
-                  "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>";
+                  "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>" .
+                  $extraTableCell . "</tr>";
 
               echo "<br>";
             }

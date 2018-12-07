@@ -101,6 +101,22 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   </li>
               </ul>
           </li>
+          <li>
+              <strong>Daily Schedule with Usernames</strong><em> - All reservations with the reserver's username included</em><br/>
+              <ul>
+                  <li>
+                      <form name="roomlookup" method="POST" action="report-usernames.php">
+                          Room: <input type="text" name="lookuproom"/>
+                          Date: <input id="date" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
+                          <img src="../includes/datechooser/calendar.gif"
+                               onclick="showChooser(this, 'date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                          <div id="chooserSpan3" class="dateChooser select-free"
+                               style="display: none; visibility: hidden; width: 160px;"></div>
+                          <input type="submit" value="Run Report"/>
+                      </form>
+                  </li>
+              </ul>
+          </li>
             <li>
                 <strong>User Lookup</strong><em> - All reservations made by specified user. Leave the field blank to lookup all users.</em><br/>
                 <ul>

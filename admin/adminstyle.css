@@ -146,6 +146,14 @@ td {
     border: 1px #000000 solid;
     height: 50px;
     padding: 4px;
+    font-size: 18px;
+    align: center;
+}
+
+#reporttable th {
+  border: 1px #000000 solid;
+  height: 50px;
+  padding: 10px;
 }
 
 .reportodd {
