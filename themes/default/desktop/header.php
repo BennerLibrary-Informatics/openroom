@@ -57,7 +57,6 @@ require_once("includes/or-dbinfo.php");
               ?>
             </div>
  </div>
-<?php include("modules/reminder.php"); ?>
 <div id="whiteBreak"></div>
 <div id="menuHeader">
     <span class="username">
@@ -314,6 +313,7 @@ function hideDiv(ele) {
 }
 </style>
 <div id="containerInfo">
+  <?php include("modules/reminder.php"); ?>
     <div id="calendarDiv" style="display:none">
         <center>
         <?php include("modules/calendar.php"); ?>

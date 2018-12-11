@@ -35,5 +35,5 @@ require_once("includes/or-dbinfo.php");
     }
     ?>
 </div>
-<?php include("modules/reminder.php"); ?>
 <div id="container">
+  <?php include("modules/reminder.php"); ?>
