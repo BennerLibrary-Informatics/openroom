@@ -91,9 +91,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <li>
                       <form name="roomlookup" method="POST" action="report-schedule.php">
                           Room: <input type="text" name="lookuproom"/>
-                          Date: <input id="date" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
+                          Date: <input id="dateDailySched" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
                           <img src="../includes/datechooser/calendar.gif"
-                               onclick="showChooser(this, 'date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                               style="cursor: pointer;" onclick="showChooser(this, 'dateDailySched', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                           <div id="chooserSpan3" class="dateChooser select-free"
                                style="display: none; visibility: hidden; width: 160px;"></div>
                           <input type="submit" value="Run Report"/>
@@ -107,9 +107,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <li>
                       <form name="roomlookup" method="POST" action="report-usernames.php">
                           Room: <input type="text" name="lookuproom"/>
-                          Date: <input id="date" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
+                          Date: <input id="dateDailySchedUsername" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
                           <img src="../includes/datechooser/calendar.gif"
-                               onclick="showChooser(this, 'date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                               style="cursor: pointer;" onclick="showChooser(this, 'dateDailySchedUsername', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                           <div id="chooserSpan3" class="dateChooser select-free"
                                style="display: none; visibility: hidden; width: 160px;"></div>
                           <input type="submit" value="Run Report"/>
@@ -134,12 +134,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <form name="daily" method="POST" action="report-daily.php">
                             For the date: <input id="from" size="10" maxlength="10" name="from" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
-                                 onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                 style="cursor: pointer;" onclick="showChooser(this, 'from', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
                             and ending: <input id="to" size="10" maxlength="10" name="to" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
-                                 onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                 style="cursor: pointer;" onclick="showChooser(this, 'to', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
                             <input type="submit" value="Run Report"/>
@@ -224,12 +224,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             For the period starting: <input id="fromc" size="10" maxlength="10" name="fromc"
                                                             type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
-                                 onclick="showChooser(this, 'fromc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                 style="cursor: pointer;" onclick="showChooser(this, 'fromc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
                             and ending: <input id="toc" size="10" maxlength="10" name="toc" type="text" placeholder="MM/DD/YYYY" required>
                             <img src="../includes/datechooser/calendar.gif"
-                                 onclick="showChooser(this, 'toc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                 style="cursor: pointer;" onclick="showChooser(this, 'toc', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
                             <input type="submit" value="Run Report"/>

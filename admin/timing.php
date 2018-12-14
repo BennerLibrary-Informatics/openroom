@@ -393,7 +393,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                            type="text" value="<?php if(isset($permval)){
                                                echo $permval;}?>">
                                     <img src="../includes/datechooser/calendar.gif"
-                                         onclick="showChooser(this, 'limit_window_date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                         style="cursor: pointer;" onclick="showChooser(this, 'limit_window_date', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                                     <div id="chooserSpan3" class="dateChooser select-free"
                                          style="display: none; visibility: hidden; width: 160px;"></div>
                                 </li>
@@ -428,7 +428,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             <input id="limit_openingday" size="10" maxlength="10" name="limit_openingday" type="text" placeholder="MM/DD/YYYY"
                                    value="<?php echo $settings["limit_openingday"]; ?>">
                             <img src="../includes/datechooser/calendar.gif"
-                                 onclick="showChooser(this, 'limit_openingday', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                                 style="cursor: pointer;" onclick="showChooser(this, 'limit_openingday', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
                             <div id="chooserSpan3" class="dateChooser select-free"
                                  style="display: none; visibility: hidden; width: 160px;"></div>
                             <br/>

@@ -81,7 +81,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <table id="reporttable" align="center">
               <tr class="reportheader">
-                <th colspan="5" border = "solid";><h4><strong><center>Room: &nbsp;
+                <th colspan="5" border = "solid"><h4 style="cursor: default;"><strong><center>Room: &nbsp;
               <?php
                 echo $firstRoom["roomname"];
                 echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
@@ -114,7 +114,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               if ($record["roomid"] != $previousRoomID) {
                 if ($previousRoomID != 0) {
                   echo "<table id='reporttable' align='center'>";
-                  echo "<tr class='reportheader'><th colspan = '5'><h4><strong><center>Room:&nbsp;";
+                  echo "<tr class='reportheader'><th colspan = '5'><h4 style='cursor: default;'><strong><center>Room:&nbsp;";
                   echo $record['roomname'];
                   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                   echo date("m/d/Y");
@@ -175,11 +175,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
 // function to call msqli_query
 function getReservationInfo($date, $nextDay) {
+  $lookuproom = isset($_REQUEST["lookuproom"]) ? $_REQUEST["lookuproom"] : "";
   if ($lookuproom == "") {
     $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomid, reservations.start ASC;");
   }
   else {
-    $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "'" . $orderbystr . ";");
+    $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "';");
   }
   return $records;
 }
