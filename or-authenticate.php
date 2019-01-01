@@ -57,9 +57,11 @@ require_once('ldap-authenticate.php');
 function AuthenticateUser(string $username, string $password, array $settings): bool
 {
     if (ConnectLdap($username, $password, $settings)) {
-        return true;
+      return true;
     }
-    return false;
+    else {
+      return false;
+    }
 }
 
 
@@ -76,8 +78,11 @@ if ($username != "" && $password != "" && $ajax_indicator != "") {
             $isAuthenticated = false;
             $output .= "\t<errormessage>" . "Sorry, authentication failed." . "</errormessage>\n";
         }
-        if (!$isAuthenticated) {
+        if ($isAuthenticated == false) {
             $output .= "\t<authenticated>false</authenticated>\n";
+            $output .= "\t<isadministrator>false</isadministrator>\n";
+            $output .= "\t<issupervisor>false</issupervisor>\n";
+            $output .= "\t<isreporter>false</isreporter>\n";
         } else {
             if (mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM bannedusers WHERE username='" . $username . "';")) <= 0) {
                 $_SESSION["systemid"] = $settings["systemid"];

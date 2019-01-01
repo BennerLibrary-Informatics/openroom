@@ -1,5 +1,5 @@
 <?php
-function ConnectLdap($name, $password, $settings)
+function ConnectLdap($name, $password, $settings): bool
 {
     $ldapserver = $settings["ldap_baseDN"];
     $name = trim(htmlspecialchars($name));
@@ -9,7 +9,8 @@ function ConnectLdap($name, $password, $settings)
     $ldap = ldap_connect($ldapserver);
     if (!IsNotNullOrEmptyString($name) && !IsNotNullOrEmptyString($password)) {
         sleep(1);
-        if (@ldap_bind($ldap, $qc_username, $password)) {
+        if (ldap_bind($ldap, $qc_username, $password)) {
+            ldap_close($ldap);
             return true;
         } else {
             ldap_close($ldap);
