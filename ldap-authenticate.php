@@ -9,11 +9,13 @@ function ConnectLdap($name, $password, $settings): bool
     $ldap = ldap_connect($ldapserver);
     if (!IsNotNullOrEmptyString($name) && !IsNotNullOrEmptyString($password)) {
         sleep(1);
-        if ($bind = ldap_bind($ldap, $username, $password)) {
-            return true;
-        } else {
-            ldap_close($ldap);
-    	    return false;
+        try {
+          ldap_bind($ldap, $username, $password);
+          return true;
+        }
+        catch(err) {
+          ldap_close($ldap);
+          return false;
         }
     }
     ldap_close($ldap);

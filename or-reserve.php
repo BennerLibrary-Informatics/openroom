@@ -413,7 +413,7 @@ if ($username != "") {
                     $domain = "";
                     if ($settings["login_method"] == "ldap") {
                         if ($username == $_SESSION["username"]) {
-                            $user_email = $_SESSION["emailaddress"];
+                            $user_email = $_SESSION["username"] . "@olivet.edu";
                             $user_real = $_SESSION["displayname"];
                         } else {
                             require_once(__DIR__ . '/vendor/autoload.php');
