@@ -439,7 +439,7 @@ if ($username != "") {
                                        ? "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n"
                                        : "";
                     $verbose_msg = "Your room has been reserved!\n\n" .
-                        $user_real_str .
+                        //$user_real_str .
                         "Username: " . $username . "\n\n" .
                         "E-mail: " . $user_email . "\n\n" .
                         "Room: " . $thisroom->name . "\n\n" .
@@ -459,7 +459,7 @@ if ($username != "") {
                     }
 
                     $terse_msg = $verbose_msg;
-                    $verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
+                    //$verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
 
                     $gef_msg = "<html><body>" . $user_real_gef . "<b>Date and Time</b>: " . date("F j, Y", $starttime) . " " . date("g:i a", $starttime) . " - " . date("F j, Y", $endtime) . " " . date("g:i a", $endtime) . "<br></br><b>Username: " . $username
                     ."<br></br>" . $gef_msg_of . "</body></html>";
