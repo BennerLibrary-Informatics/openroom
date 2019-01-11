@@ -438,7 +438,7 @@ if ($username != "") {
                     $adminContactMsg = (isset($_REQUEST["phone_number"]) && isset($_REQUEST["email_system"]))
                                        ? "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n"
                                        : "";
-                    $verbose_msg = "Your room has been reserved!\n\n" .
+                    $verbose_msg = "Your room has been reserved! Keep this email as proof of your reservation as you may be asked to provide confirmation upon arrival. As a courtesy to other patrons, please cancel your reservation if this room is no longer needed.\n\n\n" .
                         //$user_real_str .
                         "Username: " . $username . "\n\n" .
                         "E-mail: " . $user_email . "\n\n" .
@@ -470,11 +470,11 @@ if ($username != "") {
                     }
 
                     if ($emailconfirmation != "no") {
-                        mail($user_email, $settings["instance_name"] . " Reservation", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system . $bccstr);
+                        mail($user_email, "Your Reservation at Benner Library", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system . $bccstr);
                     } else {
-                        mail($email_res_verbose, $settings["instance_name"] . " Reservation", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
+                        mail($email_res_verbose, "Your Reservation at Benner Library", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                     }
-                    mail($email_res_terse, $settings["instance_name"] . " Reservation", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
+                    mail($email_res_terse, "Your Reservation at Benner Library", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                     mail($email_res_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
 
                     //On Condition emails

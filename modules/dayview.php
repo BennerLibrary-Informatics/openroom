@@ -81,12 +81,12 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         popup.innerHTML = "<div class = 'col-12'><div class = 'col-12 text-center'><label class = 'roomtitle'>" /*<div id=\"popupClose\"><\/div>*/ + roomname + "</label><br/>" + roomdescription + "</div><br/>"
         + "<div class = 'row'><div class = 'col-sm-6'><label><strong>Start</strong>:</label> " + time_str + "</div> <div id = 'endReservationTime' class = 'col-sm-6'><label><strong>End</strong>:</label> " + end_time_str + "</div> <div class = 'col-sm-6'></div></div>"
         + "<form name=\'reserve\' action=\'javascript:reserve(" + group + ");\'>"
-        + "<div class = 'row'><div class = 'col-sm-6'><label>Duration</label></strong>: <select name=\'duration\' onchange=\'changeEndReservationTime(this);\'>"  + durationhtml + "</select></div>"
+        + "<div class = 'row'><div class = 'col-sm-6'><label>Duration:</label></strong> <select name=\'duration\' onchange=\'changeEndReservationTime(this);\'>"  + durationhtml + "</select></div>"
         + "<div class = 'col-sm-6'><label></span>Members</strong>: </label> <select name=\'capacity\'>" + capacity_string + "</select></div></div>"
         + "<hr><div class = 'row col-12'>" + altusernamestr + "<input type=\'hidden\' name=\'roomid\' value=\'"+ roomid + "\' />"
           + "<input type=\'hidden\' name=\'starttime\' value=\'"+ currentmdyandtime + "\' />"
-          + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /><strong></div><div class = 'row col-12'"+ optionalfields_string + "</div>"
-        + "<hr><div class = 'row'><div class = 'col-6 text-center bottombutton1'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'col-6 text-center bottombutton2'><a id = '' href=\'javascript:closePopUp();\'>Cancel</a></div></div></form>";
+          + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /></div>" + optionalfields_string
+        + "<strong><div class = 'row'><div class = 'bottombutton1'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'bottombutton2'><a id = '' href=\'javascript:closePopUp();\'>Cancel</a></strong></div></div></form>";
     }
 
     function changeEndReservationTime(select) {
