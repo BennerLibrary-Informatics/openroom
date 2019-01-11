@@ -89,6 +89,7 @@ if ($_SESSION["username"] != "") {
         $dvout .= $group_str;
         //$dvout .= .$group_str;
         $dvout .= "<div>";
+        $dvout .= "<br><br>";
         //or use this line instead to have the horizontal scrollbar at bottom of screen
         //$dvout .=  "<div class =\"table-responsive\">";
         $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";

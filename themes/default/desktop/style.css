@@ -445,6 +445,7 @@ label{
     border-color: lightgray;
     border-radius: 15px;
     font-size: 15px;
+    font-weight: bold;
     width: auto;
     cursor: pointer;
     padding: 10px;
