@@ -444,8 +444,8 @@ if ($username != "") {
                         "E-mail: " . $user_email . "\n\n" .
                         "Room: " . $thisroom->name . "\n\n" .
                         "Date and Time: " . date("F j, Y g:i a", $starttime) . " - " . date("F j, Y g:i a", $endtime) . "\n\n" .
-                        "Number in Group: " . $capacity . "\n\n" .
-                        $adminContactMsg;
+                        "Number in Group: " . $capacity . "\n\n";
+                        //$adminContactMsg;
 
                     $gef_msg_of = "";
 
@@ -458,6 +458,7 @@ if ($username != "") {
                       }
                     }
 
+                    $verbose_msg .= "Please do not reply to this email. Stop by the Circulation Desk or contact the library at 815-939-5354 with any questions.";
                     $terse_msg = $verbose_msg;
                     //$verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
 
