@@ -251,8 +251,9 @@ if ($_SESSION["username"] != "") {
                       $current_duration += $settings["interval"];
                   }
                   $capacity = $room->capacity;
+                  $capacitymin = $room->capacitymin;
                   $capacity_string = "";
-                  for ($cc = 1; $cc <= $capacity; $cc++) {
+                  for ($cc = (int)$capacitymin; $cc <= $capacity; $cc++) {
                       $capacity_string .= "<option value=\'" . $cc . "\'>" . $cc . "</option>";
                   }
                   //If this user is an administrator, give them the option of inputting and altusername

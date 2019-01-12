@@ -96,7 +96,7 @@ $output = "<roominfo>\n";
 $room_result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms " . $roomstring . " " . $grpstr . "ORDER BY roomposition ASC;");
 //For each room
 while ($record = mysqli_fetch_array($room_result)) {
-    $output .= "\t<room position=\"" . $record["roomposition"] . "\">\n\t\t<id>" . $record["roomid"] . "</id>\n\t\t<name>" . $record["roomname"] . "</name>\n\t\t<capacity>" . $record["roomcapacitymax"] . "</capacity>\n\t\t<description>" . $record["roomdescription"] . "</description>\n\t\t<hours>\n";
+    $output .= "\t<room position=\"" . $record["roomposition"] . "\">\n\t\t<id>" . $record["roomid"] . "</id>\n\t\t<name>" . $record["roomname"] . "</name>\n\t\t<capacity>" . $record["roomcapacitymax"] . "</capacity>\n\t\t<capacitymin>" . $record["roomcapacitymin"] . "</capacitymin>\n\t\t<description>" . $record["roomdescription"] . "</description>\n\t\t<hours>\n";
     //Get default hours for this room
     $dhours_result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomhours WHERE roomid=" . $record["roomid"] . " ORDER BY dayofweek, start ASC;");
     $prevwkdy = "";
