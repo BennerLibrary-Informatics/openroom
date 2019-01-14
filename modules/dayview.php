@@ -82,10 +82,10 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
         + "<div class = 'row'><div class = 'col-sm-6'><label><strong>Start</strong>:</label> " + time_str + "</div> <div id = 'endReservationTime' class = 'col-sm-6'><label><strong>End</strong>:</label> " + end_time_str + "</div> <div class = 'col-sm-6'></div></div>"
         + "<form name=\'reserve\' action=\'javascript:reserve(" + group + ");\'>"
         + "<div class = 'row'><div class = 'col-sm-6'><label>Duration:</label></strong> <select name=\'duration\' onchange=\'changeEndReservationTime(this);\'>"  + durationhtml + "</select></div>"
-        + "<div class = 'col-sm-6'><label></span>Members</strong>: </label> <select name=\'capacity\'>" + capacity_string + "</select></div></div>"
+        + "<div class = 'col-sm-6'><label></span>Members</strong>: </label> <select name=\'capacity\'>" + capacity_string + "</select></div></div>" + optionalfields_string
         + "<hr><div class = 'row col-12'>" + altusernamestr + "<input type=\'hidden\' name=\'roomid\' value=\'"+ roomid + "\' />"
           + "<input type=\'hidden\' name=\'starttime\' value=\'"+ currentmdyandtime + "\' />"
-          + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /></div>" + optionalfields_string
+          + "<input type=\'hidden\' name=\'fullcapacity\' value=\'" + capacity + "\' /></div>"
         + "<strong><div class = 'row'><div class = 'bottombutton1'><a href=\'javascript:reserve(" + group + ");\'> Reserve</a> </div><div class = 'bottombutton2'><a id = '' href=\'javascript:closePopUp();\'>Cancel</a></strong></div></div></form>";
     }
 

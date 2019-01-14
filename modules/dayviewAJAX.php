@@ -100,12 +100,12 @@ if ($_SESSION["username"] != "") {
     while ($optionalfield = mysqli_fetch_array($optionalfields_array)) {
         //Determine if required
         if ($optionalfield["optionrequired"] == 1) {
-            $optionalfields_string .= "<strong><span class=\'requiredmarker\'>*</span>";
+            $optionalfields_string .= "<label><strong><span class=\'requiredmarker\'>*</span>";
         } else {
             $optionalfields_string .= "<strong>";
         }
         //Print field question
-        $optionalfields_string .= $optionalfield["optionquestion"] . ":</strong> ";
+        $optionalfields_string .= $optionalfield["optionquestion"] . ":</strong></label> ";
         //Determine if this field is a text field or a select field
         if ($optionalfield["optiontype"] == 0) {
             $optionalfields_string .= "<style> input[type=text] {color: black;} </style><input type=\'text\' color=\'black\' name=\'" . $optionalfield["optionformname"] . "\' /><br/>";

@@ -22,7 +22,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     $direction = isset($_REQUEST["direction"]) ? $_REQUEST["direction"] : " ";
     $orderbystr = "";
 
-    if (!(preg_match("/^[A-Za-z0-9]+\s[A-Za-z0-9]/", $lookuproom)) && $lookuproom != "") {
+    if (!(preg_match("/^[A-Za-z0-9#]+\s[A-Za-z0-9#]/", $lookuproom)) && $lookuproom != "") {
         $errormsg = "Room name is invalid!";
     }
     if (!(preg_match("/^[A-Za-z0-9]+$/", $orderbywhat))) {
@@ -64,12 +64,12 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         </center>
         <h3><a href="index.php">Administration</a> - Reports - Daily Schedule</h3>
 
-        <br/><strong>Daily schedule for rooms</strong><br>
-          <?php
-
+        <br/><strong>Daily schedule for rooms</strong><br/>
+        <?php
         if ($date == "") {
           $date = date('Y-m-d');
         }
+        $date_mdy = date('m/d/Y', strtotime($date));
         $date = date('Y-m-d H:i:s', strtotime($date));
         $nextDay = date('Y-m-d H:i:s', strtotime($date . "+1 days"));
 
@@ -79,11 +79,16 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 
         <table id="reporttable" align="center">
               <tr class="reportheader">
-                <th colspan="4"><h4 style="cursor: default;"><strong><center>Room: &nbsp;
+                <th colspan="4"><h4 style="cursor: default;"><strong><center>
               <?php
-                echo $firstRoom["roomname"];
+                if ($firstRoom["roomname"] == "") {
+                  ?>No results found<?php
+                }
+                else {
+                  ?>Room: <?php echo $firstRoom["roomname"];
+                }
                 echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-                echo date("m/d/Y");
+                echo $date_mdy;
               ?>
               </center></strong></h4>
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=roomname&direction=ASC"></a></th>
@@ -95,7 +100,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=end&direction=ASC"></a></td>
                 <td><strong>Number in Group</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=numberingroup&direction=ASC"></a></td>
-                <td><strong>Time of Request</strong>&nbsp;
+                <td><strong>Purpose</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
                 <?php
                 ?>
@@ -112,7 +117,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "<tr class='reportheader'><th colspan = '4'><h4 style='cursor: default;'><strong><center>Room:&nbsp;";
                   echo $record['roomname'];
                   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-                  echo date("m/d/Y");
+                  echo $date_mdy;
                   echo "</strong></center></h4>";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=roomname&direction=ASC'></a></th></tr>";
                   echo "<tr class='reportodd'>";
@@ -122,7 +127,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=end&direction=ASC'></a></td>";
                   echo "<td><strong>Number in Group</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=numberingroup&direction=ASC'></a></td>";
-                  echo "<td><strong>Time of Request</strong>&nbsp;";
+                  echo "<td><strong>Purpose</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
                   echo "<div class='page-break'></div>";
                   echo "<br><br>";
@@ -136,13 +141,13 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               //Optional Fields
               $opfields = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservationoptions WHERE reservationid = " . $record["reservationid"] . ";");
               while ($opfield = mysqli_fetch_array($opfields)) {
-                  echo "<strong>" . $opfield["optionname"] . ": </strong>" . $opfield["optionvalue"] . "<br/>";
+                  $opfield_uservalue = $opfield["optionvalue"];
               }
 
               echo "</div></td><td>" . date('g:i a', strtotime($record["start"])) . "</td>" .
                   "<td>" . date('g:i a', strtotime($record["end"])) . "</td>" .
                   "<td>" . $record["numberingroup"] . "</td>" .
-                  "<td>" . date('m-d-Y g:i a', strtotime($record["timeofrequest"])) . "</td>";
+                  "<td>" . $opfield_uservalue . "</td>";
 
               echo "<br>";
             }

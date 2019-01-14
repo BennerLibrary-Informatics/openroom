@@ -54,7 +54,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         if ($optiontype == "0" || $optiontype == "1") {
                             if ($optiontype == "1" && $optionchoices != "") {
                                 $optionchoices = trim($optionchoices);
-                                $optionchoices = str_replace(" ", "", $optionchoices);
                             } elseif ($optiontype == "1" && $optionchoices == "") {
                                 $errormsg .= "Make sure to add Choices if you've chosen the Selection type.";
                             }
