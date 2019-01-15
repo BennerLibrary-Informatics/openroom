@@ -77,13 +77,14 @@ if ($_SESSION["username"] != "") {
             if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center groups'";
             $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
         }
+        $selectedGroup = $_POST["group"];
         $group_str .= "</div></div>";
         $yesterday = strtotime($currentmdy) - 86400;
         $endyesterday = $yesterday + 86399;
         $tomorrow = strtotime($currentmdy) + 86400;
         $endtomorrow = $tomorrow + 86399;
         $dvout = "<center><div id = \"legend\" class =\"row\"><div id = \"legendText\" style=\"text-align: right\">Reservable: <span id=\"open\" class=\"glyphicon glyphicon-stop\"></span></div><div id = \"legendText\" style=\"text-align: center\">Not Reservable: <span id=\"closedList\">X</span></div><div id = \"legendText\">Your Reservations: <span class=\"glyphicon glyphicon-ok\"></span></div><div id = \"legendText\">Reserved: <span style=\"color: red;\">R</span></div></div><div class = 'row'></div></center>";
-        $dvout .= "<div id=\"dayviewheader\" style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><span onclick=\"dayviewer('$yesterday','$endyesterday','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span>&nbsp";
+        $dvout .= "<div id=\"dayviewheader\" style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><span onclick=\"dayviewer('$yesterday','$endyesterday','$selectedGroup','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','$selectedGroup','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span>&nbsp";
         $dvout .= "<span style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></span></div>";
         $dvout .= "<div class = 'header' id='roomhead' >";
         $dvout .= $group_str;

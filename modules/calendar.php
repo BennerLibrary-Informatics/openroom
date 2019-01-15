@@ -79,7 +79,7 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
                     if (xmlhttp.responseText == "Error: User is not logged in.") location.reload(true);
                 }
                 else {
-                    if (document.getElementById("dayviewmodule") != null) {
+                    if (document.getElementById("dayviewModule") != null) {
                       document.getElementById("dayviewModule").innerHTML = "";
                     }
                     if (document.getElementById("loader") != null) {

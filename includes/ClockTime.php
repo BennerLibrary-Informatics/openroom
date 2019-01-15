@@ -138,7 +138,11 @@ class ClockTime
         //	If this->minutes is equal, we need to check seconds
         //		If this->seconds is greater we know this is true
         //		If not, it's false
-
+        if ($this->hours == 0) {
+          $this->hours = 23;
+          $this->minutes = 59;
+          $this->seconds = 59;
+        }
         if ($this->hours > $clockTime->hours) {
             return true;
         } elseif ($this->hours == $clockTime->hours) {

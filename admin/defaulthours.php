@@ -234,6 +234,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                                 else
                                   echo "<option value=\"". $i . "\">" . $i . "</option>";
                             }
+                            echo "<option value='59'>59</option>";
                             ?>
                         </select>
                         <select name="endperiod">

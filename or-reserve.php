@@ -179,7 +179,7 @@ if ($username != "") {
         //Loop through collision array
         foreach ($collision_array as $collision) {
             //If collision is NOT bat, spelunker or salamander, set error and break out of the loop because it extends beyond business hours
-            if ($collision != "bat" && $collision != "spelunker" && $collision != "salamander") {
+            if ($collision != "bat" && $collision != "spelunker" && $collision != "salamander" && $collision != "empty") {
                 $errormsg .= "This reservation can not be created as it extends beyond business hours.<br/>";
                 break 1;
             }
