@@ -16,6 +16,20 @@ body {
 
 @media print {
 .page-break { display: block; page-break-before: always; }
+  @page {
+    margin: 0;
+    }
+    body {
+      margin: 1.6cm;
+    }
+}
+
+@media print body {
+	font-size: 1em;
+	margin-top: 2cm;
+	margin-right: 2cm;
+	margin-bottom: 1.5cm;
+	margin-left: 2cm;
 }
 
 #container {

@@ -41,16 +41,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
     <head>
-        <title><?php echo $settings["instance_name"]; ?> - Administration - Reports - Daily Schedule</title>
         <link rel="stylesheet" type="text/css" href="adminstyle.css"/>
         <meta http-equiv="Content-Script-Type" content="text/javascript"/>
     </head>
 
     <body>
-    <div id="heading"><span
-                class="username"><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : "&nbsp;"; ?></span>&nbsp;<?php echo ($_SESSION["isadministrator"] == "TRUE") ? "<span class=\"isadministrator\">(Admin)</span>&nbsp;" : "";
-        echo ($_SESSION["isreporter"] == "TRUE") ? "<span class=\"isreporter\">(Reporter)</span>&nbsp;" : ""; ?>
-        |&nbsp;<a href="../index.php">Public View</a>&nbsp;|&nbsp;<a href="../modules/logout.php">Logout</a></div>
     <div id="container">
         <center>
             <?php if ($_SESSION["isadministrator"] == "TRUE" || $_SESSION["isreporter"] == "TRUE"){
@@ -62,9 +57,6 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
             ?>
         </center>
-        <h3><a href="index.php">Administration</a> - Reports - Daily Schedule</h3>
-
-        <br/><strong>Daily schedule for rooms</strong><br/>
         <?php
         if ($date == "") {
           $date = date('Y-m-d');
