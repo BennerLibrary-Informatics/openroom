@@ -46,7 +46,7 @@ if (($isadministrator || $username == $res_username || $issupervisor) && $userna
                 // 	}
                 // 	$user_email = $username ."@". $domain;
                 if ($res_username == $_SESSION["username"]) {
-                    $user_email = $_SESSION["emailaddress"];
+                    $user_email = $_SESSION["username"] . "@olivet.edu";
                 } else {
                     require_once(__DIR__ . '/vendor/autoload.php');
                     $user = new model\User($res_username);
