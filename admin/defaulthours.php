@@ -140,7 +140,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 echo "<h4><strong>" . $group["roomgroupname"] . ":</strong></h4>";
                 echo "<table border=1 frame=void rules=rows>";
                 echo "<tr align='center'><th>Room</th><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>";
-                $rooms =  mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid =" . $group["roomgroupid"] . ";");
+                $rooms =  mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid =" . $group["roomgroupid"] . " ORDER BY roomposition ASC;");
                 while($room = mysqli_fetch_array($rooms)){
                     echo "<tr>";
                     echo "<td width=500px align='center'>" . $room['roomname'] . "</td>";

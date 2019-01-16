@@ -54,7 +54,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             if ($roomcapacitymin > $roomcapacitymax)
               $errormsg = "Min capacity must be less than max capacity";
             //Min caacity must be >= 0
-            if ($roomcapacitymin < 0)
+            if ($roomcapacitymin <= 0)
               $errormsg = "Min capacity must be greater than or equal to 0";
 
             $roomdescription = isset($_REQUEST["roomdescription"]) ? $_REQUEST["roomdescription"] : "";
@@ -91,7 +91,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             if ($roomcapacitymin > $roomcapacitymax)
               $errormsg = "Min capacity must be less than max capacity";
             //Min caacity must be >= 0
-            if ($roomcapacitymin < 0)
+            if ($roomcapacitymin <= 0)
               $errormsg = "Min capacity must be greater than or equal to 0";
 
             if ($roomname != "" && $roomcapacitymin != "" && $roomcapacitymax != "" && $roomdescription != "" && $roomgroupid != "" && $roomid != "" && $errormsg == "") {
