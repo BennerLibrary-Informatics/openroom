@@ -201,8 +201,8 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     <td>
                         <input id="to" size="10" maxlength="10" name="to" type="text" placeholder="MM/DD/YYYY">
                         <img src="../includes/datechooser/calendar.gif"
-                             style="cursor: pointer;" onclick="showChooser(this, 'to', 'chooserSpan4', 1950, 2060, Date.patterns.ShortDatePattern, false);">
-                        <div id="chooserSpan4" class="dateChooser select-free"
+                             style="cursor: pointer;" onclick="showChooser(this, 'to', 'chooserSpan5', 1950, 2060, Date.patterns.ShortDatePattern, false);">
+                        <div id="chooserSpan5" class="dateChooser select-free"
                              style="display: none; visibility: hidden; width: 160px; z-index: 1;"></div>
                     </td>
                 </tr>

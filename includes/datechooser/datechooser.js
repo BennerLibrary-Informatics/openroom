@@ -142,7 +142,14 @@ DateChooser.prototype.show = function () {
     this._div.style.display = "block";
     this._div.style.visibility = "visible";
     if (this._div.id == 'chooserSpan4') {
-      this._div.style.position = "fixed";
+      this._div.style.position = "absolute";
+      this._div.style.top = ("10px");
+      this._div.style.left = ("100px");
+    }
+    if (this._div.id == 'chooserSpan5') {
+      this._div.style.position = "absolute";
+      this._div.style.top = ("20px");
+      this._div.style.left = ("100px");
     }
     else {
       this._div.style.position = "absolute";
@@ -260,4 +267,3 @@ DateChooser.prototype.createCalendarHtml = function () {
     }
     return result + "\r\n  </tr>\r\n</table><!--[if lte IE 6.5]><iframe></iframe><![endif]-->";
 };
-
