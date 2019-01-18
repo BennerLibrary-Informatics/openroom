@@ -70,15 +70,8 @@ if (($isadministrator || $username == $res_username || $issupervisor) && $userna
             //Create verbose, terse and GEF messages.
             //VERBOSE
             $verbose_msg = "Your reservation for Room " . $roomname . " from " . date("F j, Y g:i a", $starttime) . " to " . date("F j, Y g:i a", $endtime) . " has been cancelled.<br/><br/>" . "Thank you for using " . $settings["instance_name"] . "! \n\n";
-            if(isset($settings["phone_number"])  && !isset($settings["email_system"])){
-                $verbose_msg .= "Please call ". $settings["phone_number"] . " if you need further assistance";
-            }
-            else if (!isset($settings["phone_number"])  && isset($settings["email_system"])){
-                $verbose_msg .= "Please email " .$settings["email_system"]." if you need further assistance. \n\n";
-            }
-            else {
-                $verbose_msg .= "Please call " .$settings["phone_number"]. " or email " . $settings["email_system"] . " if you need further assistance. \n\n";
-            }
+            $verbose_msg .= "Please call 815-939-5354 if you need further assistance";
+
             $terse_msg = $verbose_msg;
             $gef_msg = "<html><body><b>Date</b>: " . date("l, F j", $starttime) . "<br/><br/><b>Time</b>: " . date("g:i a", $starttime) . " - " . date("g:i a", $endtime) . "<br/><br/><b>Username</b>: " . $username . "</body></html>";
             $bccstr = "";
