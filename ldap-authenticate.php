@@ -2,14 +2,19 @@
 function ConnectLdap($name, $password, $settings): bool
 {
     $ldapserver = $settings["ldap_host"];
-    $username = $name;
-    $username .= "@olivet.edu";
+    if (strpos($name, '@olivet.edu') !== false) {
+      $username = $name;
+    }
+    else {
+      $username = $name;
+      $username .= "@olivet.edu";
+    }
     $name = trim(htmlspecialchars($name));
     $password = $password;
     $ldap = ldap_connect($ldapserver);
     if (!IsNotNullOrEmptyString($name) && !IsNotNullOrEmptyString($password)) {
         sleep(1);
-        if ($bind = ldap_bind($ldap, $username, $password)) {
+        if ($bind = @ldap_bind($ldap, $username, $password)) {
             return true;
         } else {
             ldap_close($ldap);
