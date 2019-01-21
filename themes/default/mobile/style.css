@@ -2,7 +2,7 @@ body {
     margin: 0px;
     padding-top: 10px;
     background-image: url("../desktop/images/background.gif");
-    background-color: #c1c1c1;
+    background-color: #c4bcc9;
     font-family: Helvetica, arial, sans-serif;
     font-size: 12px;
 }
@@ -44,7 +44,6 @@ p {
 
 #heading {
     box-shadow: 0 0 10px #333333;
-    background-color: #FFFFFF;
     width: 80%;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -53,6 +52,7 @@ p {
     margin: 0 auto;
     padding: 0px;
     width: 320px;
+    height: 65px;
 }
 
 #navigation_button {
@@ -69,32 +69,31 @@ p {
     padding-right: 6px;
     text-align: center;
     text-decoration: none;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
 }
 
 #header_title {
-    color: #FFFFFF;
-    float: right;
-    font-weight: bold;
-    font-size: 15px;
-    height: 45px;
-    margin-top: 5px;
-    margin-right: 5px;
-    padding: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-    text-align: center;
+    font-family: "PT Serif Caption";
+    color: white;
+    float: left;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-left: 5px;
 }
 
 .logout {
-    background-color: #FFCA9E;
+    background-color: #9486b1;
 }
 
 .viewreservations {
-    background-color: #D0FF9E;
+    background-color: #9486b1;
 }
 
 .makereservation {
-    background-color: #D0CAFF;
+    background-color: #9486b1;
 }
 
 #remindermessage {
@@ -114,12 +113,12 @@ p {
 
 #container {
     box-shadow: 0 0 10px #333333;
-    background-color: #FFFFFF;
+    background-color: #c4bcc9;
     width: 80%;
     margin: 0 auto;
     margin-bottom: 20px;
-    background-color: #EEEEEE;
-    border: 1px #000000 solid;
+    border: 0px;
+    box-shadow: 0 0 10px #333333;
     margin: 0 auto;
     padding: 0px;
     padding-top: 4px;
@@ -299,13 +298,14 @@ select {
 }
 
 #themeswitch {
-    background: #f4fdcf;
+    background: #54406b;
     border: 1px #cccccc solid;
-    color: #666666;
+    font-weight: bold;
+    color: black;
     cursor: pointer;
     font-size: 9px;
     margin: 0 auto;
     padding: 4px;
     text-align: center;
-    width: 300px;
+    width: 120px;
 }

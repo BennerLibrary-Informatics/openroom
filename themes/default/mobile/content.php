@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Chicago');
+
 if (!isset($_GET["op"])) {
   $_GET["op"] = "";
 }
