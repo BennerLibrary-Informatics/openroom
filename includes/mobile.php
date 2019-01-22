@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Chicago');
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -48,7 +50,7 @@ switch ($op) {
 							OR
 							(reservations.start <= '" . $startTime . "' AND reservations.end > '" . $startTime . "')
 							OR
-							(reservations.start <= '" . $endTime . "' AND reservations.end > '" . $endTime . "') 
+							(reservations.start <= '" . $endTime . "' AND reservations.end > '" . $endTime . "')
 						)
 					)
 				ORDER BY roomname;";
