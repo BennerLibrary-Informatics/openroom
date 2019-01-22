@@ -102,11 +102,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=numberingroup&direction=ASC"></a></td>
                 <td><strong>Purpose</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
-                <?php
-                if ($lookuproom == "") {
-                  echo "<td><strong>Username</strong></td>";
-                }
-                ?>
+                <td><strong>Username</strong>&nbsp;
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
+                
             </tr>
 
             <?php
@@ -132,18 +130,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=numberingroup&direction=ASC'></a></td>";
                   echo "<td><strong>Purpose</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
-                  echo "<td><strong>Username</strong></td>";
+                  echo "<td><strong>Username</strong>&nbsp;";
+                  echo "<a href='report-usernames.php?lookuproom=$lookuproom;'></a></td>";
                   echo "<br>";
                 }
                 $previousRoomID = $record["roomid"];
               }
 
-              if ($lookuproom == "") {
-                $extraTableCell = "<td>" . $record["username"] . "</td>";
-              }
-              else {
-                $extraTableCell = "";
-              }
+              $extraTableCell = "<td>" . $record["username"] . "</td>";
 
               echo "<tr class=\"reportodd\">";
 
