@@ -132,9 +132,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=numberingroup&direction=ASC'></a></td>";
                   echo "<td><strong>Purpose</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
-                  if ($lookuproom == "") {
-                    echo "<td><strong>Username</strong></td>";
-                  }
+                  echo "<td><strong>Username</strong></td>";
                   echo "<br>";
                 }
                 $previousRoomID = $record["roomid"];
