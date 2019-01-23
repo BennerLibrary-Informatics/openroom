@@ -76,7 +76,13 @@ if ($username != "" && $password != "" && $ajax_indicator != "") {
             $isAuthenticated = true;
         } else {
             $isAuthenticated = false;
-            $output .= "\t<errormessage>" . "Sorry, authentication failed." . "</errormessage>\n";
+            //if username has @olivet.edu, show different error message
+            if (strpos($username, '@olivet.edu') !== false) {
+              $output .= "\t<errormessage>" . "Make sure that you don't include @olivet.edu in your username and try again." . "</errormessage>\n";
+            }
+            else {
+              $output .= "\t<errormessage>" . "Sorry, authentication failed. Check your username and password and try again." . "</errormessage>\n";
+            }
         }
         if ($isAuthenticated == false) {
             $output .= "\t<authenticated>false</authenticated>\n";

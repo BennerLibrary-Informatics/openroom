@@ -2,13 +2,8 @@
 function ConnectLdap($name, $password, $settings): bool
 {
     $ldapserver = $settings["ldap_host"];
-    if (strpos($name, '@olivet.edu') !== false) {
-      $username = $name;
-    }
-    else {
-      $username = $name;
-      $username .= "@olivet.edu";
-    }
+    $username = $name;
+    $username .= "@olivet.edu";
     $name = trim(htmlspecialchars($name));
     $password = $password;
     $ldap = ldap_connect($ldapserver);
