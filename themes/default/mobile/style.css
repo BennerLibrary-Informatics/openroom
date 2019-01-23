@@ -57,7 +57,6 @@ p {
 }
 
 #navigation_button {
-    border: 1px #000000 solid;
     color: #000000;
     float: right;
     font-weight: bold;
@@ -82,7 +81,7 @@ p {
     float: left;
     font-size: 12px;
     margin-top: -8px;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 .logout {
@@ -116,12 +115,11 @@ p {
     box-shadow: 0 0 10px #333333;
     background-color: #c4bcc9;
     width: 80%;
-    margin: 0 auto;
     margin-bottom: 20px;
     border: 0px;
     box-shadow: 0 0 10px #333333;
     margin: 0 auto;
-    padding: 0px;
+    padding-bottom: 10px;
     padding-top: 4px;
     text-align: center;
     width: 320px;
@@ -302,10 +300,11 @@ select {
     background: #54406b;
     border: 1px #cccccc solid;
     font-weight: bold;
-    color: black;
+    color: white;
     cursor: pointer;
     font-size: 9px;
     margin: 0 auto;
+    margin-top: 10px;
     padding: 4px;
     text-align: center;
     width: 120px;
