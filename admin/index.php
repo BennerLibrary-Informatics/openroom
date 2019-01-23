@@ -90,7 +90,15 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               <ul>
                   <li>
                       <form name="roomlookup" method="POST" action="report-schedule.php">
-                          Room: <input type="text" name="lookuproom"/>
+                        <?php
+                          echo "Room: <select name='lookuproom'>";
+                          echo "<option>Choose a room</option>";
+                          $roomOptions = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomname FROM rooms ORDER BY rooms.roomgroupid, rooms.roomid ASC;");
+                          while ($room = mysqli_fetch_array($roomOptions)) {
+                              echo "<option value='" . $room['roomname'] . "'>" . $room['roomname'] . "</option>";
+                          }
+                          echo "</select>";
+                        ?>
                           Date: <input id="dateDailySched" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
                           <img src="../includes/datechooser/calendar.gif"
                                style="cursor: pointer;" onclick="showChooser(this, 'dateDailySched', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
@@ -106,7 +114,15 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               <ul>
                   <li>
                       <form name="roomlookup" method="POST" action="report-usernames.php">
-                          Room: <input type="text" name="lookuproom"/>
+                            <?php
+                              echo "Room: <select name='lookuproom'>";
+                              echo "<option>Choose a room</option>";
+                              $roomOptions = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomname FROM rooms ORDER BY rooms.roomgroupid, rooms.roomid ASC;");
+                              while ($room = mysqli_fetch_array($roomOptions)) {
+                                  echo "<option value='" . $room['roomname'] . "'>" . $room['roomname'] . "</option>";
+                              }
+                              echo "</select>";
+                            ?>
                           Date: <input id="dateDailySchedUsername" size="10" maxlength="10" name="date" type="text" placeholder="MM/DD/YYYY">
                           <img src="../includes/datechooser/calendar.gif"
                                style="cursor: pointer;" onclick="showChooser(this, 'dateDailySchedUsername', 'chooserSpan3', 1950, 2060, Date.patterns.ShortDatePattern, false);">
