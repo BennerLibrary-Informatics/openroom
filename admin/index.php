@@ -93,7 +93,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         <?php
                           echo "Room: <select name='lookuproom'>";
                           echo "<option>Choose a room</option>";
-                          $roomOptions = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomname FROM rooms ORDER BY rooms.roomgroupid, rooms.roomid ASC;");
+                          $roomOptions = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomname FROM rooms ORDER BY rooms.roomgroupid, rooms.roomname ASC;");
                           while ($room = mysqli_fetch_array($roomOptions)) {
                               echo "<option value='" . $room['roomname'] . "'>" . $room['roomname'] . "</option>";
                           }

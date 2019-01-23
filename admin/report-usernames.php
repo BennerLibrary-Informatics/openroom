@@ -104,7 +104,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
                 <td><strong>Username</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
-                
+
             </tr>
 
             <?php
@@ -171,7 +171,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 // function to call msqli_query
 function getReservationInfo($date, $nextDay) {
   $lookuproom = isset($_REQUEST["lookuproom"]) ? $_REQUEST["lookuproom"] : "";
-  if ($lookuproom == "") {
+  if ($lookuproom == "Choose a room") {
     $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomposition, reservations.start ASC;");
   }
   else {

@@ -61,6 +61,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
         if ($date == "") {
           $date = date('Y-m-d');
         }
+        if ($lookuproom == "Choose a room") {
+          $lookuproom = "";
+        }
         $date_mdy = date('m/d/Y', strtotime($date));
         $date = date('Y-m-d H:i:s', strtotime($date));
         $nextDay = date('Y-m-d H:i:s', strtotime($date . "+1 days"));
@@ -159,7 +162,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
 // function to call msqli_query
 function getReservationInfo($date, $nextDay) {
   $lookuproom = isset($_REQUEST["lookuproom"]) ? $_REQUEST["lookuproom"] : "";
-  if ($lookuproom == "") {
+  if ($lookuproom == "Choose a room") {
     $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomposition, reservations.start ASC;");
   }
   else {
