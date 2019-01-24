@@ -33,11 +33,11 @@ require_once("includes/or-dbinfo.php");
             }
         }
         else {
-          echo "<a id=\"header_title\">Olivet Nazarene University<br/>Benner Library</a>";
+          echo "<a id=\"login_title\">Benner Library<br/>Olivet Nazarene University</a>";
         }
     }
     else {
-      echo "<a id=\"header_title\">Olivet Nazarene University<br/>Benner Library</a>";
+      echo "<a id=\"login_title\">Benner Library<br/>Olivet Nazarene University</a>";
     }
     ?>
 </div>

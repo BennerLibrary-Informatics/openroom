@@ -81,7 +81,16 @@ p {
     float: left;
     font-size: 12px;
     margin-top: -8px;
-    margin-left: 15px;
+    margin-left: 13px;
+}
+
+#login_title {
+  font-family: "PT Serif Caption";
+  color: white;
+  float: left;
+  font-size: 12px;
+  margin-top: 13px;
+  margin-left: 10px;
 }
 
 .logout {
