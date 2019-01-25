@@ -1,6 +1,9 @@
 </div>
+<!--
+Temporarily removed Switch to Desktop button until we can figure out why it's not working
 <div id="themeswitch" onClick="javascript:document.cookie='theme=desktop';location.reload(true);">Switch to Desktop View
 </div>
+-->
 <br/>
 <div id="footnote">
   <a href onclick="policiesPopUp(); return false;">Policies</a>
