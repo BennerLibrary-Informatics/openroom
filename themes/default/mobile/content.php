@@ -169,7 +169,7 @@ switch ($op) {
                         echo $optional_field["optionquestion"] .
                             "<input type=\"text\" class=\"mobiletextfield\" name=\"" . $optional_field["optionformname"] . "\" />";
                     } elseif ($optional_field["optiontype"] == 1) {
-                        echo $optional_field["optionquestion"] . "<select name=\"" . $optional_field["optionformname"] . "\">";
+                        echo $optional_field["optionquestion"] . ": <select name=\"" . $optional_field["optionformname"] . "\">";
 
                         $choices = explode(";", $optional_field["optionchoices"]);
                         foreach ($choices as $choice) {
