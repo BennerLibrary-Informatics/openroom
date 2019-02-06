@@ -13,7 +13,7 @@ require_once("includes/or-dbinfo.php");
 
 <body>
 <div id="heading">
-    <a href="index.php" style="margin-left: 15px; float: left;"><img src = 'https://library.olivet.edu/img/logo.svg' width="50" height="50"></a>
+    <a href="https://library.olivet.edu/index.php" style="margin-left: 15px; float: left;"><img src = 'https://library.olivet.edu/img/logo.svg' width="50" height="50"></a>
     <?php
     if (!isset($_SESSION["systemid"])) {
       $_SESSION["systemid"] = "";
