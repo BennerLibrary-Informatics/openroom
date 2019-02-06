@@ -7,7 +7,7 @@ require_once("includes/or-dbinfo.php");
 <head>
     <title><?php echo $settings["instance_name"]; ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo $_SESSION["themepath"]; ?>style.css"/>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <script type="text/javascript" src="includes/jquery.min.js"></script>
 </head>
 

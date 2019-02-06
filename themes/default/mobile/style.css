@@ -318,3 +318,88 @@ select {
     text-align: center;
     width: 120px;
 }
+
+.modal {
+    background-color: rgba(43,62,66,.85);
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3; /* Sit on top */
+}
+
+.modal-content {
+    position: relative;
+    background-color: #ffffff;
+    margin: auto;
+    padding: 0;
+    border: 5px solid #888;
+    width: 60%;
+    border: 1px solid transparent;
+    border-color: #54406b;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.helpClose, .aboutClose, .policiesClose {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    border-color: #54406b;
+    margin-left: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    background: none;
+}
+
+.helpClose:hover, .aboutClose:hover, .policiesClose:hover,
+.helpClose:focus, .aboutClose:focus, .policiesClose:focus {
+    color: red;
+    background: #e8deda;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    font-size: 16px;
+    font-family: sans-serif;
+    padding: 10px 15px;
+    background-color: white;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+    color: black;
+    justify-content: flex-start;
+    font-weight: bold;
+}
+
+.modal-body {
+  padding: 2px 16px;
+  color: black;
+  text-align: left;
+  word-wrap: break-word;
+  border-top: 1px solid transparent;
+  border-color: #54406b;
+}
+
+.modal-footer {
+    padding: 10px 15px;
+    text-align: right;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    background-color: white;
+    color: black;
+}

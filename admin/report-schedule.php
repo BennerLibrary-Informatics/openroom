@@ -94,11 +94,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <td><strong>End Time</strong>&nbsp;
                   <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=end&direction=ASC"></a></td>
                 <td><strong>Number in Group</strong>&nbsp;
-                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=numberingroup&direction=ASC"></a></td>
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>"></a></td>
                 <td><strong>Purpose</strong>&nbsp;
-                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>&orderbywhat=timeofrequest&direction=ASC"></a></td>
-                <?php
-                ?>
+                  <a href="report-schedule.php?lookuproom=<?php echo $lookuproom; ?>"></a></td>
             </tr>
 
             <?php
@@ -114,16 +112,16 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                   echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                   echo $date_mdy;
                   echo "</strong></center></h4>";
-                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=roomname&direction=ASC'></a></th></tr>";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;'></a></th></tr>";
                   echo "<tr class='reportodd'>";
                   echo "<td><strong>Start Time</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=start&direction=ASC'></a></td>";
                   echo "<td><strong>End Time</strong>&nbsp;";
                   echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=end&direction=ASC'></a></td>";
                   echo "<td><strong>Number in Group</strong>&nbsp;";
-                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=numberingroup&direction=ASC'></a></td>";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;'></a></td>";
                   echo "<td><strong>Purpose</strong>&nbsp;";
-                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;&orderbywhat=timeofrequest&direction=ASC'></a></td>";
+                  echo "<a href='report-schedule.php?lookuproom=$lookuproom;'></a></td>";
                   echo "<div class='page-break'></div>";
                   echo "<br><br>";
 
@@ -166,7 +164,7 @@ function getReservationInfo($date, $nextDay) {
     $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "' ORDER BY rooms.roomposition, reservations.start ASC;");
   }
   else {
-    $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "';");
+    $records = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM reservations,rooms WHERE rooms.roomname ='" . $lookuproom . "' AND reservations.roomid = rooms.roomid AND reservations.end > '" . $date . "' AND reservations.end < '" . $nextDay . "'ORDER BY rooms.roomposition, reservations.start ASC;");
   }
   return $records;
 }
