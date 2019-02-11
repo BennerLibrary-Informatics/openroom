@@ -2,6 +2,7 @@
 @import "css/bootstrap-grid.css";
 @import "css/bootstrap-reboot.css";
 @import "css/bootstrap.min.css";
+@import "css/fontawesome.css";
 
 @font-face{
   font-family: "PT Serif Caption";
@@ -688,11 +689,11 @@ label{
     text-align: right;
   }
 }
-@media only screen and (max-width: 960px){
+/*@media only screen and (max-width: 960px){
   #headerText{
     margin-left:
   }
-}
+}*/
 @media only screen and (max-width: 768px){
   #container, #heading{
     width: 100%;
