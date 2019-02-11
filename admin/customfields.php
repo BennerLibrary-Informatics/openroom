@@ -86,6 +86,20 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $errormsg .= "The Name field is empty!";
             }
             break;
+        //Edit an existing option
+        case "editoption":
+            $optionname = isset($_REQUEST["optionname"]) ? $_REQUEST["optionname"] : "";
+            $optionquestion = isset($_REQUEST["optionquestion"]) ? $_REQUEST["optionquestion"] : "";
+            $optionchoices = isset($_REQUEST["optionchoices"]) ? $_REQUEST["optionchoices"] : "";
+            $optionrequired = isset($_REQUEST["optionrequired"]) ? $_REQUEST["optionrequired"] : "";
+            if ($optionquestion != "" && $optionchoices != "" && $optionrequired != "" && $errormsg == "") {
+                if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE optionalfields SET optionquestion='" . $optionquestion . "', optionchoices='" . $optionchoices . "', optionrequired='" . $optionrequired . "' WHERE optionname='" . $optionname . "';")) {
+                    $successmsg = "Optional Field $optionname has been updated!";
+                } else {
+                    $errormsg = "Unable to edit optional field $optionname. Please try again.";
+                }
+            }
+            break;
         case "incorder":
             $allcount = mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields;"));
             $thisop = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $optionformname . "';"));
@@ -169,10 +183,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 <td class="tableheader">Form Name</td>
                 <td class="tableheader">Form Question</td>
                 <td class="tableheader">Type</td>
-                <td class="tableheader">Choices*</td>
+                <td class="tableheader">Choices</td>
             <!--<td class="tableheader">Private?</td>-->
                 <td class="tableheader">Required?</td>
-                <td class="tableheader">Delete</td>
             </tr>
             <?php
             $ofa = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields ORDER BY optionorder ASC;");
@@ -180,8 +193,10 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $orderstr = "";
             $count = 0;
             while ($of = mysqli_fetch_array($ofa)) {
+                $textTypeStyle = "";
                 if ($of["optiontype"] == 0) {
                     $oftype = "Text";
+                    $textTypeStyle = "style=\"border: 0px; background-color: transparent; cursor: default;\" readonly";
                 } else {
                     $oftype = "Selection";
                 }
@@ -192,10 +207,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                     $ofprivate = "Yes";
                 }
 
+                $selectedYes = "";
+                $selectedNo = "";
                 if ($of["optionrequired"] == 0) {
-                    $ofrequired = "No";
+                    //$ofrequired = "No";
+                    $selectedNo = "selected";
                 } else {
-                    $ofrequired = "Yes";
+                    //$ofrequired = "Yes";
+                    $selectedYes = "selected";
                 }
 
                 if ($count == 0) {
@@ -211,22 +230,21 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $choicestr = "";
                 foreach ($choices as $choice) {
                     if ($choice != "") {
-                        $choicestr .= $choice . " ";
+                        $choicestr .= $choice . ";";
                     } else {
                         $choicestr .= $choice;
                     }
                 }
 
                 echo "<tr><td>" . $orderstr .
-                    "</td><td><strong>" . $of["optionname"] .
+                    "</td><td><strong><form name=\"editoption\" method=\"POST\" action=\"customfields.php\"><input type=\"hidden\" name=\"op\" value=\"editoption\"/><input name=\"optionname\" type=\"text\" class=\"medtxt\" value=\"" . $of["optionname"] . "\" style=\"border: 0px; background-color: transparent;\" readonly/>" .
                     "</strong></td><td>" . $of["optionformname"] .
-                    "</td><td>" . $of["optionquestion"] .
+                    "</td><td><input name=\"optionquestion\" type=\"text\" class=\"medtxt\" value=\"" . $of["optionquestion"] . "\" />" .
                     "</td><td>" . $oftype .
-                    "</td><td>" . $choicestr .
+                    "</td><td><input name=\"optionchoices\" type=\"text\" value=\"" . $of["optionchoices"] . "\" . $textTypeStyle . />" .
                     /*"</td><td>" . $ofprivate .*/
-                    "</td><td>" . $ofrequired .
-                    "</td><td><a href=\"javascript:confirmdelete('" . $of["optionformname"] . "','" . $of["optionname"] . "');\">X</a></td></tr>";
-
+                    "</td><td><select name=\"optionrequired\"><option value=\"1\" . $selectedYes . >Yes</option><option value=\"0\" . $selectedNo . >No</option></select>" .
+                    "</td><td><input type=\"submit\" value=\"Save Changes\" /></form></td><td><a href=\"javascript:confirmdelete('" . $of["optionformname"] . "','" . $of["optionname"] . "');\"><img src=\"../themes/default/desktop/images/fa trash-o.png\" alt=\"Delete Room\" style=\"height: 24px;\"></a></td></tr>";
                 $count++;
             }
             ?>
