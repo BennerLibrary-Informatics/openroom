@@ -70,7 +70,7 @@ if ($activatecode == "" && $activateusername == "") {
     <?php
     if ($successmsg == "") {
         ?>
-          <div id = "createaccount" class = "col-lg-10 col-sm-12 offset-lg-2">
+          <div id = "createaccount">
           <form name="createaccount" method="POST" action="createaccount.php">
             <div class = "form-group row">
               <div class = "col-lg-2 col-md-3 col-sm-12 offset-lg-1 loginlabel">
