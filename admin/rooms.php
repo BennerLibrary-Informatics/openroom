@@ -25,7 +25,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $nextpos = $thispos + 1;
                 $thisgroupcount = mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $thisroom["roomgroupid"] . ";"));
                 if ($nextpos < $thisgroupcount) {
-                    mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomposition=" . $thispos . " WHERE roomposition=" . $nextpos . ";");
+                    mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomposition=" . $thispos . " WHERE roomposition=" . $nextpos . " AND roomgroupid=" . $thisroom["roomgroupid"] . ";");
                     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomposition=" . $nextpos . " WHERE roomid=" . $opid . ";");
                 }
             }
@@ -39,7 +39,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $prevpos = $thispos - 1;
                 $thisgroupcount = mysqli_num_rows(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM rooms WHERE roomgroupid=" . $thisroom["roomgroupid"] . ";"));
                 if ($prevpos >= 0) {
-                    mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomposition=" . $thispos . " WHERE roomposition=" . $prevpos . ";");
+                    mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomposition=" . $thispos . " WHERE roomposition=" . $prevpos . " AND roomgroupid=" . $thisroom["roomgroupid"] . ";");
                     mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE rooms SET roomposition=" . $prevpos . " WHERE roomid=" . $opid . ";");
                 }
             }
