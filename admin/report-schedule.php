@@ -136,6 +136,7 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
               while ($opfield = mysqli_fetch_array($opfields)) {
                   $opfield_uservalue = $opfield["optionvalue"];
               }
+              $opfield_uservalue = isset($opfield_uservalue) ? $opfield_uservalue : "Previously Deleted";
 
               echo "</div></td><td>" . date('g:i a', strtotime($record["start"])) . "</td>" .
                   "<td>" . date('g:i a', strtotime($record["end"])) . "</td>" .
