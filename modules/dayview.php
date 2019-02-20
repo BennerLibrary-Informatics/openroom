@@ -99,7 +99,9 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
     }
 
     function closePopUp() {
-        clearTimeout(autoClose);
+        if(typeof autoClose !== "undefined") {
+          clearTimeout(autoClose);
+        }
         document.getElementById("popup").style.visibility = "hidden";
         document.getElementById("popup").style.display = "none";
     }
