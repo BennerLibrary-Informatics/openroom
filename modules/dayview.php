@@ -99,6 +99,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
     }
 
     function closePopUp() {
+        clearTimeout(autoClose);
         document.getElementById("popup").style.visibility = "hidden";
         document.getElementById("popup").style.display = "none";
     }
@@ -135,6 +136,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
                 var brokenstring = xmlhttp.responseText.split("|");
                 if (brokenstring[0] == "Error: User is not logged in.") location.reload(true);
                 document.getElementById("popup").innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">x<\/span><\/div>" + brokenstring[0];
+                autoClose = setTimeout(function() {closePopUp(); }, 5000);
                 if (document.getElementById("calendarButton") != null) {
                   document.getElementById("calendarButton").style.visibility = "visible";
                 }
@@ -194,7 +196,7 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
                 var brokenstring = xmlhttp.responseText.split("|");
                 if (brokenstring[0] == "Error: User is not logged in.") location.reload(true);
                 document.getElementById("popup").innerHTML = "<div id=\"popupClose\"><span onClick=\"closePopUp()\">x<\/span><\/div>" + brokenstring[0];
-                setTimeout(function() { closePopUp(); }, 5000);
+                autoClose = setTimeout(function() { closePopUp(); }, 5000);
                 dayviewer(starttime, brokenstring[2], groupid, '');
             }
             else {
