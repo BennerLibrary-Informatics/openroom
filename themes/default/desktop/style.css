@@ -321,7 +321,8 @@ hr {
   padding: 0 30px;
 }
 label{
-  font-size: 12pt;
+  font-size: 20px;
+  margin-left: -10px;
 }
 
 
@@ -432,8 +433,16 @@ label{
     font-size: 30px;
     font-weight: bold;
     text-align: center;
+    float: center;
     margin-right: -22px;
     margin-left: -15px;
+    overflow: hidden;
+}
+
+#roomhead {
+  color: black;
+  float: center;
+  font-size: 16px;
 }
 
 .row {
@@ -677,6 +686,44 @@ label{
 }
 .table-responsive{
   padding: 5px;
+}
+
+.selectMenu {
+  width: 225px;
+  height: 30px;
+  background-color: #54406b;
+  color: white;
+  font-size: 15px;
+  float: center;
+  overflow: hidden;
+}
+
+#selectheader {
+  font-size: 20px;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  float: center;
+  margin-right: 200px;
+  position: relative;
+}
+
+.selectedRoomGroup {
+  font-size: 20px;
+}
+
+input[type=submit]{
+  background-color: white;
+  max-width: 80px;
+  height: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 5px;
+  font-weight: none;
+  display: block;
+  display: inline-block;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 990px){

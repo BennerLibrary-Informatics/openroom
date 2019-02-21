@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 echo "<script type = 'text/javascript'>
   // When the user scrolls the page, execute myFunction
   window.onscroll = function() {myFunction()};
@@ -14,7 +16,8 @@ echo "<script type = 'text/javascript'>
       header.classList.remove('sticky');
     }
   }
-</script>
+  </script>
+
 <style>
   /* The sticky class is added to the header with JS when it reaches its scroll position */
   .sticky {
@@ -32,6 +35,7 @@ date_default_timezone_set('America/Chicago');
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 $pageLoadDT = date('Y-m-d H:i:s');
 require_once("../includes/ClockTime.php");
 require_once("../includes/or-dbinfo.php");
@@ -45,10 +49,17 @@ $_POST["torange"] = (isset($_POST["torange"]) && $_POST["torange"] != 0)
                     : mktime(23, 59, 59, date("n"), date("j"), date("Y"));
 $_POST["group"] = (isset($_POST["group"])) ? $_POST["group"] : "";
 if ($_POST["group"] == "") {
-    $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups ORDER BY roomgroupid ASC;");
+    $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomgroupid FROM roomgroups ORDER BY roomgroupid ASC;");
     $group = mysqli_fetch_array($groups);
     $_POST["group"] = $group["roomgroupid"];
 }
+
+$groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomgroupname FROM roomgroups WHERE roomgroupid = " . $_POST["group"] . ";");
+$groupname = mysqli_fetch_array($groups);
+$_POST["groupname"] = $groupname["roomgroupname"];
+
+//echo $_POST["groupname"];
+
 //Pull reservations and room information from XML API
 $getdatarange = include("../or-getdatarange.php");
 $getroominfo = include("../or-getroominfo.php");
@@ -63,22 +74,17 @@ $todayonlymdy = date('l, F d, Y');
 if ($_SESSION["username"] != "") {
     //Get all groups from DB to create Group Selector
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM roomgroups ORDER BY roomgroupid ASC;");
-    /*$group_str = "<select id=\"groupselector\" onchange=\"dayviewer('". $_POST["fromrange"] ."','". $_POST["torange"] ."',this.value,'');\">";
-    while($group = mysql_fetch_array($groups)){
-        $selected_str = "";
-        if($group["roomgroupid"] == $_POST["group"]) $selected_str = "selected";
-        $group_str .= "<option value=\"". $group["roomgroupid"] ."\" ". $selected_str .">". $group["roomgroupname"] ."</option>";
-    }
-    $group_str .= "</select>";*/
-    //$calendarimg = ("../themes/default/desktop/images/calendarbutt.png");
-        $group_str = "<div class = 'row'>";
-        while ($group = mysqli_fetch_array($groups)) {
-            $selected_str = "class='grouptab col-sm text-center groups'";
-            if ($group["roomgroupid"] == $_POST["group"]) $selected_str = "class='selected col-sm text-center groups'";
-            $group_str .= "<div onClick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "','" . $group["roomgroupid"] . "','');\" " . $selected_str . ">" . $group["roomgroupname"] . "</div>";
+
+        //Select menu
+        $group_str = "<strong>Room Groups:</strong> <select class = 'selectMenu' id ='roomSelection'>";
+        $groupOptions = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomgroupid, roomgroupname FROM roomgroups ORDER BY roomgroups.roomgroupid ASC;");
+        while ($group = mysqli_fetch_array($groupOptions)) {
+          $group_str .= "<option value='" . $group['roomgroupid'] . "'>" . $group['roomgroupname'] . "</option>";
         }
-        $selectedGroup = $_POST["group"];
-        $group_str .= "</div></div>";
+        $group_str .= "</select>";
+        $group_str .= "<input type='submit' name='submit' value='Submit' onclick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "', '', '');\" />";
+        $selectedGroup = $_POST["groupname"];
+
         $yesterday = strtotime($currentmdy) - 86400;
         $endyesterday = $yesterday + 86399;
         $tomorrow = strtotime($currentmdy) + 86400;
@@ -86,11 +92,12 @@ if ($_SESSION["username"] != "") {
         $dvout = "<center><div id = \"legend\" class =\"row\"><div id = \"legendText\" style=\"text-align: right\">Reservable: <span id=\"open\" class=\"glyphicon glyphicon-stop\"></span></div><div id = \"legendText\" style=\"text-align: center\">Not Reservable: <span id=\"closedList\">X</span></div><div id = \"legendText\">Your Reservations: <span class=\"glyphicon glyphicon-ok\"></span></div><div id = \"legendText\">Reserved: <span style=\"color: red;\">R</span></div></div><div class = 'row'></div></center>";
         $dvout .= "<div id=\"dayviewheader\" style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><span onclick=\"dayviewer('$yesterday','$endyesterday','$selectedGroup','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','$selectedGroup','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span>&nbsp";
         $dvout .= "<span style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></span></div>";
-        $dvout .= "<div class = 'header' id='roomhead' >";
+        //Insert the select menu
+        $dvout .= "<div id=\"selectheader\">";
         $dvout .= $group_str;
-        //$dvout .= .$group_str;
-        $dvout .= "<div>";
-        $dvout .= "<br><br>";
+        $dvout .= "</div>";
+        $dvout .= "<div id = roomhead><br>";
+        $dvout .= "</div>";
         //or use this line instead to have the horizontal scrollbar at bottom of screen
         //$dvout .=  "<div class =\"table-responsive\">";
         $dvout .= "<table  id=\"dayviewTable\" cellpadding=\"0\" cellspacing=\"0\">";
@@ -124,9 +131,10 @@ if ($_SESSION["username"] != "") {
         }
     }
     //Construct table header
-    $dvout .= "<div class = 'row' style='position: -webkit-sticky; position: sticky; top: 40; z-index: 1; background-color: c4bcc9;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rooms: </b></label></div>";
+    $dvout .= "<div class = 'row' style='position: -webkit-sticky; position: sticky; top: 40; z-index: 1; background-color: c4bcc9; text-align: left;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>" . $_POST["groupname"] . ":</b></label></div></div>";
+    $dvout .= "<div class = 'row' style='position: -webkit-sticky; position: sticky; top: 40; z-index: 1; background-color: c4bcc9; text-align: left;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label></label></div>";
    foreach ($xmlroominfo->room as $room) {
-       $dvout .= "<div class = 'col-sm'>" . $room->name . "</div>";
+       $dvout .= "<div class = 'col-sm' style=\"font-size: 18px; margin-left: 55px;\"><b>" . $room->name . "</b></div>";
      }
    $dvout .= "</div></div>";
 
@@ -298,7 +306,7 @@ if ($_SESSION["username"] != "") {
                 }
               }
               //$dvout .= "<div class='col' onMouseOver=\"roomDetails('<span id=\'roomdetailsname\'>" . $room->name . "</span><br/><span id=\'roomdetailscapacitylabel\'>Capacity: </span><span id=\'roomdetailscapacity\'>" . $room->capacity . "</span><br/>" . $room->description . "');\">" . $collision . "</div>";
-              $dvout .= "<div class='col'> $collision </div>";
+              $dvout .= "<div class='col' style='margin-left: 50px;'> $collision </div>";
             }
             //Increment
             $i++;

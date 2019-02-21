@@ -22,6 +22,12 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
 
         function dayviewer(fromrange, torange, group, obj) {
             allotherdays = document.getElementsByClassName('calendarday');
+
+            if (document.getElementById("roomSelection") != null ) {
+              group = document.getElementById("roomSelection").value;
+            } else {
+              group = '';
+            }
             for (var i = 0; i < allotherdays.length; i++) {
                 if (obj != '') {
                     allotherdays[i].style.background = "";
