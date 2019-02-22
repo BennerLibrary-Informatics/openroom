@@ -82,7 +82,7 @@ if ($_SESSION["username"] != "") {
           $group_str .= "<option value='" . $group['roomgroupid'] . "'>" . $group['roomgroupname'] . "</option>";
         }
         $group_str .= "</select>";
-        $group_str .= "<input type='submit' name='submit' value='Submit' onclick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "', '', '');\" />";
+        $group_str .= "<input id='groupSubmit' type='submit' name='submit' value='Submit' onclick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "', '', '');\" />";
         $selectedGroup = $_POST["groupname"];
 
         $yesterday = strtotime($currentmdy) - 86400;

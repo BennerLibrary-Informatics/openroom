@@ -713,7 +713,7 @@ label{
   font-size: 20px;
 }
 
-input[type=submit]{
+#groupSubmit {
   background-color: white;
   max-width: 80px;
   height: 30px;
