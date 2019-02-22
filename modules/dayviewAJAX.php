@@ -134,7 +134,7 @@ if ($_SESSION["username"] != "") {
     $dvout .= "<div class = 'row' style='position: -webkit-sticky; position: sticky; top: 40; z-index: 1; background-color: c4bcc9; text-align: left;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label><b>" . $_POST["groupname"] . ":</b></label></div></div>";
     $dvout .= "<div class = 'row' style='position: -webkit-sticky; position: sticky; top: 40; z-index: 1; background-color: c4bcc9; text-align: left;'><div class = 'col-lg-2 hidden-sm-down hidden-lg-up text-nowrap'><label></label></div>";
    foreach ($xmlroominfo->room as $room) {
-       $dvout .= "<div class = 'col-sm' style=\"font-size: 18px; margin-left: 55px;\"><b>" . $room->name . "</b></div>";
+       $dvout .= "<div class = 'col-sm' style=\"font-size: 18px; whitespace: nowrap; width: 200px;\"><b>" . $room->name . "</b></div>";
      }
    $dvout .= "</div></div>";
 
