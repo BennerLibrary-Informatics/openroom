@@ -79,11 +79,13 @@ if ($_SESSION["username"] != "") {
         $group_str = "<strong>Room Groups:</strong> <select class = 'selectMenu' id ='roomSelection'>";
         $groupOptions = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomgroupid, roomgroupname FROM roomgroups ORDER BY roomgroups.roomgroupid ASC;");
         while ($group = mysqli_fetch_array($groupOptions)) {
-          $group_str .= "<option value='" . $group['roomgroupid'] . "'>" . $group['roomgroupname'] . "</option>";
+          $selected_str = "";
+          if($group["roomgroupid"]==$_POST["group"]) $selected_str = "selected";
+          $group_str .= "<option value='" . $group['roomgroupid'] . "' . $selected_str . >" . $group['roomgroupname'] . "</option>";
         }
         $group_str .= "</select>";
         $group_str .= "<input id='groupSubmit' type='submit' name='submit' value='Submit' onclick=\"dayviewer('" . $_POST["fromrange"] . "','" . $_POST["torange"] . "', '', '');\" />";
-        $selectedGroup = $_POST["groupname"];
+        $selectedGroup = $_POST["group"];
 
         $yesterday = strtotime($currentmdy) - 86400;
         $endyesterday = $yesterday + 86399;
