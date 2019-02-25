@@ -22,7 +22,9 @@ class User
         foreach ($q->fetchAll() as $row) {
             $settings[$row['settingname']] = $row['settingvalue'];
         }
-        $this->emailaddress = $this->ReturnEmailAddress($this->username, $settings);
+        //$this->emailaddress = $this->ReturnEmailAddress($this->username, $settings);
+        $this->emailaddress = $this->username . "@olivet.edu";
+        error_log($this->emailaddress);
         if ($settings["login_method"] == "ldap") {
             $this->password = "LDAP";
         } else {
@@ -33,7 +35,8 @@ class User
         } else {
             $this->activationCode = "";
         }
-        $this->displayname = $this->ReturnDisplayName($this->username, $settings);
+        //$this->displayname = $this->ReturnDisplayName($this->username, $settings);
+        $this->displayname = $this->username;
         if (Administrator::exists($this->username)) {
             $this->isAdministrator = true;
         } else {
@@ -183,13 +186,15 @@ class User
         foreach ($q->fetchAll() as $row) {
             $settings[$row['settingname']] = $row['settingvalue'];
         }
-        $this->emailaddress = ReturnEmailAddress($this->username, $settings);
+        //$this->emailaddress = ReturnEmailAddress($this->username, $settings);
+        $this->emailaddress = $this->username . "@olivet.edu";
         if ($settings["login_method"] == "ldap") {
             $this->password = "LDAP";
         } else {
             $this->password = "";
         }
-        $this->displayname = ReturnDisplayName($this->username, $settings);
+        //$this->displayname = ReturnDisplayName($this->username, $settings);
+        $this->displayname = $this->username;
         if (Administrator::exists($this->username)) {
             $this->isAdministrator = true;
         } else {
