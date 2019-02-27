@@ -2,7 +2,6 @@
 @import "css/bootstrap-grid.css";
 @import "css/bootstrap-reboot.css";
 @import "css/bootstrap.min.css";
-@import "css/fontawesome.css";
 
 @font-face{
   font-family: "PT Serif Caption";
@@ -691,8 +690,8 @@ label{
 .selectMenu {
   width: 225px;
   height: 30px;
-  background-color: #54406b;
-  color: white;
+  background-color: white;
+  color: black;
   font-size: 15px;
   float: center;
   overflow: hidden;
@@ -714,11 +713,12 @@ label{
 }
 
 #groupSubmit {
-  background-color: white;
+  background-color: #54406b;
   max-width: 80px;
   height: 30px;
   font-size: 15px;
   font-weight: bold;
+  color: white;
   margin-left: 5px;
   font-weight: none;
   display: block;
