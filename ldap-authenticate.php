@@ -5,7 +5,7 @@ function ConnectLdap($name, $password, $settings): bool
     $username = $name;
     $username .= "@olivet.edu";
     $name = trim(htmlspecialchars($name));
-    $password = $password;
+    $password = trim(htmlspecialchars($password));
     $ldap = ldap_connect($ldapserver);
     if (!IsNotNullOrEmptyString($name) && !IsNotNullOrEmptyString($password)) {
         sleep(1);
