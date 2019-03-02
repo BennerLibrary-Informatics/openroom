@@ -240,6 +240,11 @@ hr {
   font-size: 24px;
   color:red;
 }
+#cancelList{
+  padding-left: 7px;
+  font-size: 20px;
+  color:red;
+}
 .glyphicon.glyphicon-remove {
   font-size: 16px;
   color:red;

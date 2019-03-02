@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 <?php
 error_reporting(E_ALL);
 
@@ -91,7 +93,7 @@ if ($_SESSION["username"] != "") {
         $endyesterday = $yesterday + 86399;
         $tomorrow = strtotime($currentmdy) + 86400;
         $endtomorrow = $tomorrow + 86399;
-        $dvout = "<center><div id = \"legend\" class =\"row\"><div id = \"legendText\" style=\"text-align: right\">Reservable: <span id=\"open\" class=\"glyphicon glyphicon-stop\"></span></div><div id = \"legendText\" style=\"text-align: center\">Not Reservable: <span id=\"closedList\">X</span></div><div id = \"legendText\">Your Reservations: <span class=\"glyphicon glyphicon-ok\"></span></div><div id = \"legendText\">Reserved: <span style=\"color: red;\">R</span></div></div><div class = 'row'></div></center>";
+        $dvout = "<center><div id = \"legend\" class =\"row\"><div id = \"legendText\" style=\"text-align: right\">Reservable: <span id=\"open\" class=\"glyphicon glyphicon-stop\"></span></div><div id = \"legendText\" style=\"text-align: center\">Not Reservable: <span id=\"closedList\">X</span></div><div id = \"legendText\">Your Reservations: <span class=\"glyphicon glyphicon-ok\"></span></div><div id = \"legendText\">Reserved: <span style=\"color: red;\">R</span></div><div id = \"legendText\">Cancel Reservation: <span style=\"color: red;\" class=\"fas fa-trash-alt\"></span></div></div><div class = 'row'></div></center>";
         $dvout .= "<div id=\"dayviewheader\" style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><span onclick=\"dayviewer('$yesterday','$endyesterday','$selectedGroup','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-left\"></span>&nbsp;" . $currentmdy . "&nbsp;<span onclick=\"dayviewer('$tomorrow','$endtomorrow','$selectedGroup','');hideDiv('calendarDiv');\" class=\"glyphicon glyphicon-circle-arrow-right\"></span>&nbsp";
         $dvout .= "<span style=\"position: -webkit-sticky; position: sticky; top: 0; z-index: 1; background-color: c4bcc9;\"><input id=\"calendarButton\" type=\"button\" value=\"Show/Hide Calendar\" onclick=\"showHideDiv('calendarDiv')\"/></span></div>";
         //Insert the select menu
@@ -233,17 +235,20 @@ if ($_SESSION["username"] != "") {
                               //Display "taken" button that shows public info.
                               //$collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
                               if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
-                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"takenList\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\">R</span>";
+                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"takenList\">R</span>";
+                                $collision .=  "<span title=\"&#009;&nbsp;Cancel Reservation\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" id=\"cancelList\" class=\"fas fa-trash-alt\"></span>";
                               }
                               else {
                                 $collision = "<span id=\"takenList\">R</span>";
                               }
                           } else {
                               if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
-                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\"></span>";
+                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                                $collision .=  "<span title=\"&#009;&nbsp;Cancel Reservation\" id=\"cancelList\" class=\"fas fa-trash-alt\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\"></span>";
                               }
                               else {
-                                $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" style=\"cursor: url('themes/default/desktop/images/trashcan.png'), alias;\"></span>";
+                                $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                                $collision .=  "<span id=\"cancelList\" class=\"fas fa-trash-alt\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\"></span>";
                               }
                               //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                           }
