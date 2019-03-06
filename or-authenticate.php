@@ -68,7 +68,7 @@ function AuthenticateUser(string $username, string $password, array $settings): 
 $username = isset($_POST["username"]) ? $_POST["username"] : "";
 $password = isset($_POST["username"]) ? $_POST["password"] : "";
 $username = stripslashes($username);
-$password = stripslashes($password);
+$password = addslashes($password);
 $ajax_indicator = isset($_POST["ajax_indicator"]) ? $_POST["ajax_indicator"] : "FALSE";
 $output = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n<authresponse>\n";
 if ($username != "" && $password != "" && $ajax_indicator != "") {
