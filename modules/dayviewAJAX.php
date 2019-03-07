@@ -235,20 +235,20 @@ if ($_SESSION["username"] != "") {
                               //Display "taken" button that shows public info.
                               //$collision = "<span id=\"takenList\" class=\"glyphicon glyphicon-remove\"></span>";
                               if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
-                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"takenList\">R</span>";
-                                $collision .=  "<span title=\"&#009;&nbsp;Cancel Reservation\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" id=\"cancelList\" class=\"fas fa-trash-alt\"></span>";
+                                $collision =  "<span title=\"Reserved by: $reservation->username\" id=\"takenList\">R</span>";
+                                $collision .=  "<span title=\"Cancel Reservation\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\" id=\"cancelList\" class=\"fas fa-trash-alt\" style=\"font-size: 12pt; cursor: pointer;\"></span>";
                               }
                               else {
                                 $collision = "<span id=\"takenList\">R</span>";
                               }
                           } else {
                               if ($isadministrator == "TRUE" || $issupervisor == "TRUE") {
-                                $collision =  "<span title=\"&#009;&nbsp;Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
-                                $collision .=  "<span title=\"&#009;&nbsp;Cancel Reservation\" id=\"cancelList\" class=\"fas fa-trash-alt\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\"></span>";
+                                $collision =  "<span title=\"Reserved by: $reservation->username\" id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
+                                $collision .=  "<span title=\"Cancel Reservation\" id=\"cancelList\" class=\"fas fa-trash-alt\" style=\"font-size: 12pt; cursor: pointer;\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\"></span>";
                               }
                               else {
                                 $collision =  "<span id=\"reservationList\" class=\"glyphicon glyphicon-ok\"></span>";
-                                $collision .=  "<span id=\"cancelList\" class=\"fas fa-trash-alt\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\"></span>";
+                                $collision .=  "<span title=\"Cancel Reservation\" id=\"cancelList\" class=\"fas fa-trash-alt\" style=\"font-size: 12pt; cursor: pointer;\" onClick=\"cancelQuestion(" . $reservation->id . "," . $_POST["group"] . ");\"></span>";
                               }
                               //$collision = "<img style=\"cursor: pointer;\" \" border=\"0\" onClick=\"showPopUp(this,'" . $info . "');\" />";
                           }
