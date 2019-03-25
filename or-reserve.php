@@ -458,7 +458,8 @@ if ($username != "") {
                       }
                     }
 
-                    $verbose_msg .= "Please do not reply to this email. Stop by the Circulation Desk or contact the library at 815-939-5354 with any questions.";
+                    $verbose_msg .= "Please do not reply to this email. Stop by the Circulation Desk or contact the library at 815-939-5354 with any questions." .
+                    "Policies: https://library.olivet.edu/about/policies/index.php";
                     $terse_msg = $verbose_msg;
                     //$verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
 
