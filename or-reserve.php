@@ -398,11 +398,7 @@ if ($username != "") {
                     //Success!
                     //Run on-success code (send out appropriate emails, etc.)
                     $email_res_verbose = implode(",", unserialize($settings["email_res_verbose"]));
-                    $email_res_terse = implode(",", unserialize($settings["email_res_terse"]));
-                    $email_res_gef = implode(",", unserialize($settings["email_res_gef"]));
                     $email_cond_verbose = implode(",", unserialize($settings["email_cond_verbose"]));
-                    $email_cond_terse = implode(",", unserialize($settings["email_cond_terse"]));
-                    $email_cond_gef = implode(",", unserialize($settings["email_cond_gef"]));
                     $email_system = $settings["email_system"];
 
                     //Get user's email address
@@ -422,7 +418,6 @@ if ($username != "") {
                             $user_real = $user->get_displayname();
                         }
                         $user_real_str = "Name: " . $user_real . "\n\n";
-                        $user_real_gef = "<b>Name</b>: " . $user_real . "<br/><br/>";
                     }
                     if ($settings["login_method"] == "normal") {
                         $emailrecord = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM users WHERE username='" . $username . "';");
@@ -432,39 +427,28 @@ if ($username != "") {
                         }
                     }
 
-                    //Create verbose, terse and GEF messages.
-                    //VERBOSE
+                    //Create verbose email message
                     //Check if admin contact info has been set
-                    $adminContactMsg = (isset($_REQUEST["phone_number"]) && isset($_REQUEST["email_system"]))
-                                       ? "Please call ". $_REQUEST["phone_number"] . " or email ". $_REQUEST["email_system"] . " if you need further assistance.\n\n"
+                    $adminContactMsg = (isset($settings["phone_number"]))
+                                       ? "Please do not reply to this email. Stop by the Circulation Desk or contact the library at ". $settings["phone_number"] . " with any questions.\n\n"
                                        : "";
-                    $verbose_msg = "Your room has been reserved! Keep this email as proof of your reservation as you may be asked to provide confirmation upon arrival. As a courtesy to other patrons, please cancel your reservation if this room is no longer needed.\n\n\n" .
+                    $verbose_msg = $settings["email_message"] . "\n\n\n" .
                         //$user_real_str .
                         "Username: " . $username . "\n\n" .
                         "E-mail: " . $user_email . "\n\n" .
                         "Room: " . $thisroom->name . "\n\n" .
                         "Date and Time: " . date("F j, Y g:i a", $starttime) . " - " . date("F j, Y g:i a", $endtime) . "\n\n" .
                         "Number in Group: " . $capacity . "\n\n";
-                        //$adminContactMsg;
-
-                    $gef_msg_of = "";
 
                     if (isset($ofvalues)) {
                       foreach ($ofvalues as $key => $ofval) {
                         $opname = mysqli_fetch_array(mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM optionalfields WHERE optionformname='" . $key . "';"));
                         $opname = $opname["optionname"];
                         $verbose_msg .= $opname . ": " . str_replace("\\", "", $ofval) . "\n\n";
-                        $gef_msg_of .= "<b>" . $opname . "</b>: " . str_replace("\\", "", $ofval) . "<br/><br/>";
                       }
                     }
 
-                    $verbose_msg .= "Please do not reply to this email. Stop by the Circulation Desk or contact the library at 815-939-5354 with any questions." .
-                    "Policies: https://library.olivet.edu/about/policies/index.php";
-                    $terse_msg = $verbose_msg;
-                    //$verbose_msg .= "Policies: " . $settings["policies"] . "\n\n";
-
-                    $gef_msg = "<html><body>" . $user_real_gef . "<b>Date and Time</b>: " . date("F j, Y", $starttime) . " " . date("g:i a", $starttime) . " - " . date("F j, Y", $endtime) . " " . date("g:i a", $endtime) . "<br></br><b>Username: " . $username
-                    ."<br></br>" . $gef_msg_of . "</body></html>";
+                    $verbose_msg .= "Policies: https://library.olivet.edu/about/policies/index.php" . "\n\n\n" . $adminContactMsg;
 
                     $bccstr = "";
                     if ($email_res_verbose != "") {
@@ -476,8 +460,6 @@ if ($username != "") {
                     } else {
                         mail($email_res_verbose, "Your Reservation at Benner Library", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                     }
-                    mail($email_res_terse, "Your Reservation at Benner Library", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                    mail($email_res_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
 
                     //On Condition emails
                     //Get the current email_condition and email_value
@@ -486,19 +468,12 @@ if ($username != "") {
                     if ($settings["email_condition"] != "none") {
                         if ($settings["email_condition"] == "duration" && $duration >= $settings["email_condition_value"]) {
                             mail($email_cond_verbose, $settings["instance_name"] . " Reservation (Condition Met)", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                            mail($email_cond_terse, $settings["instance_name"] . " Reservation (Condition Met)", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                            mail($email_cond_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                         } elseif ($settings["email_condition"] == "capacity" && $capacity >= $settings["email_condition_value"]) {
                             mail($email_cond_verbose, $settings["instance_name"] . " Reservation (Condition Met)", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                            mail($email_cond_terse, $settings["instance_name"] . " Reservation (Condition Met)", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                            mail($email_cond_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-
                         } else {
                             $thecond = isset($settings["email_condition"]) ? $settings["email_condition"] : "";
                             if (isset($ofvalues[$thecond]) && isset($settings["email_condition_value"]) && $ofvalues[$thecond] == $settings["email_condition_value"]) {
                                 mail($email_cond_verbose, $settings["instance_name"] . " Reservation (Condition Met)", $verbose_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                                mail($email_cond_terse, $settings["instance_name"] . " Reservation (Condition Met)", $terse_msg, "From: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                                mail($email_cond_gef, "Room: " . $thisroom->name, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                             }
                         }
                     }

@@ -21,11 +21,7 @@ if (($isadministrator || $username == $res_username || $issupervisor) && $userna
         $remove_res = mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM reservations WHERE reservationid=" . $reservationid . ";");
         if ($remove_res) {
             $email_can_verbose = implode(",", unserialize($settings["email_can_verbose"]));
-            $email_can_terse = implode(",", unserialize($settings["email_can_terse"]));
-            $email_can_gef = implode(",", unserialize($settings["email_can_gef"]));
             $email_cond_verbose = implode(",", unserialize($settings["email_cond_verbose"]));
-            $email_cond_terse = implode(",", unserialize($settings["email_cond_terse"]));
-            $email_cond_gef = implode(",", unserialize($settings["email_cond_gef"]));
             $email_system = $settings["email_system"];
             //Get user's email address
             //If using login_method ldap just use the user's username and the ldap_baseDN dc's
@@ -67,20 +63,16 @@ if (($isadministrator || $username == $res_username || $issupervisor) && $userna
             $endtime = strtotime($reservation["end"]);
             $endtime += 60;
             $duration = $endtime - $starttime;
-            //Create verbose, terse and GEF messages.
+            //Create verbose email message
             //VERBOSE
             $verbose_msg = "Your reservation for Room " . $roomname . " from " . date("F j, Y g:i a", $starttime) . " to " . date("F j, Y g:i a", $endtime) . " has been cancelled.<br/><br/>" . "Thank you for using " . $settings["instance_name"] . "! \n\n";
             $verbose_msg .= "Please call 815-939-5354 if you need further assistance";
 
-            $terse_msg = $verbose_msg;
-            $gef_msg = "<html><body><b>Date</b>: " . date("l, F j", $starttime) . "<br/><br/><b>Time</b>: " . date("g:i a", $starttime) . " - " . date("g:i a", $endtime) . "<br/><br/><b>Username</b>: " . $username . "</body></html>";
             $bccstr = "";
             if ($email_can_verbose != "") {
                 $bccstr = "\r\nBcc: " . $email_can_verbose;
             }
             mail($user_email, $settings["instance_name"] . " Cancellation", $verbose_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system . $bccstr . "',' -f" . $email_system);
-            mail($email_can_terse, $settings["instance_name"] . " Cancellation", $terse_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-            mail($email_can_gef, "Cancelled: Room " . $roomname, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
             //On Condition emails
             //Get the current email_condition and email_value
             //If condition == "none" skip this, if it is "duration" or "capacity" check those values
@@ -88,12 +80,8 @@ if (($isadministrator || $username == $res_username || $issupervisor) && $userna
             if ($settings["email_condition"] != "none") {
                 if ($settings["email_condition"] == "duration" && $duration >= $settings["email_condition_value"]) {
                     mail($email_cond_verbose, $settings["instance_name"] . " Cancellation (Condition Met)", $verbose_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                    mail($email_cond_terse, $settings["instance_name"] . " Cancellation (Condition Met)", $terse_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                    mail($email_cond_gef, "Cancelled: Room " . $roomname, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                 } elseif ($settings["email_condition"] == "capacity" && $capacity >= $settings["email_condition_value"]) {
                     mail($email_cond_verbose, $settings["instance_name"] . " Cancellation (Condition Met)", $verbose_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                    mail($email_cond_terse, $settings["instance_name"] . " Cancellation (Condition Met)", $terse_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                    mail($email_cond_gef, "Cancelled: Room " . $roomname, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                 } else {
                     $thecond = $settings["email_condition"];
                     //Get optionname from optionalfields table
@@ -104,8 +92,6 @@ if (($isadministrator || $username == $res_username || $issupervisor) && $userna
                     $thisov = $thisoptions["optionvalue"];
                     if ($thisov == $settings["email_condition_value"]) {
                         mail($email_cond_verbose, $settings["instance_name"] . " Cancellation (Condition Met)", $verbose_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                        mail($email_cond_terse, $settings["instance_name"] . " Cancellation (Condition Met)", $terse_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
-                        mail($email_cond_gef, "Cancelled: Room " . $roomname, $gef_msg, "MIME-Version: 1.0\r\nContent-type: text/html; charset=iso-8859-1\r\nFrom: " . $email_system . "\r\nReturn-Path: " . $email_system . "\r\nReply-To: " . $email_system);
                     }
                 }
             }

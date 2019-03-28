@@ -27,37 +27,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $email_res_verbose = explode(",", $email_res_verbose);
             $email_res_verbose = serialize($email_res_verbose);
             if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_res_verbose . "' WHERE settingname='email_res_verbose';")) {
-                $successmsg = "OnReservations-Verbose has been updated.";
+                $successmsg = "OnReservations-Addresses has been updated.";
             } else {
-                $errormsg = "Unable to update OnReservations-Verbose. Make sure each email address is separated by a comma.";
-            }
-
-            break;
-        case "email_res_terse":
-            $email_res_terse = isset($_REQUEST["email_res_terse"]) ? $_REQUEST["email_res_terse"] : "";
-
-            $email_res_terse = trim($email_res_terse);
-            $email_res_terse = str_replace(" ", "", $email_res_terse);
-            $email_res_terse = explode(",", $email_res_terse);
-            $email_res_terse = serialize($email_res_terse);
-            if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_res_terse . "' WHERE settingname='email_res_terse';")) {
-                $successmsg = "OnReservations-Terse has been updated.";
-            } else {
-                $errormsg = "Unable to update OnReservations-Terse. Make sure each email address is separated by a comma.";
-            }
-
-            break;
-        case "email_res_gef":
-            $email_res_gef = isset($_REQUEST["email_res_gef"]) ? $_REQUEST["email_res_gef"] : "";
-
-            $email_res_gef = trim($email_res_gef);
-            $email_res_gef = str_replace(" ", "", $email_res_gef);
-            $email_res_gef = explode(",", $email_res_gef);
-            $email_res_gef = serialize($email_res_gef);
-            if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_res_gef . "' WHERE settingname='email_res_gef';")) {
-                $successmsg = "OnReservations-GEF has been updated.";
-            } else {
-                $errormsg = "Unable to update OnReservations-GEF. Make sure each email address is separated by a comma.";
+                $errormsg = "Unable to update OnReservations-Addresses. Make sure each email address is separated by a comma.";
             }
 
             break;
@@ -69,37 +41,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $email_can_verbose = explode(",", $email_can_verbose);
             $email_can_verbose = serialize($email_can_verbose);
             if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_can_verbose . "' WHERE settingname='email_can_verbose';")) {
-                $successmsg = "OnCancellation-Verbose has been updated.";
+                $successmsg = "OnCancellation-Addresses has been updated.";
             } else {
-                $errormsg = "Unable to update OnCancellation-Verbose. Make sure each email address is separated by a comma.";
-            }
-
-            break;
-        case "email_can_terse":
-            $email_can_terse = isset($_REQUEST["email_can_terse"]) ? $_REQUEST["email_can_terse"] : "";
-
-            $email_can_terse = trim($email_can_terse);
-            $email_can_terse = str_replace(" ", "", $email_can_terse);
-            $email_can_terse = explode(",", $email_can_terse);
-            $email_can_terse = serialize($email_can_terse);
-            if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_can_terse . "' WHERE settingname='email_can_terse';")) {
-                $successmsg = "OnCancellation-Terse has been updated.";
-            } else {
-                $errormsg = "Unable to update OnCancellation-Terse. Make sure each email address is separated by a comma.";
-            }
-
-            break;
-        case "email_can_gef":
-            $email_can_gef = isset($_REQUEST["email_can_gef"]) ? $_REQUEST["email_can_gef"] : "";
-
-            $email_can_gef = trim($email_can_gef);
-            $email_can_gef = str_replace(" ", "", $email_can_gef);
-            $email_can_gef = explode(",", $email_can_gef);
-            $email_can_gef = serialize($email_can_gef);
-            if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_can_gef . "' WHERE settingname='email_can_gef';")) {
-                $successmsg = "OnCancellation-GEF has been updated.";
-            } else {
-                $errormsg = "Unable to update OnCancellation-GEF. Make sure each email address is separated by a comma.";
+                $errormsg = "Unable to update OnCancellation-Addresses. Make sure each email address is separated by a comma.";
             }
 
             break;
@@ -127,6 +71,14 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 $errormsg = "Unable to set Phone Number. Make sure the format is correct.";
             }
             break;
+        case "email_message":
+            $email_message = isset($_REQUEST["email_message"]) ? $_REQUEST["email_message"] : "";
+                if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_message . "' WHERE settingname='email_message';")) {
+                    $successmsg = "Email Message has been updated.";
+                } else {
+                    $errormsg = "Unable to set Email Message. Please try again.";
+                }
+            break;
         case "condition":
             $email_condition = isset($_REQUEST["email_condition"]) ? $_REQUEST["email_condition"] : "";
             $email_condition_value = isset($_REQUEST["email_condition_value"]) ? $_REQUEST["email_condition_value"] : "";
@@ -143,33 +95,9 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             $email_cond_verbose = explode(",", $email_cond_verbose);
             $email_cond_verbose = serialize($email_cond_verbose);
             if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_cond_verbose . "' WHERE settingname='email_cond_verbose';")) {
-                $successmsg = "OnCondition-Verbose has been updated.";
+                $successmsg = "OnCondition-Addresses has been updated.";
             } else {
-                $errormsg = "Unable to update OnCondition-Verbose. Make sure each email address is separated by a comma.";
-            }
-            break;
-        case "email_cond_terse":
-            $email_cond_terse = isset($_REQUEST["email_cond_terse"]) ? $_REQUEST["email_cond_terse"] : "";
-            $email_cond_terse = trim($email_cond_terse);
-            $email_cond_terse = str_replace(" ", "", $email_cond_terse);
-            $email_cond_terse = explode(",", $email_cond_terse);
-            $email_cond_terse = serialize($email_cond_terse);
-            if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_cond_terse . "' WHERE settingname='email_cond_terse';")) {
-                $successmsg = "OnCondition-Terse has been updated.";
-            } else {
-                $errormsg = "Unable to update OnCondition-Terse. Make sure each email address is separated by a comma.";
-            }
-            break;
-        case "email_cond_gef":
-            $email_cond_gef = isset($_REQUEST["email_cond_gef"]) ? $_REQUEST["email_cond_gef"] : "";
-            $email_cond_gef = trim($email_cond_gef);
-            $email_cond_gef = str_replace(" ", "", $email_cond_gef);
-            $email_cond_gef = explode(",", $email_cond_gef);
-            $email_cond_gef = serialize($email_cond_gef);
-            if (mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE settings SET settingvalue='" . $email_cond_gef . "' WHERE settingname='email_cond_gef';")) {
-                $successmsg = "OnCondition-GEF has been updated.";
-            } else {
-                $errormsg = "Unable to update OnCondition-GEF. Make sure each email address is separated by a comma.";
+                $errormsg = "Unable to update OnCondition-Addresses. Make sure each email address is separated by a comma.";
             }
             break;
     }
@@ -207,44 +135,22 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
             }
 
             $email_res_verbose = implode(",", unserialize($settings["email_res_verbose"]));
-            $email_res_terse = implode(",", unserialize($settings["email_res_terse"]));
-            $email_res_gef = implode(",", unserialize($settings["email_res_gef"]));
             $email_can_verbose = implode(",", unserialize($settings["email_can_verbose"]));
-            $email_can_terse = implode(",", unserialize($settings["email_can_terse"]));
-            $email_can_gef = implode(",", unserialize($settings["email_can_gef"]));
             $email_cond_verbose = implode(",", unserialize($settings["email_cond_verbose"]));
-            $email_cond_terse = implode(",", unserialize($settings["email_cond_terse"]));
-            $email_cond_gef = implode(",", unserialize($settings["email_cond_gef"]));
-
             ?>
         </center>
         <h3><a href="index.php">Administration</a> - Email Setup</h3><br/><hr/>
-        <span class="notetext">There are three types of emails: <strong>Verbose</strong> are fully-detailed messages, <strong>Terse</strong> are stripped down to only the most important details, and <strong>GEF (Gmail Event Format)</strong> is formatted to work with Gmail Events.
-        <br/><br/>An email will be sent BCC to any email addresses entered in the fields below whenever the specified action occurs. You can enter multiple addresses in a single field by separating them with semicolons. <strong>Ex: email1@domain.com;email2@domain.com</strong><hr/></span>
+        An email will be sent BCC to any email addresses entered in the fields below whenever the specified action occurs. You can enter multiple addresses in a single field by separating them with semicolons. <strong>Ex: email1@domain.com;email2@domain.com</strong><hr/></span>
         <ul id="settingsul">
             <li>
                 On Reservations - <span class="notetext">This email is sent whenever a reservation is made.</span>
                 <ul>
                     <li>
-                        <form name="onreserveverbose" action="email.php" method="POST">Verbose: <input type="text"
+                        <form name="onreserveverbose" action="email.php" method="POST">Addresses: <input type="text"
                                                                                                        name="email_res_verbose"
                                                                                                        value="<?php echo $email_res_verbose; ?>"/><input
                                     type="hidden" name="op" value="email_res_verbose"/><input type="submit"
                                                                                               value="Save"/></form>
-                    </li>
-                    <li>
-                        <form name="onreserveterse" action="email.php" method="POST">Terse: <input type="text"
-                                                                                                   name="email_res_terse"
-                                                                                                   value="<?php echo $email_res_terse; ?>"/><input
-                                    type="hidden" name="op" value="email_res_terse"/><input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                    <li>
-                        <form name="onreservegef" action="email.php" method="POST">GEF: <input type="text"
-                                                                                               name="email_res_gef"
-                                                                                               value="<?php echo $email_res_gef; ?>"/><input
-                                    type="hidden" name="op" value="email_res_gef"/><input type="submit" value="Save"/>
-                        </form>
                     </li>
                 </ul>
                 <br/>
@@ -278,26 +184,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                             <input type="submit" value="Save"/></form>
                         <ul>
                             <li>
-                                <form name="onconditionverbose" action="email.php" method="POST">Verbose: <input
+                                <form name="onconditionverbose" action="email.php" method="POST">Addresses: <input
                                             type="text" name="email_cond_verbose"
                                             value="<?php echo $email_cond_verbose; ?>"/><input type="hidden" name="op"
                                                                                                value="email_cond_verbose"/><input
                                             type="submit" value="Save"/></form>
-                            </li>
-                            <li>
-                                <form name="onconditionterse" action="email.php" method="POST">Terse: <input type="text"
-                                                                                                             name="email_cond_terse"
-                                                                                                             value="<?php echo $email_cond_terse; ?>"/><input
-                                            type="hidden" name="op" value="email_cond_terse"/><input type="submit"
-                                                                                                     value="Save"/>
-                                </form>
-                            </li>
-                            <li>
-                                <form name="onconditiongef" action="email.php" method="POST">GEF: <input type="text"
-                                                                                                         name="email_cond_gef"
-                                                                                                         value="<?php echo $email_cond_gef; ?>"/><input
-                                            type="hidden" name="op" value="email_cond_gef"/><input type="submit"
-                                                                                                   value="Save"/></form>
                             </li>
                         </ul>
                     </li>
@@ -308,25 +199,11 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                 On Cancellations - <span class="notetext">This email is sent whenever a reservation is cancelled.</span>
                 <ul>
                     <li>
-                        <form name="oncancelverbose" action="email.php" method="POST">Verbose: <input type="text"
+                        <form name="oncancelverbose" action="email.php" method="POST">Addresses: <input type="text"
                                                                                                       name="email_can_verbose"
                                                                                                       value="<?php echo $email_can_verbose; ?>"/><input
                                     type="hidden" name="op" value="email_can_verbose"/><input type="submit"
                                                                                               value="Save"/></form>
-                    </li>
-                    <li>
-                        <form name="oncancelterse" action="email.php" method="POST">Terse: <input type="text"
-                                                                                                  name="email_can_terse"
-                                                                                                  value="<?php echo $email_can_terse; ?>"/><input
-                                    type="hidden" name="op" value="email_can_terse"/><input type="submit" value="Save"/>
-                        </form>
-                    </li>
-                    <li>
-                        <form name="oncancelgef" action="email.php" method="POST">GEF: <input type="text"
-                                                                                              name="email_can_gef"
-                                                                                              value="<?php echo $email_can_gef; ?>"/><input
-                                    type="hidden" name="op" value="email_can_gef"/><input type="submit" value="Save"/>
-                        </form>
                     </li>
                 </ul>
                 <br/>
@@ -355,6 +232,18 @@ if (!(isset($_SESSION["username"])) || $_SESSION["username"] == "") {
                         </form>
                     </li>
                 </ul>
+            </li>
+            <br/>
+            <li>
+                Email Message - <span class="notetext">This is the customizable part of the email message that will be sent to users.
+                                                       The following reservation details will also be dynamically added: username, date and time, number in group, any optional field data, and policies link.
+                                                       The email message ends with a line referring the user to contact whatever phone number is set in the field above if they have questions.</span>
+                  <form name="emailMessage" action="email.php" method="POST">
+                    <textarea name="email_message" cols="50" rows="10"/><?php echo $settings["email_message"]; ?></textarea>
+                    <br/>
+                    <input type="hidden" name="op" value="email_message"/>
+                    <input type="submit" value="Save Changes"/>
+                  </form>
             </li>
         </ul>
         <br/>
