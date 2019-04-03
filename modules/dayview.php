@@ -148,7 +148,6 @@ $optionalfieldsarraytemp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FR
                 if (document.getElementById("calendarButton") != null) {
                   document.getElementById("calendarButton").style.visibility = "hidden";
                 }
-                document.getElementById("dayviewModule").innerHTML = "";
                 document.getElementById("loader").innerHTML = "<br\/><br\/><br\/><center><img src='<?php echo $_SESSION["themepath"]; ?>images\/ajax-loader.gif' \/><br\/>Cancelling, please wait...<\/center>";
             }
         };
