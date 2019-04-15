@@ -50,6 +50,9 @@ $_POST["torange"] = (isset($_POST["torange"]) && $_POST["torange"] != 0)
                     ? mktime(23, 59, 59, date("n", (int)$_POST["torange"]), date("j", (int)$_POST["torange"]), date("Y", (int)$_POST["torange"]))
                     : mktime(23, 59, 59, date("n"), date("j"), date("Y"));
 $_POST["group"] = (isset($_POST["group"])) ? $_POST["group"] : "";
+if ($_SESSION["directRoomLink"] != "") {
+  $_POST["group"] = $_SESSION["directRoomLink"];
+}
 if ($_POST["group"] == "") {
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomgroupid FROM roomgroups ORDER BY roomgroupid ASC;");
     $group = mysqli_fetch_array($groups);
