@@ -53,6 +53,9 @@ $_POST["group"] = (isset($_POST["group"])) ? $_POST["group"] : "";
 if ($_SESSION["directRoomLink"] != "") {
   $_POST["group"] = $_SESSION["directRoomLink"];
 }
+else if ($_SESSION["directRoomLinkLoggedIn"] != "") {
+  $_POST["group"] = $_SESSION["directRoomLinkLoggedIn"];
+}
 if ($_POST["group"] == "") {
     $groups = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT roomgroupid FROM roomgroups ORDER BY roomgroupid ASC;");
     $group = mysqli_fetch_array($groups);
