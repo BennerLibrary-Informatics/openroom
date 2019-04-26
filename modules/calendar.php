@@ -93,7 +93,7 @@ if (!(isset($_SESSION["username"])) || empty($_SESSION["username"])) {
                     }
                 }
             };
-            <?php $_SESSION["directRoomLinkLoggedIn"] = (isset($_GET["room"]) ? $_GET["room"] : "");?>
+            <?php if (isset($_GET["room"])) $_SESSION["directRoomLinkLoggedIn"] = $_GET["room"];?>
             urlstring = "modules/dayviewAJAX.php";
 
             params = "fromrange=" + fromrange + "&torange=" + torange + "&group=" + group + "&ajax_indicator=FALSE";

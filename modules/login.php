@@ -35,7 +35,7 @@
                 }
                 //else authenticated is true and reload index.php
                 else {
-                    <?php $_SESSION["directRoomLink"] = (isset($_GET["room"]) ? $_GET["room"] : "");?>
+                    <?php if (isset($_GET["room"])) $_SESSION["directRoomLink"] = $_GET["room"];?>
                     window.location.href = "index.php";
                 }
             }
